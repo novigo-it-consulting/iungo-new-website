@@ -1,3 +1,9 @@
+import ProductCard from "./ProductCard";
+import {
+  FIRST_ROW_PRODUCTS,
+  SECOND_ROW_PRODUCTS,
+} from "./products.constants";
+
 export default function ProductsSection() {
   return (
     <section
@@ -19,6 +25,49 @@ export default function ProductsSection() {
           Nativamente integrados sobre 3 engines proprietárias de IA. Compre
           por módulo ou em pacotes Go-to-Market.
         </p>
+
+        <div
+          data-products-grid
+          className="mt-8 w-full max-w-[1667px] 2xl:h-[932px]"
+        >
+          <div
+            data-products-first-row
+            className="grid w-full grid-cols-1 items-start gap-6 xl:grid-cols-[1.54fr_1.54fr_1fr] xl:gap-8 2xl:h-[458px] 2xl:grid-cols-[604.92px_604.92px_1fr] 2xl:gap-[31.93px]"
+          >
+            {FIRST_ROW_PRODUCTS.map((product) => (
+              <ProductCard
+                key={product.id}
+                productId={product.id}
+                productName={product.name}
+                className={product.className}
+                ctaHref={product.ctaHref ?? undefined}
+                ctaLabel={product.ctaLabel}
+                copy={product.copy ?? undefined}
+                icon={product.icon ?? undefined}
+                contentClassName={product.contentClassName}
+              />
+            ))}
+          </div>
+
+          <div
+            data-products-second-row
+            className="mt-6 grid w-full grid-cols-1 items-start gap-6 md:grid-cols-2 xl:mt-8 xl:grid-cols-4 xl:gap-8 2xl:mt-[32.16px] 2xl:h-[441.84px] 2xl:grid-cols-[393px_392.6px_392.6px_1fr] 2xl:gap-[32.0667px]"
+          >
+            {SECOND_ROW_PRODUCTS.map((product) => (
+              <ProductCard
+                key={product.id}
+                productId={product.id}
+                productName={product.name}
+                className={product.className}
+                ctaHref={product.ctaHref ?? undefined}
+                ctaLabel={product.ctaLabel}
+                copy={product.copy ?? undefined}
+                icon={product.icon ?? undefined}
+                contentClassName={product.contentClassName}
+              />
+            ))}
+          </div>
+        </div>
       </div>
     </section>
   );
