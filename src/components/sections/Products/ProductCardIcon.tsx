@@ -14,18 +14,18 @@ export default function ProductCardIcon({
   return (
     <div
       data-product-icon={productId}
-      className={`box-border flex size-14 shrink-0 items-center justify-center rounded-[14px] p-2 2xl:size-[67.93px] 2xl:rounded-[16.98px] 2xl:p-[11.32px] ${backgroundClassName}`}
+      className={`box-border inline-flex h-[51.44px] w-[51.44px] shrink-0 items-center justify-center gap-[10.72px] overflow-visible rounded-[12.86px] border-0 p-[8.57px] shadow-none ${backgroundClassName}`}
     >
       <span
         data-product-icon-glyph={productId}
-        className="relative block size-9 shrink-0 2xl:size-[42.46px]"
+        className="relative block h-[30px] w-[30px] shrink-0"
       >
         <Image
           src={src}
           alt=""
           aria-hidden="true"
           fill
-          sizes="43px"
+          sizes="30px"
           className="object-contain"
         />
       </span>

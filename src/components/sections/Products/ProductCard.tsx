@@ -19,6 +19,8 @@ interface ProductCardProps {
   copy?: ProductCardCopyConfig;
   icon?: ProductCardIconConfig;
   contentClassName?: string;
+  contentGapClassName?: string;
+  cardPaddingClassName?: string;
   children?: ReactNode;
 }
 
@@ -31,22 +33,28 @@ export default function ProductCard({
   copy,
   icon,
   contentClassName = "",
+  contentGapClassName,
+  cardPaddingClassName,
   children,
 }: ProductCardProps) {
   const hasContent = icon || copy;
+  const resolvedContentGapClassName =
+    contentGapClassName ?? "2xl:gap-[38px]";
+  const resolvedPaddingClassName =
+    cardPaddingClassName ?? "2xl:p-8";
 
   return (
     <article
       data-product-card={productId}
       aria-label={productName}
-      className={`box-border flex w-full flex-col rounded-[20.03px] border border-[#D3D5D8] bg-[linear-gradient(180deg,_#FFFFFF_0%,_#EEF6FF_100%)] p-6 xl:p-8 ${className}`}
+      className={`box-border flex w-full flex-col rounded-[20.03px] border border-[#D3D5D8] bg-[linear-gradient(180deg,_#FFFFFF_0%,_#EEF6FF_100%)] p-6 xl:p-8 ${resolvedPaddingClassName} ${className}`}
     >
       {children}
 
       {hasContent ? (
         <div
           data-product-content={productId}
-          className={`flex w-full flex-col gap-6 2xl:gap-[38px] ${contentClassName}`}
+          className={`flex w-full flex-col gap-6 ${resolvedContentGapClassName} ${contentClassName}`}
         >
           {icon ? (
             <ProductCardIcon
@@ -61,8 +69,6 @@ export default function ProductCard({
               productId={productId}
               title={productName}
               description={copy.description}
-              titleClassName={copy.titleClassName}
-              descriptionClassName={copy.descriptionClassName}
             />
           ) : null}
         </div>

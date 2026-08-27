@@ -1,52 +1,58 @@
 import Image from "next/image";
 import MetricItem from "./MetricItem";
 import { METRICS } from "./metrics.constants";
+import PageSideRails from "@/components/layout/PageSideRails";
 
 export default function MetricsSection() {
   return (
-    <section data-metrics-section className="w-full bg-white">
-      <div className="mx-auto flex w-full max-w-[1728px] flex-col items-center px-4 pt-8 md:px-8 2xl:px-0 2xl:pt-[41px]">
-        <div
-          data-metrics-client-logo
-          className="relative h-[52px] w-[180px] 2xl:h-[71px] 2xl:w-[247px]"
-        >
-          <Image
-            src="/images/rd-saude-logo.png"
-            alt="RD Saúde — por uma sociedade mais saudável"
-            fill
-            sizes="(min-width: 1536px) 247px, 180px"
-            className="object-contain"
-          />
-        </div>
-
-        <h2
-          data-metrics-heading
-          className="mt-4 flex w-full max-w-[1672px] items-center justify-center text-center font-reddit text-[28px] font-semibold leading-[40px] tracking-[-0.28px] text-[#424241] md:text-[32px] md:leading-[48px] md:tracking-[-0.32px] 2xl:mt-[21px] 2xl:h-[113px] 2xl:text-[40px] 2xl:leading-[89px] 2xl:tracking-[-0.4px]"
-        >
-          Métricas que decisores enterprise levam a sério.
-        </h2>
-
-        <div
-          data-metrics-card
-          className="mt-6 flex items-center justify-center min-h-[240px] w-full max-w-[1669px] box-border rounded-[20.03px] border border-[#D3D5D8] bg-white 2xl:-mt-[10px] 2xl:h-[315px] 2xl:translate-x-[1.5px]"
-        >
-          <dl
-            data-metrics-list
-            className="flex w-full flex-col items-center gap-8 py-8 xl:w-[85%] xl:flex-row xl:items-start xl:justify-between xl:gap-0 2xl:h-[232px] 2xl:w-full 2xl:max-w-[1414px] 2xl:p-0"
+    <section
+      data-metrics-section
+      data-page-rail-section="metrics"
+      className="w-full bg-white"
+    >
+      <PageSideRails scope="metrics">
+        <div className="mx-auto flex w-full max-w-[1728px] flex-col items-center px-4 pt-8 md:px-8 2xl:max-w-none 2xl:px-0 2xl:pt-[41px]">
+          <div
+            data-metrics-client-logo
+            className="relative h-[46px] w-[160px] md:h-[54px] md:w-[187px]"
           >
-            {METRICS.map((metric) => (
-              <MetricItem
-                key={metric.id}
-                metricId={metric.id}
-                value={metric.value}
-                description={metric.description}
-                itemClassName={metric.itemClassName}
-                descriptionClassName={metric.descriptionClassName}
-              />
-            ))}
-          </dl>
+            <Image
+              src="/images/rd-saude-logo.png"
+              alt="RD Saúde — por uma sociedade mais saudável"
+              fill
+              sizes="(min-width: 768px) 187px, 160px"
+              className="object-contain"
+            />
+          </div>
+
+          <h2
+            data-metrics-heading
+            className="mt-4 w-full max-w-[900px] text-center font-reddit text-[20px] font-medium leading-[28px] text-[#424241] md:text-[22px] md:leading-[30px] lg:text-[24px] lg:leading-[32px] 2xl:mt-[21px]"
+          >
+            Métricas que decisores enterprise levam a sério.
+          </h2>
+
+          <div
+            data-metrics-card
+            data-page-content-anchor="metrics"
+            className="mt-[31px] flex w-full max-w-[1264px] box-border items-center justify-center min-h-[200px] rounded-[20.03px] border border-[#D3D5D8] bg-white lg:h-[238px] lg:min-h-0"
+          >
+            <dl
+              data-metrics-list
+              className="grid w-full grid-cols-1 items-center justify-items-center gap-y-8 py-8 md:grid-cols-2 md:gap-x-12 md:gap-y-8 xl:h-[176px] xl:max-w-[1071px] xl:grid-cols-4 xl:gap-x-[144px] xl:gap-y-0 xl:py-0"
+            >
+              {METRICS.map((metric) => (
+                <MetricItem
+                  key={metric.id}
+                  metricId={metric.id}
+                  value={metric.value}
+                  description={metric.description}
+                />
+              ))}
+            </dl>
+          </div>
         </div>
-      </div>
+      </PageSideRails>
     </section>
   );
 }
