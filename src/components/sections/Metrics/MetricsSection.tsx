@@ -35,7 +35,7 @@ export default function MetricsSection() {
           <div
             data-metrics-card
             data-page-content-anchor="metrics"
-            className="mt-[31px] flex w-full max-w-[1264px] box-border items-center justify-center min-h-[200px] rounded-[20.03px] border border-[#D3D5D8] bg-white lg:h-[238px] lg:min-h-0"
+            className="mt-[31px] flex w-full max-w-[1264px] box-border items-center justify-center min-h-[200px] rounded-[20.03px] border border-[#D3D5D8] bg-white"
           >
             <dl
               data-metrics-list

@@ -12,7 +12,7 @@ export default function MetricItem({
   return (
     <div
       data-metric-item={metricId}
-      className="flex w-[159px] flex-col items-center gap-[6.06px]"
+      className="mx-auto flex min-w-0 w-full max-w-[180px] flex-col items-center gap-[6.06px]"
     >
       <dd
         data-metric-value={metricId}
@@ -23,7 +23,7 @@ export default function MetricItem({
 
       <dt
         data-metric-description={metricId}
-        className="h-auto w-[159px] text-center font-reddit text-[13.63px] font-normal leading-[24.2px] tracking-[0] text-[#909090]"
+        className="h-auto w-full text-center font-reddit text-[13.63px] font-normal leading-[24.2px] tracking-[0] text-[#909090]"
       >
         {description}
       </dt>

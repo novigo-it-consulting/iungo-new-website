@@ -4,7 +4,7 @@ export default function HeroContent() {
   return (
     <div
       data-hero-content
-      className="relative z-10 w-full pt-10 xl:w-[46%] xl:pt-16 2xl:flex 2xl:h-full 2xl:flex-col 2xl:pl-[2.78px] 2xl:pt-[71.13px] 2xl:pb-[56px]"
+      className="relative z-10 w-full pt-10 xl:basis-[46%] xl:flex-none xl:min-w-0 xl:pt-16 2xl:flex 2xl:h-full 2xl:flex-col 2xl:pl-[2.78px] 2xl:pt-[71.13px] 2xl:pb-[56px]"
     >
       <div
         data-hero-copy

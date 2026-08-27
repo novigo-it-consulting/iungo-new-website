@@ -15,7 +15,7 @@ export default function HeroSection() {
         scope="hero"
         className="mx-auto max-w-[1728px] px-4 md:px-8 2xl:max-w-none 2xl:px-0"
       >
-        <div className="relative xl:min-h-[737px] 2xl:h-[558px] 2xl:min-h-0">
+        <div className="relative xl:flex xl:min-h-[737px] xl:items-start xl:gap-6 2xl:h-[558px] 2xl:min-h-0">
           <HeroContent />
           <HeroVisual />
         </div>

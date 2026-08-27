@@ -4,7 +4,7 @@ export default function HeroVisual() {
   return (
     <div
       data-hero-visual
-      className="relative mx-auto aspect-[3/2] w-full max-w-[876px] xl:absolute xl:right-0 xl:top-[64px] xl:w-[52%] 2xl:h-[461.09px] 2xl:w-[663.24px] 2xl:max-w-none 2xl:shrink-0"
+      className="relative mx-auto aspect-[3/2] w-full max-w-[876px] xl:mx-0 xl:mt-16 xl:min-w-0 xl:flex-1 2xl:ml-auto 2xl:mt-16 2xl:h-[461.09px] 2xl:w-[663.24px] 2xl:max-w-[663.24px] 2xl:flex-none 2xl:shrink-0"
     >
       <Image
         src="/images/hero/hero-platform-icons.png"
