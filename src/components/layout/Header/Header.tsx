@@ -28,7 +28,7 @@ export default function Header() {
       */}
       <div
         data-header-frame
-        className="box-border mx-auto w-full max-w-[1728px] px-4 py-4 md:px-8 xl:py-[39px] 2xl:mx-[233.16px] 2xl:h-[90.86px] 2xl:max-w-none 2xl:w-auto 2xl:py-0 2xl:pl-[95.84px] 2xl:pr-[91.84px]"
+        className="box-border mx-auto w-full max-w-[1728px] px-4 py-4 md:px-8 xl:py-5 2xl:mx-[233.16px] 2xl:h-[96px] 2xl:max-w-none 2xl:w-auto 2xl:py-0 2xl:pl-[95.84px] 2xl:pr-[91.84px]"
       >
         <div
           data-header-content
