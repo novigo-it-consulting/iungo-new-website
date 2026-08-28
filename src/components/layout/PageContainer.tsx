@@ -5,7 +5,8 @@ type PageContainerSize =
   | "organizer"
   | "organizerSteps"
   | "organizerCapabilities"
-  | "organizerComparison";
+  | "organizerComparison"
+  | "cta";
 
 const sizeClasses: Record<PageContainerSize, string> = {
   default:
@@ -23,6 +24,9 @@ const sizeClasses: Record<PageContainerSize, string> = {
   // Frame centralizado de 1024px — área útil de 960px em qualquer resolução.
   organizerComparison:
     "w-full max-w-[1024px] px-6 sm:px-8",
+  // Frame centralizado de 896px — reutilizado nas CTAs de produto.
+  cta:
+    "w-full max-w-[896px] px-6 sm:px-8",
 };
 
 interface PageContainerProps extends ComponentPropsWithoutRef<"div"> {

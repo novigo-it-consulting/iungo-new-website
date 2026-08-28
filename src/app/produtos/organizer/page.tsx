@@ -7,7 +7,7 @@ import OrganizerCaseStudySection from "@/components/sections/Organizer/CaseStudy
 
 export default function IungoOrganizerPage() {
   return (
-    <main className="min-w-0 flex-1">
+    <main className="min-w-0 flex-1 bg-white">
       <OrganizerHero />
       <OrganizerStepsSection />
       <OrganizerCapabilitiesSection />

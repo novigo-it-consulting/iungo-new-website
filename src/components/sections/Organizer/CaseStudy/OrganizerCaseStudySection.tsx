@@ -1,4 +1,5 @@
 import PageContainer from "@/components/layout/PageContainer";
+import OrganizerCaseStudyCard from "./OrganizerCaseStudyCard";
 
 export default function OrganizerCaseStudySection() {
   return (
@@ -7,12 +8,7 @@ export default function OrganizerCaseStudySection() {
       className="w-full bg-[#FAFAF9] py-14 sm:py-16 lg:py-20"
     >
       <PageContainer size="organizerComparison">
-        <div
-          data-organizer-case-study-content
-          className="w-full min-w-0"
-        >
-          {/* O card será implementado na próxima etapa */}
-        </div>
+        <OrganizerCaseStudyCard />
       </PageContainer>
     </section>
   );
