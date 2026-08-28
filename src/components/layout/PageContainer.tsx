@@ -16,9 +16,9 @@ const sizeClasses: Record<PageContainerSize, string> = {
   // Frame centralizado com padding interno horizontal (não subtrai margem).
   organizerSteps:
     "w-full max-w-[1280px] px-6 sm:px-8",
-  // Container de 1280px — margem de 320px em 1920px.
+  // Frame Fill de 1280px com padding interno — margem de 320px em 1920px.
   organizerCapabilities:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1280px]",
+    "w-full max-w-[1280px] px-6 sm:px-8",
 };
 
 interface PageContainerProps extends ComponentPropsWithoutRef<"div"> {

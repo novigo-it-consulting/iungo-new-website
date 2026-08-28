@@ -1,5 +1,5 @@
+import SectionHeader from "@/components/ui/SectionHeader";
 import PageContainer from "@/components/layout/PageContainer";
-import OrganizerStepsHeader from "./OrganizerStepsHeader";
 import OrganizerStepsList from "./OrganizerStepsList";
 
 export default function OrganizerStepsSection() {
@@ -13,7 +13,12 @@ export default function OrganizerStepsSection() {
         size="organizerSteps"
         className="flex min-w-0 flex-col items-center justify-start gap-16"
       >
-        <OrganizerStepsHeader />
+        <SectionHeader
+          eyebrow="COMO FUNCIONA"
+          title="Da planilha ao canal, em 3 passos."
+          titleId="organizer-steps-title"
+          className="max-w-[768px]"
+        />
         <OrganizerStepsList />
       </PageContainer>
     </section>
