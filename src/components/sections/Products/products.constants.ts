@@ -5,6 +5,7 @@ export const FIRST_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-3 xl:h-[346.74px]",
     ctaHref: "/produtos/organizer",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: "Saiba mais sobre o Iungo Organizer",
     copy: {
       description:
         "O melhor AI PIM para enriquecer catálogos com IA generativa, com onboarding em 14 dias e integração nativa com Mercado Livre e Amazon BR.",
@@ -23,6 +24,7 @@ export const FIRST_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-3 xl:h-[346.76px]",
     ctaHref: "/produtos/concierge",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: null,
     copy: {
       description:
         "O Journey Orchestrator para orquestrar jornadas em tempo real, com estúdio visual no-code e gatilhos em minutos.",
@@ -41,6 +43,7 @@ export const FIRST_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-2 xl:h-[346.76px]",
     ctaHref: "/produtos/behavior",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: null,
     copy: {
       description:
         "O Real-Time CDP brasileiro com visão 360° preditiva, engine comportamental e semântica proprietária.",
@@ -62,6 +65,7 @@ export const SECOND_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-2 xl:h-[333.14px]",
     ctaHref: "/produtos/resolve",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: null,
     copy: {
       description:
         "O Knowledge Agent que conhece seu catálogo e resolve atendimentos L1/L2 com IA generativa em menos de 8 segundos.",
@@ -80,6 +84,7 @@ export const SECOND_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-2 xl:h-[334.53px]",
     ctaHref: "/produtos/attendant",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: null,
     copy: {
       description:
         "O Transactional Agent para automatizar pedidos, devoluções e operações administrativas com IA agêntica.",
@@ -98,6 +103,7 @@ export const SECOND_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-2 xl:h-[334.53px]",
     ctaHref: "/produtos/convert",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: null,
     copy: {
       description:
         "O Sales AI Agent conversacional que vende 24/7 usando o catálogo PIM e o perfil CDP em tempo real.",
@@ -116,6 +122,7 @@ export const SECOND_ROW_PRODUCTS = [
     className: "min-h-[360px] xl:col-span-2 xl:h-[334.53px]",
     ctaHref: "/produtos/iot",
     ctaLabel: "Saiba mais",
+    ctaAriaLabel: null,
     copy: {
       description:
         "Inteligência conectada para ativos físicos: RFID, RTLS, NFC e LoRa. A única plataforma brasileira que une catálogo digital e rastreamento físico em tempo real.",

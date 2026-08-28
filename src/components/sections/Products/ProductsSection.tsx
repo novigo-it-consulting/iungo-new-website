@@ -47,6 +47,7 @@ export default function ProductsSection() {
                 className={product.className}
                 ctaHref={product.ctaHref ?? undefined}
                 ctaLabel={product.ctaLabel}
+                ctaAriaLabel={product.ctaAriaLabel ?? undefined}
                 copy={product.copy ?? undefined}
                 icon={product.icon ?? undefined}
                 contentClassName={product.contentClassName}
@@ -66,6 +67,7 @@ export default function ProductsSection() {
                 className={product.className}
                 ctaHref={product.ctaHref ?? undefined}
                 ctaLabel={product.ctaLabel}
+                ctaAriaLabel={product.ctaAriaLabel ?? undefined}
                 copy={product.copy ?? undefined}
                 icon={product.icon ?? undefined}
                 contentClassName={product.contentClassName}

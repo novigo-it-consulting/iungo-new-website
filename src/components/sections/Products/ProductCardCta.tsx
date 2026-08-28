@@ -4,17 +4,20 @@ interface ProductCardCtaProps {
   productId: string;
   href: string;
   label?: string;
+  ariaLabel?: string;
 }
 
 export default function ProductCardCta({
   productId,
   href,
   label = "Saiba mais",
+  ariaLabel,
 }: ProductCardCtaProps) {
   return (
     <Link
       data-product-cta={productId}
       href={href}
+      aria-label={ariaLabel}
       className="inline-flex h-[40.88px] w-[121.9px] shrink-0 items-center justify-center gap-[8.67px] self-start whitespace-nowrap rounded-[43.36px] border-0 bg-[#0024AE] px-[13.88px] py-[6.94px] shadow-none transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2"
     >
       <span
