@@ -4,7 +4,8 @@ type PageContainerSize =
   | "default"
   | "organizer"
   | "organizerSteps"
-  | "organizerCapabilities";
+  | "organizerCapabilities"
+  | "organizerComparison";
 
 const sizeClasses: Record<PageContainerSize, string> = {
   default:
@@ -19,6 +20,9 @@ const sizeClasses: Record<PageContainerSize, string> = {
   // Frame Fill de 1280px com padding interno — margem de 320px em 1920px.
   organizerCapabilities:
     "w-full max-w-[1280px] px-6 sm:px-8",
+  // Frame centralizado de 1024px — área útil de 960px em qualquer resolução.
+  organizerComparison:
+    "w-full max-w-[1024px] px-6 sm:px-8",
 };
 
 interface PageContainerProps extends ComponentPropsWithoutRef<"div"> {
