@@ -35,11 +35,11 @@ export default function MetricsSection() {
           <div
             data-metrics-card
             data-page-content-anchor="metrics"
-            className="mt-[31px] flex w-full max-w-[1264px] box-border items-center justify-center min-h-[200px] rounded-[20.03px] border border-[#D3D5D8] bg-white"
+            className="mt-[31px] flex w-full max-w-[1264px] box-border items-center justify-center rounded-[20.03px] border border-[#D3D5D8] bg-white xl:py-[31px]"
           >
             <dl
               data-metrics-list
-              className="grid w-full grid-cols-1 items-center justify-items-center gap-y-8 py-8 md:grid-cols-2 md:gap-x-12 md:gap-y-8 xl:h-[176px] xl:max-w-[1071px] xl:grid-cols-4 xl:gap-x-[144px] xl:gap-y-0 xl:py-0"
+              className="grid w-full grid-cols-1 items-start justify-items-center gap-y-8 py-8 md:grid-cols-2 md:gap-x-12 md:gap-y-8 xl:h-[176px] xl:max-w-[1071px] xl:grid-cols-4 xl:gap-x-[144px] xl:gap-y-0 xl:py-0"
             >
               {METRICS.map((metric) => (
                 <MetricItem

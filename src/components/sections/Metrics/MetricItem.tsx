@@ -12,7 +12,7 @@ export default function MetricItem({
   return (
     <div
       data-metric-item={metricId}
-      className="mx-auto flex min-w-0 w-full max-w-[180px] flex-col items-center gap-[6.06px]"
+      className="mx-auto flex min-w-0 w-full max-w-[180px] self-start flex-col items-center gap-[6.06px]"
     >
       <dd
         data-metric-value={metricId}

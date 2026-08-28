@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import FooterBottom from "./FooterBottom";
+import FooterNav from "./FooterNav";
 import FooterNewsletter from "./FooterNewsletter";
 
 export default function Footer() {
@@ -62,7 +64,9 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Divisória, colunas de navegação, copyright e selos serão adicionados nas próximas etapas */}
+        <FooterNav />
+
+        <FooterBottom />
       </div>
     </footer>
   );
