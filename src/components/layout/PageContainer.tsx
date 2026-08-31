@@ -12,10 +12,10 @@ type PageContainerSize =
 const sizeClasses: Record<PageContainerSize, string> = {
   default:
     "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1260px]",
-  // Em 3xl+ (≥1920px), a margem esquerda é travada em 327px para alinhar
+  // Em 2xl+ (≥1536px), a margem esquerda é travada em 329px para alinhar
   // com o logo do Header (fixo em 329px via mx-[233.16px] + pl-[95.84px]).
   organizer:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1266px] 3xl:ml-[327px] 3xl:w-auto",
+    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1266px] 2xl:ml-[329px] 2xl:w-auto",
   // Frame centralizado com padding interno horizontal (não subtrai margem).
   organizerSteps:
     "w-full max-w-[1280px] px-6 sm:px-8",
