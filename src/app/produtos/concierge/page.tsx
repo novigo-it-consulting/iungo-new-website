@@ -1,9 +1,9 @@
-import ConciergeCtaSection from "@/components/sections/Concierge/ConciergeCtaSection";
-import ConciergeHeroSection from "@/components/sections/Concierge/ConciergeHeroSection";
-import ConciergeJourneyStudioSection from "@/components/sections/Concierge/ConciergeJourneyStudioSection";
-import ConciergeSystemScreensSection from "@/components/sections/Concierge/ConciergeSystemScreensSection";
-import ConciergeTestimonialsSection from "@/components/sections/Concierge/ConciergeTestimonialsSection";
-import ConciergeTriggersSection from "@/components/sections/Concierge/ConciergeTriggersSection";
+import ConciergeCtaSection from "@/components/sections/Concierge/Cta/ConciergeCtaSection";
+import ConciergeHeroSection from "@/components/sections/Concierge/Hero/ConciergeHeroSection";
+import ConciergeJourneyStudioSection from "@/components/sections/Concierge/JourneyStudio/ConciergeJourneyStudioSection";
+import ConciergeSystemScreensSection from "@/components/sections/Concierge/SystemScreens/ConciergeSystemScreensSection";
+import ConciergeTestimonialsSection from "@/components/sections/Concierge/Testimonials/ConciergeTestimonialsSection";
+import ConciergeTriggersSection from "@/components/sections/Concierge/Triggers/ConciergeTriggersSection";
 
 export default function IungoConciergePage() {
   return (
