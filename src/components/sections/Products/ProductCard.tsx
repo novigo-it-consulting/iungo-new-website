@@ -16,6 +16,7 @@ interface ProductCardProps {
   className?: string;
   ctaHref?: string;
   ctaLabel?: string;
+  ctaAriaLabel?: string;
   copy?: ProductCardCopyConfig;
   icon?: ProductCardIconConfig;
   contentClassName?: string;
@@ -30,6 +31,7 @@ export default function ProductCard({
   className = "",
   ctaHref,
   ctaLabel = "Saiba mais",
+  ctaAriaLabel,
   copy,
   icon,
   contentClassName = "",
@@ -80,6 +82,7 @@ export default function ProductCard({
             productId={productId}
             href={ctaHref}
             label={ctaLabel}
+            ariaLabel={ctaAriaLabel}
           />
         </div>
       ) : null}
