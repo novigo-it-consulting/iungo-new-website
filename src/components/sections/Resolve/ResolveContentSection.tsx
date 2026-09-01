@@ -3,6 +3,7 @@ import PageContainer from "@/components/layout/PageContainer";
 import ResolveDifferentials from "./ResolveDifferentials";
 import ResolveMetricItem from "./ResolveMetricItem";
 import { RESOLVE_METRICS } from "./resolveMetrics.constants";
+import ResolveSystemScreens from "./SystemScreens/ResolveSystemScreens";
 
 export default function ResolveContentSection() {
   return (
@@ -15,7 +16,7 @@ export default function ResolveContentSection() {
       <PageContainer
         data-resolve-first-content-container
         size="content1152"
-        className="min-w-0 xl:min-h-[1206.8px]"
+        className="min-w-0"
       >
         <div
           data-resolve-metrics
@@ -27,6 +28,14 @@ export default function ResolveContentSection() {
         </div>
 
         <ResolveDifferentials />
+      </PageContainer>
+
+      <PageContainer
+        data-resolve-system-screens-container
+        size="content1280"
+        className="min-w-0 mt-[149px]"
+      >
+        <ResolveSystemScreens />
       </PageContainer>
     </section>
   );
