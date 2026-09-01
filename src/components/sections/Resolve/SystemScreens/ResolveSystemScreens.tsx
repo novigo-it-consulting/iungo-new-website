@@ -1,38 +1,37 @@
-import ResolveSystemScreensBadges from "./ResolveSystemScreensBadges";
-import ResolveSystemScreensVisuals from "./ResolveSystemScreensVisuals";
+import ProductSystemScreensBadges from "@/components/sections/shared/SystemScreens/ProductSystemScreensBadges";
+import ProductSystemScreensHeader from "@/components/sections/shared/SystemScreens/ProductSystemScreensHeader";
+import FramedProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/FramedProductSystemScreensVisuals";
+
+import {
+  RESOLVE_SYSTEM_SCREEN_BADGES,
+  RESOLVE_SYSTEM_SCREEN_GRID_ITEMS,
+  RESOLVE_SYSTEM_SCREEN_MAIN,
+} from "./resolveSystemScreens.constants";
+
+const RESOLVE_INACTIVE_BADGE_BORDER = "border-[rgba(200,79,4,0.35)]";
 
 export default function ResolveSystemScreens() {
   return (
     <>
-      <div
-        data-resolve-system-screens-header
-        className="mx-auto flex w-full max-w-[672px] flex-col gap-3 text-center"
-      >
-        <div
-          data-resolve-system-screens-title-frame
-          className="w-full pt-1"
-        >
-          <h2
-            id="resolve-system-screens-title"
-            data-resolve-system-screens-title
-            className="m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]"
-          >
-            O console que o supervisor de CX olha o dia inteiro.
-          </h2>
-        </div>
+      <ProductSystemScreensHeader
+        productSlug="resolve"
+        title="O console que o supervisor de CX olha o dia inteiro."
+        description="Console de operação, treinamento via PIM, métricas de qualidade e supervisão de handoff."
+      />
 
-        <p
-          data-resolve-system-screens-description
-          className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
-        >
-          Console de operação, treinamento via PIM, métricas de qualidade e
-          supervisão de handoff.
-        </p>
-      </div>
+      <ProductSystemScreensBadges
+        productSlug="resolve"
+        ariaLabel="Telas do sistema Iungo Resolve"
+        badges={RESOLVE_SYSTEM_SCREEN_BADGES}
+        inactiveBorderClassName={RESOLVE_INACTIVE_BADGE_BORDER}
+      />
 
-      <ResolveSystemScreensBadges />
-
-      <ResolveSystemScreensVisuals />
+      <FramedProductSystemScreensVisuals
+        productSlug="resolve"
+        main={RESOLVE_SYSTEM_SCREEN_MAIN}
+        gridItems={RESOLVE_SYSTEM_SCREEN_GRID_ITEMS}
+        mainSizes="(max-width: 1216px) 100vw, 1216px"
+      />
     </>
   );
 }

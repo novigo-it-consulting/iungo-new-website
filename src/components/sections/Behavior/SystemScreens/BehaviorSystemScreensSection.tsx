@@ -1,7 +1,15 @@
 import PageContainer from "@/components/layout/PageContainer";
+import PlainProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/PlainProductSystemScreensVisuals";
+import ProductSystemScreensBadges from "@/components/sections/shared/SystemScreens/ProductSystemScreensBadges";
+import ProductSystemScreensHeader from "@/components/sections/shared/SystemScreens/ProductSystemScreensHeader";
 
-import BehaviorSystemScreensBadges from "./BehaviorSystemScreensBadges";
-import BehaviorSystemScreensVisuals from "./BehaviorSystemScreensVisuals";
+import {
+  BEHAVIOR_SYSTEM_SCREEN_BADGES,
+  BEHAVIOR_SYSTEM_SCREEN_GRID_ITEMS,
+  BEHAVIOR_SYSTEM_SCREEN_MAIN,
+} from "./behaviorSystemScreens.constants";
+
+const BEHAVIOR_INACTIVE_BADGE_BORDER = "border-[#D3D5D8]";
 
 export default function BehaviorSystemScreensSection() {
   return (
@@ -15,35 +23,24 @@ export default function BehaviorSystemScreensSection() {
         size="content1280"
         className="min-w-0"
       >
-        <div
-          data-behavior-system-screens-header
-          className="mx-auto flex w-full max-w-[672px] flex-col gap-3 text-center"
-        >
-          <div
-            data-behavior-system-screens-title-frame
-            className="w-full pt-1"
-          >
-            <h2
-              id="behavior-system-screens-title"
-              data-behavior-system-screens-title
-              className="m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]"
-            >
-              A interface real, todo dia, em produção.
-            </h2>
-          </div>
+        <ProductSystemScreensHeader
+          productSlug="behavior"
+          title="A interface real, todo dia, em produção."
+          description="Ficha de produto, workflow editorial, governança de atributos e publicação multi-canal."
+        />
 
-          <p
-            data-behavior-system-screens-description
-            className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
-          >
-            Ficha de produto, workflow editorial, governança de atributos e
-            publicação multi-canal.
-          </p>
-        </div>
+        <ProductSystemScreensBadges
+          productSlug="behavior"
+          ariaLabel="Telas do sistema Iungo Behavior"
+          badges={BEHAVIOR_SYSTEM_SCREEN_BADGES}
+          inactiveBorderClassName={BEHAVIOR_INACTIVE_BADGE_BORDER}
+        />
 
-        <BehaviorSystemScreensBadges />
-
-        <BehaviorSystemScreensVisuals />
+        <PlainProductSystemScreensVisuals
+          productSlug="behavior"
+          main={BEHAVIOR_SYSTEM_SCREEN_MAIN}
+          gridItems={BEHAVIOR_SYSTEM_SCREEN_GRID_ITEMS}
+        />
       </PageContainer>
     </section>
   );
