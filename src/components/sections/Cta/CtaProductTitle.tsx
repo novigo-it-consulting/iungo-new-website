@@ -1,20 +1,24 @@
-type ConciergeCtaTitleProps = {
+type CtaProductTitleProps = {
+  titleId: string;
   line1: string;
   line2: string;
+  dataPrefix: string;
 };
 
-export default function ConciergeCtaTitle({
+export default function CtaProductTitle({
+  titleId,
   line1,
   line2,
-}: ConciergeCtaTitleProps) {
+  dataPrefix,
+}: CtaProductTitleProps) {
   return (
     <div
-      data-concierge-cta-title-frame
+      {...{ [`data-${dataPrefix}-title-frame`]: true }}
       className="flex w-full max-w-[832px] min-h-[120px] flex-col items-center"
     >
       <h2
-        id="concierge-cta-title"
-        data-concierge-cta-title
+        id={titleId}
+        {...{ [`data-${dataPrefix}-title`]: true }}
         className="m-0 w-full text-center font-reddit text-[48px] font-bold leading-[60px] tracking-[-0.96px] text-white"
       >
         {line1}
