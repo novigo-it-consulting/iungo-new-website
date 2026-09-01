@@ -2,9 +2,6 @@ import PrimaryLink from "@/components/ui/PrimaryLink";
 
 import AttendantHeroIcon from "./AttendantHeroIcon";
 
-const heroParagraphClassName =
-  "m-0 w-full font-reddit text-base font-normal leading-8 tracking-[0.38px] text-[#041527]";
-
 export default function AttendantHeroContent() {
   return (
     <div
@@ -34,7 +31,7 @@ export default function AttendantHeroContent() {
       >
         <p
           data-attendant-hero-description
-          className={heroParagraphClassName}
+          className="m-0 w-full font-reddit text-base font-normal leading-8 tracking-[0.38px] text-[#041527]"
         >
           O agente que executa, não só responde.
           <br />

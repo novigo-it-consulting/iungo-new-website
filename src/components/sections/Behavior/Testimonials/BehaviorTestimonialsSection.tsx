@@ -1,8 +1,9 @@
 import PageContainer from "@/components/layout/PageContainer";
+import ProductTestimonialsCards from "@/components/sections/shared/Testimonials/ProductTestimonialsCards";
+import ProductTestimonialsDisclaimer from "@/components/sections/shared/Testimonials/ProductTestimonialsDisclaimer";
+import ProductTestimonialsHeader from "@/components/sections/shared/Testimonials/ProductTestimonialsHeader";
 
-import BehaviorTestimonialsCards from "./BehaviorTestimonialsCards";
-import BehaviorTestimonialsDisclaimer from "./BehaviorTestimonialsDisclaimer";
-import BehaviorTestimonialsHeader from "./BehaviorTestimonialsHeader";
+import { BEHAVIOR_TESTIMONIALS } from "./behaviorTestimonials.constants";
 
 export default function BehaviorTestimonialsSection() {
   return (
@@ -23,11 +24,19 @@ export default function BehaviorTestimonialsSection() {
           size="content1152"
           className="flex min-w-0 flex-col items-center"
         >
-          <BehaviorTestimonialsHeader />
+          <ProductTestimonialsHeader
+            productSlug="behavior"
+            title="Quem ativou, sentiu."
+            description="Líderes de growth e CRM que substituíram Segment + ferramentas avulsas pela stack unificada."
+          />
 
-          <BehaviorTestimonialsCards />
+          <ProductTestimonialsCards
+            productSlug="behavior"
+            testimonials={BEHAVIOR_TESTIMONIALS}
+            variant="behavior"
+          />
 
-          <BehaviorTestimonialsDisclaimer />
+          <ProductTestimonialsDisclaimer productSlug="behavior" />
         </PageContainer>
       </section>
     </>

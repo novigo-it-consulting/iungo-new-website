@@ -31,7 +31,6 @@ export default function AttendantSystemScreens() {
         main={ATTENDANT_SYSTEM_SCREEN_MAIN}
         gridItems={ATTENDANT_SYSTEM_SCREEN_GRID_ITEMS}
         mainSizes="(min-width: 1280px) 1216px, calc(100vw - 48px)"
-        includeMainImageDataAttribute
       />
     </>
   );

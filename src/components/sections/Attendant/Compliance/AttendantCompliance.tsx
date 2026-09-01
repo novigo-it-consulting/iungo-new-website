@@ -1,25 +1,17 @@
 import { ATTENDANT_COMPLIANCE_METRICS } from "./attendantCompliance.constants";
 
-function AttendantComplianceBadge() {
-  return (
-    <span
-      data-attendant-compliance-badge
-      className="inline-flex w-fit shrink-0 items-center justify-center rounded-[999px] border border-[#E4E4E7] bg-[#F4F4F5] px-[14px] py-[6px]"
-    >
-      <span className="font-reddit text-[11.2px] font-medium leading-[16.8px] tracking-[0.67px] text-[#15803D]">
-        COMPLIANCE
-      </span>
-    </span>
-  );
-}
-
 export default function AttendantCompliance() {
   return (
     <div
       data-attendant-compliance-container
       className="box-border flex w-full min-w-0 flex-col gap-4 rounded-2xl border border-[#E4E4E7] bg-white p-12"
     >
-      <AttendantComplianceBadge />
+      <span
+        data-attendant-compliance-badge
+        className="inline-flex w-fit shrink-0 items-center justify-center rounded-[999px] border border-[#E4E4E7] bg-[#F4F4F5] px-[14px] py-[6px] font-reddit text-[11.2px] font-medium leading-[16.8px] tracking-[0.67px] text-[#15803D]"
+      >
+        COMPLIANCE
+      </span>
 
       <h2
         id="attendant-compliance-title"

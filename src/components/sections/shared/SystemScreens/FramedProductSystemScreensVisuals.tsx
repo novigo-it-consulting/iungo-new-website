@@ -10,7 +10,6 @@ type FramedProductSystemScreensVisualsProps = {
   main: ProductSystemScreenMainImage;
   gridItems: readonly ProductSystemScreenImage[];
   mainSizes: string;
-  includeMainImageDataAttribute?: boolean;
 };
 
 export default function FramedProductSystemScreensVisuals({
@@ -18,7 +17,6 @@ export default function FramedProductSystemScreensVisuals({
   main,
   gridItems,
   mainSizes,
-  includeMainImageDataAttribute = false,
 }: FramedProductSystemScreensVisualsProps) {
   return (
     <div
@@ -34,9 +32,6 @@ export default function FramedProductSystemScreensVisuals({
         className="overflow-hidden rounded-2xl"
       >
         <Image
-          {...(includeMainImageDataAttribute
-            ? { [`data-${productSlug}-system-screens-main`]: true }
-            : {})}
           src={main.src}
           alt={main.alt}
           width={main.width}

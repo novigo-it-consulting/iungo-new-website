@@ -1,6 +1,8 @@
-import ResolveTestimonialsCards from "./ResolveTestimonialsCards";
-import ResolveTestimonialsDisclaimer from "./ResolveTestimonialsDisclaimer";
-import ResolveTestimonialsHeader from "./ResolveTestimonialsHeader";
+import ProductTestimonialsCards from "@/components/sections/shared/Testimonials/ProductTestimonialsCards";
+import ProductTestimonialsDisclaimer from "@/components/sections/shared/Testimonials/ProductTestimonialsDisclaimer";
+import ProductTestimonialsHeader from "@/components/sections/shared/Testimonials/ProductTestimonialsHeader";
+
+import { RESOLVE_TESTIMONIALS } from "./resolveTestimonials.constants";
 
 export default function ResolveTestimonials() {
   return (
@@ -9,11 +11,19 @@ export default function ResolveTestimonials() {
       aria-labelledby="resolve-testimonials-title"
       className="flex w-full min-w-0 flex-col items-center"
     >
-      <ResolveTestimonialsHeader />
+      <ProductTestimonialsHeader
+        productSlug="resolve"
+        title="CX que cresce sem inflar headcount."
+        description="Líderes de atendimento que automatizaram L1/L2 sem perder qualidade nem CSAT."
+      />
 
-      <ResolveTestimonialsCards />
+      <ProductTestimonialsCards
+        productSlug="resolve"
+        testimonials={RESOLVE_TESTIMONIALS}
+        variant="resolve"
+      />
 
-      <ResolveTestimonialsDisclaimer />
+      <ProductTestimonialsDisclaimer productSlug="resolve" />
     </div>
   );
 }

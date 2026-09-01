@@ -1,17 +1,32 @@
 import TestimonialCard from "@/components/ui/TestimonialCard";
 
-import { BEHAVIOR_TESTIMONIALS } from "./behaviorTestimonials.constants";
+import type {
+  ProductTestimonialItem,
+  ProductTestimonialsVariant,
+} from "./productTestimonials.types";
 
-export default function BehaviorTestimonialsCards() {
+type ProductTestimonialsCardsProps = {
+  productSlug: string;
+  testimonials: readonly ProductTestimonialItem[];
+  variant: ProductTestimonialsVariant;
+};
+
+export default function ProductTestimonialsCards({
+  productSlug,
+  testimonials,
+  variant,
+}: ProductTestimonialsCardsProps) {
   return (
     <ul
-      data-behavior-testimonials-cards
+      {...{
+        [`data-${productSlug}-testimonials-cards`]: true,
+      }}
       className="mt-10 grid w-full max-w-[1088px] grid-cols-1 gap-6 lg:grid-cols-2"
     >
-      {BEHAVIOR_TESTIMONIALS.map((testimonial) => (
+      {testimonials.map((testimonial) => (
         <li key={testimonial.id} className="min-w-0">
           <TestimonialCard
-            variant="behavior"
+            variant={variant}
             quote={testimonial.quote}
             initials={testimonial.initials}
             avatarClassName={testimonial.avatarClassName}
