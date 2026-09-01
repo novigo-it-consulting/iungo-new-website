@@ -8,7 +8,7 @@ export type TestimonialCardProps = {
   role: string;
   metricValue: string;
   metricLabel: string;
-  variant?: "default" | "behavior" | "resolve";
+  variant?: "default" | "behavior" | "resolve" | "attendant";
 };
 
 const metricValueClasses = {
@@ -18,6 +18,8 @@ const metricValueClasses = {
     "font-reddit text-[20px] font-bold leading-[28px] tracking-[-0.4px] text-[#5B6C7C]",
   resolve:
     "font-reddit text-[20px] font-bold leading-[28px] tracking-[-0.4px] text-[#C84F04]",
+  attendant:
+    "m-0 font-reddit text-xl font-bold leading-7 tracking-[-0.4px] text-[#3B37C0]",
 } as const;
 
 const quoteTextClasses = {
@@ -25,12 +27,16 @@ const quoteTextClasses = {
     "font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-[#5B6C7C]",
   resolve:
     "font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-[#C84F04]",
+  attendant:
+    "m-0 font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-[#3B37C0]",
 } as const;
 
 function usesTextQuote(
   variant: TestimonialCardProps["variant"],
-): variant is "behavior" | "resolve" {
-  return variant === "behavior" || variant === "resolve";
+): variant is "behavior" | "resolve" | "attendant" {
+  return (
+    variant === "behavior" || variant === "resolve" || variant === "attendant"
+  );
 }
 
 export default function TestimonialCard({
