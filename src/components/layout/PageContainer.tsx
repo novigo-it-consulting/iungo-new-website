@@ -8,7 +8,8 @@ type PageContainerSize =
   | "organizerComparison"
   | "cta"
   | "content1280"
-  | "content1152";
+  | "content1152"
+  | "hero1224";
 
 const sizeClasses: Record<PageContainerSize, string> = {
   default:
@@ -35,6 +36,9 @@ const sizeClasses: Record<PageContainerSize, string> = {
   // Frame centralizado de 1152px — margem de 384px em 1920px.
   content1152:
     "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1152px]",
+  // Frame centralizado de 1224px — margem de 348px em 1920px.
+  hero1224:
+    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1224px]",
 };
 
 interface PageContainerProps extends ComponentPropsWithoutRef<"div"> {

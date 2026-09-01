@@ -8,7 +8,7 @@ export type TestimonialCardProps = {
   role: string;
   metricValue: string;
   metricLabel: string;
-  variant?: "default" | "behavior";
+  variant?: "default" | "behavior" | "resolve";
 };
 
 const metricValueClasses = {
@@ -16,7 +16,22 @@ const metricValueClasses = {
     "font-reddit text-[20px] font-bold leading-[28px] tracking-[-0.4px] text-[#A72121]",
   behavior:
     "font-reddit text-[20px] font-bold leading-[28px] tracking-[-0.4px] text-[#5B6C7C]",
+  resolve:
+    "font-reddit text-[20px] font-bold leading-[28px] tracking-[-0.4px] text-[#C84F04]",
 } as const;
+
+const quoteTextClasses = {
+  behavior:
+    "font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-[#5B6C7C]",
+  resolve:
+    "font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-[#C84F04]",
+} as const;
+
+function usesTextQuote(
+  variant: TestimonialCardProps["variant"],
+): variant is "behavior" | "resolve" {
+  return variant === "behavior" || variant === "resolve";
+}
 
 export default function TestimonialCard({
   quote,
@@ -35,12 +50,12 @@ export default function TestimonialCard({
     >
       <div
         data-testimonial-quote
-        className={`flex w-full min-h-[48px] ${variant === "behavior" ? "items-center" : "items-start"}`}
+        className={`flex w-full min-h-[48px] ${usesTextQuote(variant) ? "items-center" : "items-start"}`}
       >
-        {variant === "behavior" ? (
+        {usesTextQuote(variant) ? (
           <span
             aria-hidden="true"
-            className="font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-[#5B6C7C]"
+            className={quoteTextClasses[variant]}
           >
             {"\u201C"}
           </span>
