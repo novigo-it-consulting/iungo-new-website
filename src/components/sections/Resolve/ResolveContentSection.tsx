@@ -4,14 +4,14 @@ import ResolveDifferentials from "./ResolveDifferentials";
 import ResolveMetricItem from "./ResolveMetricItem";
 import { RESOLVE_METRICS } from "./resolveMetrics.constants";
 import ResolveSystemScreens from "./SystemScreens/ResolveSystemScreens";
+import ResolveTestimonials from "./Testimonials/ResolveTestimonials";
 
 export default function ResolveContentSection() {
   return (
     <section
       data-resolve-content-section
       aria-label="Conteúdo do Iungo Resolve"
-      // Reserva provisória de altura no desktop; reavaliar quando os três containers estiverem completos.
-      className="w-full min-w-0 bg-white xl:min-h-[3225px] xl:pt-[109px]"
+      className="w-full min-w-0 bg-white xl:pt-[109px]"
     >
       <PageContainer
         data-resolve-first-content-container
@@ -36,6 +36,14 @@ export default function ResolveContentSection() {
         className="min-w-0 mt-[149px]"
       >
         <ResolveSystemScreens />
+      </PageContainer>
+
+      <PageContainer
+        data-resolve-testimonials-container
+        size="content1152"
+        className="min-w-0 mt-[193px]"
+      >
+        <ResolveTestimonials />
       </PageContainer>
     </section>
   );

@@ -10,6 +10,7 @@ type ProductPageCtaSectionProps = {
   line2: string;
   buttonHref: string;
   buttonLabel: string;
+  spacerClassName?: string;
 };
 
 export default function ProductPageCtaSection({
@@ -19,13 +20,14 @@ export default function ProductPageCtaSection({
   line2,
   buttonHref,
   buttonLabel,
+  spacerClassName = "h-8 w-full bg-white",
 }: ProductPageCtaSectionProps) {
   return (
     <>
       <div
         {...{ [`data-${dataPrefix}-spacer`]: true }}
         aria-hidden="true"
-        className="h-8 w-full bg-white"
+        className={spacerClassName}
       />
 
       <section
