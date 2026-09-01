@@ -1,5 +1,6 @@
 import BehaviorCdpOverviewSection from "@/components/sections/Behavior/CdpOverview/BehaviorCdpOverviewSection";
 import BehaviorHeroSection from "@/components/sections/Behavior/Hero/BehaviorHeroSection";
+import BehaviorSystemScreensSection from "@/components/sections/Behavior/SystemScreens/BehaviorSystemScreensSection";
 import BehaviorTestimonialSection from "@/components/sections/Behavior/Testimonial/BehaviorTestimonialSection";
 
 export default function IungoBehaviorPage() {
@@ -8,6 +9,7 @@ export default function IungoBehaviorPage() {
       <BehaviorHeroSection />
       <BehaviorCdpOverviewSection />
       <BehaviorTestimonialSection />
+      <BehaviorSystemScreensSection />
     </main>
   );
 }
