@@ -1,6 +1,6 @@
 import ResolveContentSection from "@/components/sections/Resolve/ResolveContentSection";
 import ResolveCtaSection from "@/components/sections/Resolve/Cta/ResolveCtaSection";
-import ResolveHeroSection from "@/components/sections/Resolve/ResolveHeroSection";
+import ResolveHeroSection from "@/components/sections/Resolve/Hero/ResolveHeroSection";
 
 export default function IungoResolvePage() {
   return (

@@ -1,6 +1,6 @@
 import PageContainer from "@/components/layout/PageContainer";
 
-import ResolveDifferentials from "./ResolveDifferentials";
+import ResolveDifferentials from "./Differentials/ResolveDifferentials";
 import ResolveMetricItem from "./ResolveMetricItem";
 import { RESOLVE_METRICS } from "./resolveMetrics.constants";
 import ResolveSystemScreens from "./SystemScreens/ResolveSystemScreens";
