@@ -1,5 +1,7 @@
 import IoTApplicationAreasSection from "./ApplicationAreas/IoTApplicationAreasSection";
+import IoTAssetCloudSection from "./AssetCloud/IoTAssetCloudSection";
 import IoTMetricsSection from "./Metrics/IoTMetricsSection";
+import IoTTechnologiesSection from "./Technologies/IoTTechnologiesSection";
 
 export default function IoTContentSection() {
   return (
@@ -10,6 +12,8 @@ export default function IoTContentSection() {
     >
       <IoTMetricsSection />
       <IoTApplicationAreasSection />
+      <IoTTechnologiesSection />
+      <IoTAssetCloudSection />
     </section>
   );
 }
