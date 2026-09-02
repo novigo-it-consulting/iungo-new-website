@@ -1,14 +1,8 @@
+import DarkSectionEyebrow from "@/components/sections/shared/SectionHeader/DarkSectionEyebrow";
+
 import OrganizerCaseStudyDescription from "./OrganizerCaseStudyDescription";
 import OrganizerCaseStudyIndicators from "./OrganizerCaseStudyIndicators";
 import OrganizerCaseStudyLink from "./OrganizerCaseStudyLink";
-
-function CaseStudyBadge() {
-  return (
-    <span className="box-border inline-flex w-fit shrink-0 self-start items-center justify-center whitespace-nowrap rounded-[999px] border border-white/[0.12] bg-white/[0.07] px-[14.4px] py-[6.4px] font-reddit text-[11.2px] font-medium leading-[16.8px] tracking-[0.672px] text-white/[0.92] backdrop-blur-[4px]">
-      CASE STUDY
-    </span>
-  );
-}
 
 export default function OrganizerCaseStudyCard() {
   return (
@@ -21,7 +15,7 @@ export default function OrganizerCaseStudyCard() {
         className="min-w-0 bg-[#0A0B14] p-6 sm:p-8 lg:col-span-2 lg:px-10 lg:pt-10 lg:pb-[43.42px]"
       >
         <div className="flex w-full flex-col items-start gap-2">
-          <CaseStudyBadge />
+          <DarkSectionEyebrow label="CASE STUDY" />
           <h2 className="m-0 w-full pt-2 pr-2 font-reddit text-[24px] font-bold leading-8 tracking-[-0.48px] text-white">
             Marketplace de moda em hiper-escala
           </h2>
