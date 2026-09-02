@@ -11,6 +11,7 @@ type ProductPageCtaSectionProps = {
   buttonHref: string;
   buttonLabel: string;
   spacerClassName?: string;
+  buttonVariant?: "default" | "convert";
 };
 
 export default function ProductPageCtaSection({
@@ -21,6 +22,7 @@ export default function ProductPageCtaSection({
   buttonHref,
   buttonLabel,
   spacerClassName = "h-8 w-full bg-white",
+  buttonVariant = "default",
 }: ProductPageCtaSectionProps) {
   return (
     <>
@@ -55,7 +57,11 @@ export default function ProductPageCtaSection({
               {...{ [`data-${dataPrefix}-action`]: true }}
               className="mt-[25px]"
             >
-              <CtaButton href={buttonHref} label={buttonLabel} />
+              <CtaButton
+                href={buttonHref}
+                label={buttonLabel}
+                variant={buttonVariant}
+              />
             </div>
           </div>
         </PageContainer>
