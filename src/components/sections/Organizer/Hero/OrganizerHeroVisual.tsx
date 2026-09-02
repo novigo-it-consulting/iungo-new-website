@@ -1,10 +1,15 @@
 import Image from "next/image";
 
+import {
+  productHeroImageClassName,
+  productHeroImageSizes,
+} from "@/components/sections/shared/Hero/productHero.styles";
+
 export default function OrganizerHeroVisual() {
   return (
     <div
       data-organizer-hero-visual
-      className="relative aspect-square w-full max-w-[450px] justify-self-center lg:justify-self-end"
+      className="relative aspect-square w-full min-w-0 max-w-[min(450px,100%)] justify-self-center lg:justify-self-end"
     >
       <Image
         src="/images/products/organizer/organizer-hero.png"
@@ -12,8 +17,8 @@ export default function OrganizerHeroVisual() {
         width={450}
         height={450}
         priority
-        sizes="(min-width: 1024px) 450px, calc(100vw - 48px)"
-        className="h-auto w-full object-contain"
+        sizes={productHeroImageSizes}
+        className={productHeroImageClassName}
       />
     </div>
   );

@@ -1,5 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
+import { pageOrganizerContainerClassName } from "./pageLayout.constants";
+
 type PageContainerSize =
   | "default"
   | "organizer"
@@ -16,8 +18,7 @@ const sizeClasses: Record<PageContainerSize, string> = {
     "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1260px]",
   // Em 2xl+ (≥1536px), a margem esquerda é travada em 329px para alinhar
   // com o logo do Header (fixo em 329px via mx-[233.16px] + pl-[95.84px]).
-  organizer:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1266px] 2xl:ml-[329px] 2xl:w-auto",
+  organizer: pageOrganizerContainerClassName,
   // Frame centralizado com padding interno horizontal (não subtrai margem).
   organizerSteps:
     "w-full max-w-[1280px] px-6 sm:px-8",

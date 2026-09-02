@@ -1,21 +1,17 @@
+import ProductHeroLayout from "@/components/sections/shared/Hero/ProductHeroLayout";
+
 import IoTHeroContent from "./IoTHeroContent";
 import IoTHeroVisual from "./IoTHeroVisual";
 
 export default function IoTHeroSection() {
   return (
-    <section
-      data-iot-hero-section
-      aria-labelledby="iot-hero-title"
-      className="w-full min-w-0 bg-white bg-[linear-gradient(180deg,rgba(255,255,255,0.10)_29%,rgba(184,134,11,0.10)_100%)] py-12 md:py-14 xl:min-h-[679px] xl:py-[54px]"
+    <ProductHeroLayout
+      scope="iot"
+      titleId="iot-hero-title"
+      gradientClassName="bg-[linear-gradient(180deg,rgba(255,255,255,0.10)_29%,rgba(184,134,11,0.10)_100%)]"
     >
-      <div
-        data-iot-hero-container
-        className="mx-auto grid min-w-0 w-[calc(100%_-_48px)] grid-cols-1 sm:w-[calc(100%_-_64px)] xl:w-full xl:grid-cols-[minmax(0,1fr)_450px] xl:items-start xl:pl-[330px] xl:pr-[320px]"
-      >
-        <IoTHeroContent />
-
-        <IoTHeroVisual />
-      </div>
-    </section>
+      <IoTHeroContent />
+      <IoTHeroVisual />
+    </ProductHeroLayout>
   );
 }
