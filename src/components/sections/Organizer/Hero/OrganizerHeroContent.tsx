@@ -1,4 +1,9 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import {
+  productHeroTitleClassName,
+  productHeroParagraphClassName,
+} from "@/components/sections/shared/Hero/productHero.styles";
+
 import OrganizerHeroIcon from "./OrganizerHeroIcon";
 
 export default function OrganizerHeroContent() {
@@ -13,19 +18,17 @@ export default function OrganizerHeroContent() {
       >
         <OrganizerHeroIcon />
 
-        <h1
-          data-organizer-hero-title
-          className="m-0 w-full max-w-[544px] font-reddit font-semibold tracking-[-0.01em] text-[#424241] text-[40px] leading-[48px] sm:text-[48px] sm:leading-[58px] lg:text-[56px] lg:leading-[70px] xl:min-h-[113px] xl:text-[66px] xl:leading-[89px]"
-        >
+        <h1 data-organizer-hero-title className={productHeroTitleClassName}>
           Iungo Organizer
         </h1>
 
         <p
           data-organizer-hero-description
-          className="m-0 w-full max-w-[579px] font-reddit text-[16px] font-normal leading-8 tracking-[0.38px] text-[#041527] xl:min-h-[77px]"
+          className={`max-w-[579px] ${productHeroParagraphClassName}`}
         >
           O melhor AI PIM para enriquecer catálogos com IA generativa, com
-          onboarding em 14 dias e integração nativa com Mercado Livre e Amazon BR.
+          onboarding em 14 dias e integração nativa com Mercado Livre e Amazon
+          BR.
         </p>
       </div>
 

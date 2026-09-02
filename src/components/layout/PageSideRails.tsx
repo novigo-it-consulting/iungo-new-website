@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import { pageSideRailsGridClassName } from "./pageLayout.constants";
+
 interface PageSideRailsProps {
   scope: string;
   children: ReactNode;
@@ -16,7 +18,7 @@ export default function PageSideRails({
   return (
     <div
       data-page-rail-layout={scope}
-      className={`grid w-full grid-cols-1 2xl:grid-cols-[329px_minmax(0,1fr)_325px] ${className}`}
+      className={`${pageSideRailsGridClassName} ${className}`}
     >
       <div
         data-page-left-rail={scope}

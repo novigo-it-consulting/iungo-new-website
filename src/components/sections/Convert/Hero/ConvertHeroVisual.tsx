@@ -1,13 +1,16 @@
 import Image from "next/image";
 
+import {
+  productHeroImageClassName,
+  productHeroImageSizes,
+  productHeroVisualWrapperClassName,
+} from "@/components/sections/shared/Hero/productHero.styles";
+
 import { CONVERT_HERO_IMAGE } from "./convertHero.constants";
 
 export default function ConvertHeroVisual() {
   return (
-    <div
-      data-convert-hero-visual
-      className="mt-8 flex min-w-0 justify-center xl:mt-0 xl:justify-end"
-    >
+    <div data-convert-hero-visual className={productHeroVisualWrapperClassName}>
       {CONVERT_HERO_IMAGE.available ? (
         <Image
           src={CONVERT_HERO_IMAGE.src}
@@ -15,14 +18,14 @@ export default function ConvertHeroVisual() {
           width={CONVERT_HERO_IMAGE.width}
           height={CONVERT_HERO_IMAGE.height}
           priority
-          sizes="(min-width: 1280px) 450px, calc(100vw - 48px)"
-          className="block h-auto w-full max-w-[450px] object-contain"
+          sizes={productHeroImageSizes}
+          className={productHeroImageClassName}
         />
       ) : (
         <div
           data-convert-hero-visual-placeholder
           aria-hidden="true"
-          className="aspect-square w-full max-w-[450px] bg-[#F4F4F5]"
+          className="aspect-square w-full max-w-[min(450px,100%)] bg-[#F4F4F5]"
         />
       )}
     </div>

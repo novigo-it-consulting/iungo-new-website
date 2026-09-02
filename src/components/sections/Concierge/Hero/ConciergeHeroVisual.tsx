@@ -1,10 +1,16 @@
 import Image from "next/image";
 
+import {
+  productHeroImageClassName,
+  productHeroImageSizes,
+  productHeroVisualWrapperClassName,
+} from "@/components/sections/shared/Hero/productHero.styles";
+
 export default function ConciergeHeroVisual() {
   return (
     <div
       data-concierge-hero-visual
-      className="mt-8 flex min-w-0 justify-center xl:mt-0 xl:justify-end xl:translate-x-[7px]"
+      className={productHeroVisualWrapperClassName}
     >
       <Image
         src="/images/products/concierge/concierge-hero.png"
@@ -12,8 +18,8 @@ export default function ConciergeHeroVisual() {
         width={900}
         height={900}
         priority
-        sizes="(min-width: 768px) 450px, calc(100vw - 48px)"
-        className="h-auto w-full max-w-[450px] object-contain"
+        sizes={productHeroImageSizes}
+        className={productHeroImageClassName}
       />
     </div>
   );

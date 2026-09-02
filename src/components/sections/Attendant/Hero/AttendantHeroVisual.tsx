@@ -1,12 +1,18 @@
 import Image from "next/image";
 
+import {
+  productHeroImageClassName,
+  productHeroImageSizes,
+  productHeroVisualWrapperClassName,
+} from "@/components/sections/shared/Hero/productHero.styles";
+
 import { ATTENDANT_HERO_IMAGE } from "./attendantHero.constants";
 
 export default function AttendantHeroVisual() {
   return (
     <div
       data-attendant-hero-visual
-      className="mt-8 flex min-w-0 justify-center xl:mt-0 xl:justify-end"
+      className={productHeroVisualWrapperClassName}
     >
       {ATTENDANT_HERO_IMAGE.available ? (
         <Image
@@ -15,14 +21,14 @@ export default function AttendantHeroVisual() {
           width={ATTENDANT_HERO_IMAGE.width}
           height={ATTENDANT_HERO_IMAGE.height}
           priority
-          sizes="(min-width: 1280px) 450px, calc(100vw - 48px)"
-          className="block h-auto w-full max-w-[450px] object-contain"
+          sizes={productHeroImageSizes}
+          className={productHeroImageClassName}
         />
       ) : (
         <div
           data-attendant-hero-visual-placeholder
           aria-hidden="true"
-          className="aspect-square w-full max-w-[450px] bg-[#F4F4F5]"
+          className="aspect-square w-full max-w-[min(450px,100%)] bg-[#F4F4F5]"
         />
       )}
     </div>
