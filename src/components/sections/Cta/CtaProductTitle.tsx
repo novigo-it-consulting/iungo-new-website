@@ -3,18 +3,23 @@ type CtaProductTitleProps = {
   line1: string;
   line2: string;
   dataPrefix: string;
+  frameClassName?: string;
 };
+
+const defaultTitleFrameClassName =
+  "flex w-full max-w-[832px] min-h-[120px] flex-col items-center";
 
 export default function CtaProductTitle({
   titleId,
   line1,
   line2,
   dataPrefix,
+  frameClassName = defaultTitleFrameClassName,
 }: CtaProductTitleProps) {
   return (
     <div
       {...{ [`data-${dataPrefix}-title-frame`]: true }}
-      className="flex w-full max-w-[832px] min-h-[120px] flex-col items-center"
+      className={frameClassName}
     >
       <h2
         id={titleId}

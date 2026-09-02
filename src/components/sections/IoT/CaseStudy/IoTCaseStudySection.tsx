@@ -9,7 +9,7 @@ export default function IoTCaseStudySection() {
     <section
       data-iot-case-study-section
       aria-label="Case Raia Drogasil e telas do Iungo Asset Cloud IoT"
-      className="box-border w-full min-w-0 bg-white py-[96px]"
+      className="box-border w-full min-w-0 bg-white pt-[96px]"
     >
       <PageContainer data-iot-case-study-container size="organizerComparison">
         <IoTCaseStudyCard />

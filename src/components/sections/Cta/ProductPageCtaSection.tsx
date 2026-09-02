@@ -3,6 +3,9 @@ import PageContainer from "@/components/layout/PageContainer";
 import CtaButton from "./CtaButton";
 import CtaProductTitle from "./CtaProductTitle";
 
+const defaultContentClassName =
+  "flex w-full min-w-0 flex-col items-center";
+
 type ProductPageCtaSectionProps = {
   dataPrefix: string;
   titleId: string;
@@ -12,6 +15,8 @@ type ProductPageCtaSectionProps = {
   buttonLabel: string;
   spacerClassName?: string;
   buttonVariant?: "default" | "convert";
+  titleFrameClassName?: string;
+  titleToButtonGapClassName?: string;
 };
 
 export default function ProductPageCtaSection({
@@ -23,7 +28,11 @@ export default function ProductPageCtaSection({
   buttonLabel,
   spacerClassName = "h-8 w-full bg-white",
   buttonVariant = "default",
+  titleFrameClassName,
+  titleToButtonGapClassName,
 }: ProductPageCtaSectionProps) {
+  const usesFlexGap = Boolean(titleToButtonGapClassName);
+
   return (
     <>
       <div
@@ -44,18 +53,19 @@ export default function ProductPageCtaSection({
         >
           <div
             {...{ [`data-${dataPrefix}-content`]: true }}
-            className="flex w-full min-w-0 flex-col items-center"
+            className={`${defaultContentClassName}${titleToButtonGapClassName ? ` ${titleToButtonGapClassName}` : ""}`}
           >
             <CtaProductTitle
               dataPrefix={dataPrefix}
               titleId={titleId}
               line1={line1}
               line2={line2}
+              frameClassName={titleFrameClassName}
             />
 
             <div
               {...{ [`data-${dataPrefix}-action`]: true }}
-              className="mt-[25px]"
+              className={usesFlexGap ? undefined : "mt-[25px]"}
             >
               <CtaButton
                 href={buttonHref}
