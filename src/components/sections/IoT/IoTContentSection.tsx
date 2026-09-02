@@ -1,3 +1,4 @@
+import IoTApplicationAreasSection from "./ApplicationAreas/IoTApplicationAreasSection";
 import IoTMetricsSection from "./Metrics/IoTMetricsSection";
 
 export default function IoTContentSection() {
@@ -8,6 +9,7 @@ export default function IoTContentSection() {
       className="w-full min-w-0 bg-white"
     >
       <IoTMetricsSection />
+      <IoTApplicationAreasSection />
     </section>
   );
 }
