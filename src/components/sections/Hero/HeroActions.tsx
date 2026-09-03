@@ -1,5 +1,6 @@
 import Link from "next/link";
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 
 import {
   homeHeroActionsClassName,
@@ -8,7 +9,8 @@ import {
 
 export default function HeroActions() {
   return (
-    <div data-hero-actions className={homeHeroActionsClassName}>      <PrimaryLink href="/solicitar-demonstracao">
+    <div data-hero-actions className={homeHeroActionsClassName}>
+      <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
         Solicitar Demonstração
       </PrimaryLink>
 

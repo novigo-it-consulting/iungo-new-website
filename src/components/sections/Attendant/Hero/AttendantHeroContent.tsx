@@ -1,20 +1,21 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
-  productHeroCtaClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-
-import AttendantHeroIcon from "./AttendantHeroIcon";
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function AttendantHeroContent() {
   return (
     <div data-attendant-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <AttendantHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.attendant} />
       </div>
 
       <ProductHeroTitle
@@ -39,11 +40,11 @@ export default function AttendantHeroContent() {
         </p>
       </div>
 
-      <div data-attendant-hero-cta className={productHeroCtaClassName}>
-        <PrimaryLink href="/solicitar-demonstracao">
+      <ProductHeroCta productSlug="attendant">
+        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
           Solicitar Demonstração
         </PrimaryLink>
-      </div>
+      </ProductHeroCta>
     </div>
   );
 }

@@ -1,20 +1,21 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
-  productHeroCtaClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-
-import ConvertHeroIcon from "./ConvertHeroIcon";
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function ConvertHeroContent() {
   return (
     <div data-convert-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <ConvertHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.convert} />
       </div>
 
       <ProductHeroTitle
@@ -42,11 +43,11 @@ export default function ConvertHeroContent() {
         </p>
       </div>
 
-      <div data-convert-hero-cta className={productHeroCtaClassName}>
-        <PrimaryLink href="/solicitar-demonstracao">
+      <ProductHeroCta productSlug="convert">
+        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
           Solicitar Demonstração
         </PrimaryLink>
-      </div>
+      </ProductHeroCta>
     </div>
   );
 }

@@ -1,0 +1,13 @@
+[data-request-demo-frame] {
+  container-type: inline-size;
+  container-name: request-demo-frame;
+}
+
+@media (min-width: 1280px) {
+  .request-demo-title {
+    font-size: clamp(42px, 8.908cqw, 49.97px);
+    line-height: clamp(56px, 12.013cqw, 67.4px);
+    letter-spacing: -0.01em;
+    max-width: 561.03px;
+  }
+}

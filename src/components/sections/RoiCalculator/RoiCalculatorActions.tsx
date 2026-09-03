@@ -1,16 +1,20 @@
+import Link from "next/link";
+
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export default function RoiCalculatorActions() {
   return (
     <div
       data-roi="actions"
       className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-3"
     >
-      <button
-        type="button"
+      <Link
+        href={SOLICITAR_DEMONSTRACAO_HREF}
         data-roi="cta-primary"
         className="inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-[50px] bg-white px-[25.6px] pb-[16.19px] pt-[14.39px] font-reddit text-[15.2px] font-medium leading-[22.8px] tracking-[0] text-[#000D3F] shadow-[0_1px_2px_rgba(0,13,63,0.06),0_4px_16px_rgba(0,13,63,0.10)] transition-opacity duration-150 hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#031358] motion-reduce:transition-none"
       >
         Agendar diagnóstico
-      </button>
+      </Link>
 
       <button
         type="button"

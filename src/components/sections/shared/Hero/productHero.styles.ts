@@ -27,6 +27,9 @@ export const productHeroImageSizes =
 export const productHeroCtaClassName =
   "mt-10 inline-flex xl:mt-12 2xl:mt-[60px]";
 
+/** Variante compacta para Behavior e Concierge (espaçamento aprovado no Figma). */
+export const productHeroCtaCompactClassName = "mt-10 inline-flex xl:mt-[39px]";
+
 export const productHeroIconSpacingClassName = "mb-4 xl:mb-[14px]";
 
 export const productHeroDescriptionBlockClassName = "mt-[14px] w-full";

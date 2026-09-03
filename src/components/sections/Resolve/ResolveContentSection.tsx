@@ -4,7 +4,9 @@ import ResolveDifferentials from "./Differentials/ResolveDifferentials";
 import ResolveMetricItem from "./ResolveMetricItem";
 import { RESOLVE_METRICS } from "./resolveMetrics.constants";
 import ResolveSystemScreens from "./SystemScreens/ResolveSystemScreens";
-import ResolveTestimonials from "./Testimonials/ResolveTestimonials";
+import ProductTestimonialsSection from "@/components/sections/shared/Testimonials/ProductTestimonialsSection";
+
+import { RESOLVE_TESTIMONIALS } from "./Testimonials/resolveTestimonials.constants";
 
 export default function ResolveContentSection() {
   return (
@@ -43,7 +45,13 @@ export default function ResolveContentSection() {
         size="content1152"
         className="min-w-0 mt-[193px]"
       >
-        <ResolveTestimonials />
+        <ProductTestimonialsSection
+          productSlug="resolve"
+          title="CX que cresce sem inflar headcount."
+          description="Líderes de atendimento que automatizaram L1/L2 sem perder qualidade nem CSAT."
+          testimonials={RESOLVE_TESTIMONIALS}
+          variant="resolve"
+        />
       </PageContainer>
     </section>
   );

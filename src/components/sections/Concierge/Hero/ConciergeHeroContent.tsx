@@ -1,19 +1,22 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
+  productHeroCtaCompactClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-
-import ConciergeHeroIcon from "./ConciergeHeroIcon";
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function ConciergeHeroContent() {
   return (
     <div data-concierge-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <ConciergeHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.concierge} />
       </div>
 
       <ProductHeroTitle
@@ -31,11 +34,11 @@ export default function ConciergeHeroContent() {
         usando o próprio. Behavior + Organizer AI PIM em tempo real.
       </p>
 
-      <div data-concierge-hero-cta className="mt-10 inline-flex xl:mt-[39px]">
-        <PrimaryLink href="/solicitar-demonstracao">
+      <ProductHeroCta productSlug="concierge" className={productHeroCtaCompactClassName}>
+        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
           Solicitar Demonstração
         </PrimaryLink>
-      </div>
+      </ProductHeroCta>
     </div>
   );
 }

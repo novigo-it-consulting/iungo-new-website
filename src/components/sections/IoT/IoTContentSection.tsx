@@ -5,7 +5,9 @@ import IoTAssetCloudSection from "./AssetCloud/IoTAssetCloudSection";
 import IoTCaseStudySection from "./CaseStudy/IoTCaseStudySection";
 import IoTMetricsSection from "./Metrics/IoTMetricsSection";
 import IoTTechnologiesSection from "./Technologies/IoTTechnologiesSection";
-import IoTTestimonials from "./Testimonials/IoTTestimonials";
+import ProductTestimonialsSection from "@/components/sections/shared/Testimonials/ProductTestimonialsSection";
+
+import { IOT_TESTIMONIALS } from "./Testimonials/iotTestimonials.constants";
 
 export default function IoTContentSection() {
   return (
@@ -25,7 +27,13 @@ export default function IoTContentSection() {
         size="content1152"
         className="min-w-0 mt-[205px]"
       >
-        <IoTTestimonials />
+        <ProductTestimonialsSection
+          productSlug="iot"
+          title="Quem rastreia ativo crítico, fala."
+          description="Diretores de TI e supply chain que reduziram prejuízo, fechamento contábil e auditoria física."
+          testimonials={IOT_TESTIMONIALS}
+          variant="iot"
+        />
       </PageContainer>
     </section>
   );

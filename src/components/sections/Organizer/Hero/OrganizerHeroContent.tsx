@@ -1,10 +1,12 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import {
   productHeroTitleClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
-import OrganizerHeroIcon from "./OrganizerHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function OrganizerHeroContent() {
   return (
@@ -16,7 +18,7 @@ export default function OrganizerHeroContent() {
         data-organizer-hero-copy
         className="flex min-w-0 flex-col items-start gap-[14px]"
       >
-        <OrganizerHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.organizer} />
 
         <h1 data-organizer-hero-title className={productHeroTitleClassName}>
           Iungo Organizer
@@ -32,7 +34,7 @@ export default function OrganizerHeroContent() {
         </p>
       </div>
 
-      <PrimaryLink href="/solicitar-demonstracao">
+      <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
         Solicitar Demonstração
       </PrimaryLink>
     </div>

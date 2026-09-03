@@ -27,7 +27,7 @@ export default function MetricsSection() {
 
           <h2
             data-metrics-heading
-            className="mt-4 w-full max-w-[900px] text-center font-reddit text-[20px] font-medium leading-[28px] text-[#424241] md:text-[22px] md:leading-[30px] lg:text-[24px] lg:leading-[32px] 2xl:mt-[21px]"
+            className="mt-8 w-full max-w-[900px] text-center font-reddit text-[20px] font-medium leading-[28px] text-[#424241] md:text-[22px] md:leading-[30px] lg:text-[24px] lg:leading-[32px] 2xl:mt-[50px]"
           >
             Métricas que decisores enterprise levam a sério.
           </h2>

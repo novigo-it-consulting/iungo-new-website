@@ -4,8 +4,9 @@ import BehaviorRevenueCalculatorButton from "./BehaviorRevenueCalculatorButton";
 
 export default function BehaviorRevenueCalculatorCard() {
   return (
-    <div
+    <section
       data-behavior-revenue-calculator-card
+      aria-labelledby="behavior-revenue-calculator-title"
       className="mx-auto box-border w-full max-w-[896px] rounded-[16px] bg-[#F4F4F5]"
     >
       <div className="flex w-full flex-col items-center gap-4 px-[48px] py-[48px]">
@@ -44,6 +45,6 @@ export default function BehaviorRevenueCalculatorCard() {
 
         <BehaviorRevenueCalculatorButton />
       </div>
-    </div>
+    </section>
   );
 }

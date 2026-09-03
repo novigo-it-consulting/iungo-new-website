@@ -3,7 +3,9 @@ import PageContainer from "@/components/layout/PageContainer";
 import AttendantCompliance from "./Compliance/AttendantCompliance";
 import AttendantSupportedOperations from "./SupportedOperations/AttendantSupportedOperations";
 import AttendantSystemScreens from "./SystemScreens/AttendantSystemScreens";
-import AttendantTestimonials from "./Testimonials/AttendantTestimonials";
+import ProductTestimonialsSection from "@/components/sections/shared/Testimonials/ProductTestimonialsSection";
+
+import { ATTENDANT_TESTIMONIALS } from "./Testimonials/attendantTestimonials.constants";
 
 export default function AttendantContentSection() {
   return (
@@ -29,7 +31,13 @@ export default function AttendantContentSection() {
         size="content1152"
         className="min-w-0 mt-[281px]"
       >
-        <AttendantTestimonials />
+        <ProductTestimonialsSection
+          productSlug="attendant"
+          title="Operação que não dorme."
+          description="Heads de operação e back-office que pararam de tratar tarefa mecânica como trabalho humano."
+          testimonials={ATTENDANT_TESTIMONIALS}
+          variant="attendant"
+        />
       </PageContainer>
 
       <PageContainer

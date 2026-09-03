@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "chrome-launcher": "1.1.2",
+    "lighthouse": "12.3.0",
+    "puppeteer-core": "24.2.0"
+  },
+  "devDependencies": {
+    "eslint-plugin-sonarjs": "^3.0.7",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.69.0"
+  }
+}

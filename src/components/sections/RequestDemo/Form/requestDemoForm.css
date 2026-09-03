@@ -1,0 +1,32 @@
+/*
+ * Estado selecionado: borda e texto na cor primária do projeto (#0024AE),
+ * fundo levemente azulado (#E9F3FF) para contraste perceptível sem preencher o selo opaco.
+ */
+.contact-type-option:has(:checked) {
+  border-color: #0024ae;
+  background-color: #e9f3ff;
+  color: #0024ae;
+}
+
+.contact-type-option:has(:focus-visible) {
+  outline: 2px solid #0024ae;
+  outline-offset: 2px;
+}
+
+[data-request-demo-message] textarea::-webkit-scrollbar {
+  width: 10px; /* área total — thumb fica mais à esquerda */
+}
+
+[data-request-demo-message] textarea::-webkit-scrollbar-track {
+  background: transparent;
+  margin-block: 12px;
+}
+
+[data-request-demo-message] textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(113, 113, 122, 0.35);
+  border-radius: 999px;
+  min-height: 24px;
+  border: 2px solid transparent;
+  border-right: 6px solid transparent; /* empurra a barra ~6px para a esquerda */
+  background-clip: padding-box;
+}
