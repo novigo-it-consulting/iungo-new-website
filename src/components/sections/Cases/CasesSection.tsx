@@ -1,3 +1,4 @@
+import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";
 import CaseCard from "./CaseCard";
 import CaseCardContent from "./CaseCardContent";
 import CaseCardDescription from "./CaseCardDescription";
@@ -58,7 +59,7 @@ export default function CasesSection() {
           <button
             type="button"
             data-cases="all-cases-button"
-            className="box-border inline-flex h-[41px] w-[157px] shrink-0 items-center justify-center gap-[8.67px] self-start whitespace-nowrap rounded-[43.36px] border-0 bg-[#0024AE] px-[13.88px] py-[6.94px] shadow-none hover:bg-[#0024AE] hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 lg:self-auto"
+            className={`box-border inline-flex h-[41px] w-[157px] shrink-0 items-center justify-center gap-[8.67px] self-start whitespace-nowrap rounded-[43.36px] border-0 bg-[#0024AE] px-[13.88px] py-[6.94px] shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 lg:self-auto ${solidButtonHoverClassName}`}
           >
             <span
               data-cases="all-cases-button-text"
