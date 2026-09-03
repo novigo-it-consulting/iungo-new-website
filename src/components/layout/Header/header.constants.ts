@@ -5,8 +5,9 @@ export type NavItem = {
   href: string;
 };
 
-export const NAV_ITEMS: NavItem[] = [
-  { label: "Soluções", href: "/solucoes" },
+export const SOLUCOES_NAV_LABEL = "Soluções";
+
+export const NAV_LINK_ITEMS: NavItem[] = [
   { label: "Plataforma", href: "/plataformas" },
   { label: "Cases", href: "/cases" },
   { label: "Recursos", href: "/recursos" },

@@ -46,7 +46,7 @@ export const FIRST_ROW_PRODUCTS = [
     ctaAriaLabel: null,
     copy: {
       description:
-        "O Real-Time CDP brasileiro com visão 360° preditiva, engine comportamental e semântica proprietária.",
+        "O Real-Time CDP brasileiro com visão 360º preditiva, engine comportamental e semântica proprietária.",
     },
     icon: {
       src: "/icons/products/behavior.svg",

@@ -1,0 +1,160 @@
+"use client";
+
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
+
+type SolucoesMegaMenuContextValue = {
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
+  toggle: () => void;
+  scheduleClose: () => void;
+  cancelScheduledClose: () => void;
+  triggerRef: RefObject<HTMLButtonElement | null>;
+  panelRef: RefObject<HTMLDivElement | null>;
+};
+
+const SolucoesMegaMenuContext =
+  createContext<SolucoesMegaMenuContextValue | null>(null);
+
+const CLOSE_DELAY_MS = 200;
+
+export function SolucoesMegaMenuProvider({
+  children,
+}: Readonly<{ children: ReactNode }>) {
+  const [isOpen, setIsOpen] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const clearCloseTimer = useCallback(() => {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  }, []);
+
+  const open = useCallback(() => {
+    clearCloseTimer();
+    setIsOpen(true);
+  }, [clearCloseTimer]);
+
+  const close = useCallback(() => {
+    clearCloseTimer();
+    setIsOpen(false);
+  }, [clearCloseTimer]);
+
+  const toggle = useCallback(() => {
+    setIsOpen((current) => {
+      clearCloseTimer();
+      return !current;
+    });
+  }, [clearCloseTimer]);
+
+  const scheduleClose = useCallback(() => {
+    clearCloseTimer();
+    closeTimerRef.current = setTimeout(() => {
+      const activeElement = document.activeElement;
+      const focusIsInsidePanel = panelRef.current?.contains(activeElement);
+      const focusIsOnTrigger = triggerRef.current?.contains(activeElement);
+
+      if (!focusIsInsidePanel && !focusIsOnTrigger) {
+        setIsOpen(false);
+      }
+    }, CLOSE_DELAY_MS);
+  }, [clearCloseTimer]);
+
+  const cancelScheduledClose = useCallback(() => {
+    clearCloseTimer();
+  }, [clearCloseTimer]);
+
+  useEffect(() => {
+    return () => {
+      clearCloseTimer();
+    };
+  }, [clearCloseTimer]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handlePointerDown = (event: MouseEvent) => {
+      const target = event.target as Node;
+
+      if (
+        triggerRef.current?.contains(target) ||
+        panelRef.current?.contains(target)
+      ) {
+        return;
+      }
+
+      close();
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== "Escape") {
+        return;
+      }
+
+      close();
+      triggerRef.current?.focus();
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [close, isOpen]);
+
+  const value = useMemo(
+    () => ({
+      isOpen,
+      open,
+      close,
+      toggle,
+      scheduleClose,
+      cancelScheduledClose,
+      triggerRef,
+      panelRef,
+    }),
+    [
+      cancelScheduledClose,
+      close,
+      isOpen,
+      open,
+      scheduleClose,
+      toggle,
+    ],
+  );
+
+  return (
+    <SolucoesMegaMenuContext.Provider value={value}>
+      {children}
+    </SolucoesMegaMenuContext.Provider>
+  );
+}
+
+export function useSolucoesMegaMenu() {
+  const context = useContext(SolucoesMegaMenuContext);
+
+  if (!context) {
+    throw new Error(
+      "useSolucoesMegaMenu must be used within SolucoesMegaMenuProvider",
+    );
+  }
+
+  return context;
+}
