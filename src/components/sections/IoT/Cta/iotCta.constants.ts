@@ -1,3 +1,5 @@
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export const IOT_CTA_TITLE = {
   line1: "O ativo físico vira dado.",
   line2: "O dado vira inteligência.",
@@ -5,5 +7,5 @@ export const IOT_CTA_TITLE = {
 
 export const IOT_CTA_BUTTON = {
   label: "Solicitar demonstração",
-  href: "/solicitar-demonstracao",
+  href: SOLICITAR_DEMONSTRACAO_HREF,
 } as const;

@@ -1,3 +1,5 @@
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export type NavItem = {
   label: string;
   href: string;
@@ -17,6 +19,6 @@ export const HEADER_BUTTONS = {
   },
   solicitarDemo: {
     label: "Solicitar Demonstração",
-    href: "/solicitar-demonstracao",
+    href: SOLICITAR_DEMONSTRACAO_HREF,
   },
 } as const;

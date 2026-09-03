@@ -1,0 +1,14 @@
+/*
+ * Estado selecionado: borda e texto na cor primária do projeto (#0024AE),
+ * fundo levemente azulado (#E9F3FF) para contraste perceptível sem preencher o selo opaco.
+ */
+.contact-type-option:has(:checked) {
+  border-color: #0024ae;
+  background-color: #e9f3ff;
+  color: #0024ae;
+}
+
+.contact-type-option:has(:focus-visible) {
+  outline: 2px solid #0024ae;
+  outline-offset: 2px;
+}

@@ -1,3 +1,5 @@
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export const ORGANIZER_CTA_TITLE = {
   line1: "Veja seu catálogo",
   line2: "enriquecido em 14 dias.",
@@ -8,5 +10,5 @@ export const ORGANIZER_CTA_SUBTITLE =
 
 export const ORGANIZER_CTA_BUTTON = {
   label: "Solicitar demonstração",
-  href: "/solicitar-demonstracao",
+  href: SOLICITAR_DEMONSTRACAO_HREF,
 } as const;

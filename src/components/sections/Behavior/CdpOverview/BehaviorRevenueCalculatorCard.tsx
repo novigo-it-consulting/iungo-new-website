@@ -6,6 +6,8 @@ export default function BehaviorRevenueCalculatorCard() {
   return (
     <div
       data-behavior-revenue-calculator-card
+      role="region"
+      aria-labelledby="behavior-revenue-calculator-title"
       className="mx-auto box-border w-full max-w-[896px] rounded-[16px] bg-[#F4F4F5]"
     >
       <div className="flex w-full flex-col items-center gap-4 px-[48px] py-[48px]">

@@ -1,3 +1,5 @@
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export const CONCIERGE_CTA_TITLE = {
   line1: "Triggers que convertem",
   line2: "2,5x mais que o site.",
@@ -5,5 +7,5 @@ export const CONCIERGE_CTA_TITLE = {
 
 export const CONCIERGE_CTA_BUTTON = {
   label: "Solicitar demonstração",
-  href: "/solicitar-demonstracao",
+  href: SOLICITAR_DEMONSTRACAO_HREF,
 } as const;

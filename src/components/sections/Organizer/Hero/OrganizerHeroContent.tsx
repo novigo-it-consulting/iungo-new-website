@@ -1,4 +1,5 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import {
   productHeroTitleClassName,
   productHeroParagraphClassName,
@@ -32,7 +33,7 @@ export default function OrganizerHeroContent() {
         </p>
       </div>
 
-      <PrimaryLink href="/solicitar-demonstracao">
+      <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
         Solicitar Demonstração
       </PrimaryLink>
     </div>

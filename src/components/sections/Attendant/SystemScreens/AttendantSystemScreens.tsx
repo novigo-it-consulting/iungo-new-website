@@ -12,7 +12,7 @@ const ATTENDANT_INACTIVE_BADGE_BORDER = "border-[#3B37C0]/[0.35]";
 
 export default function AttendantSystemScreens() {
   return (
-    <>
+    <section aria-labelledby="attendant-system-screens-title">
       <ProductSystemScreensHeader
         productSlug="attendant"
         title="A operação que não exige humano para tarefas mecânicas."
@@ -32,6 +32,6 @@ export default function AttendantSystemScreens() {
         gridItems={ATTENDANT_SYSTEM_SCREEN_GRID_ITEMS}
         mainSizes="(min-width: 1280px) 1216px, calc(100vw - 48px)"
       />
-    </>
+    </section>
   );
 }

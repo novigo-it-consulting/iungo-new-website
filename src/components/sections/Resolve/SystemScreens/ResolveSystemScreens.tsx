@@ -12,7 +12,7 @@ const RESOLVE_INACTIVE_BADGE_BORDER = "border-[rgba(200,79,4,0.35)]";
 
 export default function ResolveSystemScreens() {
   return (
-    <>
+    <section aria-labelledby="resolve-system-screens-title">
       <ProductSystemScreensHeader
         productSlug="resolve"
         title="O console que o supervisor de CX olha o dia inteiro."
@@ -32,6 +32,6 @@ export default function ResolveSystemScreens() {
         gridItems={RESOLVE_SYSTEM_SCREEN_GRID_ITEMS}
         mainSizes="(max-width: 1216px) 100vw, 1216px"
       />
-    </>
+    </section>
   );
 }

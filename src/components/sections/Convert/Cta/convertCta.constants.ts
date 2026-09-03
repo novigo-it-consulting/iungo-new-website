@@ -1,3 +1,5 @@
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export const CONVERT_CTA_TITLE = {
   line1: "O Sales Agent que",
   line2: "entende seu negócio.",
@@ -5,5 +7,5 @@ export const CONVERT_CTA_TITLE = {
 
 export const CONVERT_CTA_BUTTON = {
   label: "Solicitar demonstração",
-  href: "/solicitar-demonstracao",
+  href: SOLICITAR_DEMONSTRACAO_HREF,
 } as const;

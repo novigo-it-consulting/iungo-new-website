@@ -1,3 +1,5 @@
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+
 export const ATTENDANT_CTA_TITLE = {
   line1: "Atendimento que",
   line2: "executa de verdade.",
@@ -5,5 +7,5 @@ export const ATTENDANT_CTA_TITLE = {
 
 export const ATTENDANT_CTA_BUTTON = {
   label: "Solicitar demonstração",
-  href: "/solicitar-demonstracao",
+  href: SOLICITAR_DEMONSTRACAO_HREF,
 } as const;

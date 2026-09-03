@@ -1,4 +1,5 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
@@ -41,7 +42,7 @@ export default function IoTHeroContent() {
       </div>
 
       <div data-iot-hero-cta className={productHeroCtaClassName}>
-        <PrimaryLink href="/solicitar-demonstracao">
+        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
           Solicitar Demonstração
         </PrimaryLink>
       </div>

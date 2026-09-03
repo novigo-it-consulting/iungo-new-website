@@ -6,7 +6,7 @@ import { ATTENDANT_TESTIMONIALS } from "./attendantTestimonials.constants";
 
 export default function AttendantTestimonials() {
   return (
-    <div
+    <section
       data-attendant-testimonials
       aria-labelledby="attendant-testimonials-title"
       className="flex w-full min-w-0 flex-col items-center"
@@ -24,6 +24,6 @@ export default function AttendantTestimonials() {
       />
 
       <ProductTestimonialsDisclaimer productSlug="attendant" />
-    </div>
+    </section>
   );
 }

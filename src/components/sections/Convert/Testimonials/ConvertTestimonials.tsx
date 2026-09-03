@@ -6,7 +6,7 @@ import { CONVERT_TESTIMONIALS } from "./convertTestimonials.constants";
 
 export default function ConvertTestimonials() {
   return (
-    <div
+    <section
       data-convert-testimonials
       aria-labelledby="convert-testimonials-title"
       className="flex w-full min-w-0 flex-col items-center"
@@ -24,6 +24,6 @@ export default function ConvertTestimonials() {
       />
 
       <ProductTestimonialsDisclaimer productSlug="convert" />
-    </div>
+    </section>
   );
 }

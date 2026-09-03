@@ -15,9 +15,9 @@ export default function FooterNav() {
             data-footer-nav-group={group.title.toLowerCase()}
             className="flex w-full min-w-0 flex-col items-start gap-4"
           >
-            <h2 className="m-0 w-full font-reddit text-[14px] font-normal leading-5 text-white">
+            <p className="m-0 w-full font-reddit text-[14px] font-normal leading-5 text-white">
               {group.title}
-            </h2>
+            </p>
 
             <ul className="m-0 flex w-full list-none flex-col gap-2 p-0">
               {group.links.map((link) => (

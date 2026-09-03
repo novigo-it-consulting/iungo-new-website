@@ -6,7 +6,7 @@ import { RESOLVE_TESTIMONIALS } from "./resolveTestimonials.constants";
 
 export default function ResolveTestimonials() {
   return (
-    <div
+    <section
       data-resolve-testimonials
       aria-labelledby="resolve-testimonials-title"
       className="flex w-full min-w-0 flex-col items-center"
@@ -24,6 +24,6 @@ export default function ResolveTestimonials() {
       />
 
       <ProductTestimonialsDisclaimer productSlug="resolve" />
-    </div>
+    </section>
   );
 }

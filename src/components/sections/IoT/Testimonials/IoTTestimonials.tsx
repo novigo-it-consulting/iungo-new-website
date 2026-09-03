@@ -6,7 +6,7 @@ import { IOT_TESTIMONIALS } from "./iotTestimonials.constants";
 
 export default function IoTTestimonials() {
   return (
-    <div
+    <section
       data-iot-testimonials
       aria-labelledby="iot-testimonials-title"
       className="flex w-full min-w-0 flex-col items-center"
@@ -24,6 +24,6 @@ export default function IoTTestimonials() {
       />
 
       <ProductTestimonialsDisclaimer productSlug="iot" />
-    </div>
+    </section>
   );
 }
