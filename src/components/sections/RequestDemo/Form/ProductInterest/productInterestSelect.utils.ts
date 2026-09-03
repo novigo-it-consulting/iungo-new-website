@@ -102,9 +102,7 @@ export function handleComboboxKeyDown({
       const selectedIndex = allOptions.findIndex(
         (option) => option.value === selectedValue,
       );
-      onOpen(
-        clampActiveIndex(selectedIndex >= 0 ? selectedIndex : 0, optionCount),
-      );
+      onOpen(clampActiveIndex(Math.max(selectedIndex, 0), optionCount));
     }
 
     return;

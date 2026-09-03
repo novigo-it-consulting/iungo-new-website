@@ -12,7 +12,7 @@ export default function ProductHeroIcon({
   iconSrc,
   backgroundColor,
   sizePreset,
-}: ProductHeroIconProps) {
+}: Readonly<ProductHeroIconProps>) {
   return (
     <div
       {...{ [`data-${productSlug}-hero-icon`]: true }}

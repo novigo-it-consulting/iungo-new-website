@@ -44,15 +44,18 @@ const AUDIT_OPTIONS = [
 mkdirSync(OUT, { recursive: true });
 
 function slug(path) {
-  return path === "/" ? "home" : path.replace(/\//g, "-").slice(1);
+  return path === "/" ? "home" : path.replaceAll("/", "-").slice(1);
 }
 
-async function main() {
-  const chrome = await chromeLauncher.launch({
+let chrome;
+let browser;
+
+try {
+  chrome = await chromeLauncher.launch({
     chromeFlags: ["--headless=new", "--disable-gpu", "--no-sandbox"],
   });
 
-  const browser = await puppeteer.connect({
+  browser = await puppeteer.connect({
     browserURL: `http://127.0.0.1:${chrome.port}`,
     defaultViewport: null,
   });
@@ -144,20 +147,21 @@ async function main() {
   await trigger.click();
   await page.waitForSelector("#request-demo-product-interest-listbox");
 
-  comboboxResults.push({
-    test: "open-click",
-    pass: await page.$eval(
-      "#request-demo-product-interest",
-      (el) => el.getAttribute("aria-expanded") === "true",
-    ),
-  });
-
-  comboboxResults.push({
-    test: "options-count-with-audit-injection",
-    pass:
-      (await page.$$eval('[role="option"]', (els) => els.length)) ===
-      AUDIT_OPTIONS.length + 1,
-  });
+  comboboxResults.push(
+    {
+      test: "open-click",
+      pass: await page.$eval(
+        "#request-demo-product-interest",
+        (el) => el.getAttribute("aria-expanded") === "true",
+      ),
+    },
+    {
+      test: "options-count-with-audit-injection",
+      pass:
+        (await page.$$eval('[role="option"]', (els) => els.length)) ===
+        AUDIT_OPTIONS.length + 1,
+    },
+  );
 
   await page.keyboard.press("ArrowDown");
   await page.keyboard.press("ArrowDown");
@@ -169,21 +173,22 @@ async function main() {
   });
 
   await page.keyboard.press("Enter");
-  comboboxResults.push({
-    test: "select-enter-closes",
-    pass: await page.$eval(
-      "#request-demo-product-interest",
-      (el) => el.getAttribute("aria-expanded") === "false",
-    ),
-  });
-
-  comboboxResults.push({
-    test: "hidden-input-value-updated",
-    pass: await page.$eval(
-      'input[name="productInterest"]',
-      (el) => el.value !== "",
-    ),
-  });
+  comboboxResults.push(
+    {
+      test: "select-enter-closes",
+      pass: await page.$eval(
+        "#request-demo-product-interest",
+        (el) => el.getAttribute("aria-expanded") === "false",
+      ),
+    },
+    {
+      test: "hidden-input-value-updated",
+      pass: await page.$eval(
+        'input[name="productInterest"]',
+        (el) => el.value !== "",
+      ),
+    },
+  );
 
   await trigger.click();
   await page.keyboard.press("Escape");
@@ -230,21 +235,22 @@ async function main() {
     },
   );
 
-  comboboxResults.push({
-    test: "panel-rounded-20px",
-    pass: panelBox.borderRadius === "20px",
-    detail: panelBox.borderRadius,
-  });
-
-  comboboxResults.push({
-    test: "panel-within-viewport",
-    pass:
-      panelBox.top >= 0 &&
-      panelBox.bottom <= 768 &&
-      panelBox.left >= 0 &&
-      panelBox.width > 0,
-    detail: panelBox,
-  });
+  comboboxResults.push(
+    {
+      test: "panel-rounded-20px",
+      pass: panelBox.borderRadius === "20px",
+      detail: panelBox.borderRadius,
+    },
+    {
+      test: "panel-within-viewport",
+      pass:
+        panelBox.top >= 0 &&
+        panelBox.bottom <= 768 &&
+        panelBox.left >= 0 &&
+        panelBox.width > 0,
+      detail: panelBox,
+    },
+  );
 
   await page.evaluate(() => {
     const triggerEl = document.querySelector("#request-demo-product-interest");
@@ -277,9 +283,6 @@ async function main() {
     JSON.stringify(screenshotLog, null, 2),
   );
 
-  await browser.close();
-  await chrome.kill();
-
   console.log(
     JSON.stringify(
       { screenshots: screenshotLog.length, comboboxResults, fontReport },
@@ -287,9 +290,16 @@ async function main() {
       2,
     ),
   );
-}
-
-main().catch((error) => {
+} catch (error) {
   console.error(error);
-  process.exit(1);
-});
+  process.exitCode = 1;
+} finally {
+  await browser?.close().catch(() => {});
+  if (chrome) {
+    await chrome.kill().catch(() => {});
+  }
+
+  if (process.exitCode === 1) {
+    process.exit(1);
+  }
+}

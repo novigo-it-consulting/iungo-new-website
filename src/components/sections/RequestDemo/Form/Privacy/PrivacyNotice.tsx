@@ -37,17 +37,13 @@ export default function PrivacyNotice() {
             <span className={privacyNoticeLinkClassName}>
               Política de Privacidade
             </span>
-          )}
-          . Autorizo a Iungo Intelligence a tratar meus dados pessoais para fins
-          de retorno comercial, conforme art. 7º, I e V da LGPD. Posso revogar
-          este consentimento a qualquer momento via{" "}
+          )}{". Autorizo a Iungo Intelligence a tratar meus dados pessoais para fins de retorno comercial, conforme art. 7º, I e V da LGPD. Posso revogar este consentimento a qualquer momento via "}
           <a
             href={`mailto:${PRIVACY_NOTICE_DPO_EMAIL}`}
             className={privacyNoticeEmailClassName}
           >
             {PRIVACY_NOTICE_DPO_EMAIL}
-          </a>
-          .
+          </a>{"."}
         </p>
       </div>
     </div>

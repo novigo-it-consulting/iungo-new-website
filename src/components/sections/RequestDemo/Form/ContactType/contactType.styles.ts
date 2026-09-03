@@ -1,9 +1,7 @@
-import { requestDemoFieldLabelClassName } from "../requestDemoField.styles";
+export { requestDemoFieldLabelClassName as contactTypeLegendClassName } from "../requestDemoField.styles";
 
 export const contactTypeFieldsetClassName =
   "m-0 min-w-0 border-0 p-0";
-
-export const contactTypeLegendClassName = requestDemoFieldLabelClassName;
 
 export const contactTypeOptionsClassName =
   "flex w-full min-w-0 flex-col gap-[10px] md:flex-row md:flex-wrap";

@@ -32,7 +32,7 @@ export default function RequestDemoTwoColumnFields({
   rowClassName,
   leftField,
   rightField,
-}: RequestDemoTwoColumnFieldsProps) {
+}: Readonly<RequestDemoTwoColumnFieldsProps>) {
   return (
     <div {...{ [`data-${dataAttribute}`]: true }} className={rowClassName}>
       <div className={requestDemoFormRowLeftColumnClassName}>

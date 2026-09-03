@@ -45,12 +45,12 @@ export default function ProductInterestSelect({
   name,
   placeholderOption,
   options,
-}: ProductInterestSelectProps) {
+}: Readonly<ProductInterestSelectProps>) {
   const listboxId = `${id}-listbox`;
   const labelId = `${id}-label`;
   const controlRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
-  const optionRefs = useRef<Array<HTMLLIElement | null>>([]);
+  const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
 
   const allOptions = useMemo(
     () => [placeholderOption, ...options],
@@ -174,7 +174,7 @@ export default function ProductInterestSelect({
       (option) => option.value === selectedValue,
     );
     openList(
-      clampActiveIndex(selectedIndex >= 0 ? selectedIndex : 0, allOptions.length),
+      clampActiveIndex(Math.max(selectedIndex, 0), allOptions.length),
     );
   };
 
@@ -219,27 +219,33 @@ export default function ProductInterestSelect({
               const isHighlighted = index === safeActiveIndex;
 
               return (
-                <li
-                  key={option.value || "placeholder"}
-                  ref={(element) => {
-                    optionRefs.current[index] = element;
-                  }}
-                  id={`${id}-option-${index}`}
-                  role="option"
-                  aria-selected={isSelected}
-                  className={getOptionClassName({
-                    isHighlighted,
-                    isSelected,
-                    baseClassName: productInterestSelectOptionBaseClassName,
-                    highlightedClassName:
-                      productInterestSelectOptionHighlightedClassName,
-                    selectedClassName:
-                      productInterestSelectOptionSelectedClassName,
-                  })}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  onClick={() => selectOption(option)}
-                >
-                  {option.label}
+                <li key={option.value || "placeholder"} role="presentation">
+                  <button
+                    type="button"
+                    ref={(element) => {
+                      optionRefs.current[index] = element;
+                    }}
+                    id={`${id}-option-${index}`}
+                    role="option"
+                    aria-selected={isSelected}
+                    tabIndex={-1}
+                    className={getOptionClassName({
+                      isHighlighted,
+                      isSelected,
+                      baseClassName: `${productInterestSelectOptionBaseClassName} w-full text-left`,
+                      highlightedClassName:
+                        productInterestSelectOptionHighlightedClassName,
+                      selectedClassName:
+                        productInterestSelectOptionSelectedClassName,
+                    })}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    onMouseDown={(event) => {
+                      event.preventDefault();
+                    }}
+                    onClick={() => selectOption(option)}
+                  >
+                    {option.label}
+                  </button>
                 </li>
               );
             })}

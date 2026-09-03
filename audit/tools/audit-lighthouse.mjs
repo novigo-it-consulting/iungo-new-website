@@ -52,8 +52,10 @@ async function runOnce(url, chrome) {
   };
 }
 
-async function main() {
-  const chrome = await chromeLauncher.launch({
+let chrome;
+
+try {
+  chrome = await chromeLauncher.launch({
     chromeFlags: ["--headless=new", "--disable-gpu", "--no-sandbox"],
   });
 
@@ -96,15 +98,20 @@ async function main() {
     };
   }
 
-  await chrome.kill();
   writeFileSync(
     join(OUT, "lighthouse-median.json"),
     JSON.stringify(report, null, 2),
   );
   console.log(JSON.stringify(report, null, 2));
-}
-
-main().catch((error) => {
+} catch (error) {
   console.error(error);
-  process.exit(1);
-});
+  process.exitCode = 1;
+} finally {
+  if (chrome) {
+    await chrome.kill().catch(() => {});
+  }
+
+  if (process.exitCode === 1) {
+    process.exit(1);
+  }
+}

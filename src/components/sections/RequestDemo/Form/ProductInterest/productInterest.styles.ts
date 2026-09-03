@@ -1,3 +1,1 @@
-import { requestDemoFormSingleColumnRowClassName } from "../requestDemoFormRow.styles";
-
-export const productInterestRowClassName = requestDemoFormSingleColumnRowClassName;
+export { requestDemoFormSingleColumnRowClassName as productInterestRowClassName } from "../requestDemoFormRow.styles";

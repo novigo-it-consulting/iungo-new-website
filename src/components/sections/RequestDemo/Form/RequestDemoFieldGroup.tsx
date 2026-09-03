@@ -15,7 +15,7 @@ export default function RequestDemoFieldGroup({
   id,
   label,
   children,
-}: RequestDemoFieldGroupProps) {
+}: Readonly<RequestDemoFieldGroupProps>) {
   return (
     <div className={requestDemoFieldGroupClassName}>
       <label htmlFor={id} className={requestDemoTextFieldLabelClassName}>

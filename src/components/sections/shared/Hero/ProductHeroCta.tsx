@@ -12,7 +12,7 @@ export default function ProductHeroCta({
   productSlug,
   className = productHeroCtaClassName,
   children,
-}: ProductHeroCtaProps) {
+}: Readonly<ProductHeroCtaProps>) {
   return (
     <div {...{ [`data-${productSlug}-hero-cta`]: true }} className={className}>
       {children}

@@ -15,7 +15,7 @@ export default function ContactCard({
   title,
   contact,
   description,
-}: ContactCardProps) {
+}: Readonly<ContactCardProps>) {
   const variantClassNames = getContactCardVariantClassNames(variant);
 
   return (

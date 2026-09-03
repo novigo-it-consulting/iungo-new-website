@@ -22,7 +22,7 @@ export default function ProductTestimonialsSection({
   testimonials,
   variant,
   className = "flex w-full min-w-0 flex-col items-center",
-}: ProductTestimonialsSectionProps) {
+}: Readonly<ProductTestimonialsSectionProps>) {
   return (
     <section
       {...{ [`data-${productSlug}-testimonials`]: true }}
