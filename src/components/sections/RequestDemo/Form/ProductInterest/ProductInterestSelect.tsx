@@ -10,7 +10,7 @@ import {
   type CSSProperties,
 } from "react";
 
-import type { RequestDemoSelectOption } from "../RequestDemoSelectField";
+import type { RequestDemoSelectOption } from "../requestDemoForm.types";
 import {
   requestDemoFieldGroupClassName,
   requestDemoSelectClassName,

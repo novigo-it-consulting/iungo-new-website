@@ -6,17 +6,22 @@ import CaseCardMetrics from "./CaseCardMetrics";
 import CaseCardTitle from "./CaseCardTitle";
 import CaseTag from "./CaseTag";
 import { CASES } from "./cases.constants";
+import {
+  casesSectionCardsGridClassName,
+  casesSectionClassName,
+  casesSectionContainerClassName,
+} from "./casesSection.styles";
 
 export default function CasesSection() {
   return (
     <section
       id="casos-de-sucesso"
       aria-labelledby="cases-title"
-      className="m-0 w-full bg-white"
+      className={casesSectionClassName}
     >
       <div
         data-section="cases-container"
-        className="mx-auto flex w-full max-w-[1280px] flex-col items-stretch gap-8 overflow-visible px-5 py-12 sm:px-6 sm:py-16 lg:gap-12 lg:px-8 lg:py-24"
+        className={casesSectionContainerClassName}
       >
         <div
           data-cases="header"
@@ -66,7 +71,7 @@ export default function CasesSection() {
 
         <div
           data-cases="cards-grid"
-          className="grid w-full grid-cols-1 items-stretch gap-6 lg:grid-cols-2 lg:gap-x-6 lg:gap-y-0"
+          className={casesSectionCardsGridClassName}
         >
           <CaseCard
             caseId="lider-moda-premium"

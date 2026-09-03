@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 
-import type { RequestDemoSelectOption } from "../RequestDemoSelectField";
+import type { RequestDemoSelectOption } from "../requestDemoForm.types";
 
 export const PANEL_GAP_PX = 4;
 export const PANEL_MAX_HEIGHT_PX = 240;

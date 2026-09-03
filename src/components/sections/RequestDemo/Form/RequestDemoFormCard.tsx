@@ -1,3 +1,5 @@
+"use client";
+
 import CompanyPhoneFields from "./CompanyPhone/CompanyPhoneFields";
 import ContactTypeField from "./ContactType/ContactTypeField";
 import NameEmailFields from "./NameEmail/NameEmailFields";
@@ -18,7 +20,7 @@ export default function RequestDemoFormCard() {
       data-request-demo-form-card
       className={requestDemoFormCardClassName}
     >
-      <form className={requestDemoFormInnerClassName} noValidate>
+      <form className={requestDemoFormInnerClassName} noValidate onSubmit={(e) => e.preventDefault()}>
         <ContactTypeField />
         <NameEmailFields />
         <CompanyPhoneFields />

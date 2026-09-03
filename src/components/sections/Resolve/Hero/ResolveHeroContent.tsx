@@ -1,11 +1,11 @@
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
-  productHeroCtaClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 
 import ResolveHeroButton from "./ResolveHeroButton";
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
@@ -45,9 +45,9 @@ export default function ResolveHeroContent() {
         </p>
       </div>
 
-      <div data-resolve-hero-cta className={productHeroCtaClassName}>
+      <ProductHeroCta productSlug="resolve">
         <ResolveHeroButton />
-      </div>
+      </ProductHeroCta>
     </div>
   );
 }

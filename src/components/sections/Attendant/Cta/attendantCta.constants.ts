@@ -1,11 +1,6 @@
-import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+export { PRODUCT_PAGE_CTA_BUTTON as ATTENDANT_CTA_BUTTON } from "@/components/sections/shared/cta.constants";
 
 export const ATTENDANT_CTA_TITLE = {
   line1: "Atendimento que",
   line2: "executa de verdade.",
-} as const;
-
-export const ATTENDANT_CTA_BUTTON = {
-  label: "Solicitar demonstração",
-  href: SOLICITAR_DEMONSTRACAO_HREF,
 } as const;

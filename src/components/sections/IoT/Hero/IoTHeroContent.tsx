@@ -3,11 +3,11 @@ import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
-  productHeroCtaClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 
 import { IOT_HERO_COPY } from "./iotHero.constants";
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
@@ -42,11 +42,11 @@ export default function IoTHeroContent() {
         </p>
       </div>
 
-      <div data-iot-hero-cta className={productHeroCtaClassName}>
+      <ProductHeroCta productSlug="iot">
         <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
           Solicitar Demonstração
         </PrimaryLink>
-      </div>
+      </ProductHeroCta>
     </div>
   );
 }

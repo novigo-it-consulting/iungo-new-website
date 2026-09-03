@@ -11,7 +11,7 @@ import {
 export default function RequestDemoSubmitButton() {
   return (
     <div data-request-demo-submit className={submitButtonRowClassName}>
-      <button type="button" className={submitButtonClassName}>
+      <button type="submit" className={submitButtonClassName}>
         {REQUEST_DEMO_SUBMIT_LABEL}
       </button>
 

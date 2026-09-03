@@ -53,7 +53,11 @@ export default function ProductPageCtaSection({
         >
           <div
             {...{ [`data-${dataPrefix}-content`]: true }}
-            className={`${defaultContentClassName}${titleToButtonGapClassName ? ` ${titleToButtonGapClassName}` : ""}`}
+            className={
+              titleToButtonGapClassName
+                ? `${defaultContentClassName} ${titleToButtonGapClassName}`
+                : defaultContentClassName
+            }
           >
             <CtaProductTitle
               dataPrefix={dataPrefix}

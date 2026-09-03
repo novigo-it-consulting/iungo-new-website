@@ -3,11 +3,12 @@ import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
+  productHeroCtaCompactClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
@@ -38,11 +39,11 @@ export default function BehaviorHeroContent() {
         </p>
       </div>
 
-      <div data-behavior-hero-cta className="mt-10 inline-flex xl:mt-[39px]">
+      <ProductHeroCta productSlug="behavior" className={productHeroCtaCompactClassName}>
         <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
           Solicitar Demonstração
         </PrimaryLink>
-      </div>
+      </ProductHeroCta>
     </div>
   );
 }

@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# audit — dependências locais e artefatos gerados
+audit/tools/node_modules/
+audit/review/
+audit/lighthouse-*.json
+audit/lighthouse-*.html
+audit/tools/changed-files.txt

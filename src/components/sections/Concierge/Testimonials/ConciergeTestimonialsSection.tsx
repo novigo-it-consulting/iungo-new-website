@@ -1,8 +1,8 @@
 import PageContainer from "@/components/layout/PageContainer";
 
 import ProductTestimonialsCards from "@/components/sections/shared/Testimonials/ProductTestimonialsCards";
+import ProductTestimonialsDisclaimer from "@/components/sections/shared/Testimonials/ProductTestimonialsDisclaimer";
 
-import ConciergeTestimonialsDisclaimer from "./ConciergeTestimonialsDisclaimer";
 import ConciergeTestimonialsHeader from "./ConciergeTestimonialsHeader";
 import { CONCIERGE_TESTIMONIALS } from "./conciergeTestimonials.constants";
 
@@ -34,7 +34,7 @@ export default function ConciergeTestimonialsSection() {
               listClassName="mt-10 grid w-full max-w-[1088px] grid-cols-1 gap-6 lg:grid-cols-2 xl:min-h-[339px]"
             />
 
-            <ConciergeTestimonialsDisclaimer />
+            <ProductTestimonialsDisclaimer productSlug="concierge" />
           </div>
         </PageContainer>
       </section>
