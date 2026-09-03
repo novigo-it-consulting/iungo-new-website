@@ -8,13 +8,14 @@ import {
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
-import BehaviorHeroIcon from "./BehaviorHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function BehaviorHeroContent() {
   return (
     <div data-behavior-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <BehaviorHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.behavior} />
       </div>
 
       <ProductHeroTitle

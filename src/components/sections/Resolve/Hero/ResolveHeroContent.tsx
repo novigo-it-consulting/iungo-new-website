@@ -8,13 +8,14 @@ import {
 } from "@/components/sections/shared/Hero/productHero.styles";
 
 import ResolveHeroButton from "./ResolveHeroButton";
-import ResolveHeroIcon from "./ResolveHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function ResolveHeroContent() {
   return (
     <div data-resolve-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <ResolveHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.resolve} />
       </div>
 
       <ProductHeroTitle

@@ -9,13 +9,14 @@ import {
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
-import AttendantHeroIcon from "./AttendantHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function AttendantHeroContent() {
   return (
     <div data-attendant-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <AttendantHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.attendant} />
       </div>
 
       <ProductHeroTitle

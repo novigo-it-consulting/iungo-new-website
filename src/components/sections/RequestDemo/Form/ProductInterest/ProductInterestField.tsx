@@ -1,4 +1,4 @@
-import RequestDemoSelectField from "../RequestDemoSelectField";
+import ProductInterestSelect from "./ProductInterestSelect";
 import {
   PRODUCT_INTEREST_FIELD_NAME,
   PRODUCT_INTEREST_LABEL,
@@ -10,7 +10,7 @@ import { productInterestRowClassName } from "./productInterest.styles";
 export default function ProductInterestField() {
   return (
     <div data-request-demo-product-interest className={productInterestRowClassName}>
-      <RequestDemoSelectField
+      <ProductInterestSelect
         id="request-demo-product-interest"
         name={PRODUCT_INTEREST_FIELD_NAME}
         label={PRODUCT_INTEREST_LABEL}

@@ -9,13 +9,14 @@ import {
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
-import ConvertHeroIcon from "./ConvertHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function ConvertHeroContent() {
   return (
     <div data-convert-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <ConvertHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.convert} />
       </div>
 
       <ProductHeroTitle

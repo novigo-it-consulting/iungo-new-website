@@ -10,13 +10,14 @@ import {
 } from "@/components/sections/shared/Hero/productHero.styles";
 
 import { IOT_HERO_COPY } from "./iotHero.constants";
-import IoTHeroIcon from "./IoTHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function IoTHeroContent() {
   return (
     <div data-iot-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <IoTHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.iot} />
       </div>
 
       <ProductHeroTitle

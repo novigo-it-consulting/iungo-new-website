@@ -2,7 +2,9 @@ import PageContainer from "@/components/layout/PageContainer";
 
 import ConvertHandoff from "./Handoff/ConvertHandoff";
 import ConvertSystemScreens from "./SystemScreens/ConvertSystemScreens";
-import ConvertTestimonials from "./Testimonials/ConvertTestimonials";
+import ProductTestimonialsSection from "@/components/sections/shared/Testimonials/ProductTestimonialsSection";
+
+import { CONVERT_TESTIMONIALS } from "./Testimonials/convertTestimonials.constants";
 import ConvertWhySellsMore from "./WhySellsMore/ConvertWhySellsMore";
 
 export default function ConvertContentSection() {
@@ -29,7 +31,13 @@ export default function ConvertContentSection() {
         size="content1152"
         className="min-w-0 mt-[204px]"
       >
-        <ConvertTestimonials />
+        <ProductTestimonialsSection
+          productSlug="convert"
+          title="O comercial que vende sozinho — e abre porta pro vendedor."
+          description="Diretores comerciais que pararam de perder venda quente fora do horário e começaram a entregar pipeline aquecido ao time."
+          testimonials={CONVERT_TESTIMONIALS}
+          variant="convert"
+        />
       </PageContainer>
 
       <PageContainer

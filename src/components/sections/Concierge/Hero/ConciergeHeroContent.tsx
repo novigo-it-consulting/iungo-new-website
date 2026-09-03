@@ -8,13 +8,14 @@ import {
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
-import ConciergeHeroIcon from "./ConciergeHeroIcon";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function ConciergeHeroContent() {
   return (
     <div data-concierge-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
-        <ConciergeHeroIcon />
+        <ProductHeroIcon {...PRODUCT_HERO_ICONS.concierge} />
       </div>
 
       <ProductHeroTitle
