@@ -1,10 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import {
-  requestDemoFieldGroupClassName,
-  requestDemoFieldInputClassName,
-  requestDemoTextFieldLabelClassName,
-} from "./requestDemoField.styles";
+import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
+import { requestDemoFieldInputClassName } from "./requestDemoField.styles";
 
 type RequestDemoFieldProps = {
   id: string;
@@ -32,11 +29,7 @@ export default function RequestDemoField({
   inputMode,
 }: RequestDemoFieldProps) {
   return (
-    <div className={requestDemoFieldGroupClassName}>
-      <label htmlFor={id} className={requestDemoTextFieldLabelClassName}>
-        {label}
-      </label>
-
+    <RequestDemoFieldGroup id={id} label={label}>
       <input
         id={id}
         name={name}
@@ -48,6 +41,6 @@ export default function RequestDemoField({
         inputMode={inputMode}
         className={requestDemoFieldInputClassName}
       />
-    </div>
+    </RequestDemoFieldGroup>
   );
 }

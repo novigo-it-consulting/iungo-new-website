@@ -1,9 +1,6 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import {
-  requestDemoFieldGroupClassName,
-  requestDemoTextFieldLabelClassName,
-} from "./requestDemoField.styles";
+import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
 
 type RequestDemoTextareaFieldProps = {
   id: string;
@@ -23,11 +20,7 @@ export default function RequestDemoTextareaField({
   textareaClassName,
 }: RequestDemoTextareaFieldProps) {
   return (
-    <div className={requestDemoFieldGroupClassName}>
-      <label htmlFor={id} className={requestDemoTextFieldLabelClassName}>
-        {label}
-      </label>
-
+    <RequestDemoFieldGroup id={id} label={label}>
       <textarea
         id={id}
         name={name}
@@ -35,6 +28,6 @@ export default function RequestDemoTextareaField({
         spellCheck={spellCheck}
         className={textareaClassName}
       />
-    </div>
+    </RequestDemoFieldGroup>
   );
 }

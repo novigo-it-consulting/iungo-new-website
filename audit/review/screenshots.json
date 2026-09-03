@@ -1,0 +1,137 @@
+[
+  {
+    "route": "/",
+    "viewport": "390",
+    "file": "home-390.png"
+  },
+  {
+    "route": "/",
+    "viewport": "1366",
+    "file": "home-1366.png"
+  },
+  {
+    "route": "/",
+    "viewport": "1920",
+    "file": "home-1920.png"
+  },
+  {
+    "route": "/produtos/attendant",
+    "viewport": "390",
+    "file": "produtos-attendant-390.png"
+  },
+  {
+    "route": "/produtos/attendant",
+    "viewport": "1366",
+    "file": "produtos-attendant-1366.png"
+  },
+  {
+    "route": "/produtos/attendant",
+    "viewport": "1920",
+    "file": "produtos-attendant-1920.png"
+  },
+  {
+    "route": "/produtos/behavior",
+    "viewport": "390",
+    "file": "produtos-behavior-390.png"
+  },
+  {
+    "route": "/produtos/behavior",
+    "viewport": "1366",
+    "file": "produtos-behavior-1366.png"
+  },
+  {
+    "route": "/produtos/behavior",
+    "viewport": "1920",
+    "file": "produtos-behavior-1920.png"
+  },
+  {
+    "route": "/produtos/concierge",
+    "viewport": "390",
+    "file": "produtos-concierge-390.png"
+  },
+  {
+    "route": "/produtos/concierge",
+    "viewport": "1366",
+    "file": "produtos-concierge-1366.png"
+  },
+  {
+    "route": "/produtos/concierge",
+    "viewport": "1920",
+    "file": "produtos-concierge-1920.png"
+  },
+  {
+    "route": "/produtos/convert",
+    "viewport": "390",
+    "file": "produtos-convert-390.png"
+  },
+  {
+    "route": "/produtos/convert",
+    "viewport": "1366",
+    "file": "produtos-convert-1366.png"
+  },
+  {
+    "route": "/produtos/convert",
+    "viewport": "1920",
+    "file": "produtos-convert-1920.png"
+  },
+  {
+    "route": "/produtos/iot",
+    "viewport": "390",
+    "file": "produtos-iot-390.png"
+  },
+  {
+    "route": "/produtos/iot",
+    "viewport": "1366",
+    "file": "produtos-iot-1366.png"
+  },
+  {
+    "route": "/produtos/iot",
+    "viewport": "1920",
+    "file": "produtos-iot-1920.png"
+  },
+  {
+    "route": "/produtos/organizer",
+    "viewport": "390",
+    "file": "produtos-organizer-390.png"
+  },
+  {
+    "route": "/produtos/organizer",
+    "viewport": "1366",
+    "file": "produtos-organizer-1366.png"
+  },
+  {
+    "route": "/produtos/organizer",
+    "viewport": "1920",
+    "file": "produtos-organizer-1920.png"
+  },
+  {
+    "route": "/produtos/resolve",
+    "viewport": "390",
+    "file": "produtos-resolve-390.png"
+  },
+  {
+    "route": "/produtos/resolve",
+    "viewport": "1366",
+    "file": "produtos-resolve-1366.png"
+  },
+  {
+    "route": "/produtos/resolve",
+    "viewport": "1920",
+    "file": "produtos-resolve-1920.png"
+  },
+  {
+    "route": "/solicitar-demonstracao",
+    "viewport": "390",
+    "file": "solicitar-demonstracao-390.png"
+  },
+  {
+    "route": "/solicitar-demonstracao",
+    "viewport": "1366",
+    "file": "solicitar-demonstracao-1366.png"
+  },
+  {
+    "route": "/solicitar-demonstracao",
+    "viewport": "1920",
+    "file": "solicitar-demonstracao-1920.png"
+  }
+]

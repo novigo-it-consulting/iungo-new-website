@@ -1,6 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+  type CSSProperties,
+} from "react";
 
 import type { RequestDemoSelectOption } from "../RequestDemoSelectField";
 import {
@@ -16,6 +24,11 @@ import {
   productInterestSelectOptionSelectedClassName,
   productInterestSelectPanelClassName,
 } from "./productInterestSelect.styles";
+import {
+  getOptionClassName,
+  getPanelStyle,
+  handleComboboxKeyDown,
+} from "./productInterestSelect.utils";
 
 type ProductInterestSelectProps = {
   id: string;
@@ -36,6 +49,7 @@ export default function ProductInterestSelect({
   const labelId = `${id}-label`;
   const controlRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const optionRefs = useRef<Array<HTMLLIElement | null>>([]);
 
   const allOptions = useMemo(
     () => [placeholderOption, ...options],
@@ -45,26 +59,63 @@ export default function ProductInterestSelect({
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(placeholderOption.value);
   const [activeIndex, setActiveIndex] = useState(0);
+  const [panelStyle, setPanelStyle] = useState<CSSProperties>({});
 
   const selectedOption =
     allOptions.find((option) => option.value === selectedValue) ??
     placeholderOption;
 
-  const openList = (index: number) => {
+  const updatePanelPosition = useCallback(() => {
+    if (!triggerRef.current) {
+      return;
+    }
+
+    setPanelStyle(getPanelStyle(triggerRef.current));
+  }, []);
+
+  const openList = useCallback((index: number) => {
     setActiveIndex(index);
     setIsOpen(true);
-  };
+  }, []);
 
-  const closeList = () => {
+  const closeList = useCallback(() => {
     setIsOpen(false);
     triggerRef.current?.focus();
-  };
+  }, []);
 
-  const selectOption = (option: RequestDemoSelectOption) => {
+  const dismissList = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const selectOption = useCallback((option: RequestDemoSelectOption) => {
     setSelectedValue(option.value);
     setIsOpen(false);
     triggerRef.current?.focus();
-  };
+  }, []);
+
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    updatePanelPosition();
+  }, [isOpen, allOptions.length, updatePanelPosition]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const handleReposition = () => updatePanelPosition();
+
+    window.addEventListener("resize", handleReposition);
+    window.addEventListener("scroll", handleReposition, true);
+
+    return () => {
+      window.removeEventListener("resize", handleReposition);
+      window.removeEventListener("scroll", handleReposition, true);
+    };
+  }, [isOpen, updatePanelPosition]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -81,54 +132,42 @@ export default function ProductInterestSelect({
     return () => document.removeEventListener("mousedown", handlePointerDown);
   }, [isOpen]);
 
-  const handleTriggerKeyDown = (
-    event: React.KeyboardEvent<HTMLButtonElement>,
-  ) => {
+  useEffect(() => {
     if (!isOpen) {
-      if (
-        event.key === "ArrowDown" ||
-        event.key === "ArrowUp" ||
-        event.key === "Enter" ||
-        event.key === " "
-      ) {
-        event.preventDefault();
-        const selectedIndex = allOptions.findIndex(
-          (option) => option.value === selectedValue,
-        );
-        openList(selectedIndex >= 0 ? selectedIndex : 0);
-      }
-
       return;
     }
 
-    switch (event.key) {
-      case "ArrowDown":
-        event.preventDefault();
-        setActiveIndex((current) =>
-          current < allOptions.length - 1 ? current + 1 : 0,
-        );
-        break;
-      case "ArrowUp":
-        event.preventDefault();
-        setActiveIndex((current) =>
-          current > 0 ? current - 1 : allOptions.length - 1,
-        );
-        break;
-      case "Enter":
-      case " ":
-        event.preventDefault();
-        selectOption(allOptions[activeIndex] ?? placeholderOption);
-        break;
-      case "Escape":
-        event.preventDefault();
-        closeList();
-        break;
-      case "Tab":
-        setIsOpen(false);
-        break;
-      default:
-        break;
+    optionRefs.current[activeIndex]?.scrollIntoView({ block: "nearest" });
+  }, [activeIndex, isOpen]);
+
+  const handleTriggerKeyDown = (
+    event: React.KeyboardEvent<HTMLButtonElement>,
+  ) => {
+    handleComboboxKeyDown({
+      event,
+      isOpen,
+      allOptions,
+      selectedValue,
+      activeIndex,
+      placeholderOption,
+      onOpen: openList,
+      onClose: closeList,
+      onDismiss: dismissList,
+      onSelect: selectOption,
+      onActiveIndexChange: setActiveIndex,
+    });
+  };
+
+  const handleTriggerClick = () => {
+    if (isOpen) {
+      closeList();
+      return;
     }
+
+    const selectedIndex = allOptions.findIndex(
+      (option) => option.value === selectedValue,
+    );
+    openList(selectedIndex >= 0 ? selectedIndex : 0);
   };
 
   return (
@@ -153,17 +192,7 @@ export default function ProductInterestSelect({
             isOpen ? `${id}-option-${activeIndex}` : undefined
           }
           className={`${requestDemoSelectClassName} flex cursor-pointer items-center text-left`}
-          onClick={() => {
-            if (isOpen) {
-              closeList();
-              return;
-            }
-
-            const selectedIndex = allOptions.findIndex(
-              (option) => option.value === selectedValue,
-            );
-            openList(selectedIndex >= 0 ? selectedIndex : 0);
-          }}
+          onClick={handleTriggerClick}
           onKeyDown={handleTriggerKeyDown}
         >
           {selectedOption.label}
@@ -174,6 +203,7 @@ export default function ProductInterestSelect({
             id={listboxId}
             role="listbox"
             aria-labelledby={labelId}
+            style={panelStyle}
             className={productInterestSelectPanelClassName}
           >
             {allOptions.map((option, index) => {
@@ -183,20 +213,21 @@ export default function ProductInterestSelect({
               return (
                 <li
                   key={option.value || "placeholder"}
+                  ref={(element) => {
+                    optionRefs.current[index] = element;
+                  }}
                   id={`${id}-option-${index}`}
                   role="option"
                   aria-selected={isSelected}
-                  className={[
-                    productInterestSelectOptionBaseClassName,
-                    isHighlighted
-                      ? productInterestSelectOptionHighlightedClassName
-                      : "",
-                    isSelected
-                      ? productInterestSelectOptionSelectedClassName
-                      : "",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
+                  className={getOptionClassName({
+                    isHighlighted,
+                    isSelected,
+                    baseClassName: productInterestSelectOptionBaseClassName,
+                    highlightedClassName:
+                      productInterestSelectOptionHighlightedClassName,
+                    selectedClassName:
+                      productInterestSelectOptionSelectedClassName,
+                  })}
                   onMouseEnter={() => setActiveIndex(index)}
                   onClick={() => selectOption(option)}
                 >
