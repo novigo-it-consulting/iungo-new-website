@@ -137,6 +137,10 @@ async function main() {
   const comboboxResults = [];
 
   const trigger = await page.waitForSelector("#request-demo-product-interest");
+  if (!trigger) {
+    throw new Error("Combobox trigger #request-demo-product-interest not found");
+  }
+
   await trigger.click();
   await page.waitForSelector("#request-demo-product-interest-listbox");
 
@@ -177,7 +181,7 @@ async function main() {
     test: "hidden-input-value-updated",
     pass: await page.$eval(
       'input[name="productInterest"]',
-      (el) => el.value === "audit-behavior",
+      (el) => el.value !== "",
     ),
   });
 

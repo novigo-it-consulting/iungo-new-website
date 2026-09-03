@@ -6,6 +6,27 @@ export const PANEL_GAP_PX = 4;
 export const PANEL_MAX_HEIGHT_PX = 240;
 export const VIEWPORT_MARGIN_PX = 16;
 
+export function clampActiveIndex(index: number, length: number): number {
+  if (length <= 0) {
+    return 0;
+  }
+
+  return Math.min(Math.max(index, 0), length - 1);
+}
+
+export function getActiveOption(
+  allOptions: readonly RequestDemoSelectOption[],
+  activeIndex: number,
+  placeholderOption: RequestDemoSelectOption,
+): RequestDemoSelectOption {
+  if (allOptions.length === 0) {
+    return placeholderOption;
+  }
+
+  const safeIndex = clampActiveIndex(activeIndex, allOptions.length);
+  return allOptions[safeIndex] ?? placeholderOption;
+}
+
 export function getPanelStyle(trigger: HTMLElement): CSSProperties {
   const rect = trigger.getBoundingClientRect();
   const maxHeight = Math.min(
@@ -62,6 +83,14 @@ export function handleComboboxKeyDown({
   onSelect,
   onActiveIndexChange,
 }: HandleComboboxKeyDownParams) {
+  const optionCount = allOptions.length;
+
+  if (optionCount === 0) {
+    return;
+  }
+
+  const safeActiveIndex = clampActiveIndex(activeIndex, optionCount);
+
   if (!isOpen) {
     if (
       event.key === "ArrowDown" ||
@@ -73,7 +102,9 @@ export function handleComboboxKeyDown({
       const selectedIndex = allOptions.findIndex(
         (option) => option.value === selectedValue,
       );
-      onOpen(selectedIndex >= 0 ? selectedIndex : 0);
+      onOpen(
+        clampActiveIndex(selectedIndex >= 0 ? selectedIndex : 0, optionCount),
+      );
     }
 
     return;
@@ -83,19 +114,25 @@ export function handleComboboxKeyDown({
     case "ArrowDown":
       event.preventDefault();
       onActiveIndexChange(
-        activeIndex < allOptions.length - 1 ? activeIndex + 1 : 0,
+        clampActiveIndex(
+          safeActiveIndex < optionCount - 1 ? safeActiveIndex + 1 : 0,
+          optionCount,
+        ),
       );
       break;
     case "ArrowUp":
       event.preventDefault();
       onActiveIndexChange(
-        activeIndex > 0 ? activeIndex - 1 : allOptions.length - 1,
+        clampActiveIndex(
+          safeActiveIndex > 0 ? safeActiveIndex - 1 : optionCount - 1,
+          optionCount,
+        ),
       );
       break;
     case "Enter":
     case " ":
       event.preventDefault();
-      onSelect(allOptions[activeIndex] ?? placeholderOption);
+      onSelect(getActiveOption(allOptions, safeActiveIndex, placeholderOption));
       break;
     case "Escape":
       event.preventDefault();

@@ -25,6 +25,7 @@ import {
   productInterestSelectPanelClassName,
 } from "./productInterestSelect.styles";
 import {
+  clampActiveIndex,
   getOptionClassName,
   getPanelStyle,
   handleComboboxKeyDown,
@@ -65,6 +66,8 @@ export default function ProductInterestSelect({
     allOptions.find((option) => option.value === selectedValue) ??
     placeholderOption;
 
+  const safeActiveIndex = clampActiveIndex(activeIndex, allOptions.length);
+
   const updatePanelPosition = useCallback(() => {
     if (!triggerRef.current) {
       return;
@@ -73,10 +76,13 @@ export default function ProductInterestSelect({
     setPanelStyle(getPanelStyle(triggerRef.current));
   }, []);
 
-  const openList = useCallback((index: number) => {
-    setActiveIndex(index);
-    setIsOpen(true);
-  }, []);
+  const openList = useCallback(
+    (index: number) => {
+      setActiveIndex(clampActiveIndex(index, allOptions.length));
+      setIsOpen(true);
+    },
+    [allOptions.length],
+  );
 
   const closeList = useCallback(() => {
     setIsOpen(false);
@@ -137,8 +143,8 @@ export default function ProductInterestSelect({
       return;
     }
 
-    optionRefs.current[activeIndex]?.scrollIntoView({ block: "nearest" });
-  }, [activeIndex, isOpen]);
+    optionRefs.current[safeActiveIndex]?.scrollIntoView({ block: "nearest" });
+  }, [safeActiveIndex, isOpen]);
 
   const handleTriggerKeyDown = (
     event: React.KeyboardEvent<HTMLButtonElement>,
@@ -167,7 +173,9 @@ export default function ProductInterestSelect({
     const selectedIndex = allOptions.findIndex(
       (option) => option.value === selectedValue,
     );
-    openList(selectedIndex >= 0 ? selectedIndex : 0);
+    openList(
+      clampActiveIndex(selectedIndex >= 0 ? selectedIndex : 0, allOptions.length),
+    );
   };
 
   return (
@@ -189,7 +197,7 @@ export default function ProductInterestSelect({
           aria-haspopup="listbox"
           aria-labelledby={labelId}
           aria-activedescendant={
-            isOpen ? `${id}-option-${activeIndex}` : undefined
+            isOpen ? `${id}-option-${safeActiveIndex}` : undefined
           }
           className={`${requestDemoSelectClassName} flex cursor-pointer items-center text-left`}
           onClick={handleTriggerClick}
@@ -208,7 +216,7 @@ export default function ProductInterestSelect({
           >
             {allOptions.map((option, index) => {
               const isSelected = option.value === selectedValue;
-              const isHighlighted = index === activeIndex;
+              const isHighlighted = index === safeActiveIndex;
 
               return (
                 <li
