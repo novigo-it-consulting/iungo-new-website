@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { NAV_ITEMS, HEADER_BUTTONS } from "./header.constants";
+import { NAV_LINK_ITEMS, HEADER_BUTTONS } from "./header.constants";
+import SolucoesMobileNavGroup from "./SolucoesMegaMenu/SolucoesMobileNavGroup";
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -73,7 +74,8 @@ export default function MobileNavigation() {
         <div className="mx-auto w-full max-w-[1728px] px-4 py-6 md:px-8">
           <nav aria-label="Navegação mobile">
             <ul className="mb-6 flex flex-col">
-              {NAV_ITEMS.map((item) => (
+              <SolucoesMobileNavGroup onNavigate={close} />
+              {NAV_LINK_ITEMS.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
