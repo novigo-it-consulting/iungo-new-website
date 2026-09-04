@@ -51,7 +51,7 @@ export const solucoesMegaMenuProductListClassName =
 
 /** Hover: iungo-fog (#F4F6FA) e iungo-indigo (#0024AE) — equivalentes locais. */
 export const solucoesMegaMenuProductCardClassName =
-  "group flex w-full min-w-0 flex-col gap-1 rounded-lg p-3 transition-colors duration-150 hover:bg-[#F4F6FA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 motion-reduce:transition-none";
+  "group flex w-full min-w-0 flex-col gap-2 rounded-lg p-3 transition-colors duration-150 hover:bg-[#F4F6FA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 motion-reduce:transition-none";
 
 export const solucoesMegaMenuProductTitleRowClassName =
   "flex min-w-0 items-center gap-2";
