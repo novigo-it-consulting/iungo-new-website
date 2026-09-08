@@ -23,7 +23,7 @@ export default function HeaderShell({ actions }: Readonly<HeaderShellProps>) {
         <div
           data-header-content
           data-page-main-content="header"
-          className="flex h-full min-w-0 items-center justify-between gap-4 xl:gap-6 2xl:gap-8"
+          className="flex h-full min-w-0 items-center justify-between gap-4 xl:max-w-[1271px] xl:mx-auto xl:gap-6 2xl:gap-8"
         >
           <Link
             data-header-logo
