@@ -1,4 +1,3 @@
-import Image from "next/image";
 import MetricItem from "./MetricItem";
 import { METRICS } from "./metrics.constants";
 import PageSideRails from "@/components/layout/PageSideRails";
@@ -12,22 +11,9 @@ export default function MetricsSection() {
     >
       <PageSideRails scope="metrics">
         <div className="mx-auto flex w-full max-w-[1728px] flex-col items-center px-4 pt-8 md:px-8 2xl:max-w-none 2xl:px-0 2xl:pt-[41px]">
-          <div
-            data-metrics-client-logo
-            className="relative h-[46px] w-[160px] md:h-[54px] md:w-[187px]"
-          >
-            <Image
-              src="/images/rd-saude-logo.png"
-              alt="RD Saúde — por uma sociedade mais saudável"
-              fill
-              sizes="(min-width: 768px) 187px, 160px"
-              className="object-contain"
-            />
-          </div>
-
           <h2
             data-metrics-heading
-            className="mt-8 w-full max-w-[900px] text-center font-reddit text-[20px] font-medium leading-[28px] text-[#424241] md:text-[22px] md:leading-[30px] lg:text-[24px] lg:leading-[32px] 2xl:mt-[50px]"
+            className="w-full max-w-[900px] text-center font-reddit text-[30px] font-semibold leading-[72.7px] tracking-[-0.01em] text-[#424241] 2xl:mt-[50px]"
           >
             Métricas que decisores enterprise levam a sério.
           </h2>

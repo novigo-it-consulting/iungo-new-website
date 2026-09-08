@@ -1,0 +1,43 @@
+@keyframes homeScaleProofMarquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+[data-scale-proof-track] {
+  animation: homeScaleProofMarquee 35s linear infinite;
+  will-change: transform; /* restrito ao track; removido em reduced-motion */
+}
+
+/* Pausa no hover — apenas dispositivos com ponteiro fino */
+@media (hover: hover) and (pointer: fine) {
+  [data-scale-proof-viewport]:hover [data-scale-proof-track] {
+    animation-play-state: paused;
+  }
+}
+
+/* Pausa por focus-within (preparação para itens focáveis futuros; sem efeito atual) */
+[data-scale-proof-viewport]:focus-within [data-scale-proof-track] {
+  animation-play-state: paused;
+}
+
+/* Movimento reduzido: desativa animação, exibe a cópia 1 com scroll manual */
+@media (prefers-reduced-motion: reduce) {
+  [data-scale-proof-track] {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Permite scroll horizontal apenas no viewport do carrossel */
+  [data-scale-proof-viewport] {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* Oculta a cópia decorativa; a cópia acessível permanece visível.
+     Seletor qualificado com [data-scale-proof-group] para não afetar
+     outros elementos aria-hidden="true" no DOM. */
+  [data-scale-proof-group][aria-hidden="true"] {
+    display: none;
+  }
+}
