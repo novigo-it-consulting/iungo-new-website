@@ -30,7 +30,7 @@ export default function ProductHeroLayout({
     >
       <PageContainer
         {...{ [`data-${scope}-hero-container`]: true }}
-        size="organizer"
+        size="content1264"
         className="min-w-0"
       >
         <div className={productHeroGridClassName}>{children}</div>

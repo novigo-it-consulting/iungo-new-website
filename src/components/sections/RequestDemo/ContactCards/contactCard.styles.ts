@@ -19,7 +19,7 @@ const contactCardVariantClassNames: Record<
 };
 
 export const contactCardsColumnClassName =
-  "flex w-full min-w-0 flex-col gap-[21px] min-[1249px]:w-[385.24px] min-[1249px]:shrink-0";
+  "flex w-full min-w-0 flex-col gap-[21px]";
 
 export const contactCardBaseClassName =
   "box-border flex min-h-[144.47px] w-full min-w-0 flex-col items-start rounded-[20.64px] min-[1249px]:h-[144.47px]";

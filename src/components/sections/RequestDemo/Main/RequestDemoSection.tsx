@@ -24,7 +24,7 @@ export default function RequestDemoSection() {
     >
       <PageContainer
         data-request-demo-frame
-        size="organizer"
+        size="content1264"
         className={requestDemoPageFrameClassName}
       >
         <h1 id="request-demo-title" className={requestDemoTitleClassName}>
@@ -37,9 +37,10 @@ export default function RequestDemoSection() {
         >
           <div
             data-request-demo-main-layout
+            data-demo-cards-container
             className={requestDemoMainLayoutClassName}
           >
-            <div className={requestDemoFormColumnClassName}>
+            <div data-demo-form-card className={requestDemoFormColumnClassName}>
               <RequestDemoFormCard />
             </div>
 

@@ -15,7 +15,7 @@ export default function OrganizerHero() {
     >
       <PageContainer
         data-organizer-hero-container
-        size="organizer"
+        size="content1264"
         className="grid min-w-0 grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,450px)] lg:gap-x-6 lg:gap-y-10 xl:gap-x-8 2xl:gap-x-10"
       >
         <OrganizerHeroContent />

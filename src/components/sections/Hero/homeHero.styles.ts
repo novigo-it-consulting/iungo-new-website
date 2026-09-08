@@ -13,7 +13,7 @@ export const homeHeroSecondaryButtonClassName =
 
 /** Texto até 561px; imagem ocupa o restante (máx. 663px). Gap fixo 47px (Figma). */
 export const homeHeroRowClassName =
-  "grid min-w-0 grid-cols-1 gap-10 xl:grid-cols-[minmax(0,561px)_minmax(0,1fr)] xl:items-start xl:gap-[47px] xl:w-full xl:max-w-[1271px] xl:mx-auto";
+  "grid min-w-0 grid-cols-1 gap-10 xl:grid-cols-[minmax(0,561px)_minmax(0,1fr)] xl:items-start xl:gap-[47px] xl:w-full";
 
 export const homeHeroContentClassName =
   "relative z-10 flex min-w-0 w-full max-w-[561px] flex-col";

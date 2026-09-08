@@ -1,11 +1,9 @@
 import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";
 
-// Alinha o frame do Header com as sections abaixo em todos os breakpoints:
-// - abaixo de 2xl (< 1536px): px-4 / md:px-8 — mesmo recuo do PageSideRails
-// - em 2xl (≥ 1536px): pl-[329px] pr-[320px] — espelha as colunas fixas do
-//   PageSideRails (PAGE_LEFT_RAIL_PX=329 / PAGE_RIGHT_RAIL_PX=320)
+// O frame ocupa toda a largura — gutters e max-width são responsabilidade do
+// PageContainer content1264 dentro do HeaderShell.
 export const headerFrameClassName =
-  "box-border px-4 md:px-8 py-4 2xl:pl-[329px] 2xl:pr-[320px] 2xl:h-[96px] 2xl:py-0";
+  "box-border w-full py-4 2xl:h-[96px] 2xl:py-0";
 
 export const headerNavClassName =
   "hidden shrink-0 items-center xl:flex 2xl:h-[25px] 2xl:w-[339.2px]";

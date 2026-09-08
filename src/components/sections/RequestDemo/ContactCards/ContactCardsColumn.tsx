@@ -6,6 +6,7 @@ export default function ContactCardsColumn() {
   return (
     <aside
       data-request-demo-contact-cards
+      data-demo-contact-card
       aria-label="Canais de contato"
       className={contactCardsColumnClassName}
     >
