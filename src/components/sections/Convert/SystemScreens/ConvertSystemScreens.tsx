@@ -30,7 +30,6 @@ export default function ConvertSystemScreens() {
         productSlug="convert"
         main={CONVERT_SYSTEM_SCREEN_MAIN}
         gridItems={CONVERT_SYSTEM_SCREEN_GRID_ITEMS}
-        mainSizes="(min-width: 1280px) 1216px, calc(100vw - 48px)"
       />
     </>
   );

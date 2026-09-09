@@ -1,5 +1,10 @@
 import Image from "next/image";
 
+import {
+  productSystemScreensImageClassName,
+  productSystemScreensMainSizes,
+} from "@/components/sections/shared/SystemScreens/productSystemScreens.styles";
+
 export default function ConciergeSystemScreensVisual() {
   return (
     <div
@@ -12,8 +17,8 @@ export default function ConciergeSystemScreensVisual() {
         width={1216}
         height={408}
         unoptimized
-        sizes="(min-width: 1280px) 1216px, calc(100vw - 48px)"
-        className="h-auto w-full"
+        sizes={productSystemScreensMainSizes}
+        className={productSystemScreensImageClassName}
       />
     </div>
   );

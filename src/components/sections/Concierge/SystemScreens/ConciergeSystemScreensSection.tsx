@@ -46,7 +46,7 @@ export default function ConciergeSystemScreensSection() {
 
           <div
             data-concierge-system-screens-content
-            className="px-6 sm:px-8"
+            className="sm:px-8"
           >
             <ConciergeSystemScreensFilters />
 

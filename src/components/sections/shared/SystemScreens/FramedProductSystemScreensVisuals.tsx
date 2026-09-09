@@ -1,29 +1,35 @@
 import Image from "next/image";
 
+import ProductSystemScreensImageGrid from "./ProductSystemScreensImageGrid";
 import type {
   ProductSystemScreenImage,
   ProductSystemScreenMainImage,
 } from "./productSystemScreens.types";
+import {
+  productSystemScreensImageClassName,
+  productSystemScreensMainSizes,
+  productSystemScreensVisualsClassName,
+} from "./productSystemScreens.styles";
 
 type FramedProductSystemScreensVisualsProps = {
   productSlug: string;
   main: ProductSystemScreenMainImage;
   gridItems: readonly ProductSystemScreenImage[];
-  mainSizes: string;
+  mainSizes?: string;
 };
 
 export default function FramedProductSystemScreensVisuals({
   productSlug,
   main,
   gridItems,
-  mainSizes,
+  mainSizes = productSystemScreensMainSizes,
 }: FramedProductSystemScreensVisualsProps) {
   return (
     <div
       {...{
         [`data-${productSlug}-system-screens-visuals`]: true,
       }}
-      className="mx-auto mt-6 flex w-full max-w-[1216px] flex-col gap-6"
+      className={productSystemScreensVisualsClassName}
     >
       <div
         {...{
@@ -38,38 +44,15 @@ export default function FramedProductSystemScreensVisuals({
           height={main.height}
           unoptimized
           sizes={mainSizes}
-          className="block h-auto w-full"
-          loading="lazy"
+          className={productSystemScreensImageClassName}
         />
       </div>
 
-      <div
-        {...{
-          [`data-${productSlug}-system-screens-grid`]: true,
-        }}
-        className="grid w-full min-w-0 grid-cols-1 items-start gap-4 lg:grid-cols-3"
-      >
-        {gridItems.map((item) => (
-          <div
-            key={item.id}
-            {...{
-              [`data-${productSlug}-system-screens-grid-item`]: item.id,
-            }}
-            className="overflow-hidden rounded-xl"
-          >
-            <Image
-              src={item.src}
-              alt={item.alt}
-              width={item.width}
-              height={item.height}
-              unoptimized
-              sizes="(min-width: 1024px) calc((100vw - 64px - 32px) / 3), calc(100vw - 48px)"
-              className="block h-auto min-w-0 w-full"
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
+      <ProductSystemScreensImageGrid
+        productSlug={productSlug}
+        items={gridItems}
+        itemClassName="w-full min-w-0 overflow-hidden rounded-xl"
+      />
     </div>
   );
 }
