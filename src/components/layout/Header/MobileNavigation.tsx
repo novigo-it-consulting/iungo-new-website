@@ -2,8 +2,17 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+
+import { isAvailableHref } from "@/constants/routes";
+
 import { NAV_LINK_ITEMS, HEADER_BUTTONS } from "./header.constants";
 import SolucoesMobileNavGroup from "./SolucoesMegaMenu/SolucoesMobileNavGroup";
+
+const mobileNavItemClassName =
+  "block min-h-[44px] cursor-pointer rounded py-3 font-reddit text-lg font-normal leading-8 text-[#383838] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-1";
+
+const mobileAreaClienteClassName =
+  "flex h-[55px] w-full cursor-pointer items-center justify-center rounded-full bg-[#687681] px-[18.33px] font-reddit text-lg font-bold leading-[27.49px] text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#687681] focus-visible:ring-offset-2";
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +36,7 @@ export default function MobileNavigation() {
   }, [isOpen]);
 
   const close = () => setIsOpen(false);
+  const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
 
   return (
     <div className="xl:hidden">
@@ -76,27 +86,37 @@ export default function MobileNavigation() {
             <ul className="mb-6 flex flex-col">
               <SolucoesMobileNavGroup onNavigate={close} />
               {NAV_LINK_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={close}
-                    className="block min-h-[44px] py-3 font-reddit text-lg font-normal leading-8 text-[#383838] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-1 rounded"
-                  >
-                    {item.label}
-                  </Link>
+                <li key={item.id}>
+                  {isAvailableHref(item.href) ? (
+                    <Link
+                      href={item.href}
+                      onClick={close}
+                      className={mobileNavItemClassName}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span className={mobileNavItemClassName}>{item.label}</span>
+                  )}
                 </li>
               ))}
             </ul>
           </nav>
 
           <div className="flex flex-col gap-4">
-            <Link
-              href={HEADER_BUTTONS.areaCliente.href}
-              onClick={close}
-              className="flex h-[55px] w-full items-center justify-center rounded-full bg-[#687681] px-[18.33px] font-reddit text-lg font-bold leading-[27.49px] text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#687681] focus-visible:ring-offset-2"
-            >
-              {HEADER_BUTTONS.areaCliente.label}
-            </Link>
+            {isAvailableHref(areaClienteHref) ? (
+              <Link
+                href={areaClienteHref}
+                onClick={close}
+                className={mobileAreaClienteClassName}
+              >
+                {HEADER_BUTTONS.areaCliente.label}
+              </Link>
+            ) : (
+              <span className={mobileAreaClienteClassName}>
+                {HEADER_BUTTONS.areaCliente.label}
+              </span>
+            )}
             <Link
               href={HEADER_BUTTONS.solicitarDemo.href}
               onClick={close}

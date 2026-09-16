@@ -11,11 +11,16 @@ export const IOT_CASE_STUDY_DETAILS = {
     "De 2.500 notebooks em janeiro de 2023 a mais de 70.000 ativos rastreados hoje — crescimento contínuo sem trocar a plataforma, sem rebobinar dados históricos, sem disrupção de operação.",
 } as const;
 
-export const IOT_CASE_STUDY_CTA = {
+export const IOT_CASE_STUDY_CTA: {
+  label: string;
+  arrow: string;
+  /** Defina o path quando a página do case existir. */
+  href: string | null;
+} = {
   label: "Ler case completo",
   arrow: "→",
-  href: "#",
-} as const;
+  href: null,
+};
 
 export interface IoTCaseStudyPhase {
   id: string;

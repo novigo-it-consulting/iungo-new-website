@@ -1,3 +1,4 @@
+import { isAvailableHref } from "@/constants/routes";
 import { SOLUCOES_MEGA_MENU_FEATURED_CASE } from "./solucoesMegaMenu.featuredCase.constants";
 import SolucoesMegaMenuArrowLink from "./SolucoesMegaMenuArrowLink";
 import SolucoesMegaMenuBadge from "./SolucoesMegaMenuBadge";
@@ -16,6 +17,7 @@ export default function SolucoesMegaMenuFeaturedCaseCard({
   onNavigate,
 }: Readonly<SolucoesMegaMenuFeaturedCaseCardProps>) {
   const featuredCase = SOLUCOES_MEGA_MENU_FEATURED_CASE;
+  const canReadFeaturedCase = isAvailableHref(featuredCase.readCaseHref);
 
   return (
     <article
@@ -44,9 +46,7 @@ export default function SolucoesMegaMenuFeaturedCaseCard({
       <SolucoesMegaMenuArrowLink
         label={featuredCase.readCaseLabel}
         href={featuredCase.readCaseHref}
-        linkKind={
-          featuredCase.readCaseHref ? "featured-case" : "featured-case-pending"
-        }
+        linkKind={canReadFeaturedCase ? "featured-case" : "featured-case-pending"}
         className={solucoesMegaMenuFeaturedCaseReadLinkClassName}
         onNavigate={onNavigate}
       />

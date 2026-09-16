@@ -1,3 +1,5 @@
+import { CASES_HREF } from "@/constants/routes";
+
 export type FooterNavLink = {
   label: string;
   href: string | null;
@@ -40,7 +42,7 @@ export const FOOTER_NAV_GROUPS: readonly FooterNavGroup[] = [
     title: "Empresa",
     links: [
       { label: "Sobre", href: null },
-      { label: "Cases", href: "/cases" },
+      { label: "Cases", href: CASES_HREF },
       { label: "Contato", href: null },
       { label: "Carreiras", href: null },
       { label: "Imprensa", href: null },

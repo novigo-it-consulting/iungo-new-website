@@ -3,6 +3,7 @@
 import Link from "next/link";
 
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
+import { isAvailableHref } from "@/constants/routes";
 
 export type SolucoesMegaMenuArrowLinkKind =
   | "view-solution"
@@ -48,7 +49,7 @@ export default function SolucoesMegaMenuArrowLink({
 }: Readonly<SolucoesMegaMenuArrowLinkProps>) {
   const dataAttributes = ARROW_LINK_DATA_ATTRIBUTES[linkKind];
 
-  if (href) {
+  if (isAvailableHref(href)) {
     return (
       <Link
         href={href}

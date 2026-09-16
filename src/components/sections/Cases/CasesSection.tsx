@@ -1,3 +1,6 @@
+import Link from "next/link";
+
+import { CASES_HREF, isAvailableHref } from "@/constants/routes";
 import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";
 import CaseCard from "./CaseCard";
 import { CASES } from "./cases.constants";
@@ -7,7 +10,11 @@ import {
   casesSectionContainerClassName,
 } from "./casesSection.styles";
 
+const allCasesButtonClassName = `box-border inline-flex h-[41px] w-[157px] shrink-0 cursor-pointer items-center justify-center gap-[8.67px] self-start whitespace-nowrap rounded-[43.36px] border-0 bg-[#0024AE] px-[13.88px] py-[6.94px] shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 lg:self-auto ${solidButtonHoverClassName}`;
+
 export default function CasesSection() {
+  const casesHref = CASES_HREF;
+
   return (
     <section
       id="casos-de-sucesso"
@@ -47,18 +54,32 @@ export default function CasesSection() {
             </h2>
           </div>
 
-          <button
-            type="button"
-            data-cases="all-cases-button"
-            className={`box-border inline-flex h-[41px] w-[157px] shrink-0 items-center justify-center gap-[8.67px] self-start whitespace-nowrap rounded-[43.36px] border-0 bg-[#0024AE] px-[13.88px] py-[6.94px] shadow-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 lg:self-auto ${solidButtonHoverClassName}`}
-          >
-            <span
-              data-cases="all-cases-button-text"
-              className="w-fit whitespace-nowrap font-reddit text-[13.63px] font-bold leading-[20.8px] tracking-[0] text-white"
+          {isAvailableHref(casesHref) ? (
+            <Link
+              href={casesHref}
+              data-cases="all-cases-button"
+              className={allCasesButtonClassName}
             >
-              Ver todos os casos
+              <span
+                data-cases="all-cases-button-text"
+                className="w-fit whitespace-nowrap font-reddit text-[13.63px] font-bold leading-[20.8px] tracking-[0] text-white"
+              >
+                Ver todos os casos
+              </span>
+            </Link>
+          ) : (
+            <span
+              data-cases="all-cases-button"
+              className={allCasesButtonClassName}
+            >
+              <span
+                data-cases="all-cases-button-text"
+                className="w-fit whitespace-nowrap font-reddit text-[13.63px] font-bold leading-[20.8px] tracking-[0] text-white"
+              >
+                Ver todos os casos
+              </span>
             </span>
-          </button>
+          )}
         </div>
 
         <div

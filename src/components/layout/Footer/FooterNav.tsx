@@ -1,5 +1,11 @@
 import Link from "next/link";
+
+import { isAvailableHref } from "@/constants/routes";
+
 import { FOOTER_NAV_GROUPS } from "./footer.constants";
+
+const footerNavItemClassName =
+  "inline-block max-w-full cursor-pointer font-reddit text-[14px] font-normal leading-5 text-white/60 transition-colors hover:text-white focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40";
 
 export default function FooterNav() {
   return (
@@ -22,17 +28,12 @@ export default function FooterNav() {
             <ul className="m-0 flex w-full list-none flex-col gap-2 p-0">
               {group.links.map((link) => (
                 <li key={link.label}>
-                  {link.href !== null ? (
-                    <Link
-                      href={link.href}
-                      className="inline-block max-w-full font-reddit text-[14px] font-normal leading-5 text-white/60 transition-colors hover:text-white focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
-                    >
+                  {isAvailableHref(link.href) ? (
+                    <Link href={link.href} className={footerNavItemClassName}>
                       {link.label}
                     </Link>
                   ) : (
-                    <span className="font-reddit text-[14px] font-normal leading-5 text-white/60">
-                      {link.label}
-                    </span>
+                    <span className={footerNavItemClassName}>{link.label}</span>
                   )}
                 </li>
               ))}

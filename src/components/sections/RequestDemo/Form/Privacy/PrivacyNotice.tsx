@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { isAvailableHref } from "@/constants/routes";
+
 import {
   PRIVACY_NOTICE_DPO_EMAIL,
   PRIVACY_POLICY_HREF,
@@ -26,7 +28,7 @@ export default function PrivacyNotice() {
 
         <p className={privacyNoticeTextClassName}>
           Li e concordo com a{" "}
-          {PRIVACY_POLICY_HREF ? (
+          {isAvailableHref(PRIVACY_POLICY_HREF) ? (
             <Link
               href={PRIVACY_POLICY_HREF}
               className={privacyNoticeLinkClassName}

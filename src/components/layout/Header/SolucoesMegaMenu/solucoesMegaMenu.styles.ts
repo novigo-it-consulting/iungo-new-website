@@ -96,7 +96,7 @@ export const solucoesMegaMenuArrowLinkBaseClassName =
 
 export const solucoesMegaMenuCategoryViewLinkClassName = [
   solucoesMegaMenuArrowLinkBaseClassName,
-  "mt-3 text-[#4F46E5] transition-opacity duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 motion-reduce:transition-none",
+  "mt-3 cursor-pointer text-[#4F46E5] transition-opacity duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 motion-reduce:transition-none",
 ].join(" ");
 
 export const solucoesMegaMenuTriggerClassName =
@@ -139,5 +139,5 @@ export const solucoesMegaMenuFeaturedCaseSubtitleClassName =
 
 export const solucoesMegaMenuFeaturedCaseReadLinkClassName = [
   solucoesMegaMenuArrowLinkBaseClassName,
-  "self-start text-[#22D3EE] underline-offset-2 transition-colors duration-150 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B14] motion-reduce:transition-none",
+  "cursor-pointer self-start text-[#22D3EE] underline-offset-2 transition-colors duration-150 hover:underline focus-visible:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#22D3EE] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0A0B14] motion-reduce:transition-none",
 ].join(" ");
