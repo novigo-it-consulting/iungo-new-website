@@ -1,0 +1,27 @@
+[data-case-card] {
+  transition-property: transform, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-case-card]:hover {
+    z-index: 1;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(4, 21, 39, 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-case-card] {
+    transition: none;
+    transform: none;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    [data-case-card]:hover {
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}

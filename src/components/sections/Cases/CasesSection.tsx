@@ -2,12 +2,12 @@ import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.sty
 import CaseCard from "./CaseCard";
 import CaseCardContent from "./CaseCardContent";
 import CaseCardDescription from "./CaseCardDescription";
-import CaseCardMedia from "./CaseCardMedia";
 import CaseCardMetrics from "./CaseCardMetrics";
 import CaseCardTitle from "./CaseCardTitle";
 import CaseTag from "./CaseTag";
 import { CASES } from "./cases.constants";
 import {
+  caseCardTagsClassName,
   casesSectionCardsGridClassName,
   casesSectionClassName,
   casesSectionContainerClassName,
@@ -32,7 +32,6 @@ export default function CasesSection() {
             data-cases="heading-group"
             className="flex min-w-0 flex-col items-start gap-4"
           >
-            {/* Selo */}
             <span
               data-cases="badge"
               className="box-border inline-flex h-[31.8px] w-[145.8px] shrink-0 items-center justify-center overflow-visible rounded-[399px] border border-[#0024AE]/25 bg-[#0024AE]/5 px-[14.4px] py-[6.4px] backdrop-blur-sm"
@@ -45,7 +44,6 @@ export default function CasesSection() {
               </span>
             </span>
 
-            {/* Título */}
             <h2
               id="cases-title"
               data-cases="title"
@@ -55,7 +53,6 @@ export default function CasesSection() {
             </h2>
           </div>
 
-          {/* Botão */}
           <button
             type="button"
             data-cases="all-cases-button"
@@ -74,82 +71,44 @@ export default function CasesSection() {
           data-cases="cards-grid"
           className={casesSectionCardsGridClassName}
         >
-          <CaseCard
-            caseId="lider-moda-premium"
-            accessibleName="Caso de sucesso Líder Moda Premium"
-            media={
-              <CaseCardMedia
-                caseId="lider-moda-premium"
-                accessibleName="Espaço reservado para a imagem do caso Líder Moda Premium"
-              />
-            }
-          >
-            <CaseCardContent>
-              <div
-                data-case-tags="lider-moda-premium"
-                className="flex w-full flex-wrap items-center justify-start gap-2 overflow-visible p-0"
-              >
-                <CaseTag tone="blue">MODA</CaseTag>
-                <CaseTag tone="red">CONCIERGE</CaseTag>
-                <CaseTag tone="blue">CDP</CaseTag>
-              </div>
-              <CaseCardTitle caseId="lider-moda-premium">
-                +R$ 600 mil em 15 dias, em 6 marcas simultâneas
-              </CaseCardTitle>
-              <CaseCardDescription caseId="lider-moda-premium">
-                A maior holding de moda premium da AL ativou Concierge em 6 marcas e dobrou a CVR vs média do site, projetando R$ 14M de receita incremental anual.
-              </CaseCardDescription>
-              <div
-                data-case-divider="lider-moda-premium"
-                className="h-px w-full bg-[#E4E4E7]"
-                role="separator"
-                aria-hidden="true"
-              />
-              <CaseCardMetrics
-                caseId="lider-moda-premium"
-                metrics={CASES["lider-moda-premium"].metrics}
-                valueClassName={CASES["lider-moda-premium"].metricsValueClassName}
-              />
-            </CaseCardContent>
-          </CaseCard>
-          <CaseCard
-            caseId="raia-drogasil"
-            accessibleName="Caso de sucesso Raia Drogasil"
-            media={
-              <CaseCardMedia
-                caseId="raia-drogasil"
-                accessibleName="Espaço reservado para a imagem do caso Raia Drogasil"
-              />
-            }
-          >
-            <CaseCardContent>
-              <div
-                data-case-tags="raia-drogasil"
-                className="flex w-full flex-wrap items-center justify-start gap-2 overflow-visible p-0"
-              >
-                <CaseTag tone="blue">FARMA &amp; SAÚDE</CaseTag>
-                <CaseTag tone="yellow">IOT</CaseTag>
-                <CaseTag tone="blue">RFID</CaseTag>
-              </div>
-              <CaseCardTitle caseId="raia-drogasil">
-                70.000+ ativos rastreados, do notebook ao terminal de loja
-              </CaseCardTitle>
-              <CaseCardDescription caseId="raia-drogasil">
-                A maior rede de farmácias do Brasil estruturou gestão de patrimônio com Iungo IoT (RFID + RTLS), eliminando perdas e otimizando operações em 3.000 lojas.
-              </CaseCardDescription>
-              <div
-                data-case-divider="raia-drogasil"
-                className="h-px w-full bg-[#E4E4E7]"
-                role="separator"
-                aria-hidden="true"
-              />
-              <CaseCardMetrics
-                caseId="raia-drogasil"
-                metrics={CASES["raia-drogasil"].metrics}
-                valueClassName={CASES["raia-drogasil"].metricsValueClassName}
-              />
-            </CaseCardContent>
-          </CaseCard>
+          {CASES.map((successCase) => (
+            <CaseCard
+              key={successCase.id}
+              caseId={successCase.id}
+              accessibleName={successCase.accessibleName}
+              image={successCase.image}
+            >
+              <CaseCardContent>
+                <div
+                  data-case-tags={successCase.id}
+                  className={caseCardTagsClassName}
+                >
+                  {successCase.tags.map((tag) => (
+                    <CaseTag key={tag.label} tone={tag.tone}>
+                      {tag.label}
+                    </CaseTag>
+                  ))}
+                </div>
+                <CaseCardTitle caseId={successCase.id}>
+                  {successCase.title}
+                </CaseCardTitle>
+                <CaseCardDescription caseId={successCase.id}>
+                  {successCase.description}
+                </CaseCardDescription>
+                <div
+                  data-case-divider={successCase.id}
+                  className="h-px w-full bg-[#E4E4E7]"
+                  role="separator"
+                  aria-hidden="true"
+                />
+                <CaseCardMetrics
+                  caseId={successCase.id}
+                  metrics={successCase.metrics}
+                  valueClassName={successCase.metricsValueClassName}
+                />
+              </CaseCardContent>
+            </CaseCard>
+          ))}
         </div>
       </div>
     </section>

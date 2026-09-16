@@ -1,4 +1,4 @@
-type CaseTagTone = "blue" | "red" | "yellow";
+import type { CaseTagTone } from "./cases.constants";
 
 type CaseTagProps = {
   children: string;

@@ -1,26 +1,36 @@
 import type { ReactNode } from "react";
 
+import CaseCardMedia from "./CaseCardMedia";
+import type { CaseImage } from "./cases.constants";
+import {
+  caseCardClassName,
+  caseCardInnerClassName,
+} from "./casesSection.styles";
+import "./caseCard.hover.css";
+
 type CaseCardProps = {
   caseId: string;
   accessibleName: string;
-  media?: ReactNode;
+  image?: CaseImage;
   children?: ReactNode;
 };
 
 export default function CaseCard({
   caseId,
   accessibleName,
-  media,
+  image,
   children,
 }: CaseCardProps) {
   return (
     <article
       data-case-card={caseId}
       aria-label={accessibleName}
-      className="box-border flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-[#E4E4E7] bg-white shadow-none lg:min-h-[656.92px]"
+      className={caseCardClassName}
     >
-      {media}
-      {children}
+      <div className={caseCardInnerClassName}>
+        {image ? <CaseCardMedia caseId={caseId} image={image} /> : null}
+        {children}
+      </div>
     </article>
   );
 }
