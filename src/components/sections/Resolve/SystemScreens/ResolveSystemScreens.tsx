@@ -1,6 +1,6 @@
 import ProductSystemScreensBadges from "@/components/sections/shared/SystemScreens/ProductSystemScreensBadges";
 import ProductSystemScreensHeader from "@/components/sections/shared/SystemScreens/ProductSystemScreensHeader";
-import FramedProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/FramedProductSystemScreensVisuals";
+import ProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/ProductSystemScreensVisuals";
 
 import {
   RESOLVE_SYSTEM_SCREEN_BADGES,
@@ -26,11 +26,12 @@ export default function ResolveSystemScreens() {
         inactiveBorderClassName={RESOLVE_INACTIVE_BADGE_BORDER}
       />
 
-      <FramedProductSystemScreensVisuals
+      <ProductSystemScreensVisuals
         productSlug="resolve"
         main={RESOLVE_SYSTEM_SCREEN_MAIN}
         gridItems={RESOLVE_SYSTEM_SCREEN_GRID_ITEMS}
         mainSizes="(max-width: 1216px) 100vw, 1216px"
+        framed
       />
     </section>
   );

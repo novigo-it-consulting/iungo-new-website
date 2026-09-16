@@ -20,7 +20,7 @@ export default function ProductSystemScreensImageGrid({
   items,
   className,
   itemClassName = productSystemScreensGridItemClassName,
-}: ProductSystemScreensImageGridProps) {
+}: Readonly<ProductSystemScreensImageGridProps>) {
   return (
     <div
       {...{

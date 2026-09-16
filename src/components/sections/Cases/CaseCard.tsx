@@ -16,7 +16,7 @@ type CaseCardProps = {
   caseData: CaseData;
 };
 
-export default function CaseCard({ caseData }: CaseCardProps) {
+export default function CaseCard({ caseData }: Readonly<CaseCardProps>) {
   const {
     id,
     accessibleName,
@@ -49,11 +49,9 @@ export default function CaseCard({ caseData }: CaseCardProps) {
           </div>
           <CaseCardTitle caseId={id}>{title}</CaseCardTitle>
           <CaseCardDescription caseId={id}>{description}</CaseCardDescription>
-          <div
+          <hr
             data-case-divider={id}
-            className="h-px w-full bg-[#E4E4E7]"
-            role="separator"
-            aria-hidden="true"
+            className="m-0 h-px w-full border-0 bg-[#E4E4E7]"
           />
           <CaseCardMetrics
             caseId={id}

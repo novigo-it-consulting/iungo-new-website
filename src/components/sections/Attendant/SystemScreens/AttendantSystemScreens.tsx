@@ -1,6 +1,6 @@
 import ProductSystemScreensBadges from "@/components/sections/shared/SystemScreens/ProductSystemScreensBadges";
 import ProductSystemScreensHeader from "@/components/sections/shared/SystemScreens/ProductSystemScreensHeader";
-import FramedProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/FramedProductSystemScreensVisuals";
+import ProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/ProductSystemScreensVisuals";
 
 import {
   ATTENDANT_SYSTEM_SCREEN_BADGES,
@@ -26,10 +26,11 @@ export default function AttendantSystemScreens() {
         inactiveBorderClassName={ATTENDANT_INACTIVE_BADGE_BORDER}
       />
 
-      <FramedProductSystemScreensVisuals
+      <ProductSystemScreensVisuals
         productSlug="attendant"
         main={ATTENDANT_SYSTEM_SCREEN_MAIN}
         gridItems={ATTENDANT_SYSTEM_SCREEN_GRID_ITEMS}
+        framed
       />
     </section>
   );

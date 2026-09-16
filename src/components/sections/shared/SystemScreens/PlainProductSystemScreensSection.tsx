@@ -1,7 +1,7 @@
 import PageContainer from "@/components/layout/PageContainer";
 
 import type { ProductSystemScreensContent } from "./productSystemScreens.types";
-import PlainProductSystemScreensVisuals from "./PlainProductSystemScreensVisuals";
+import ProductSystemScreensVisuals from "./ProductSystemScreensVisuals";
 import ProductSystemScreensBadges from "./ProductSystemScreensBadges";
 import ProductSystemScreensHeader from "./ProductSystemScreensHeader";
 
@@ -49,7 +49,7 @@ export default function PlainProductSystemScreensSection({
           inactiveBorderClassName={inactiveBorderClassName}
         />
 
-        <PlainProductSystemScreensVisuals
+        <ProductSystemScreensVisuals
           productSlug={productSlug}
           main={main}
           gridItems={gridItems}

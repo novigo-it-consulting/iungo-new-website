@@ -1,6 +1,6 @@
 import ProductSystemScreensBadges from "@/components/sections/shared/SystemScreens/ProductSystemScreensBadges";
 import ProductSystemScreensHeader from "@/components/sections/shared/SystemScreens/ProductSystemScreensHeader";
-import FramedProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/FramedProductSystemScreensVisuals";
+import ProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/ProductSystemScreensVisuals";
 
 import {
   IOT_INACTIVE_BADGE_BORDER,
@@ -28,11 +28,12 @@ export default function IoTSystemScreens() {
         inactiveBorderClassName={IOT_INACTIVE_BADGE_BORDER}
       />
 
-      <FramedProductSystemScreensVisuals
+      <ProductSystemScreensVisuals
         productSlug="iot"
         main={IOT_SYSTEM_SCREEN_MAIN}
         gridItems={IOT_SYSTEM_SCREEN_GRID_ITEMS}
         mainSizes="(max-width: 1280px) 100vw, 1280px"
+        framed
       />
     </>
   );

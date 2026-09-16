@@ -1,6 +1,6 @@
 import ProductSystemScreensBadges from "@/components/sections/shared/SystemScreens/ProductSystemScreensBadges";
 import ProductSystemScreensHeader from "@/components/sections/shared/SystemScreens/ProductSystemScreensHeader";
-import FramedProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/FramedProductSystemScreensVisuals";
+import ProductSystemScreensVisuals from "@/components/sections/shared/SystemScreens/ProductSystemScreensVisuals";
 
 import {
   CONVERT_SYSTEM_SCREEN_BADGES,
@@ -26,10 +26,11 @@ export default function ConvertSystemScreens() {
         inactiveBorderClassName={CONVERT_INACTIVE_BADGE_BORDER}
       />
 
-      <FramedProductSystemScreensVisuals
+      <ProductSystemScreensVisuals
         productSlug="convert"
         main={CONVERT_SYSTEM_SCREEN_MAIN}
         gridItems={CONVERT_SYSTEM_SCREEN_GRID_ITEMS}
+        framed
       />
     </>
   );
