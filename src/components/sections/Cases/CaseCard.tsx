@@ -10,7 +10,7 @@ import {
   caseCardInnerClassName,
   caseCardTagsClassName,
 } from "./casesSection.styles";
-import "./caseCard.hover.css";
+import "@/components/ui/cardElevate.hover.css";
 
 type CaseCardProps = {
   caseData: CaseData;
@@ -31,6 +31,7 @@ export default function CaseCard({ caseData }: Readonly<CaseCardProps>) {
   return (
     <article
       data-case-card={id}
+      data-card-elevate=""
       aria-label={accessibleName}
       className={caseCardClassName}
     >
