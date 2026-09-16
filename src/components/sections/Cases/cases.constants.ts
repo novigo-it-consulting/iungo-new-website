@@ -26,6 +26,10 @@ export interface CaseData {
   image?: CaseImage;
 }
 
+function caseImage(src: string): CaseImage {
+  return { src, alt: "" };
+}
+
 export const CASES: readonly CaseData[] = [
   {
     id: "lider-moda-premium",
@@ -44,10 +48,7 @@ export const CASES: readonly CaseData[] = [
       { value: "6", label: "marcas ativas" },
     ],
     metricsValueClassName: "text-[#A72121]",
-    image: {
-      src: "/images/cases/case-moda.png",
-      alt: "",
-    },
+    image: caseImage("/images/cases/case-moda.png"),
   },
   {
     id: "raia-drogasil",
@@ -66,9 +67,6 @@ export const CASES: readonly CaseData[] = [
       { value: "3K+", label: "lojas atendidas" },
     ],
     metricsValueClassName: "text-[#B8860B]",
-    image: {
-      src: "/images/cases/case-farma.png",
-      alt: "",
-    },
+    image: caseImage("/images/cases/case-farma.png"),
   },
 ];

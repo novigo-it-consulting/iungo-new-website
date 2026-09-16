@@ -1,13 +1,7 @@
 import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";
 import CaseCard from "./CaseCard";
-import CaseCardContent from "./CaseCardContent";
-import CaseCardDescription from "./CaseCardDescription";
-import CaseCardMetrics from "./CaseCardMetrics";
-import CaseCardTitle from "./CaseCardTitle";
-import CaseTag from "./CaseTag";
 import { CASES } from "./cases.constants";
 import {
-  caseCardTagsClassName,
   casesSectionCardsGridClassName,
   casesSectionClassName,
   casesSectionContainerClassName,
@@ -72,42 +66,7 @@ export default function CasesSection() {
           className={casesSectionCardsGridClassName}
         >
           {CASES.map((successCase) => (
-            <CaseCard
-              key={successCase.id}
-              caseId={successCase.id}
-              accessibleName={successCase.accessibleName}
-              image={successCase.image}
-            >
-              <CaseCardContent>
-                <div
-                  data-case-tags={successCase.id}
-                  className={caseCardTagsClassName}
-                >
-                  {successCase.tags.map((tag) => (
-                    <CaseTag key={tag.label} tone={tag.tone}>
-                      {tag.label}
-                    </CaseTag>
-                  ))}
-                </div>
-                <CaseCardTitle caseId={successCase.id}>
-                  {successCase.title}
-                </CaseCardTitle>
-                <CaseCardDescription caseId={successCase.id}>
-                  {successCase.description}
-                </CaseCardDescription>
-                <div
-                  data-case-divider={successCase.id}
-                  className="h-px w-full bg-[#E4E4E7]"
-                  role="separator"
-                  aria-hidden="true"
-                />
-                <CaseCardMetrics
-                  caseId={successCase.id}
-                  metrics={successCase.metrics}
-                  valueClassName={successCase.metricsValueClassName}
-                />
-              </CaseCardContent>
-            </CaseCard>
+            <CaseCard key={successCase.id} caseData={successCase} />
           ))}
         </div>
       </div>

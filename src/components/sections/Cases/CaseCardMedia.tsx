@@ -10,35 +10,26 @@ import {
 
 type CaseCardMediaProps = {
   caseId: string;
-  accessibleName?: string;
-  image?: CaseImage;
+  image: CaseImage;
 };
 
 export default function CaseCardMedia({
   caseId,
-  accessibleName,
   image,
 }: CaseCardMediaProps) {
-  const isPlaceholder = !image;
-
   return (
     <div
       data-case-media={caseId}
-      {...(isPlaceholder && accessibleName
-        ? { role: "img" as const, "aria-label": accessibleName }
-        : {})}
       className="aspect-video w-full shrink-0 overflow-hidden bg-[#F1F3FA]"
     >
-      {image ? (
-        <Image
-          src={image.src}
-          alt={image.alt}
-          width={caseCardMediaImageWidth}
-          height={caseCardMediaImageHeight}
-          sizes={caseCardMediaImageSizes}
-          className={caseCardMediaImageClassName}
-        />
-      ) : null}
+      <Image
+        src={image.src}
+        alt={image.alt}
+        width={caseCardMediaImageWidth}
+        height={caseCardMediaImageHeight}
+        sizes={caseCardMediaImageSizes}
+        className={caseCardMediaImageClassName}
+      />
     </div>
   );
 }

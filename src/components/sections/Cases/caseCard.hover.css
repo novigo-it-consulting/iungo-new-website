@@ -13,15 +13,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  [data-case-card] {
+  [data-case-card],
+  [data-case-card]:hover {
     transition: none;
     transform: none;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    [data-case-card]:hover {
-      transform: none;
-      box-shadow: none;
-    }
+    box-shadow: none;
   }
 }
