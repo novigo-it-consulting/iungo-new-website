@@ -10,33 +10,30 @@ type PageContainerSize =
   | "content1152"
   | "content1264";
 
+const fluidGutteredWidthClassName =
+  "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)]";
+
+const paddedFrameClassName = "w-full px-6 sm:px-8";
+
 const sizeClasses: Record<PageContainerSize, string> = {
   // Frame padrão — margem de 330px em 1920px.
-  default:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1260px]",
+  default: `${fluidGutteredWidthClassName} max-w-[1260px]`,
   // Frame Organizer Steps — 1280px com padding interno horizontal.
-  organizerSteps:
-    "w-full max-w-[1280px] px-6 sm:px-8",
+  organizerSteps: `${paddedFrameClassName} max-w-[1280px]`,
   // Frame Organizer Capabilities — 1280px com padding interno horizontal.
-  organizerCapabilities:
-    "w-full max-w-[1280px] px-6 sm:px-8",
+  organizerCapabilities: `${paddedFrameClassName} max-w-[1280px]`,
   // Frame centralizado de 1024px — área útil de 960px em qualquer resolução.
-  organizerComparison:
-    "w-full max-w-[1024px] px-6 sm:px-8",
+  organizerComparison: `${paddedFrameClassName} max-w-[1024px]`,
   // Frame centralizado de 896px — reutilizado nas CTAs de produto.
-  cta:
-    "w-full max-w-[896px] px-6 sm:px-8",
+  cta: `${paddedFrameClassName} max-w-[896px]`,
   // Frame centralizado de 1280px — margem de 320px em 1920px.
-  content1280:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1280px]",
+  content1280: `${fluidGutteredWidthClassName} max-w-[1280px]`,
   // Frame centralizado de 1152px — margem de 384px em 1920px.
-  content1152:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1152px]",
+  content1152: `${fluidGutteredWidthClassName} max-w-[1152px]`,
   // Frame estrutural principal — margem de 328px em 1920px.
   // Alcança max-w em viewports >= 1328px (1264 + 32 + 32).
   // Usado pelo Header, heróis e conteúdo principal.
-  content1264:
-    "w-[calc(100%_-_48px)] sm:w-[calc(100%_-_64px)] max-w-[1264px]",
+  content1264: `${fluidGutteredWidthClassName} max-w-[1264px]`,
 };
 
 interface PageContainerProps extends ComponentPropsWithoutRef<"div"> {

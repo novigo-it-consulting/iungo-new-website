@@ -1,9 +1,7 @@
 import PageContainer from "@/components/layout/PageContainer";
 
 import type { ProductSystemScreensContent } from "./productSystemScreens.types";
-import ProductSystemScreensVisuals from "./ProductSystemScreensVisuals";
-import ProductSystemScreensBadges from "./ProductSystemScreensBadges";
-import ProductSystemScreensHeader from "./ProductSystemScreensHeader";
+import ProductSystemScreensBody from "./ProductSystemScreensBody";
 
 type PlainProductSystemScreensSectionProps = {
   readonly productSlug: string;
@@ -11,15 +9,8 @@ type PlainProductSystemScreensSectionProps = {
 
 export default function PlainProductSystemScreensSection({
   productSlug,
-  title,
-  description,
-  ariaLabel,
-  badges,
-  main,
-  gridItems,
-  inactiveBorderClassName = "border-[#D3D5D8]",
-  headerClassNames,
-}: PlainProductSystemScreensSectionProps) {
+  ...content
+}: Readonly<PlainProductSystemScreensSectionProps>) {
   return (
     <section
       {...{
@@ -35,25 +26,7 @@ export default function PlainProductSystemScreensSection({
         size="content1280"
         className="min-w-0"
       >
-        <ProductSystemScreensHeader
-          productSlug={productSlug}
-          title={title}
-          description={description}
-          classNames={headerClassNames}
-        />
-
-        <ProductSystemScreensBadges
-          productSlug={productSlug}
-          ariaLabel={ariaLabel}
-          badges={badges}
-          inactiveBorderClassName={inactiveBorderClassName}
-        />
-
-        <ProductSystemScreensVisuals
-          productSlug={productSlug}
-          main={main}
-          gridItems={gridItems}
-        />
+        <ProductSystemScreensBody productSlug={productSlug} {...content} />
       </PageContainer>
     </section>
   );

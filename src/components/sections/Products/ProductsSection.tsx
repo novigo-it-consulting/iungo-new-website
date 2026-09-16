@@ -42,27 +42,7 @@ export default function ProductsSection() {
           data-page-content-anchor="products"
           className="mx-auto mt-8 box-border grid w-full grid-cols-1 items-start content-start gap-y-6 md:grid-cols-2 md:gap-x-6 xl:h-[705.64px] xl:max-w-[1262.13px] xl:grid-cols-8 xl:gap-x-[24.29px] xl:gap-y-[24.35px]"
         >
-          {FIRST_ROW_PRODUCTS.map((product) => (
-            <ProductCard
-              key={product.id}
-              productId={product.id}
-              productName={product.name}
-              className={product.className}
-              ctaHref={product.ctaHref ?? undefined}
-              ctaLabel={product.ctaLabel}
-              ctaAriaLabel={product.ctaAriaLabel ?? undefined}
-              copy={product.copy ?? undefined}
-              icon={product.icon ?? undefined}
-              contentClassName={product.contentClassName}
-              contentGapClassName={
-                product.contentGapClassName ?? undefined
-              }
-              cardPaddingClassName={
-                product.cardPaddingClassName ?? undefined
-              }
-            />
-          ))}
-          {SECOND_ROW_PRODUCTS.map((product) => (
+          {[...FIRST_ROW_PRODUCTS, ...SECOND_ROW_PRODUCTS].map((product) => (
             <ProductCard
               key={product.id}
               productId={product.id}

@@ -1,12 +1,10 @@
-import Image from "next/image";
-
 import ProductSystemScreensImageGrid from "./ProductSystemScreensImageGrid";
+import ProductSystemScreensImage from "./ProductSystemScreensImage";
 import type {
   ProductSystemScreenImage,
   ProductSystemScreenMainImage,
 } from "./productSystemScreens.types";
 import {
-  productSystemScreensImageClassName,
   productSystemScreensMainSizes,
   productSystemScreensVisualsClassName,
 } from "./productSystemScreens.styles";
@@ -27,15 +25,7 @@ export default function ProductSystemScreensVisuals({
   framed = false,
 }: Readonly<ProductSystemScreensVisualsProps>) {
   const mainImage = (
-    <Image
-      src={main.src}
-      alt={main.alt}
-      width={main.width}
-      height={main.height}
-      unoptimized
-      sizes={mainSizes}
-      className={productSystemScreensImageClassName}
-    />
+    <ProductSystemScreensImage image={main} sizes={mainSizes} />
   );
 
   return (

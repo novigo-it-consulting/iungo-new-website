@@ -1,10 +1,8 @@
-import Image from "next/image";
-
+import ProductSystemScreensImage from "./ProductSystemScreensImage";
 import type { ProductSystemScreenImage } from "./productSystemScreens.types";
 import {
   productSystemScreensGridItemClassName,
   productSystemScreensGridItemSizes,
-  productSystemScreensImageClassName,
   productSystemScreensImageGridClassName,
 } from "./productSystemScreens.styles";
 
@@ -40,14 +38,9 @@ export default function ProductSystemScreensImageGrid({
           }}
           className={itemClassName}
         >
-          <Image
-            src={item.src}
-            alt={item.alt}
-            width={item.width}
-            height={item.height}
-            unoptimized
+          <ProductSystemScreensImage
+            image={item}
             sizes={productSystemScreensGridItemSizes}
-            className={productSystemScreensImageClassName}
           />
         </div>
       ))}
