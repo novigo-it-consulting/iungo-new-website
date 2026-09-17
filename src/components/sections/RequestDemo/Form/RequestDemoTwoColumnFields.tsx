@@ -9,6 +9,7 @@ import {
 type RequestDemoInputFieldConfig = {
   id: string;
   label: string;
+  errorMessage?: string;
 } & Pick<
   ComponentPropsWithoutRef<"input">,
   | "name"
@@ -18,6 +19,8 @@ type RequestDemoInputFieldConfig = {
   | "spellCheck"
   | "autoCapitalize"
   | "inputMode"
+  | "maxLength"
+  | "required"
 >;
 
 type RequestDemoTwoColumnFieldsProps = {

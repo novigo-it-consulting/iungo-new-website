@@ -10,9 +10,11 @@ import {
   type CSSProperties,
 } from "react";
 
+import { RequestDemoFieldError } from "../RequestDemoFieldGroup";
 import type { RequestDemoSelectOption } from "../requestDemoForm.types";
 import {
   requestDemoFieldGroupClassName,
+  requestDemoFieldInvalidClassName,
   requestDemoSelectClassName,
   requestDemoTextFieldLabelClassName,
 } from "../requestDemoField.styles";
@@ -37,6 +39,7 @@ type ProductInterestSelectProps = {
   name: string;
   placeholderOption: RequestDemoSelectOption;
   options: readonly RequestDemoSelectOption[];
+  errorMessage?: string;
 };
 
 export default function ProductInterestSelect({
@@ -45,9 +48,11 @@ export default function ProductInterestSelect({
   name,
   placeholderOption,
   options,
+  errorMessage,
 }: Readonly<ProductInterestSelectProps>) {
   const listboxId = `${id}-listbox`;
   const labelId = `${id}-label`;
+  const errorId = `${id}-error`;
   const controlRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const optionRefs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -196,10 +201,12 @@ export default function ProductInterestSelect({
           aria-expanded={isOpen}
           aria-haspopup="listbox"
           aria-labelledby={labelId}
+          aria-invalid={Boolean(errorMessage)}
+          aria-describedby={errorMessage ? errorId : undefined}
           aria-activedescendant={
             isOpen ? `${id}-option-${safeActiveIndex}` : undefined
           }
-          className={`${requestDemoSelectClassName} flex cursor-pointer items-center text-left`}
+          className={`${requestDemoSelectClassName} flex cursor-pointer items-center text-left${errorMessage ? ` ${requestDemoFieldInvalidClassName}` : ""}`}
           onClick={handleTriggerClick}
           onKeyDown={handleTriggerKeyDown}
         >
@@ -252,6 +259,8 @@ export default function ProductInterestSelect({
           </ul>
         ) : null}
       </div>
+
+      <RequestDemoFieldError id={errorId} message={errorMessage} />
     </div>
   );
 }

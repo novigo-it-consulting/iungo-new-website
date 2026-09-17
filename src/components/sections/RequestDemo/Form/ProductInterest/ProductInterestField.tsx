@@ -7,15 +7,25 @@ import {
 } from "./productInterest.constants";
 import { productInterestRowClassName } from "./productInterest.styles";
 
-export default function ProductInterestField() {
+type ProductInterestFieldProps = {
+  resetKey: number;
+  errorMessage?: string;
+};
+
+export default function ProductInterestField({
+  resetKey,
+  errorMessage,
+}: Readonly<ProductInterestFieldProps>) {
   return (
     <div data-request-demo-product-interest className={productInterestRowClassName}>
       <ProductInterestSelect
+        key={resetKey}
         id="request-demo-product-interest"
         name={PRODUCT_INTEREST_FIELD_NAME}
         label={PRODUCT_INTEREST_LABEL}
         placeholderOption={PRODUCT_INTEREST_PLACEHOLDER}
         options={PRODUCT_INTEREST_OPTIONS}
+        errorMessage={errorMessage}
       />
     </div>
   );
