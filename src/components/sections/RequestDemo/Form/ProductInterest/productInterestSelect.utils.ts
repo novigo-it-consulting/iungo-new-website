@@ -2,9 +2,9 @@ import type { CSSProperties } from "react";
 
 import type { RequestDemoSelectOption } from "../requestDemoForm.types";
 
-export const PANEL_GAP_PX = 4;
-export const PANEL_MAX_HEIGHT_PX = 240;
-export const VIEWPORT_MARGIN_PX = 16;
+const PANEL_GAP_PX = 4;
+const PANEL_MAX_HEIGHT_PX = 240;
+const VIEWPORT_MARGIN_PX = 16;
 
 export function clampActiveIndex(index: number, length: number): number {
   if (length <= 0) {
@@ -14,7 +14,7 @@ export function clampActiveIndex(index: number, length: number): number {
   return Math.min(Math.max(index, 0), length - 1);
 }
 
-export function getActiveOption(
+function getActiveOption(
   allOptions: readonly RequestDemoSelectOption[],
   activeIndex: number,
   placeholderOption: RequestDemoSelectOption,
