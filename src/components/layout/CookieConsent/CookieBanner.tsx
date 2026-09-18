@@ -25,10 +25,9 @@ export default function CookieBanner() {
   const { acceptAll, rejectNonEssential, openPreferences } = useCookieConsent();
 
   return (
-    <div
+    <section
       data-cookie-banner
       className={cookieBannerRegionClassName}
-      role="region"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-description"
     >
@@ -77,6 +76,6 @@ export default function CookieBanner() {
           </div>
         </div>
       </PageContainer>
-    </div>
+    </section>
   );
 }

@@ -1,6 +1,4 @@
-import { COMMERCIAL_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
-
-export const COOKIE_CONSENT_CONTACT_EMAIL = COMMERCIAL_EMAIL;
+export { COMMERCIAL_EMAIL as COOKIE_CONSENT_CONTACT_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
 
 export const COOKIE_SETTINGS_TRIGGER_ID = "footer-cookie-settings";
 

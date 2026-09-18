@@ -44,7 +44,6 @@ export const REQUEST_DEMO_MESSAGES = {
     "Mensagem enviada com sucesso! Em breve, nossa equipe entrará em contato.",
 } as const;
 
-const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const CONTACT_TYPE_VALUES = new Set<string>(
   CONTACT_TYPE_OPTIONS.map((option) => option.value),
 );
@@ -52,8 +51,62 @@ const PRODUCT_INTEREST_VALUES = new Set(
   PRODUCT_INTEREST_OPTIONS.map((option) => option.value),
 );
 
-function readFormValue(data: FormData, name: string): string {
-  return String(data.get(name) ?? "").trim();
+const UNEXPECTED_HONEYPOT_TOKEN = "unexpected-honeypot";
+
+function isDisallowedEmailCharacter(character: string): boolean {
+  return (
+    character === " " ||
+    character === "\t" ||
+    character === "\n" ||
+    character === "\r" ||
+    character === "\f" ||
+    character === "\v"
+  );
+}
+
+function isWellFormedEmail(value: string): boolean {
+  let atCount = 0;
+  let atIndex = -1;
+
+  for (let index = 0; index < value.length; index += 1) {
+    const character = value.charAt(index);
+    if (isDisallowedEmailCharacter(character)) {
+      return false;
+    }
+
+    if (character === "@") {
+      atCount += 1;
+      atIndex = index;
+    }
+  }
+
+  if (atCount !== 1 || atIndex <= 0 || atIndex === value.length - 1) {
+    return false;
+  }
+
+  const domain = value.slice(atIndex + 1);
+  const lastDot = domain.lastIndexOf(".");
+  return lastDot > 0 && lastDot < domain.length - 1;
+}
+
+function readTrimmedFormEntry(value: FormDataEntryValue | null): string {
+  if (typeof value !== "string") {
+    return "";
+  }
+
+  return value.trim();
+}
+
+function readHoneypotEntry(value: FormDataEntryValue | null): string {
+  if (value === null) {
+    return "";
+  }
+
+  if (typeof value === "string") {
+    return value;
+  }
+
+  return value.name || UNEXPECTED_HONEYPOT_TOKEN;
 }
 
 function labelFor(
@@ -67,22 +120,26 @@ function countDigits(value: string): number {
   return (value.match(/\d/g) ?? []).length;
 }
 
+export function readRequestDemoFormValuesFromData(
+  data: FormData,
+): RequestDemoFormValues {
+  return {
+    contactType: readTrimmedFormEntry(data.get("contactType")),
+    name: readTrimmedFormEntry(data.get("name")),
+    email: readTrimmedFormEntry(data.get("email")),
+    company: readTrimmedFormEntry(data.get("company")),
+    phone: readTrimmedFormEntry(data.get("phone")),
+    productInterest: readTrimmedFormEntry(data.get("productInterest")),
+    message: readTrimmedFormEntry(data.get("message")),
+    // O honeypot é encaminhado como lido — nunca sobrescrito com "".
+    honey: readHoneypotEntry(data.get("_honey")),
+  };
+}
+
 export function readRequestDemoFormValues(
   form: HTMLFormElement,
 ): RequestDemoFormValues {
-  const data = new FormData(form);
-
-  return {
-    contactType: readFormValue(data, "contactType"),
-    name: readFormValue(data, "name"),
-    email: readFormValue(data, "email"),
-    company: readFormValue(data, "company"),
-    phone: readFormValue(data, "phone"),
-    productInterest: readFormValue(data, "productInterest"),
-    message: readFormValue(data, "message"),
-    // O honeypot é encaminhado como lido — nunca sobrescrito com "".
-    honey: String(data.get("_honey") ?? ""),
-  };
+  return readRequestDemoFormValuesFromData(new FormData(form));
 }
 
 export function validateRequestDemoForm(
@@ -106,7 +163,7 @@ export function validateRequestDemoForm(
     errors.email = REQUEST_DEMO_MESSAGES.required;
   } else if (
     values.email.length > REQUEST_DEMO_FIELD_LIMITS.email ||
-    !EMAIL_PATTERN.test(values.email)
+    !isWellFormedEmail(values.email)
   ) {
     errors.email = REQUEST_DEMO_MESSAGES.email;
   }

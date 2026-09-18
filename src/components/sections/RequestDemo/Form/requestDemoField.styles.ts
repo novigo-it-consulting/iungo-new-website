@@ -17,5 +17,16 @@ export const requestDemoSelectClassName =
 export const requestDemoFieldInvalidClassName =
   "border-[#A72121] focus-visible:border-[#A72121] focus-visible:ring-[#A72121]";
 
+export function withRequestDemoInvalidClass(
+  baseClassName: string,
+  errorMessage?: string,
+): string {
+  if (!errorMessage) {
+    return baseClassName;
+  }
+
+  return `${baseClassName} ${requestDemoFieldInvalidClassName}`;
+}
+
 export const requestDemoFieldErrorTextClassName =
   "mt-2 font-reddit text-[12.9px] font-normal leading-[19.3px] tracking-[0] text-[#A72121]";

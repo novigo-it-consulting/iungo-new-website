@@ -12,17 +12,32 @@ function record(name, pass, detail) {
   results.push({ name, pass, ...(detail !== undefined ? { detail } : {}) });
 }
 
-function describeActive(element) {
-  if (!(element instanceof Element)) {
-    return String(element);
-  }
+async function readFocusStop(page) {
+  return page.evaluate(() => {
+    const root = document.querySelector("[data-mobile-navigation]");
+    const active = document.activeElement;
+    let label = "";
 
-  return (
-    element.getAttribute("aria-label") ||
-    element.textContent?.replace(/\s+/g, " ").trim().slice(0, 80) ||
-    element.id ||
-    element.tagName
-  );
+    if (active instanceof HTMLElement) {
+      label =
+        active.getAttribute("aria-label") ||
+        active.textContent?.replace(/\s+/g, " ").trim().slice(0, 80) ||
+        active.id ||
+        active.tagName;
+    } else if (active instanceof Element) {
+      label = active.getAttribute("aria-label") || active.id || active.tagName;
+    } else if (active) {
+      label = active.nodeName;
+    }
+
+    return {
+      inside:
+        root instanceof HTMLElement &&
+        active instanceof Node &&
+        root.contains(active),
+      label,
+    };
+  });
 }
 
 async function inspectOpenMenu(page) {
@@ -91,20 +106,7 @@ async function inspectOpenMenu(page) {
   const tabStops = [];
   for (let index = 0; index < 16; index += 1) {
     await page.keyboard.press("Tab");
-    tabStops.push(
-      await page.evaluate((describeSource) => {
-        const describe = eval(`(${describeSource})`);
-        const root = document.querySelector("[data-mobile-navigation]");
-        const active = document.activeElement;
-        return {
-          inside:
-            root instanceof HTMLElement &&
-            active instanceof Node &&
-            root.contains(active),
-          label: describe(active),
-        };
-      }, describeActive.toString()),
-    );
+    tabStops.push(await readFocusStop(page));
   }
 
   const tabEscaped = tabStops.filter((stop) => !stop.inside);
@@ -124,20 +126,7 @@ async function inspectOpenMenu(page) {
     await page.keyboard.down("Shift");
     await page.keyboard.press("Tab");
     await page.keyboard.up("Shift");
-    shiftStops.push(
-      await page.evaluate((describeSource) => {
-        const describe = eval(`(${describeSource})`);
-        const root = document.querySelector("[data-mobile-navigation]");
-        const active = document.activeElement;
-        return {
-          inside:
-            root instanceof HTMLElement &&
-            active instanceof Node &&
-            root.contains(active),
-          label: describe(active),
-        };
-      }, describeActive.toString()),
-    );
+    shiftStops.push(await readFocusStop(page));
   }
 
   const shiftEscaped = shiftStops.filter((stop) => !stop.inside);
@@ -178,11 +167,19 @@ async function inspectClosePaths(page, consoleMessages) {
   await page.click('[aria-label="Fechar menu"]');
   await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 5000 });
 
-  const afterToggle = await page.evaluate(() => ({
-    label: document.activeElement?.getAttribute("aria-label"),
-    panelInert: document.getElementById("mobile-navigation-menu")?.inert === true,
-    scrollY: window.scrollY,
-  }));
+  const afterToggle = await page.evaluate(() => {
+    const active = document.activeElement;
+    const panel = document.getElementById("mobile-navigation-menu");
+    let label = "";
+    if (active instanceof HTMLElement) {
+      label = active.getAttribute("aria-label") || "";
+    }
+    return {
+      label,
+      panelInert: panel instanceof HTMLElement && panel.inert === true,
+      scrollY: window.scrollY,
+    };
+  });
   record(
     "close-x:focus-on-trigger",
     afterToggle.label === "Abrir menu",
@@ -196,11 +193,19 @@ async function inspectClosePaths(page, consoleMessages) {
   await page.keyboard.press("Tab");
   await page.keyboard.press("Escape");
   await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 5000 });
-  const afterEscape = await page.evaluate(() => ({
-    label: document.activeElement?.getAttribute("aria-label"),
-    panelInert: document.getElementById("mobile-navigation-menu")?.inert === true,
-    scrollY: window.scrollY,
-  }));
+  const afterEscape = await page.evaluate(() => {
+    const active = document.activeElement;
+    const panel = document.getElementById("mobile-navigation-menu");
+    let label = "";
+    if (active instanceof HTMLElement) {
+      label = active.getAttribute("aria-label") || "";
+    }
+    return {
+      label,
+      panelInert: panel instanceof HTMLElement && panel.inert === true,
+      scrollY: window.scrollY,
+    };
+  });
   record(
     "close-escape:focus-on-trigger",
     afterEscape.label === "Abrir menu",
@@ -257,11 +262,18 @@ async function inspectClosePaths(page, consoleMessages) {
     const hamburger = document.querySelector(
       '[aria-label="Abrir menu"], [aria-label="Fechar menu"]',
     );
+    const panel = document.getElementById("mobile-navigation-menu");
+    let activeLabel = "";
+    if (active instanceof HTMLElement) {
+      activeLabel =
+        active.getAttribute("aria-label") || active.id || active.tagName;
+    } else if (active instanceof Element) {
+      activeLabel = active.tagName;
+    } else if (active) {
+      activeLabel = active.nodeName;
+    }
     return {
-      activeLabel:
-        active instanceof HTMLElement
-          ? active.getAttribute("aria-label") || active.id || active.tagName
-          : String(active),
+      activeLabel,
       hamburgerHidden:
         !(hamburger instanceof HTMLElement) || hamburger.offsetParent === null,
       focusOnHiddenHamburger:
@@ -269,7 +281,7 @@ async function inspectClosePaths(page, consoleMessages) {
         hamburger.offsetParent === null &&
         document.activeElement === hamburger,
       bodyOverscroll: document.body.style.overscrollBehavior,
-      panelInert: document.getElementById("mobile-navigation-menu")?.inert === true,
+      panelInert: panel instanceof HTMLElement && panel.inert === true,
     };
   });
   record(
@@ -344,7 +356,9 @@ try {
 } finally {
   const failed = results.filter((item) => !item.pass);
   console.log(JSON.stringify({ failed: failed.length, results }, null, 2));
-  await browser?.disconnect().catch(() => {});
+  if (browser) {
+    await browser.disconnect().catch(() => {});
+  }
   try {
     if (chrome) await chrome.kill();
   } catch {

@@ -14,9 +14,9 @@ import { RequestDemoFieldError } from "../RequestDemoFieldGroup";
 import type { RequestDemoSelectOption } from "../requestDemoForm.types";
 import {
   requestDemoFieldGroupClassName,
-  requestDemoFieldInvalidClassName,
   requestDemoSelectClassName,
   requestDemoTextFieldLabelClassName,
+  withRequestDemoInvalidClass,
 } from "../requestDemoField.styles";
 
 import {
@@ -183,6 +183,11 @@ export default function ProductInterestSelect({
     );
   };
 
+  const triggerClassName = withRequestDemoInvalidClass(
+    `${requestDemoSelectClassName} flex cursor-pointer items-center text-left`,
+    errorMessage,
+  );
+
   return (
     <div className={requestDemoFieldGroupClassName}>
       <label id={labelId} htmlFor={id} className={requestDemoTextFieldLabelClassName}>
@@ -206,7 +211,7 @@ export default function ProductInterestSelect({
           aria-activedescendant={
             isOpen ? `${id}-option-${safeActiveIndex}` : undefined
           }
-          className={`${requestDemoSelectClassName} flex cursor-pointer items-center text-left${errorMessage ? ` ${requestDemoFieldInvalidClassName}` : ""}`}
+          className={triggerClassName}
           onClick={handleTriggerClick}
           onKeyDown={handleTriggerKeyDown}
         >

@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   mapRequestDemoPayload,
+  readRequestDemoFormValuesFromData,
   REQUEST_DEMO_FIELD_LIMITS,
   REQUEST_DEMO_MESSAGES,
   validateRequestDemoForm,
@@ -82,6 +83,29 @@ describe("validateRequestDemoForm", () => {
 
     expect(errors.message).toBe(REQUEST_DEMO_MESSAGES.tooLong);
   });
+
+  it("aceita e-mails válidos no formato local@domínio", () => {
+    expect(
+      validateRequestDemoForm(values({ email: "ana@empresa.com.br" })).email,
+    ).toBeUndefined();
+    expect(
+      validateRequestDemoForm(values({ email: "a@b.c" })).email,
+    ).toBeUndefined();
+  });
+
+  it("rejeita e-mail vazio, inválido e acima do limite", () => {
+    expect(validateRequestDemoForm(values({ email: "" })).email).toBe(
+      REQUEST_DEMO_MESSAGES.required,
+    );
+    expect(
+      validateRequestDemoForm(values({ email: "nao-e-email" })).email,
+    ).toBe(REQUEST_DEMO_MESSAGES.email);
+    expect(
+      validateRequestDemoForm(
+        values({ email: `${"a".repeat(REQUEST_DEMO_FIELD_LIMITS.email)}@b.com` }),
+      ).email,
+    ).toBe(REQUEST_DEMO_MESSAGES.email);
+  });
 });
 
 describe("mapRequestDemoPayload", () => {
@@ -140,5 +164,88 @@ describe("mapRequestDemoPayload", () => {
   it("encaminha o honeypot sem sobrescrever", () => {
     const payload = mapRequestDemoPayload(values({ honey: "bot-value" }));
     expect(payload._honey).toBe("bot-value");
+  });
+});
+
+function createFormData(
+  entries: Record<string, string | File>,
+): FormData {
+  const data = new FormData();
+
+  for (const [key, value] of Object.entries(entries)) {
+    data.set(key, value);
+  }
+
+  return data;
+}
+
+const validFormEntries = {
+  contactType: "demonstracao",
+  name: " Ana Silva ",
+  email: "ana@empresa.com.br",
+  company: "Empresa Exemplo",
+  phone: "",
+  productInterest: "",
+  message: "",
+  _honey: "",
+} satisfies Record<string, string>;
+
+describe("readRequestDemoFormValuesFromData", () => {
+  it("lê strings normais e aplica trim nos campos comuns", () => {
+    const result = readRequestDemoFormValuesFromData(
+      createFormData(validFormEntries),
+    );
+
+    expect(result.name).toBe("Ana Silva");
+    expect(result.email).toBe("ana@empresa.com.br");
+    expect(result.honey).toBe("");
+  });
+
+  it("trata campo comum vazio como string vazia", () => {
+    const result = readRequestDemoFormValuesFromData(
+      createFormData({ ...validFormEntries, name: "" }),
+    );
+
+    expect(result.name).toBe("");
+  });
+
+  it("trata File em campo comum como vazio, sem [object Object]", () => {
+    const result = readRequestDemoFormValuesFromData(
+      createFormData({
+        ...validFormEntries,
+        name: new File(["conteudo"], "nome.txt"),
+      }),
+    );
+
+    expect(result.name).toBe("");
+  });
+
+  it("preserva honeypot string preenchido", () => {
+    const result = readRequestDemoFormValuesFromData(
+      createFormData({ ...validFormEntries, _honey: "bot-value" }),
+    );
+
+    expect(result.honey).toBe("bot-value");
+  });
+
+  it("não esvazia honeypot inesperado do tipo File", () => {
+    const result = readRequestDemoFormValuesFromData(
+      createFormData({
+        ...validFormEntries,
+        _honey: new File(["payload"], "payload.bin"),
+      }),
+    );
+
+    expect(result.honey).not.toBe("");
+  });
+
+  it("lê entradas longas sem converter para objeto genérico", () => {
+    const longMessage = "m".repeat(REQUEST_DEMO_FIELD_LIMITS.message);
+    const result = readRequestDemoFormValuesFromData(
+      createFormData({ ...validFormEntries, message: longMessage }),
+    );
+
+    expect(result.message).toBe(longMessage);
+    expect(result.message).not.toContain("[object Object]");
   });
 });

@@ -141,7 +141,7 @@ export default function RequestDemoFormCard() {
         {/*
          * Feedback posicionado após o botão: o usuário clica, acompanha
          * "Enviando…" no botão e vê a resposta imediatamente abaixo.
-         * role="status" para sucesso (polite) e role="alert" para erro (assertive).
+         * <output> (status) para sucesso (polite) e role="alert" para erro.
          */}
         {feedback ? (
           <RequestDemoFeedback

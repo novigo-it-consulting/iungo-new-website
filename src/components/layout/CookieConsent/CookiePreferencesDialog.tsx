@@ -52,19 +52,21 @@ import { useCookieConsent } from "./CookieConsentContext";
 
 type DraftChoice = CookieConsentChoice | "";
 
+type CookieChoiceOptionProps = {
+  name: string;
+  value: CookieConsentChoice;
+  label: string;
+  checked: boolean;
+  onChange: (value: CookieConsentChoice) => void;
+};
+
 function CookieChoiceOption({
   name,
   value,
   label,
   checked,
   onChange,
-}: {
-  name: string;
-  value: CookieConsentChoice;
-  label: string;
-  checked: boolean;
-  onChange: (value: CookieConsentChoice) => void;
-}) {
+}: Readonly<CookieChoiceOptionProps>) {
   const optionId = useId();
 
   return (
@@ -240,9 +242,12 @@ export default function CookiePreferencesDialog() {
             onChange={setDraftChoice}
           />
           {!canSave ? (
-            <p className={cookieCategoryTextClassName} role="status">
+            <output
+              className={`${cookieCategoryTextClassName} block`}
+              aria-live="polite"
+            >
               {COOKIE_CHOICE_REQUIRED_HINT}
-            </p>
+            </output>
           ) : null}
         </fieldset>
 
@@ -255,12 +260,15 @@ export default function CookiePreferencesDialog() {
           >
             {COOKIE_CONSENT_CONTACT_EMAIL}
           </a>
-          .
+          {"."}
         </p>
         {!persisted && decision !== null ? (
-          <p className={cookieCategoryTextClassName} role="status">
+          <output
+            className={`${cookieCategoryTextClassName} block`}
+            aria-live="polite"
+          >
             {COOKIE_SESSION_ONLY_NOTICE}
-          </p>
+          </output>
         ) : null}
       </div>
 

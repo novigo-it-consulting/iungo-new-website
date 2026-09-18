@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
-import { requestDemoFieldInvalidClassName } from "./requestDemoField.styles";
+import { withRequestDemoInvalidClass } from "./requestDemoField.styles";
 
 type RequestDemoTextareaFieldProps = {
   id: string;
@@ -22,8 +22,12 @@ export default function RequestDemoTextareaField({
   maxLength,
   textareaClassName,
   errorMessage,
-}: RequestDemoTextareaFieldProps) {
+}: Readonly<RequestDemoTextareaFieldProps>) {
   const describedBy = errorMessage ? `${id}-error` : undefined;
+  const fieldClassName = withRequestDemoInvalidClass(
+    textareaClassName,
+    errorMessage,
+  );
 
   return (
     <RequestDemoFieldGroup id={id} label={label} errorMessage={errorMessage}>
@@ -35,7 +39,7 @@ export default function RequestDemoTextareaField({
         maxLength={maxLength}
         aria-invalid={Boolean(errorMessage)}
         aria-describedby={describedBy}
-        className={`${textareaClassName}${errorMessage ? ` ${requestDemoFieldInvalidClassName}` : ""}`}
+        className={fieldClassName}
       />
     </RequestDemoFieldGroup>
   );

@@ -21,19 +21,70 @@ const VIEWPORTS = [
   { name: "390x320-landscape", width: 390, height: 320 },
 ];
 
-async function inspectViewport(page, viewport) {
-  await page.setViewport({ width: viewport.width, height: viewport.height });
-  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
-
-  const hamburger = await page.$('[aria-label="Abrir menu"]');
-  if (!hamburger) {
-    record(`${viewport.name}:hamburger`, false, "missing");
-    return;
+function isCollapsedBannerValid(collapsed) {
+  if (!collapsed || collapsed.solucoesOpen !== false) {
+    return false;
   }
 
-  await hamburger.click();
-  await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 5000 });
+  const buttonsInsidePanel = collapsed.demoBottom <= collapsed.panelBottom + 1;
+  if (buttonsInsidePanel) {
+    return collapsed.gapBelowButtons >= 8 && collapsed.gapBelowButtons <= 80;
+  }
+
+  return collapsed.unusedViewport <= 1;
+}
+
+function isCollapsedNotFullPage(collapsed, viewport) {
+  if (!collapsed) {
+    return false;
+  }
+
+  if (viewport.height < 500) {
+    return true;
+  }
+
+  return collapsed.unusedViewport >= 80;
+}
+
+function isEndReached(item) {
+  return (
+    Boolean(item) &&
+    item.missing !== true &&
+    item.fullyInViewport === true &&
+    item.fullyInPanel === true &&
+    item.clickable === true
+  );
+}
+
+async function openMobileMenu(page, viewport) {
+  const hamburgerReady = await page
+    .waitForFunction(
+      () => {
+        const hamburger = document.querySelector('[aria-label="Abrir menu"]');
+        return hamburger instanceof HTMLElement && hamburger.offsetParent !== null;
+      },
+      { timeout: 10000 },
+    )
+    .catch(() => null);
+  if (!hamburgerReady) {
+    record(`${viewport.name}:hamburger`, false, "missing");
+    return false;
+  }
+
+  await page.click('[aria-label="Abrir menu"]');
+  const opened = await page
+    .waitForSelector('[aria-label="Fechar menu"]', {
+      visible: true,
+      timeout: 8000,
+    })
+    .catch(() => null);
+  if (!opened) {
+    await page.click('[aria-label="Abrir menu"]');
+    await page.waitForSelector('[aria-label="Fechar menu"]', {
+      visible: true,
+      timeout: 8000,
+    });
+  }
   await page.waitForSelector("#mobile-navigation-menu", { timeout: 5000 });
   await page.waitForFunction(
     () => {
@@ -45,18 +96,25 @@ async function inspectViewport(page, viewport) {
     },
     { timeout: 5000 },
   );
+  return true;
+}
 
-  const collapsed = await page.evaluate(() => {
+async function measureCollapsedBanner(page) {
+  return page.evaluate(() => {
     const panel = document.getElementById("mobile-navigation-menu");
-    const demo = [...(panel?.querySelectorAll("a, span") ?? [])].find(
-      (element) => element.textContent?.trim() === "Solicitar Demonstração",
-    );
-    const details = document
-      .querySelector("#mobile-solucoes-nav-group")
-      ?.closest("details");
-    if (!(panel instanceof HTMLElement) || !(demo instanceof HTMLElement)) {
+    if (!(panel instanceof HTMLElement)) {
       return null;
     }
+
+    const demo = [...panel.querySelectorAll("a, span")].find(
+      (element) => element.textContent?.trim() === "Solicitar Demonstração",
+    );
+    if (!(demo instanceof HTMLElement)) {
+      return null;
+    }
+
+    const group = document.querySelector("#mobile-solucoes-nav-group");
+    const details = group ? group.closest("details") : null;
     const panelRect = panel.getBoundingClientRect();
     const demoRect = demo.getBoundingClientRect();
     return {
@@ -68,40 +126,30 @@ async function inspectViewport(page, viewport) {
       unusedViewport: Math.round(window.innerHeight - panelRect.bottom),
     };
   });
+}
 
-  record(
-    `${viewport.name}:collapsed-banner-ends-after-buttons`,
-    Boolean(
-      collapsed &&
-        collapsed.solucoesOpen === false &&
-        (collapsed.demoBottom <= collapsed.panelBottom + 1
-          ? collapsed.gapBelowButtons >= 8 && collapsed.gapBelowButtons <= 80
-          : collapsed.unusedViewport <= 1),
-    ),
-    collapsed,
-  );
-  record(
-    `${viewport.name}:collapsed-not-full-page`,
-    Boolean(
-      collapsed &&
-        (viewport.height < 500 || collapsed.unusedViewport >= 80),
-    ),
-    collapsed,
-  );
-
+async function expandSolucoes(page) {
   await page.evaluate(() => {
-    document.querySelector("#mobile-solucoes-nav-group")
-      ?.closest("details")
-      ?.setAttribute("open", "");
-    const summary = document.querySelector(
-      '#mobile-navigation-menu summary',
-    );
-    if (summary instanceof HTMLElement && !summary.closest("details")?.open) {
+    const group = document.querySelector("#mobile-solucoes-nav-group");
+    const details = group ? group.closest("details") : null;
+    if (details) {
+      details.setAttribute("open", "");
+    }
+
+    const summary = document.querySelector("#mobile-navigation-menu summary");
+    const summaryDetails = summary ? summary.closest("details") : null;
+    if (
+      summary instanceof HTMLElement &&
+      summaryDetails instanceof HTMLDetailsElement &&
+      !summaryDetails.open
+    ) {
       summary.click();
     }
   });
+}
 
-  const panelBox = await page.evaluate(() => {
+async function readPanelBox(page) {
+  return page.evaluate(() => {
     const panel = document.getElementById("mobile-navigation-menu");
     if (!(panel instanceof HTMLElement)) {
       return null;
@@ -109,15 +157,15 @@ async function inspectViewport(page, viewport) {
     const rect = panel.getBoundingClientRect();
     return {
       x: rect.left + rect.width / 2,
-      y: Math.min(rect.top + Math.max(rect.height / 2, 40), window.innerHeight - 24),
+      y: Math.min(
+        rect.top + Math.max(rect.height / 2, 40),
+        window.innerHeight - 24,
+      ),
     };
   });
+}
 
-  if (!panelBox) {
-    record(`${viewport.name}:panel`, false, "missing-panel");
-    return;
-  }
-
+async function wheelPanel(page, panelBox, deltaY, stopAtTop) {
   await page.mouse.move(panelBox.x, panelBox.y);
   await new Promise((resolve) => setTimeout(resolve, 100));
   let previousScrollTop = -1;
@@ -126,26 +174,36 @@ async function inspectViewport(page, viewport) {
       "#mobile-navigation-menu",
       (element) => element.scrollTop,
     );
-    if (step > 0 && scrollTop === previousScrollTop) {
+    if (stopAtTop && scrollTop === 0) {
+      break;
+    }
+    if (!stopAtTop && step > 0 && scrollTop === previousScrollTop) {
       break;
     }
     previousScrollTop = scrollTop;
-    await page.mouse.wheel({ deltaY: 600 });
+    await page.mouse.wheel({ deltaY });
     await new Promise((resolve) => setTimeout(resolve, 40));
   }
-  await page.waitForFunction(
-    () => {
-      const panel = document.getElementById("mobile-navigation-menu");
-      if (!(panel instanceof HTMLElement)) {
-        return false;
-      }
-      const maxScroll = panel.scrollHeight - panel.clientHeight;
-      return maxScroll <= 1 || panel.scrollTop >= maxScroll - 2;
-    },
-    { timeout: 4000 },
-  ).catch(() => {});
+}
 
-  const metrics = await page.evaluate(() => {
+async function waitForPanelScrollEnd(page) {
+  await page
+    .waitForFunction(
+      () => {
+        const panel = document.getElementById("mobile-navigation-menu");
+        if (!(panel instanceof HTMLElement)) {
+          return false;
+        }
+        const maxScroll = panel.scrollHeight - panel.clientHeight;
+        return maxScroll <= 1 || panel.scrollTop >= maxScroll - 2;
+      },
+      { timeout: 4000 },
+    )
+    .catch(() => {});
+}
+
+async function collectExpandedMetrics(page) {
+  return page.evaluate(() => {
     const panel = document.getElementById("mobile-navigation-menu");
     if (!(panel instanceof HTMLElement)) {
       return null;
@@ -288,19 +346,9 @@ async function inspectViewport(page, viewport) {
       dividersOk,
     };
   });
+}
 
-  if (!metrics) {
-    record(`${viewport.name}:panel`, false, "missing-panel");
-    return;
-  }
-
-  const endReached = (item) =>
-    item &&
-    item.missing !== true &&
-    item.fullyInViewport === true &&
-    item.fullyInPanel === true &&
-    item.clickable === true;
-
+function recordExpandedMetrics(viewport, metrics) {
   record(
     `${viewport.name}:overflow-y`,
     metrics.overflowY === "auto" || metrics.overflowY === "scroll",
@@ -322,8 +370,12 @@ async function inspectViewport(page, viewport) {
   record(
     `${viewport.name}:can-scroll-or-already-fits`,
     metrics.scrollHeight > metrics.clientHeight - 1 ||
-      endReached(metrics.demo),
-    { scrollHeight: metrics.scrollHeight, clientHeight: metrics.clientHeight, demo: metrics.demo },
+      isEndReached(metrics.demo),
+    {
+      scrollHeight: metrics.scrollHeight,
+      clientHeight: metrics.clientHeight,
+      demo: metrics.demo,
+    },
   );
   record(
     `${viewport.name}:chrome-visible`,
@@ -335,17 +387,17 @@ async function inspectViewport(page, viewport) {
   );
   record(
     `${viewport.name}:recursos-fully-visible`,
-    endReached(metrics.recursos),
+    isEndReached(metrics.recursos),
     metrics.recursos,
   );
   record(
     `${viewport.name}:client-button-fully-visible`,
-    endReached(metrics.client),
+    isEndReached(metrics.client),
     metrics.client,
   );
   record(
     `${viewport.name}:demo-button-fully-visible`,
-    endReached(metrics.demo),
+    isEndReached(metrics.demo),
     metrics.demo,
   );
   record(
@@ -386,42 +438,35 @@ async function inspectViewport(page, viewport) {
   record(
     `${viewport.name}:page-locked-while-open`,
     metrics.bodyOverscroll === "none",
-    { body: metrics.bodyOverflow, html: metrics.htmlOverflow, overscroll: metrics.bodyOverscroll },
+    {
+      body: metrics.bodyOverflow,
+      html: metrics.htmlOverflow,
+      overscroll: metrics.bodyOverscroll,
+    },
   );
+}
 
-  for (let step = 0; step < 24; step += 1) {
-    const scrollTop = await page.$eval(
-      "#mobile-navigation-menu",
-      (element) => element.scrollTop,
-    );
-    if (scrollTop === 0) {
-      break;
-    }
-    await page.mouse.wheel({ deltaY: -600 });
-  }
-
-  const backAtTop = await page.evaluate(() => {
+async function measureScrollBack(page) {
+  return page.evaluate(() => {
     const panel = document.getElementById("mobile-navigation-menu");
-    const summary = panel?.querySelector("summary");
+    const summary = panel ? panel.querySelector("summary") : null;
     if (!(panel instanceof HTMLElement) || !(summary instanceof HTMLElement)) {
       return { scrollTop: null, summaryVisible: false };
     }
     const rect = summary.getBoundingClientRect();
     return {
       scrollTop: panel.scrollTop,
-      summaryVisible: rect.top >= panel.getBoundingClientRect().top - 1 && rect.bottom <= window.innerHeight + 1,
+      summaryVisible:
+        rect.top >= panel.getBoundingClientRect().top - 1 &&
+        rect.bottom <= window.innerHeight + 1,
     };
   });
-  record(
-    `${viewport.name}:scroll-back-to-start`,
-    backAtTop.scrollTop === 0 && backAtTop.summaryVisible === true,
-    backAtTop,
-  );
+}
 
+async function closeMobileMenu(page) {
   await page.evaluate(() => {
-    const details = document
-      .querySelector("#mobile-solucoes-nav-group")
-      ?.closest("details");
+    const group = document.querySelector("#mobile-solucoes-nav-group");
+    const details = group ? group.closest("details") : null;
     if (details instanceof HTMLDetailsElement) {
       details.open = false;
       details.open = true;
@@ -429,17 +474,71 @@ async function inspectViewport(page, viewport) {
   });
 
   await page.click('[aria-label="Fechar menu"]');
-  const afterClose = await page.evaluate(() => {
+  return page.evaluate(() => {
     const panel = document.getElementById("mobile-navigation-menu");
+    const panelStyle = panel ? getComputedStyle(panel) : null;
     return {
       bodyOverflow: document.body.style.overflow,
       htmlOverflow: document.documentElement.style.overflow,
       bodyOverscroll: document.body.style.overscrollBehavior,
-      pointerEvents: panel ? getComputedStyle(panel).pointerEvents : null,
-      inert: panel?.inert === true || panel?.hasAttribute("inert"),
-      ariaHidden: panel?.getAttribute("aria-hidden"),
+      pointerEvents: panelStyle ? panelStyle.pointerEvents : null,
+      inert: Boolean(
+        panel && (panel.inert === true || panel.hasAttribute("inert")),
+      ),
+      ariaHidden: panel ? panel.getAttribute("aria-hidden") : null,
     };
   });
+}
+
+async function inspectViewport(page, viewport) {
+  await page.setViewport({ width: viewport.width, height: viewport.height });
+  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
+
+  const opened = await openMobileMenu(page, viewport);
+  if (!opened) {
+    return;
+  }
+
+  const collapsed = await measureCollapsedBanner(page);
+  record(
+    `${viewport.name}:collapsed-banner-ends-after-buttons`,
+    isCollapsedBannerValid(collapsed),
+    collapsed,
+  );
+  record(
+    `${viewport.name}:collapsed-not-full-page`,
+    isCollapsedNotFullPage(collapsed, viewport),
+    collapsed,
+  );
+
+  await expandSolucoes(page);
+
+  const panelBox = await readPanelBox(page);
+  if (!panelBox) {
+    record(`${viewport.name}:panel`, false, "missing-panel");
+    return;
+  }
+
+  await wheelPanel(page, panelBox, 600, false);
+  await waitForPanelScrollEnd(page);
+
+  const metrics = await collectExpandedMetrics(page);
+  if (!metrics) {
+    record(`${viewport.name}:panel`, false, "missing-panel");
+    return;
+  }
+
+  recordExpandedMetrics(viewport, metrics);
+
+  await wheelPanel(page, panelBox, -600, true);
+  const backAtTop = await measureScrollBack(page);
+  record(
+    `${viewport.name}:scroll-back-to-start`,
+    backAtTop.scrollTop === 0 && backAtTop.summaryVisible === true,
+    backAtTop,
+  );
+
+  const afterClose = await closeMobileMenu(page);
   record(
     `${viewport.name}:scroll-lock-cleared-after-close`,
     afterClose.bodyOverscroll !== "none",
@@ -545,7 +644,7 @@ async function inspectDesktop(page) {
   });
   record(
     "desktop:mega-menu-opens",
-    Boolean(mega?.visible && mega.withinViewport),
+    Boolean(mega && mega.visible && mega.withinViewport),
     mega,
   );
   record(
@@ -577,7 +676,7 @@ async function inspectDesktop(page) {
   );
   record(
     "desktop:no-mobile-product-dividers",
-    mega?.hasMobileDividers === false,
+    Boolean(mega) && mega.hasMobileDividers === false,
     mega,
   );
 }
@@ -616,7 +715,9 @@ async function inspectDesktopAfterMobileOpen(page) {
       hamburgerHidden:
         !hamburger ||
         (hamburger instanceof HTMLElement && hamburger.offsetParent === null),
-      panelInert: panel?.inert === true || panel?.hasAttribute("inert"),
+      panelInert: Boolean(
+        panel && (panel.inert === true || panel.hasAttribute("inert")),
+      ),
       bodyOverscroll: document.body.style.overscrollBehavior,
     };
   });
@@ -667,7 +768,9 @@ try {
 } finally {
   const failed = results.filter((item) => !item.pass);
   console.log(JSON.stringify({ failed: failed.length, results }, null, 2));
-  await browser?.disconnect().catch(() => {});
+  if (browser) {
+    await browser.disconnect().catch(() => {});
+  }
   try {
     if (chrome) await chrome.kill();
   } catch {

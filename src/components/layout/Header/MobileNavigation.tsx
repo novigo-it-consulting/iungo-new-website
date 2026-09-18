@@ -223,7 +223,12 @@ export default function MobileNavigation() {
       }
 
       const first = tabbable[0];
-      const last = tabbable[tabbable.length - 1];
+      const last = tabbable.at(-1);
+      if (!first || !last) {
+        event.preventDefault();
+        return;
+      }
+
       const active = document.activeElement;
       const isInside = active instanceof Node && root.contains(active);
 

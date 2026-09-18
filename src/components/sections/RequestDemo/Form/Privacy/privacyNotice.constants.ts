@@ -1,7 +1,6 @@
 import { FOOTER_NAV_GROUPS } from "@/components/layout/Footer/footer.constants";
-import { COMMERCIAL_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
 
-export const PRIVACY_NOTICE_CONTACT_EMAIL = COMMERCIAL_EMAIL;
+export { COMMERCIAL_EMAIL as PRIVACY_NOTICE_CONTACT_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
 
 const privacyNavLink = FOOTER_NAV_GROUPS.flatMap((group) => group.links).find(
   (link) => link.label === "Privacidade",

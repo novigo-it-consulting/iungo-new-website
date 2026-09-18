@@ -3,7 +3,7 @@ import type { ComponentPropsWithoutRef } from "react";
 import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
 import {
   requestDemoFieldInputClassName,
-  requestDemoFieldInvalidClassName,
+  withRequestDemoInvalidClass,
 } from "./requestDemoField.styles";
 
 type RequestDemoFieldProps = {
@@ -36,8 +36,12 @@ export default function RequestDemoField({
   maxLength,
   required,
   errorMessage,
-}: RequestDemoFieldProps) {
+}: Readonly<RequestDemoFieldProps>) {
   const describedBy = errorMessage ? `${id}-error` : undefined;
+  const inputClassName = withRequestDemoInvalidClass(
+    requestDemoFieldInputClassName,
+    errorMessage,
+  );
 
   return (
     <RequestDemoFieldGroup id={id} label={label} errorMessage={errorMessage}>
@@ -54,7 +58,7 @@ export default function RequestDemoField({
         required={required}
         aria-invalid={Boolean(errorMessage)}
         aria-describedby={describedBy}
-        className={`${requestDemoFieldInputClassName}${errorMessage ? ` ${requestDemoFieldInvalidClassName}` : ""}`}
+        className={inputClassName}
       />
     </RequestDemoFieldGroup>
   );

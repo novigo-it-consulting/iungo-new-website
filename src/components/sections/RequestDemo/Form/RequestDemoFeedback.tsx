@@ -2,8 +2,8 @@
  * Bloco de feedback após envio do formulário.
  *
  * - Sucesso: fundo verde claro, borda lateral verde, ícone de check.
- *   role="status" → aria-live="polite" (leitores de tela anunciam após a
- *   interação em curso, sem interromper).
+ *   <output> (role implícito status) com aria-live="polite": leitores de tela
+ *   anunciam após a interação em curso, sem interromper.
  *
  * - Erro: fundo vermelho claro, borda lateral vermelha, ícone de X.
  *   role="alert" → aria-live="assertive" (anúncio imediato; o usuário precisa
@@ -79,34 +79,36 @@ export default function RequestDemoFeedback({
   message,
 }: Readonly<RequestDemoFeedbackProps>) {
   const isSuccess = type === "success";
+  const iconClassName = isSuccess
+    ? requestDemoFeedbackSuccessIconClassName
+    : requestDemoFeedbackErrorIconClassName;
+  const textClassName = isSuccess
+    ? requestDemoFeedbackSuccessTextClassName
+    : requestDemoFeedbackErrorTextClassName;
 
-  return (
-    <div
-      role={isSuccess ? "status" : "alert"}
-      className={
-        isSuccess
-          ? requestDemoFeedbackSuccessClassName
-          : requestDemoFeedbackErrorClassName
-      }
-    >
-      <span
-        className={
-          isSuccess
-            ? requestDemoFeedbackSuccessIconClassName
-            : requestDemoFeedbackErrorIconClassName
-        }
-      >
+  const content = (
+    <>
+      <span className={iconClassName}>
         {isSuccess ? <CheckIcon /> : <XIcon />}
       </span>
-      <p
-        className={
-          isSuccess
-            ? requestDemoFeedbackSuccessTextClassName
-            : requestDemoFeedbackErrorTextClassName
-        }
+      <span className={textClassName}>{message}</span>
+    </>
+  );
+
+  if (isSuccess) {
+    return (
+      <output
+        className={requestDemoFeedbackSuccessClassName}
+        aria-live="polite"
       >
-        {message}
-      </p>
+        {content}
+      </output>
+    );
+  }
+
+  return (
+    <div role="alert" className={requestDemoFeedbackErrorClassName}>
+      {content}
     </div>
   );
 }
