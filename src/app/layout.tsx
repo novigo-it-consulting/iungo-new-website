@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Reddit_Sans } from "next/font/google";
 import "./globals.css";
+import { CookieConsentProvider } from "@/components/layout/CookieConsent/CookieConsentProvider";
 import Footer from "@/components/layout/Footer/Footer";
 import Header from "@/components/layout/Header/Header";
 
@@ -22,9 +23,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${redditSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-dvh flex-col">
-        <Header />
-        {children}
-        <Footer />
+        <CookieConsentProvider>
+          <Header />
+          {children}
+          <Footer />
+        </CookieConsentProvider>
       </body>
     </html>
   );

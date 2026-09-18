@@ -1,3 +1,5 @@
+export const COMMERCIAL_EMAIL = "comercial@iungo-ai.com" as const;
+
 export type ContactCardVariant = "commercial" | "default";
 
 export type ContactCardContact =
@@ -19,8 +21,8 @@ export const REQUEST_DEMO_CONTACT_CARDS: readonly ContactCardData[] = [
     title: "COMERCIAL",
     contact: {
       type: "email",
-      href: "mailto:comercial@iungo-ai.com",
-      label: "comercial@iungo-ai.com",
+      href: `mailto:${COMMERCIAL_EMAIL}`,
+      label: COMMERCIAL_EMAIL,
     },
     description: "Resposta em 1 dia útil",
   },
@@ -41,8 +43,8 @@ export const REQUEST_DEMO_CONTACT_CARDS: readonly ContactCardData[] = [
     title: "DPO · LGPD",
     contact: {
       type: "email",
-      href: "mailto:dpo@iungo-ai.com",
-      label: "dpo@iungo-ai.com",
+      href: `mailto:${COMMERCIAL_EMAIL}`,
+      label: COMMERCIAL_EMAIL,
     },
     description: "Direitos do titular · Art. 18",
   },

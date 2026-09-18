@@ -1,3 +1,4 @@
+import { actionButtonGroupGapClassName } from "@/components/ui/actionButtonGroup.styles";
 import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";
 
 export const homeHeroTitleClassName =
@@ -22,7 +23,7 @@ export const homeHeroCopyClassName =
   "flex w-full min-w-0 flex-col items-start gap-6 sm:gap-7 xl:gap-[53px]";
 
 export const homeHeroActionsClassName =
-  "mt-8 flex w-full flex-col items-start gap-4 sm:flex-row sm:items-center sm:gap-6 xl:mt-[65px] xl:gap-8";
+  `mt-8 flex w-full flex-col items-start sm:flex-row sm:items-center xl:mt-[65px] ${actionButtonGroupGapClassName}`;
 
 export const homeHeroSectionClassName =
   "relative box-border w-full bg-linear-to-b from-[#FFFFFF] from-0% to-[#DCEBFF] to-100% py-12 md:py-14 xl:pt-16 xl:pb-[56px] 2xl:pt-[71px] 2xl:pb-[56px]";

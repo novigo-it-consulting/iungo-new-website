@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 
 import { isAvailableHref } from "@/constants/routes";
+import { actionButtonGroupGapClassName } from "@/components/ui/actionButtonGroup.styles";
 
 import { NAV_LINK_ITEMS, HEADER_BUTTONS } from "./header.constants";
 import SolucoesMobileNavGroup from "./SolucoesMegaMenu/SolucoesMobileNavGroup";
@@ -103,7 +104,7 @@ export default function MobileNavigation() {
             </ul>
           </nav>
 
-          <div className="flex flex-col gap-4">
+          <div className={`flex flex-col ${actionButtonGroupGapClassName}`}>
             {isAvailableHref(areaClienteHref) ? (
               <Link
                 href={areaClienteHref}

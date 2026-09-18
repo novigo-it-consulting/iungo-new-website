@@ -5,6 +5,7 @@ import {
   PLATAFORMA_HREF,
   SOLICITAR_DEMONSTRACAO_HREF,
 } from "@/constants/routes";
+import { actionButtonGroupGapClassName } from "@/components/ui/actionButtonGroup.styles";
 
 const roiSecondaryButtonClassName =
   "inline-flex shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-[50px] border border-white/[0.18] bg-transparent px-[25.6px] pb-[15.19px] pt-[13.39px] font-reddit text-[15.2px] font-medium leading-[22.8px] tracking-[0] text-white/90 transition-colors duration-150 hover:bg-white/10 hover:border-white/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#031358] motion-reduce:transition-none";
@@ -15,7 +16,7 @@ export default function RoiCalculatorActions() {
   return (
     <div
       data-roi="actions"
-      className="flex w-full flex-col items-center justify-center gap-4 sm:flex-row sm:gap-3"
+      className={`flex w-full flex-col items-center justify-center sm:flex-row ${actionButtonGroupGapClassName}`}
     >
       <Link
         href={SOLICITAR_DEMONSTRACAO_HREF}
