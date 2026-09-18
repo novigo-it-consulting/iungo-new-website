@@ -23,7 +23,7 @@ export const solucoesMegaMenuFeaturedColumnClassName = [
 
 /** Selo → subtítulo: 16px provisório (sem valor explícito no Figma). */
 export const solucoesMegaMenuCategoryHeaderClassName =
-  "flex min-w-0 flex-col gap-4";
+  "flex min-w-0 flex-col gap-4 max-xl:mb-3 max-xl:gap-0";
 
 /** Base compartilhada dos selos informativos do mega menu. */
 export const solucoesMegaMenuBadgeShellBaseClassName =
@@ -41,17 +41,20 @@ export const solucoesMegaMenuCategoryBadgeClassName = [
 
 export const solucoesMegaMenuCategoryBadgeTextClassName = "text-left";
 
-/** Subtítulo: mb-3 (12px) antes da lista de cards. */
+/** Subtítulo: mb-3 (12px) antes da lista de cards. Oculto no mobile do Header. */
 export const solucoesMegaMenuCategorySubtitleClassName =
-  "mb-3 font-reddit text-left text-[12px] font-normal leading-[19.5px] text-[#71717A]";
+  "mb-3 hidden font-reddit text-left text-[12px] font-normal leading-[19.5px] text-[#71717A] xl:block";
 
 /** Gap entre cards: 8px provisório (sem valor explícito no Figma). */
 export const solucoesMegaMenuProductListClassName =
-  "m-0 flex min-w-0 list-none flex-col gap-2 p-0";
+  "m-0 flex min-w-0 list-none flex-col p-0 max-xl:gap-0 xl:gap-2";
+
+export const solucoesMegaMenuProductListItemClassName =
+  "min-w-0 max-xl:border-b max-xl:border-[#ECECEC] max-xl:last:border-b-0";
 
 /** Hover: iungo-fog (#F4F6FA) e iungo-indigo (#0024AE) — equivalentes locais. */
 export const solucoesMegaMenuProductCardClassName =
-  "group flex w-full min-w-0 flex-col gap-2 rounded-lg p-3 transition-colors duration-150 hover:bg-[#F4F6FA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 motion-reduce:transition-none";
+  "group flex w-full min-w-0 flex-col gap-0 rounded-lg p-3 transition-colors duration-150 hover:bg-[#F4F6FA] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 motion-reduce:transition-none xl:gap-2";
 
 export const solucoesMegaMenuProductTitleRowClassName =
   "flex min-w-0 items-center gap-2";
@@ -76,7 +79,7 @@ export const solucoesMegaMenuProductTitleClassName =
   "min-w-0 font-reddit text-[14px] font-medium leading-5 transition-colors duration-150 group-hover:text-[#0024AE] motion-reduce:transition-none";
 
 export const solucoesMegaMenuProductDescriptionClassName =
-  "m-0 font-reddit text-left text-[12px] font-normal leading-4 text-[#71717A]";
+  "m-0 hidden font-reddit text-left text-[12px] font-normal leading-4 text-[#71717A] xl:block";
 
 /**
  * Selo NOVO (IoT): 11.2px medium, pill, #B8860B / bg #B8860B1A.
@@ -91,12 +94,15 @@ export const solucoesMegaMenuProductBadgeClassName = [
 export const solucoesMegaMenuProductBadgeTextClassName = "whitespace-nowrap";
 
 /** Base compartilhada dos links com seta do mega menu. */
+const solucoesMegaMenuArrowLinkContentClassName =
+  "w-fit items-center gap-1.5 font-reddit text-[12px] font-normal leading-4";
+
 export const solucoesMegaMenuArrowLinkBaseClassName =
-  "inline-flex w-fit items-center gap-1.5 font-reddit text-[12px] font-normal leading-4";
+  `inline-flex ${solucoesMegaMenuArrowLinkContentClassName}`;
 
 export const solucoesMegaMenuCategoryViewLinkClassName = [
-  solucoesMegaMenuArrowLinkBaseClassName,
-  "mt-3 cursor-pointer text-[#4F46E5] transition-opacity duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 motion-reduce:transition-none",
+  solucoesMegaMenuArrowLinkContentClassName,
+  "mt-3 hidden cursor-pointer text-[#4F46E5] transition-opacity duration-150 hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5] focus-visible:ring-offset-2 motion-reduce:transition-none xl:inline-flex",
 ].join(" ");
 
 export const solucoesMegaMenuTriggerClassName =

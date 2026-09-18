@@ -26,3 +26,33 @@ export const headerDemoButtonClassName =
 
 export const headerButtonLabelClassName =
   "inline-block shrink-0 whitespace-nowrap font-bold text-white xl:text-[13.63px] xl:leading-[20.8px]";
+
+export const mobileNavToggleClassName =
+  "flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-md transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2";
+
+export const mobileNavToggleBarClassName =
+  "block h-0.5 w-6 origin-center bg-[#383838] transition-transform duration-200";
+
+export const mobileNavToggleBarMiddleClassName =
+  "block h-0.5 w-6 bg-[#383838] transition-opacity duration-200";
+
+export const mobileNavPanelClassName =
+  "absolute inset-x-0 top-full z-50 box-border h-auto max-h-[calc(100svh-100%)] min-h-0 overflow-x-hidden overflow-y-auto overscroll-contain touch-pan-y scroll-pt-2 scroll-pb-[calc(1.5rem+env(safe-area-inset-bottom))] bg-white shadow-lg transition-opacity duration-200";
+
+export const mobileNavPanelInnerClassName =
+  "mx-auto w-full max-w-[1728px] px-4 pt-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] md:px-8";
+
+export const mobileNavItemClassName =
+  "block min-h-[44px] cursor-pointer rounded py-3 font-reddit text-lg font-normal leading-8 text-[#383838] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-1";
+
+export const mobileNavActionsClassName =
+  `grid w-full min-w-0 grid-cols-2 ${actionButtonGroupGapClassName}`;
+
+const mobileNavActionBaseClassName =
+  "inline-flex h-full min-h-[55px] w-full min-w-0 cursor-pointer items-center justify-center rounded-full px-3 py-2 text-center font-reddit text-base font-bold leading-6 text-white md:px-4";
+
+export const mobileNavClientButtonClassName =
+  `${mobileNavActionBaseClassName} bg-[#687681] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#687681] focus-visible:ring-offset-2 ${solidButtonHoverClassName}`;
+
+export const mobileNavDemoButtonClassName =
+  `${mobileNavActionBaseClassName} bg-[#0024AE] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 ${solidButtonHoverClassName}`;
