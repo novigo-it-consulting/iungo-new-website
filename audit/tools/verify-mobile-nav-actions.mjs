@@ -2,15 +2,13 @@
  * Verifica os botões de ação do menu mobile lado a lado.
  * node verify-mobile-nav-actions.mjs
  */
-import * as chromeLauncher from "chrome-launcher";
-import puppeteer from "puppeteer-core";
+import {
+  AUDIT_BASE_URL as BASE_URL,
+  createResultRecorder,
+  withAuditBrowser,
+} from "./mobile-nav-audit.shared.mjs";
 
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3000";
-const results = [];
-
-function record(name, pass, detail) {
-  results.push({ name, pass, ...(detail !== undefined ? { detail } : {}) });
-}
+const { record, printAndExit } = createResultRecorder();
 
 const VIEWPORTS = [
   { name: "320", width: 320, height: 640 },
@@ -150,64 +148,34 @@ async function inspectViewport(page, viewport) {
   );
 }
 
-let chrome;
-let browser;
-
 try {
-  chrome = await chromeLauncher.launch({
-    chromeFlags: ["--headless=new", "--disable-gpu", "--no-sandbox"],
-  });
-  browser = await puppeteer.connect({
-    browserURL: `http://127.0.0.1:${chrome.port}`,
-    defaultViewport: null,
-  });
-  const page = await browser.newPage();
-  await page.evaluateOnNewDocument(() => {
-    localStorage.setItem(
-      "iungo.cookie-consent",
-      JSON.stringify({
-        formatVersion: 1,
-        policyVersion: 1,
-        decidedAt: new Date().toISOString(),
-        categories: { necessary: true },
-        choice: "reject-non-essential",
-      }),
+  await withAuditBrowser(async (page) => {
+    for (const viewport of VIEWPORTS) {
+      await inspectViewport(page, viewport);
+    }
+
+    await page.setViewport({ width: 1280, height: 800 });
+    await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
+    const desktop = await page.evaluate(() => {
+      const headerActions = document.querySelector("[data-header-actions]");
+      return {
+        headerActionsVisible:
+          headerActions instanceof HTMLElement &&
+          headerActions.offsetParent !== null,
+        headerFlex:
+          headerActions instanceof HTMLElement
+            ? getComputedStyle(headerActions).flexDirection
+            : null,
+      };
+    });
+    record(
+      "desktop:header-actions-visible",
+      desktop.headerActionsVisible && desktop.headerFlex === "row",
+      desktop,
     );
   });
-
-  for (const viewport of VIEWPORTS) {
-    await inspectViewport(page, viewport);
-  }
-
-  await page.setViewport({ width: 1280, height: 800 });
-  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  const desktop = await page.evaluate(() => {
-    const headerActions = document.querySelector("[data-header-actions]");
-    return {
-      headerActionsVisible:
-        headerActions instanceof HTMLElement &&
-        headerActions.offsetParent !== null,
-      headerFlex:
-        headerActions instanceof HTMLElement
-          ? getComputedStyle(headerActions).flexDirection
-          : null,
-    };
-  });
-  record(
-    "desktop:header-actions-visible",
-    desktop.headerActionsVisible && desktop.headerFlex === "row",
-    desktop,
-  );
 } catch (error) {
   record("script-error", false, String(error));
-} finally {
-  const failed = results.filter((item) => !item.pass);
-  console.log(JSON.stringify({ failed: failed.length, results }, null, 2));
-  await browser?.disconnect().catch(() => {});
-  try {
-    if (chrome) await chrome.kill();
-  } catch {
-    // ignore
-  }
-  process.exit(failed.length === 0 ? 0 : 1);
 }
+
+printAndExit();

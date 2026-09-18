@@ -1,6 +1,8 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
+import RequestDemoFieldGroup, {
+  requestDemoErrorDescribedBy,
+} from "./RequestDemoFieldGroup";
 import {
   requestDemoFieldInputClassName,
   withRequestDemoInvalidClass,
@@ -37,7 +39,7 @@ export default function RequestDemoField({
   required,
   errorMessage,
 }: Readonly<RequestDemoFieldProps>) {
-  const describedBy = errorMessage ? `${id}-error` : undefined;
+  const describedBy = requestDemoErrorDescribedBy(id, errorMessage);
   const inputClassName = withRequestDemoInvalidClass(
     requestDemoFieldInputClassName,
     errorMessage,

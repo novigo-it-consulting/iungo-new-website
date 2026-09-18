@@ -10,7 +10,7 @@ import {
   type CSSProperties,
 } from "react";
 
-import { RequestDemoFieldError } from "../RequestDemoFieldGroup";
+import { RequestDemoFieldError, requestDemoErrorDescribedBy } from "../RequestDemoFieldGroup";
 import type { RequestDemoSelectOption } from "../requestDemoForm.types";
 import {
   requestDemoFieldGroupClassName,
@@ -207,7 +207,7 @@ export default function ProductInterestSelect({
           aria-haspopup="listbox"
           aria-labelledby={labelId}
           aria-invalid={Boolean(errorMessage)}
-          aria-describedby={errorMessage ? errorId : undefined}
+          aria-describedby={requestDemoErrorDescribedBy(id, errorMessage)}
           aria-activedescendant={
             isOpen ? `${id}-option-${safeActiveIndex}` : undefined
           }

@@ -13,6 +13,8 @@
  * Posicionado após o botão para manter o foco visual próximo ao ponto de ação.
  */
 
+import type { ReactNode } from "react";
+
 import {
   requestDemoFeedbackErrorClassName,
   requestDemoFeedbackErrorIconClassName,
@@ -29,7 +31,7 @@ interface RequestDemoFeedbackProps {
   message: string;
 }
 
-function CheckIcon() {
+function FeedbackGlyph({ children }: Readonly<{ children: ReactNode }>) {
   return (
     <svg
       aria-hidden="true"
@@ -41,6 +43,14 @@ function CheckIcon() {
       className="mt-[1px] shrink-0"
     >
       <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+      {children}
+    </svg>
+  );
+}
+
+function CheckIcon() {
+  return (
+    <FeedbackGlyph>
       <path
         d="M6.5 10.25L8.75 12.5L13.5 8"
         stroke="currentColor"
@@ -48,29 +58,20 @@ function CheckIcon() {
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </svg>
+    </FeedbackGlyph>
   );
 }
 
 function XIcon() {
   return (
-    <svg
-      aria-hidden="true"
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className="mt-[1px] shrink-0"
-    >
-      <circle cx="10" cy="10" r="8.5" stroke="currentColor" strokeWidth="1.5" />
+    <FeedbackGlyph>
       <path
         d="M7 7L13 13M13 7L7 13"
         stroke="currentColor"
         strokeWidth="1.5"
         strokeLinecap="round"
       />
-    </svg>
+    </FeedbackGlyph>
   );
 }
 

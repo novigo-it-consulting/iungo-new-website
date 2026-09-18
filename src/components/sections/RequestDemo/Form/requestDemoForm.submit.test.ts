@@ -190,11 +190,15 @@ const validFormEntries = {
   _honey: "",
 } satisfies Record<string, string>;
 
+function readForm(overrides: Record<string, string | File> = {}) {
+  return readRequestDemoFormValuesFromData(
+    createFormData({ ...validFormEntries, ...overrides }),
+  );
+}
+
 describe("readRequestDemoFormValuesFromData", () => {
   it("lê strings normais e aplica trim nos campos comuns", () => {
-    const result = readRequestDemoFormValuesFromData(
-      createFormData(validFormEntries),
-    );
+    const result = readForm();
 
     expect(result.name).toBe("Ana Silva");
     expect(result.email).toBe("ana@empresa.com.br");
@@ -202,48 +206,26 @@ describe("readRequestDemoFormValuesFromData", () => {
   });
 
   it("trata campo comum vazio como string vazia", () => {
-    const result = readRequestDemoFormValuesFromData(
-      createFormData({ ...validFormEntries, name: "" }),
-    );
-
-    expect(result.name).toBe("");
+    expect(readForm({ name: "" }).name).toBe("");
   });
 
   it("trata File em campo comum como vazio, sem [object Object]", () => {
-    const result = readRequestDemoFormValuesFromData(
-      createFormData({
-        ...validFormEntries,
-        name: new File(["conteudo"], "nome.txt"),
-      }),
-    );
-
-    expect(result.name).toBe("");
+    expect(readForm({ name: new File(["conteudo"], "nome.txt") }).name).toBe("");
   });
 
   it("preserva honeypot string preenchido", () => {
-    const result = readRequestDemoFormValuesFromData(
-      createFormData({ ...validFormEntries, _honey: "bot-value" }),
-    );
-
-    expect(result.honey).toBe("bot-value");
+    expect(readForm({ _honey: "bot-value" }).honey).toBe("bot-value");
   });
 
   it("não esvazia honeypot inesperado do tipo File", () => {
-    const result = readRequestDemoFormValuesFromData(
-      createFormData({
-        ...validFormEntries,
-        _honey: new File(["payload"], "payload.bin"),
-      }),
-    );
-
-    expect(result.honey).not.toBe("");
+    expect(
+      readForm({ _honey: new File(["payload"], "payload.bin") }).honey,
+    ).not.toBe("");
   });
 
   it("lê entradas longas sem converter para objeto genérico", () => {
     const longMessage = "m".repeat(REQUEST_DEMO_FIELD_LIMITS.message);
-    const result = readRequestDemoFormValuesFromData(
-      createFormData({ ...validFormEntries, message: longMessage }),
-    );
+    const result = readForm({ message: longMessage });
 
     expect(result.message).toBe(longMessage);
     expect(result.message).not.toContain("[object Object]");

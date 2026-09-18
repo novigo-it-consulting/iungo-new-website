@@ -1,6 +1,8 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
+import RequestDemoFieldGroup, {
+  requestDemoErrorDescribedBy,
+} from "./RequestDemoFieldGroup";
 import { withRequestDemoInvalidClass } from "./requestDemoField.styles";
 
 type RequestDemoTextareaFieldProps = {
@@ -23,7 +25,7 @@ export default function RequestDemoTextareaField({
   textareaClassName,
   errorMessage,
 }: Readonly<RequestDemoTextareaFieldProps>) {
-  const describedBy = errorMessage ? `${id}-error` : undefined;
+  const describedBy = requestDemoErrorDescribedBy(id, errorMessage);
   const fieldClassName = withRequestDemoInvalidClass(
     textareaClassName,
     errorMessage,

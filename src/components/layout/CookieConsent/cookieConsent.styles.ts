@@ -59,6 +59,8 @@ export const cookieCategoryTitleClassName =
 export const cookieCategoryTextClassName =
   "m-0 font-reddit text-xs font-normal leading-4 text-[#383838]";
 
+export const cookieLiveNoticeClassName = `${cookieCategoryTextClassName} block`;
+
 export const cookieDialogFooterClassName =
   "flex shrink-0 flex-col gap-2 border-t border-[#ECECEC] px-5 py-4 sm:flex-row sm:justify-end sm:px-6";
 

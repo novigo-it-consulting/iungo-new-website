@@ -11,6 +11,13 @@ type RequestDemoFieldErrorProps = {
   message?: string;
 };
 
+export function requestDemoErrorDescribedBy(
+  id: string,
+  errorMessage?: string,
+): string | undefined {
+  return errorMessage ? `${id}-error` : undefined;
+}
+
 export function RequestDemoFieldError({
   id,
   message,

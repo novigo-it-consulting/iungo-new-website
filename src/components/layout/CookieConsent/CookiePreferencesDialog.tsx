@@ -46,6 +46,7 @@ import {
   cookieDialogHeaderClassName,
   cookieDialogTitleClassName,
   cookieEmailClassName,
+  cookieLiveNoticeClassName,
   cookieSaveActionClassName,
 } from "./cookieConsent.styles";
 import { useCookieConsent } from "./CookieConsentContext";
@@ -87,6 +88,16 @@ function CookieChoiceOption({
       </span>
       {label}
     </label>
+  );
+}
+
+function CookieLiveNotice({
+  children,
+}: Readonly<{ children: string }>) {
+  return (
+    <output className={cookieLiveNoticeClassName} aria-live="polite">
+      {children}
+    </output>
   );
 }
 
@@ -242,12 +253,7 @@ export default function CookiePreferencesDialog() {
             onChange={setDraftChoice}
           />
           {!canSave ? (
-            <output
-              className={`${cookieCategoryTextClassName} block`}
-              aria-live="polite"
-            >
-              {COOKIE_CHOICE_REQUIRED_HINT}
-            </output>
+            <CookieLiveNotice>{COOKIE_CHOICE_REQUIRED_HINT}</CookieLiveNotice>
           ) : null}
         </fieldset>
 
@@ -263,12 +269,7 @@ export default function CookiePreferencesDialog() {
           {"."}
         </p>
         {!persisted && decision !== null ? (
-          <output
-            className={`${cookieCategoryTextClassName} block`}
-            aria-live="polite"
-          >
-            {COOKIE_SESSION_ONLY_NOTICE}
-          </output>
+          <CookieLiveNotice>{COOKIE_SESSION_ONLY_NOTICE}</CookieLiveNotice>
         ) : null}
       </div>
 

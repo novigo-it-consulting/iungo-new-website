@@ -2,14 +2,23 @@
  * Verifica se Tab/Shift+Tab ficam no menu mobile aberto (fundo inert).
  * node verify-mobile-nav-focus.mjs
  */
-import * as chromeLauncher from "chrome-launcher";
-import puppeteer from "puppeteer-core";
+import {
+  AUDIT_BASE_URL,
+  createResultRecorder,
+  withAuditBrowser,
+} from "./mobile-nav-audit.shared.mjs";
 
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3000";
-const results = [];
+const { record, printAndExit } = createResultRecorder();
 
-function record(name, pass, detail) {
-  results.push({ name, pass, ...(detail !== undefined ? { detail } : {}) });
+async function gotoAndOpenMobileMenu(page) {
+  await page.setViewport({ width: 375, height: 667 });
+  await page.goto(AUDIT_BASE_URL, {
+    waitUntil: "domcontentloaded",
+    timeout: 30000,
+  });
+  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
+  await page.click('[aria-label="Abrir menu"]');
+  await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
 }
 
 async function readFocusStop(page) {
@@ -41,11 +50,7 @@ async function readFocusStop(page) {
 }
 
 async function inspectOpenMenu(page) {
-  await page.setViewport({ width: 375, height: 667 });
-  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
-  await page.click('[aria-label="Abrir menu"]');
-  await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
+  await gotoAndOpenMobileMenu(page);
 
   const isolation = await page.evaluate(() => {
     const root = document.querySelector("[data-mobile-navigation]");
@@ -156,18 +161,8 @@ async function inspectOpenMenu(page) {
   record("closed:footer-not-inert", !closed.footerInert, closed);
 }
 
-async function inspectClosePaths(page, consoleMessages) {
-  const start = consoleMessages.length;
-
-  await page.setViewport({ width: 375, height: 667 });
-  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
-  await page.click('[aria-label="Abrir menu"]');
-  await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
-  await page.click('[aria-label="Fechar menu"]');
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 5000 });
-
-  const afterToggle = await page.evaluate(() => {
+async function readCloseSnapshot(page) {
+  return page.evaluate(() => {
     const active = document.activeElement;
     const panel = document.getElementById("mobile-navigation-menu");
     let label = "";
@@ -180,39 +175,28 @@ async function inspectClosePaths(page, consoleMessages) {
       scrollY: window.scrollY,
     };
   });
-  record(
-    "close-x:focus-on-trigger",
-    afterToggle.label === "Abrir menu",
-    afterToggle,
-  );
-  record("close-x:panel-inert", afterToggle.panelInert, afterToggle);
-  record("close-x:no-page-jump", afterToggle.scrollY === 0, afterToggle);
+}
+
+function recordCloseSnapshot(prefix, snapshot) {
+  record(`${prefix}:focus-on-trigger`, snapshot.label === "Abrir menu", snapshot);
+  record(`${prefix}:panel-inert`, snapshot.panelInert, snapshot);
+  record(`${prefix}:no-page-jump`, snapshot.scrollY === 0, snapshot);
+}
+
+async function inspectClosePaths(page, consoleMessages) {
+  const start = consoleMessages.length;
+
+  await gotoAndOpenMobileMenu(page);
+  await page.click('[aria-label="Fechar menu"]');
+  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 5000 });
+  recordCloseSnapshot("close-x", await readCloseSnapshot(page));
 
   await page.click('[aria-label="Abrir menu"]');
   await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
   await page.keyboard.press("Tab");
   await page.keyboard.press("Escape");
   await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 5000 });
-  const afterEscape = await page.evaluate(() => {
-    const active = document.activeElement;
-    const panel = document.getElementById("mobile-navigation-menu");
-    let label = "";
-    if (active instanceof HTMLElement) {
-      label = active.getAttribute("aria-label") || "";
-    }
-    return {
-      label,
-      panelInert: panel instanceof HTMLElement && panel.inert === true,
-      scrollY: window.scrollY,
-    };
-  });
-  record(
-    "close-escape:focus-on-trigger",
-    afterEscape.label === "Abrir menu",
-    afterEscape,
-  );
-  record("close-escape:panel-inert", afterEscape.panelInert, afterEscape);
-  record("close-escape:no-page-jump", afterEscape.scrollY === 0, afterEscape);
+  recordCloseSnapshot("close-escape", await readCloseSnapshot(page));
 
   await page.click('[aria-label="Abrir menu"]');
   await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
@@ -246,11 +230,7 @@ async function inspectClosePaths(page, consoleMessages) {
     afterNavigate,
   );
 
-  await page.setViewport({ width: 375, height: 667 });
-  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
-  await page.click('[aria-label="Abrir menu"]');
-  await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
+  await gotoAndOpenMobileMenu(page);
   await page.keyboard.press("Tab");
   await page.setViewport({ width: 1280, height: 800 });
   await page.waitForFunction(
@@ -305,7 +285,7 @@ async function inspectClosePaths(page, consoleMessages) {
 async function inspectHmr(page, consoleMessages) {
   const start = consoleMessages.length;
   await page.setViewport({ width: 1280, height: 800 });
-  await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.goto(AUDIT_BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
   await new Promise((resolve) => setTimeout(resolve, 5000));
   const later = consoleMessages.slice(start);
   const websocketClosed = later.filter((text) =>
@@ -319,50 +299,18 @@ async function inspectHmr(page, consoleMessages) {
   });
 }
 
-let chrome;
-let browser;
-
 try {
-  chrome = await chromeLauncher.launch({
-    chromeFlags: ["--headless=new", "--disable-gpu", "--no-sandbox"],
+  await withAuditBrowser(async (page) => {
+    const consoleMessages = [];
+    page.on("console", (msg) => {
+      consoleMessages.push(msg.text());
+    });
+    await inspectHmr(page, consoleMessages);
+    await inspectOpenMenu(page);
+    await inspectClosePaths(page, consoleMessages);
   });
-  browser = await puppeteer.connect({
-    browserURL: `http://127.0.0.1:${chrome.port}`,
-    defaultViewport: null,
-  });
-  const page = await browser.newPage();
-  const consoleMessages = [];
-  page.on("console", (msg) => {
-    consoleMessages.push(msg.text());
-  });
-  await page.evaluateOnNewDocument(() => {
-    localStorage.setItem(
-      "iungo.cookie-consent",
-      JSON.stringify({
-        formatVersion: 1,
-        policyVersion: 1,
-        decidedAt: new Date().toISOString(),
-        categories: { necessary: true },
-        choice: "reject-non-essential",
-      }),
-    );
-  });
-
-  await inspectHmr(page, consoleMessages);
-  await inspectOpenMenu(page);
-  await inspectClosePaths(page, consoleMessages);
 } catch (error) {
   record("script-error", false, String(error));
-} finally {
-  const failed = results.filter((item) => !item.pass);
-  console.log(JSON.stringify({ failed: failed.length, results }, null, 2));
-  if (browser) {
-    await browser.disconnect().catch(() => {});
-  }
-  try {
-    if (chrome) await chrome.kill();
-  } catch {
-    // ignore
-  }
-  process.exit(failed.length === 0 ? 0 : 1);
 }
+
+printAndExit();

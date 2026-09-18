@@ -2,15 +2,13 @@
  * Verificação: rolagem do menu mobile / Soluções.
  * node verify-mobile-nav-scroll.mjs  (dev server em AUDIT_BASE_URL)
  */
-import * as chromeLauncher from "chrome-launcher";
-import puppeteer from "puppeteer-core";
+import {
+  AUDIT_BASE_URL as BASE_URL,
+  createResultRecorder,
+  withAuditBrowser,
+} from "./mobile-nav-audit.shared.mjs";
 
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3000";
-const results = [];
-
-function record(name, pass, detail) {
-  results.push({ name, pass, ...(detail !== undefined ? { detail } : {}) });
-}
+const { record, printAndExit } = createResultRecorder();
 
 const VIEWPORTS = [
   { name: "320x568", width: 320, height: 568 },
@@ -264,26 +262,19 @@ async function collectExpandedMetrics(page) {
           : Infinity,
       ),
     );
+    const areDisplayNone = (nodes) =>
+      nodes.length > 0 &&
+      nodes.every(
+        (node) =>
+          node instanceof HTMLElement &&
+          getComputedStyle(node).display === "none",
+      );
     const categorySubtitles = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-category-header] p"),
     ];
-    const categorySubtitlesHidden =
-      categorySubtitles.length > 0 &&
-      categorySubtitles.every(
-        (node) =>
-          node instanceof HTMLElement &&
-          getComputedStyle(node).display === "none",
-      );
     const viewLinks = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-view-solution-link]"),
     ];
-    const viewLinksHidden =
-      viewLinks.length > 0 &&
-      viewLinks.every(
-        (node) =>
-          node instanceof HTMLElement &&
-          getComputedStyle(node).display === "none",
-      );
     const categoryLists = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-product-list]"),
     ];
@@ -341,8 +332,8 @@ async function collectExpandedMetrics(page) {
         ? Math.round(minCardHeight)
         : null,
       productCount: productCards.length,
-      categorySubtitlesHidden,
-      viewLinksHidden,
+      categorySubtitlesHidden: areDisplayNone(categorySubtitles),
+      viewLinksHidden: areDisplayNone(viewLinks),
       dividersOk,
     };
   });
@@ -551,9 +542,19 @@ async function inspectViewport(page, viewport) {
   );
 }
 
+function recordFullyVisibleGroup(name, countKey, visibleKey, mega) {
+  const total = mega ? mega[countKey] : 0;
+  const visible = mega ? mega[visibleKey] : 0;
+  record(name, Boolean(mega && total > 0 && visible === total), mega);
+}
+
 async function inspectDesktop(page) {
   await page.setViewport({ width: 1280, height: 800 });
   await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
+  await page.waitForSelector('[data-header-nav-item="solucoes"]', {
+    visible: true,
+    timeout: 10000,
+  });
   const desktop = await page.evaluate(() => {
     const hamburger = document.querySelector('[aria-label="Abrir menu"]');
     const mobilePanel = document.getElementById("mobile-navigation-menu");
@@ -579,7 +580,8 @@ async function inspectDesktop(page) {
 
   await page.hover('[data-header-nav-item="solucoes"]');
   await page.waitForSelector("[data-solucoes-mega-menu-panel]", {
-    timeout: 5000,
+    visible: true,
+    timeout: 8000,
   });
   const mega = await page.evaluate(() => {
     const panel = document.querySelector("[data-solucoes-mega-menu-panel]");
@@ -588,33 +590,22 @@ async function inspectDesktop(page) {
     }
     const styles = getComputedStyle(panel);
     const rect = panel.getBoundingClientRect();
+    const isPainted = (node) =>
+      node instanceof HTMLElement &&
+      getComputedStyle(node).display !== "none" &&
+      node.getBoundingClientRect().height > 0;
     const descriptions = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-product] p"),
     ];
-    const visibleDescriptions = descriptions.filter(
-      (node) =>
-        node instanceof HTMLElement &&
-        getComputedStyle(node).display !== "none" &&
-        node.getBoundingClientRect().height > 0,
-    );
+    const visibleDescriptions = descriptions.filter(isPainted);
     const categorySubtitles = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-category-header] p"),
     ];
-    const visibleSubtitles = categorySubtitles.filter(
-      (node) =>
-        node instanceof HTMLElement &&
-        getComputedStyle(node).display !== "none" &&
-        node.getBoundingClientRect().height > 0,
-    );
+    const visibleSubtitles = categorySubtitles.filter(isPainted);
     const viewLinks = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-view-solution-link]"),
     ];
-    const visibleViewLinks = viewLinks.filter(
-      (node) =>
-        node instanceof HTMLElement &&
-        getComputedStyle(node).display !== "none" &&
-        node.getBoundingClientRect().height > 0,
-    );
+    const visibleViewLinks = viewLinks.filter(isPainted);
     const lists = [
       ...panel.querySelectorAll("[data-solucoes-mega-menu-product-list]"),
     ];
@@ -647,31 +638,22 @@ async function inspectDesktop(page) {
     Boolean(mega && mega.visible && mega.withinViewport),
     mega,
   );
-  record(
+  recordFullyVisibleGroup(
     "desktop:product-descriptions-visible",
-    Boolean(
-      mega &&
-        mega.descriptionCount > 0 &&
-        mega.visibleDescriptionCount === mega.descriptionCount,
-    ),
+    "descriptionCount",
+    "visibleDescriptionCount",
     mega,
   );
-  record(
+  recordFullyVisibleGroup(
     "desktop:category-subtitles-visible",
-    Boolean(
-      mega &&
-        mega.subtitleCount > 0 &&
-        mega.visibleSubtitleCount === mega.subtitleCount,
-    ),
+    "subtitleCount",
+    "visibleSubtitleCount",
     mega,
   );
-  record(
+  recordFullyVisibleGroup(
     "desktop:view-links-visible",
-    Boolean(
-      mega &&
-        mega.viewLinkCount > 0 &&
-        mega.visibleViewLinkCount === mega.viewLinkCount,
-    ),
+    "viewLinkCount",
+    "visibleViewLinkCount",
     mega,
   );
   record(
@@ -684,7 +666,13 @@ async function inspectDesktop(page) {
 async function inspectDesktopAfterMobileOpen(page) {
   await page.setViewport({ width: 768, height: 1024 });
   await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
+  await page.waitForFunction(
+    () => {
+      const hamburger = document.querySelector('[aria-label="Abrir menu"]');
+      return hamburger instanceof HTMLElement && hamburger.offsetParent !== null;
+    },
+    { timeout: 10000 },
+  );
   await page.click('[aria-label="Abrir menu"]');
   await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
 
@@ -733,48 +721,16 @@ async function inspectDesktopAfterMobileOpen(page) {
   );
 }
 
-let chrome;
-let browser;
-
 try {
-  chrome = await chromeLauncher.launch({
-    chromeFlags: ["--headless=new", "--disable-gpu", "--no-sandbox"],
+  await withAuditBrowser(async (page) => {
+    for (const viewport of VIEWPORTS) {
+      await inspectViewport(page, viewport);
+    }
+    await inspectDesktopAfterMobileOpen(page);
+    await inspectDesktop(page);
   });
-  browser = await puppeteer.connect({
-    browserURL: `http://127.0.0.1:${chrome.port}`,
-    defaultViewport: null,
-  });
-  const page = await browser.newPage();
-  await page.evaluateOnNewDocument(() => {
-    localStorage.setItem(
-      "iungo.cookie-consent",
-      JSON.stringify({
-        formatVersion: 1,
-        policyVersion: 1,
-        decidedAt: new Date().toISOString(),
-        categories: { necessary: true },
-        choice: "reject-non-essential",
-      }),
-    );
-  });
-
-  for (const viewport of VIEWPORTS) {
-    await inspectViewport(page, viewport);
-  }
-  await inspectDesktopAfterMobileOpen(page);
-  await inspectDesktop(page);
 } catch (error) {
   record("script-error", false, String(error));
-} finally {
-  const failed = results.filter((item) => !item.pass);
-  console.log(JSON.stringify({ failed: failed.length, results }, null, 2));
-  if (browser) {
-    await browser.disconnect().catch(() => {});
-  }
-  try {
-    if (chrome) await chrome.kill();
-  } catch {
-    // ignore
-  }
-  process.exit(failed.length === 0 ? 0 : 1);
 }
+
+printAndExit();
