@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL as BASE_URL,
   createResultRecorder,
+  openAuditMobileMenu,
   withAuditBrowser,
 } from "./mobile-nav-audit.shared.mjs";
 
@@ -20,14 +21,11 @@ const VIEWPORTS = [
 async function inspectViewport(page, viewport) {
   await page.setViewport({ width: viewport.width, height: viewport.height });
   await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });
-  await page.waitForSelector('[aria-label="Abrir menu"]', { timeout: 10000 });
-  await page.evaluate(() => {
-    const hamburger = document.querySelector('[aria-label="Abrir menu"]');
-    if (hamburger instanceof HTMLElement) {
-      hamburger.click();
-    }
-  });
-  await page.waitForSelector('[aria-label="Fechar menu"]', { timeout: 8000 });
+  const opened = await openAuditMobileMenu(page);
+  if (!opened) {
+    record(`${viewport.name}:hamburger`, false, "missing");
+    return;
+  }
 
   const metrics = await page.evaluate(() => {
     const menu = document.getElementById("mobile-navigation-menu");

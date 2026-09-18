@@ -1,10 +1,13 @@
 /**
- * Infra comum dos scripts de auditoria do menu mobile.
+ * Infra comum dos scripts de auditoria (Hero, menu mobile, etc.).
  */
 import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer-core";
 
 export const AUDIT_BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3000";
+
+const OPEN_MENU_SELECTOR = '[aria-label="Abrir menu"]';
+const CLOSE_MENU_SELECTOR = '[aria-label="Fechar menu"]';
 
 export function createResultRecorder() {
   const results = [];
@@ -60,4 +63,38 @@ export async function withAuditBrowser(run) {
       // ignore
     }
   }
+}
+
+export async function openAuditMobileMenu(page) {
+  const hamburgerReady = await page
+    .waitForFunction(
+      () => {
+        const hamburger = document.querySelector('[aria-label="Abrir menu"]');
+        return hamburger instanceof HTMLElement && hamburger.offsetParent !== null;
+      },
+      { timeout: 10000 },
+    )
+    .catch(() => null);
+
+  if (!hamburgerReady) {
+    return false;
+  }
+
+  await page.click(OPEN_MENU_SELECTOR);
+  const opened = await page
+    .waitForSelector(CLOSE_MENU_SELECTOR, {
+      visible: true,
+      timeout: 8000,
+    })
+    .catch(() => null);
+
+  if (!opened) {
+    await page.click(OPEN_MENU_SELECTOR);
+    await page.waitForSelector(CLOSE_MENU_SELECTOR, {
+      visible: true,
+      timeout: 8000,
+    });
+  }
+
+  return true;
 }

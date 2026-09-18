@@ -1,3 +1,4 @@
+import HeroActions from "./HeroActions";
 import HeroContent from "./HeroContent";
 import HeroVisual from "./HeroVisual";
 import PageContainer from "@/components/layout/PageContainer";
@@ -19,6 +20,7 @@ export default function HeroSection() {
         <div data-hero-row className={homeHeroRowClassName}>
           <HeroContent />
           <HeroVisual />
+          <HeroActions />
         </div>
       </PageContainer>
     </section>

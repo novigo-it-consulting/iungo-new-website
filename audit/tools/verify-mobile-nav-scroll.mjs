@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL as BASE_URL,
   createResultRecorder,
+  openAuditMobileMenu,
   withAuditBrowser,
 } from "./mobile-nav-audit.shared.mjs";
 
@@ -55,33 +56,10 @@ function isEndReached(item) {
 }
 
 async function openMobileMenu(page, viewport) {
-  const hamburgerReady = await page
-    .waitForFunction(
-      () => {
-        const hamburger = document.querySelector('[aria-label="Abrir menu"]');
-        return hamburger instanceof HTMLElement && hamburger.offsetParent !== null;
-      },
-      { timeout: 10000 },
-    )
-    .catch(() => null);
-  if (!hamburgerReady) {
+  const opened = await openAuditMobileMenu(page);
+  if (!opened) {
     record(`${viewport.name}:hamburger`, false, "missing");
     return false;
-  }
-
-  await page.click('[aria-label="Abrir menu"]');
-  const opened = await page
-    .waitForSelector('[aria-label="Fechar menu"]', {
-      visible: true,
-      timeout: 8000,
-    })
-    .catch(() => null);
-  if (!opened) {
-    await page.click('[aria-label="Abrir menu"]');
-    await page.waitForSelector('[aria-label="Fechar menu"]', {
-      visible: true,
-      timeout: 8000,
-    });
   }
   await page.waitForSelector("#mobile-navigation-menu", { timeout: 5000 });
   await page.waitForFunction(

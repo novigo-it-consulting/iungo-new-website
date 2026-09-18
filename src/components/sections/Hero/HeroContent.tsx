@@ -1,9 +1,9 @@
-import HeroActions from "./HeroActions";
 import {
   homeHeroContentClassName,
   homeHeroCopyClassName,
   homeHeroDescriptionClassName,
   homeHeroTitleClassName,
+  homeHeroTitleHighlightClassName,
   homeHeroTitleLineClassName,
 } from "./homeHero.styles";
 
@@ -22,7 +22,7 @@ export default function HeroContent() {
           <span className={homeHeroTitleLineClassName}>Atendimento. Vendas.</span>
           <span
             data-hero-highlight
-            className={`${homeHeroTitleLineClassName} font-bold text-[#0024AE]`}
+            className={homeHeroTitleHighlightClassName}
           >
             Em uma IA unificada.
           </span>
@@ -33,8 +33,6 @@ export default function HeroContent() {
           varejo digital de alta complexidade.
         </p>
       </div>
-
-      <HeroActions />
     </div>
   );
 }

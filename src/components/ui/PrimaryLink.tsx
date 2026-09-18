@@ -6,15 +6,22 @@ import {
   primaryLinkLabelClassName,
 } from "./primaryLink.styles";
 
-interface PrimaryLinkProps {
+type PrimaryLinkProps = {
   href: string;
   children: ReactNode;
-}
+  className?: string;
+  labelClassName?: string;
+};
 
-export default function PrimaryLink({ href, children }: PrimaryLinkProps) {
+export default function PrimaryLink({
+  href,
+  children,
+  className = primaryLinkClassName,
+  labelClassName = primaryLinkLabelClassName,
+}: Readonly<PrimaryLinkProps>) {
   return (
-    <Link href={href} className={primaryLinkClassName}>
-      <span className={primaryLinkLabelClassName}>{children}</span>
+    <Link href={href} className={className}>
+      <span className={labelClassName}>{children}</span>
     </Link>
   );
 }
