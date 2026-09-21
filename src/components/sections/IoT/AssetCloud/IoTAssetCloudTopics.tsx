@@ -19,8 +19,8 @@ export default function IoTAssetCloudTopics() {
               key={topic}
               data-iot-asset-cloud-topic-item
               className={[
-                "flex min-h-[22px] w-full gap-3",
-                isLastTopic ? "items-center" : "min-w-0 items-start",
+                "flex min-h-[22px] w-full min-w-0 gap-3",
+                isLastTopic ? "items-start xl:items-center" : "items-start",
               ].join(" ")}
             >
               <span
@@ -35,7 +35,9 @@ export default function IoTAssetCloudTopics() {
               <span
                 className={[
                   topicTextClassName,
-                  isLastTopic ? "shrink-0 whitespace-nowrap" : "min-w-0 flex-1",
+                  isLastTopic
+                    ? "min-w-0 flex-1 xl:shrink-0 xl:flex-none xl:whitespace-nowrap"
+                    : "min-w-0 flex-1",
                 ].join(" ")}
               >
                 {topic}

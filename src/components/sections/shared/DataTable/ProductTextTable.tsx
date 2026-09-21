@@ -1,3 +1,5 @@
+import ProductTableScroll from "./ProductTableScroll";
+
 export type ProductTextTableColumn<T extends string> = {
   key: T;
   label: string;
@@ -24,7 +26,7 @@ export type ProductTextTableProps<
 };
 
 const HEADER_CELL_CLASS =
-  "h-[52px] box-border p-4 align-middle font-reddit text-[14px] font-bold leading-5 tracking-[0px]";
+  "h-[52px] box-border whitespace-nowrap p-4 align-middle font-reddit text-[14px] font-bold leading-5 tracking-[0px]";
 
 const BODY_CELL_CLASS =
   "min-w-0 px-4 align-middle font-reddit text-[14px] leading-5 tracking-[0px]";
@@ -57,18 +59,13 @@ export default function ProductTextTable<
   rowHeaderKey,
 }: ProductTextTableProps<T, Row>) {
   return (
-    <div
-      role="region"
-      aria-label={ariaLabel}
-      tabIndex={0}
-      data-product-text-table={blockSlug}
-      className={`w-full overflow-x-auto overscroll-x-contain ${className}`}
+    <ProductTableScroll
+      ariaLabel={ariaLabel}
+      className={className}
+      frameClassName={`rounded-[16px] ${containerClassName}`}
+      dataSlug={blockSlug}
     >
-      <div
-        data-product-text-table-container={blockSlug}
-        className={`min-w-0 overflow-hidden rounded-[16px] border border-[#E4E4E7] bg-white ${containerClassName}`}
-      >
-        <table className="w-full table-fixed border-collapse">
+      <table className="w-full table-fixed border-collapse">
           <caption className="sr-only">{caption}</caption>
 
           <colgroup>
@@ -97,10 +94,13 @@ export default function ProductTextTable<
           </thead>
 
           <tbody>
-            {rows.map((row, rowIndex) => (
+            {rows.map((row, rowIndex) => {
+              const rowKey = getRowKey(row, rowIndex);
+
+              return (
               <tr
-                key={getRowKey(row, rowIndex)}
-                data-product-text-table-row={getRowKey(row, rowIndex)}
+                key={rowKey}
+                data-product-text-table-row={rowKey}
                 style={{ height: `${rowHeight}px` }}
                 className={
                   rowIndex < rows.length - 1 ? "border-b border-[#E4E4E7]" : undefined
@@ -126,10 +126,10 @@ export default function ProductTextTable<
                   );
                 })}
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
-      </div>
-    </div>
+    </ProductTableScroll>
   );
 }

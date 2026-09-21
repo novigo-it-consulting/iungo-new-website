@@ -17,7 +17,7 @@ export default function IoTMetricsContent() {
 
       <ul
         data-iot-metrics-list
-        className="m-0 grid w-full min-w-0 list-none grid-cols-1 gap-8 p-0 sm:grid-cols-2 xl:grid-cols-4"
+        className="m-0 grid w-full min-w-0 list-none grid-cols-1 gap-12 p-0 sm:grid-cols-2 xl:grid-cols-4 xl:gap-8"
       >
         {IOT_METRICS.map((metric) => (
           <IoTMetricItem key={metric.id} metric={metric} />
