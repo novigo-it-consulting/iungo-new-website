@@ -66,8 +66,15 @@ async function readOutcome(page) {
     );
     const node = success instanceof HTMLElement ? success : error;
     const text = node instanceof HTMLElement ? node.textContent?.trim() ?? "" : "";
+    let kind = "none";
+    if (success) {
+      kind = "success";
+    } else if (error) {
+      kind = "error";
+    }
+
     return {
-      kind: success ? "success" : error ? "error" : "none",
+      kind,
       isTimeout: /demorou mais do que o esperado/i.test(text),
       isSuccess: /sucesso/i.test(text),
     };

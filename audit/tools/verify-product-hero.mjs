@@ -47,14 +47,6 @@ function readProductHeroMetrics(slug) {
     };
   }
 
-  function readElementText(element) {
-    const text = element.textContent;
-    if (typeof text !== "string") {
-      return "";
-    }
-    return text.replace(/\s+/g, " ").trim();
-  }
-
   const section = document.querySelector(`[data-${slug}-hero-section]`);
   const container = document.querySelector(`[data-${slug}-hero-container]`);
   const content = document.querySelector(`[data-${slug}-hero-content]`);
@@ -102,7 +94,7 @@ function readProductHeroMetrics(slug) {
     buttonWidth: buttonBox.width,
     buttonHeight: buttonBox.height,
     buttonCenterOffset: Math.abs(buttonCenter - containerCenter),
-    buttonText: readElementText(button),
+    buttonText: (button.textContent ?? "").replace(/\s+/g, " ").trim(),
     buttonOverflow: button.scrollWidth > button.clientWidth + 1,
     buttonEllipsis: buttonStyles.textOverflow === "ellipsis",
     imageWidth: image instanceof HTMLElement ? roundBox(image).width : 0,

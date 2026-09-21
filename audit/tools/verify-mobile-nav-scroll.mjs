@@ -21,7 +21,7 @@ const VIEWPORTS = [
 ];
 
 function isCollapsedBannerValid(collapsed) {
-  if (!collapsed || collapsed.solucoesOpen !== false) {
+  if (collapsed?.solucoesOpen !== false) {
     return false;
   }
 
@@ -613,7 +613,7 @@ async function inspectDesktop(page) {
   });
   record(
     "desktop:mega-menu-opens",
-    Boolean(mega && mega.visible && mega.withinViewport),
+    Boolean(mega?.visible && mega?.withinViewport),
     mega,
   );
   recordFullyVisibleGroup(

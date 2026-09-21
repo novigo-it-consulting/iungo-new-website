@@ -35,14 +35,6 @@ function readHeroMetrics(demoHref) {
     };
   }
 
-  function readElementText(element) {
-    const text = element.textContent;
-    if (typeof text !== "string") {
-      return "";
-    }
-    return text.replace(/\s+/g, " ").trim();
-  }
-
   const section = document.querySelector("[data-hero-section]");
   const title = document.querySelector("[data-hero-title]");
   const description = document.querySelector("[data-hero-description]");
@@ -88,6 +80,7 @@ function readHeroMetrics(demoHref) {
   const demoStyles = getComputedStyle(demo);
   const platformStyles = getComputedStyle(platform);
   const titleLineWraps = [];
+  let titleLineCount = 0;
 
   for (const element of title.querySelectorAll(".home-hero-title-line")) {
     if (!(element instanceof HTMLElement)) {
@@ -95,12 +88,9 @@ function readHeroMetrics(demoHref) {
     }
     const lineHeight = Number.parseFloat(getComputedStyle(element).lineHeight);
     const height = element.getBoundingClientRect().height;
-    titleLineWraps.push(lineHeight > 0 ? Math.round(height / lineHeight) : 0);
-  }
-
-  let titleLineCount = 0;
-  for (const count of titleLineWraps) {
-    titleLineCount += count;
+    const wraps = lineHeight > 0 ? Math.round(height / lineHeight) : 0;
+    titleLineWraps.push(wraps);
+    titleLineCount += wraps;
   }
 
   return {
@@ -119,8 +109,8 @@ function readHeroMetrics(demoHref) {
     platformHeight: platformBox.height,
     demoWidth: demoBox.width,
     platformWidth: platformBox.width,
-    demoText: readElementText(demo),
-    platformText: readElementText(platform),
+    demoText: (demo.textContent ?? "").replace(/\s+/g, " ").trim(),
+    platformText: (platform.textContent ?? "").replace(/\s+/g, " ").trim(),
     demoOverflow: demo.scrollWidth > demo.clientWidth + 1,
     platformOverflow: platform.scrollWidth > platform.clientWidth + 1,
     demoEllipsis: demoStyles.textOverflow === "ellipsis",

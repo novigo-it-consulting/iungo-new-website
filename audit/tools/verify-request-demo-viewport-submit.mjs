@@ -91,7 +91,7 @@ function payloadSummary(bodyText) {
 
 function summarizePayload(body) {
   return {
-    keys: Object.keys(body).sort(),
+    keys: Object.keys(body).sort((left, right) => left.localeCompare(right)),
     honeyLength: typeof body._honey === "string" ? body._honey.length : -1,
     hasNome: typeof body.NOME === "string" && body.NOME.length > 0,
     hasEmail: typeof body["EMAIL CORPORATIVO"] === "string",
@@ -177,12 +177,11 @@ function recordCapturedRequest(prefix, captured) {
   record(
     `${prefix}:same-endpoint-post-json`,
     Boolean(
-      post &&
-        post.payload.hasNome &&
-        post.payload.hasEmail &&
-        post.payload.hasEmpresa &&
-        post.payload.hasTemplate &&
-        post.payload.honeyLength === 0,
+      post?.payload.hasNome &&
+        post?.payload.hasEmail &&
+        post?.payload.hasEmpresa &&
+        post?.payload.hasTemplate &&
+        post?.payload.honeyLength === 0,
     ),
     post ?? "missing-request",
   );

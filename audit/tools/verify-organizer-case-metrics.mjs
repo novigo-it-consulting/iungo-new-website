@@ -39,14 +39,6 @@ function readCaseStudyMetrics() {
     };
   }
 
-  function readElementText(element) {
-    const text = element.textContent;
-    if (typeof text !== "string") {
-      return "";
-    }
-    return text.replace(/\s+/g, " ").trim();
-  }
-
   const card = document.querySelector("[data-organizer-case-study-card]");
   const row = document.querySelector("[data-organizer-case-study-indicators]");
   if (!(card instanceof HTMLElement) || !(row instanceof HTMLElement)) {
@@ -68,8 +60,8 @@ function readCaseStudyMetrics() {
     range.selectNodeContents(value);
     const textBox = range.getBoundingClientRect();
     items.push({
-      valueText: readElementText(value),
-      labelText: readElementText(label),
+      valueText: (value.textContent ?? "").replace(/\s+/g, " ").trim(),
+      labelText: (label.textContent ?? "").replace(/\s+/g, " ").trim(),
       valueLeft: valueBox.left,
       valueRight: Math.round(textBox.right),
       valueTop: valueBox.top,

@@ -1,7 +1,5 @@
-import {
-  actionButtonGroupGapClassName,
-  actionButtonPairClassName,
-} from "@/components/ui/actionButtonGroup.styles";
+import { actionButtonGroupGapClassName } from "@/components/ui/actionButtonGroup.styles";
+export { actionButtonPairClassName as mobileNavActionsClassName } from "@/components/ui/actionButtonGroup.styles";
 import {
   mutedFocusVisibleClassName,
   primaryFocusVisibleClassName,
@@ -66,8 +64,6 @@ export const mobileNavPanelInnerClassName =
 
 export const mobileNavItemClassName =
   "block min-h-[44px] cursor-pointer rounded py-3 font-reddit text-lg font-normal leading-8 text-[#383838] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-1";
-
-export const mobileNavActionsClassName = actionButtonPairClassName;
 
 const mobileNavActionBaseClassName =
   "inline-flex h-full min-h-[55px] w-full min-w-0 cursor-pointer items-center justify-center rounded-full px-3 py-2 text-center font-reddit text-base font-bold leading-6 text-white md:px-4";

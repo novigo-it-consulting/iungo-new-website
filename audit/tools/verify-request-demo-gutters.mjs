@@ -136,7 +136,7 @@ function readRequestDemoGutters() {
       const lineCount = range.getClientRects().length;
 
       results.push({
-        id: card.getAttribute("data-request-demo-contact-card"),
+        id: card.dataset.requestDemoContactCard,
         overflow: linkRect.right > cardRect.right + 1,
         lineCount,
         unwrappedWidth: Math.round(unwrappedWidth),
