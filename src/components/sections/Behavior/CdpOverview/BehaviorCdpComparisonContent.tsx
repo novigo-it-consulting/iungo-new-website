@@ -1,13 +1,17 @@
 import BehaviorFeatureCheckIcon from "./BehaviorFeatureCheckIcon";
 import { BEHAVIOR_CDP_FEATURES } from "./behaviorCdpComparison.constants";
+import {
+  homeSectionTitleMobileClassName,
+  productSectionDescriptionBaseClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 const miniContainerClassName = "flex w-full min-w-0 max-w-[567px] flex-col";
 
-const titleClassName =
-  "m-0 w-full font-reddit font-bold text-[#27272A] text-[28px] leading-[34px] tracking-[-0.56px] sm:text-[32px] sm:leading-[38px] sm:tracking-[-0.64px] xl:text-[36px] xl:leading-[40px] xl:tracking-[-0.72px]";
-
-const bodyClassName =
-  "m-0 font-reddit text-[14px] font-normal leading-[22px] text-[#71717A] xl:text-[16px] xl:leading-[24px]";
+const titleClassName = [
+  "m-0 w-full font-reddit font-bold text-[#27272A] tracking-[-0.56px]",
+  homeSectionTitleMobileClassName,
+  "xl:text-[36px] xl:leading-[40px] xl:tracking-[-0.72px]",
+].join(" ");
 
 const featureClassName =
   "font-reddit text-[14px] font-normal leading-[20px] text-[#27272A]";
@@ -35,7 +39,7 @@ export default function BehaviorCdpComparisonContent() {
         data-behavior-cdp-comparison-paragraph-1-block
         className={miniContainerClassName}
       >
-        <p data-behavior-cdp-comparison-paragraph-1 className={bodyClassName}>
+        <p data-behavior-cdp-comparison-paragraph-1 className={productSectionDescriptionBaseClassName}>
           CDPs tradicionais consolidam dados em batches noturnos. Quando o time
           de marketing acorda, a oportunidade já passou.
         </p>
@@ -45,7 +49,7 @@ export default function BehaviorCdpComparisonContent() {
         data-behavior-cdp-comparison-paragraph-2-block
         className={miniContainerClassName}
       >
-        <p data-behavior-cdp-comparison-paragraph-2 className={bodyClassName}>
+        <p data-behavior-cdp-comparison-paragraph-2 className={productSectionDescriptionBaseClassName}>
           O Iungo Behavior CDP processa eventos em{" "}
           <strong className="font-bold text-[#27272A]">&lt; 200ms</strong>,
           alimenta jornadas e sales agents instantaneamente, e mantém um perfil

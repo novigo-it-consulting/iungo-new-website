@@ -3,6 +3,10 @@ import PageContainer from "@/components/layout/PageContainer";
 import ResolveDifferentials from "./Differentials/ResolveDifferentials";
 import ResolveMetricItem from "./ResolveMetricItem";
 import { RESOLVE_METRICS } from "./resolveMetrics.constants";
+import {
+  resolveContentSectionClassName,
+  resolveMetricsGridClassName,
+} from "./resolveMetrics.styles";
 import ResolveSystemScreens from "./SystemScreens/ResolveSystemScreens";
 import ProductTestimonialsSection from "@/components/sections/shared/Testimonials/ProductTestimonialsSection";
 
@@ -13,7 +17,7 @@ export default function ResolveContentSection() {
     <section
       data-resolve-content-section
       aria-label="Conteúdo do Iungo Resolve"
-      className="w-full min-w-0 bg-white xl:pt-[109px]"
+      className={resolveContentSectionClassName}
     >
       <PageContainer
         data-resolve-first-content-container
@@ -22,7 +26,7 @@ export default function ResolveContentSection() {
       >
         <div
           data-resolve-metrics
-          className="mx-auto grid w-full max-w-[1088px] grid-cols-1 gap-8 md:grid-cols-3"
+          className={resolveMetricsGridClassName}
         >
           {RESOLVE_METRICS.map((metric) => (
             <ResolveMetricItem key={metric.id} metric={metric} />

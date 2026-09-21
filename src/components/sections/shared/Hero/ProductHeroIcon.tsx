@@ -18,7 +18,7 @@ export default function ProductHeroIcon({
       {...{ [`data-${productSlug}-hero-icon`]: true }}
       aria-hidden="true"
       style={{ backgroundColor }}
-      className={`flex shrink-0 items-center justify-center rounded-[20px] p-[13.33px] md:rounded-3xl md:p-4 ${PRODUCT_HERO_ICON_SIZE_CLASS_NAMES[sizePreset]}`}
+      className={`flex shrink-0 items-center justify-center ${PRODUCT_HERO_ICON_SIZE_CLASS_NAMES[sizePreset]}`}
     >
       <span className="relative block size-full">
         <Image
@@ -26,7 +26,7 @@ export default function ProductHeroIcon({
           alt=""
           aria-hidden="true"
           fill
-          sizes="(min-width: 1280px) 71px, (min-width: 768px) 64px, 53px"
+          sizes="(min-width: 1280px) 71px, (min-width: 640px) 44px, 40px"
           className="object-contain"
         />
       </span>

@@ -30,7 +30,7 @@ export default function AttendantHeroContent() {
           className={productHeroParagraphClassName}
         >
           O agente que executa, não só responde.
-          <br />
+          <br className="max-xl:hidden" />
           Cancela pedido, troca tamanho, emite segunda via, atualiza endereço,
           gera nota fiscal. Operações reais via APIs do seu ERP, OMS e WMS —
           com auditoria completa.

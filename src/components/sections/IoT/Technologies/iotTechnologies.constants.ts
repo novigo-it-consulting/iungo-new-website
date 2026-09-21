@@ -1,3 +1,8 @@
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
+
 export const IOT_TECHNOLOGIES_HEADER = {
   eyebrow: "TECNOLOGIAS",
   title: "A tecnologia certa para cada cenário.",
@@ -5,11 +10,15 @@ export const IOT_TECHNOLOGIES_HEADER = {
     "Não vendemos um chip — escolhemos o stack ideal para sua operação.",
 } as const;
 
-export const IOT_TECHNOLOGIES_TITLE_CLASS =
-  "m-0 w-full max-w-[588px] font-reddit text-[36px] font-bold !leading-[40px] tracking-[-0.72px] text-[#27272A] text-center";
+export const IOT_TECHNOLOGIES_TITLE_CLASS = [
+  productSectionTitleClassName,
+  "w-full max-w-[588px]",
+].join(" ");
 
-export const IOT_TECHNOLOGIES_DESCRIPTION_CLASS =
-  "m-0 w-full max-w-[504px] font-reddit text-base font-normal !leading-6 tracking-[0px] text-[#71717A] text-center";
+export const IOT_TECHNOLOGIES_DESCRIPTION_CLASS = [
+  productSectionDescriptionClassName,
+  "max-w-[504px]",
+].join(" ");
 
 export interface IoTTechnologyTableRow {
   id: string;

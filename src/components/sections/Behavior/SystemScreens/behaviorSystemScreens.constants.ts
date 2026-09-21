@@ -1,4 +1,8 @@
 import type { ProductSystemScreensContent } from "@/components/sections/shared/SystemScreens/productSystemScreens.types";
+import {
+  homeSectionSubtitleMobileClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 export const BEHAVIOR_SYSTEM_SCREENS = {
   title:
@@ -10,10 +14,15 @@ export const BEHAVIOR_SYSTEM_SCREENS = {
   headerClassNames: {
     container:
       "mx-auto flex w-full max-w-[723px] flex-col gap-3 text-center",
-    title:
-      "m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-normal text-[#27272A] md:text-[36px] md:leading-[43px]",
-    description:
-      "m-0 mx-auto w-full max-w-[579px] font-reddit text-[17px] font-normal leading-[26px] tracking-normal text-[#71717A]",
+    title: [
+      productSectionTitleClassName,
+      "tracking-normal xl:leading-[43px]",
+    ].join(" "),
+    description: [
+      "m-0 mx-auto w-full max-w-[579px] font-reddit font-normal tracking-normal text-[#71717A]",
+      homeSectionSubtitleMobileClassName,
+      "xl:text-[17px] xl:leading-[26px]",
+    ].join(" "),
   },
   badges: [
     { id: "profile-360", label: "Perfil 360°", isActive: true },

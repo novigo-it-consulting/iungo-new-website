@@ -1,4 +1,8 @@
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
+import {
+  homeSectionTitleMobileClassName,
+  productSectionDescriptionBaseClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 export default function ConciergeJourneyStudioContent() {
   return (
@@ -13,7 +17,11 @@ export default function ConciergeJourneyStudioContent() {
       <h2
         id="concierge-studio-title"
         data-concierge-studio-title
-        className="m-0 w-full font-reddit font-bold text-[#27272A] text-[28px] leading-[34px] tracking-[-0.56px] sm:text-[30px] sm:leading-[38px] sm:tracking-[-0.6px] xl:text-[32px] xl:leading-[40px] xl:tracking-[-0.64px]"
+        className={[
+          "m-0 w-full font-reddit font-bold text-[#27272A] tracking-[-0.56px]",
+          homeSectionTitleMobileClassName,
+          "xl:text-[32px] xl:leading-[40px] xl:tracking-[-0.64px]",
+        ].join(" ")}
       >
         Drag-and-drop. Sem código. Sem
         <br className="hidden xl:block" />
@@ -22,7 +30,7 @@ export default function ConciergeJourneyStudioContent() {
 
       <p
         data-concierge-studio-description
-        className="m-0 w-full font-reddit text-[14px] font-normal leading-[22px] tracking-normal text-[#71717A] xl:text-[16px] xl:leading-[24px]"
+        className={productSectionDescriptionBaseClassName}
       >
         Marketing constrói, testa e publica jornadas sozinho. Trigger,
         condicionais,
@@ -34,7 +42,7 @@ export default function ConciergeJourneyStudioContent() {
 
       <p
         data-concierge-studio-behavior-description
-        className="m-0 w-full font-reddit text-[14px] font-normal leading-[22px] tracking-normal text-[#71717A] xl:text-[16px] xl:leading-[24px]"
+        className={productSectionDescriptionBaseClassName}
       >
         E ao contrário de Braze ou Klaviyo, o Studio usa o{" "}
         <strong className="font-bold text-[#27272A]">Behavior Engine</strong>{" "}

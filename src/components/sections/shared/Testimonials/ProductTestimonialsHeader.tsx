@@ -1,3 +1,8 @@
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
+
 type ProductTestimonialsHeaderProps = {
   productSlug: string;
   title: string;
@@ -36,7 +41,7 @@ export default function ProductTestimonialsHeader({
           {...{
             [`data-${productSlug}-testimonials-title`]: true,
           }}
-          className="m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]"
+          className={productSectionTitleClassName}
         >
           {title}
         </h2>
@@ -46,7 +51,7 @@ export default function ProductTestimonialsHeader({
         {...{
           [`data-${productSlug}-testimonials-description`]: true,
         }}
-        className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
+        className={productSectionDescriptionClassName}
       >
         {description}
       </p>

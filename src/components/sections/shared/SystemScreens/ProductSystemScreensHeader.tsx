@@ -1,13 +1,15 @@
 import type { ProductSystemScreensHeaderClassNames } from "./productSystemScreens.types";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 const defaultContainerClassName =
   "mx-auto flex w-full max-w-[672px] flex-col gap-3 text-center";
 
-const defaultTitleClassName =
-  "m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]";
+const defaultTitleClassName = productSectionTitleClassName;
 
-const defaultDescriptionClassName =
-  "m-0 w-full font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]";
+const defaultDescriptionClassName = productSectionDescriptionClassName;
 
 type ProductSystemScreensHeaderProps = {
   productSlug: string;

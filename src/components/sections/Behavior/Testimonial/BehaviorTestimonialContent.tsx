@@ -1,8 +1,7 @@
-const titleClassName =
-  "m-0 text-center font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] sm:text-[32px] sm:leading-[38px] sm:tracking-[-0.64px] xl:text-[36px] xl:leading-[40px] xl:tracking-[-0.72px]";
-
-const subtitleClassName =
-  "m-0 text-center font-reddit text-[14px] font-normal leading-[22px] text-[#71717A] xl:text-[16px] xl:leading-[24px]";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 export default function BehaviorTestimonialContent() {
   return (
@@ -16,7 +15,7 @@ export default function BehaviorTestimonialContent() {
       >
         <blockquote
           data-behavior-testimonial-quote
-          className={titleClassName}
+          className={productSectionTitleClassName}
         >
           &ldquo;Saímos de um CDP batch noturno para o Iungo Behavior CDP. A
           ativação subiu 240% em 90 dias.&rdquo;
@@ -27,7 +26,10 @@ export default function BehaviorTestimonialContent() {
         data-behavior-testimonial-subtitle-block
         className="w-full px-8"
       >
-        <p data-behavior-testimonial-attribution className={subtitleClassName}>
+        <p
+          data-behavior-testimonial-attribution
+          className={productSectionDescriptionClassName}
+        >
           — CMO, varejo premium (case sob NDA)
         </p>
       </div>

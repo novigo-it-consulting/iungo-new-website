@@ -4,11 +4,14 @@ import {
   primaryFocusVisibleClassName,
   solidButtonHoverClassName,
 } from "@/components/ui/buttonInteraction.styles";
-import { homeSectionSubtitleMobileClassName } from "@/components/ui/sectionTitle.styles";
+import {
+  homeSectionSubtitleMobileClassName,
+  pageHeroTitleMobileClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 export const homeHeroTitleClassName = [
   "home-hero-title m-0 w-full min-w-0 font-reddit font-semibold tracking-[-0.01em] text-[#424241]",
-  "text-[clamp(26px,8.2vw,40px)] leading-[clamp(32px,9.8vw,48px)]",
+  pageHeroTitleMobileClassName,
   "sm:text-[44px] sm:leading-[52px] md:text-[48px] md:leading-[58px]",
 ].join(" ");
 

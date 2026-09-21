@@ -1,5 +1,9 @@
 import ResolveDifferentialCard from "./ResolveDifferentialCard";
 import { RESOLVE_DIFFERENTIAL_CARDS } from "./resolveDifferentials.constants";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 export default function ResolveDifferentials() {
   return (
@@ -21,14 +25,14 @@ export default function ResolveDifferentials() {
         <h2
           id="resolve-differentials-title"
           data-resolve-differentials-title
-          className="m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]"
+          className={productSectionTitleClassName}
         >
           Por que o Iungo Resolve vê o que Zendesk e Intercom não veem.
         </h2>
 
         <p
           data-resolve-differentials-subtitle
-          className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
+          className={productSectionDescriptionClassName}
         >
           Não é mais um chatbot treinado em FAQ. É um agente plugado nos dados
           vivos da sua operação.

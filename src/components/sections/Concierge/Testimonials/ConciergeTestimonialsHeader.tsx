@@ -1,4 +1,8 @@
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 export default function ConciergeTestimonialsHeader() {
   return (
@@ -15,7 +19,7 @@ export default function ConciergeTestimonialsHeader() {
         <h2
           id="concierge-testimonials-title"
           data-concierge-testimonials-title
-          className="w-full max-w-[496px] text-center font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] sm:text-[32px] sm:leading-[38px] sm:tracking-[-0.64px] xl:text-[36px] xl:leading-[40px] xl:tracking-[-0.72px]"
+            className={`${productSectionTitleClassName} w-full max-w-[496px]`}
         >
           Marketing solta a régua sem TI.
         </h2>
@@ -23,7 +27,7 @@ export default function ConciergeTestimonialsHeader() {
 
       <p
         data-concierge-testimonials-description
-        className="w-full max-w-[619px] text-center font-reddit text-[14px] font-normal leading-[22px] tracking-normal text-[#71717A] sm:text-[15px] sm:leading-[23px] xl:text-[16px] xl:leading-[24px]"
+        className={`${productSectionDescriptionClassName} max-w-[619px]`}
       >
         CMOs e CRM leads que pararam de depender de tickets de engenharia para
         testar uma jornada.
