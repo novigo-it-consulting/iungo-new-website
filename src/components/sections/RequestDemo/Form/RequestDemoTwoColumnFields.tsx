@@ -1,10 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 import RequestDemoField from "./RequestDemoField";
-import {
-  requestDemoFormRowLeftColumnClassName,
-  requestDemoFormRowRightColumnClassName,
-} from "./requestDemoFormRow.styles";
+import { requestDemoFormRowColumnClassName } from "./requestDemoFormRow.styles";
 
 type RequestDemoInputFieldConfig = {
   id: string;
@@ -38,11 +35,11 @@ export default function RequestDemoTwoColumnFields({
 }: Readonly<RequestDemoTwoColumnFieldsProps>) {
   return (
     <div {...{ [`data-${dataAttribute}`]: true }} className={rowClassName}>
-      <div className={requestDemoFormRowLeftColumnClassName}>
+      <div className={requestDemoFormRowColumnClassName}>
         <RequestDemoField {...leftField} />
       </div>
 
-      <div className={requestDemoFormRowRightColumnClassName}>
+      <div className={requestDemoFormRowColumnClassName}>
         <RequestDemoField {...rightField} />
       </div>
     </div>

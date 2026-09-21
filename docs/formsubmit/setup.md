@@ -1,54 +1,70 @@
 # FormSubmit — Configuração e Ativação
 
-O formulário "Vamos conversar" usa o FormSubmit via AJAX (`fetch`). Não há variáveis de ambiente nem chaves públicas para configurar: o destinatário (`comercial@iungo-ai.com`) está fixo em `src/lib/formsubmit.ts`.
+O formulário "Vamos conversar" envia via AJAX **do navegador** para:
 
-## Ativação da caixa de destino (obrigatório antes de receber leads)
+```
+POST https://formsubmit.co/ajax/comercial@iungo-ai.com
+Content-Type: application/x-www-form-urlencoded;charset=UTF-8
+Accept: application/json
+```
 
-O FormSubmit exige que o destinatário confirme o endereço na primeira tentativa de envio.
+JSON (`Content-Type: application/json`) obriga um preflight CORS (`OPTIONS`). No Chrome esse `OPTIONS` para `formsubmit.co` fica pendente e o fetch é cancelado aos 15s — o `POST` do lead não conclui. `application/x-www-form-urlencoded` é pedido simples: o `POST` sai sem `OPTIONS`. O `Accept: application/json` pede a resposta JSON. Origin e Referer são os que o navegador envia. O FormSubmit identifica o formulário já ativado por essa origem; um POST feito pelo servidor Next.js (com Origin/Referer inventados) é outro pedido e quebra o reconhecimento.
 
-1. Rode o servidor local com `npm run dev`.
-2. Preencha e envie o formulário **a partir do servidor HTTP** (`http://localhost:3000/solicitar-demonstracao`).
-   - `file://` não funciona — o FormSubmit verifica a origem HTTP.
-3. A caixa `comercial@iungo-ai.com` recebe um e-mail de **confirmação do FormSubmit**.
-4. Clique no link de confirmação nesse e-mail.
-5. Repita o envio: desta vez o lead deve chegar na caixa (verifique também o spam).
+Não há variáveis `NEXT_PUBLIC_*`. O destinatário fica em `src/lib/formsubmit.ts`.
+
+A interface do visitante **não** mostra instruções de ativação. As falhas usam mensagens distintas:
+
+- rejeição explícita do FormSubmit (success false sem ativação, ou HTTP 4xx);
+- timeout (AbortError aos 15s);
+- ativação só quando a mensagem do serviço cita Activate Form — o texto ao visitante não pede que ative o formulário;
+- resultado incerto (rede, HTTP 5xx, JSON inválido).
+
+Em todos esses casos a UI oferece contato por `comercial@iungo-ai.com` e preserva os campos preenchidos.
+
+## Ativação da caixa de destino (procedimento interno)
+
+O FormSubmit exige confirmação do destinatário na primeira origem (localhost e produção são origens diferentes).
+
+1. Envie o formulário a partir de um servidor HTTP (`http://localhost:3000/solicitar-demonstracao` ou o domínio publicado). `file://` não funciona.
+2. A caixa `comercial@iungo-ai.com` recebe o e-mail de confirmação do FormSubmit.
+3. Clique no link de ativação.
+4. O próximo envio pela **mesma origem** deve chegar como lead (confira também o spam).
+
+Respostas observadas do `/ajax` (HTTP 200, corpo JSON):
+
+```json
+{"success":"true"}
+```
+
+```json
+{"success":"false","message":"This form needs Activation. We've sent you an email containing an 'Activate Form' link. Just click it and your form will be actived!"}
+```
+
+`success: "false"` é recusa explícita, não sucesso. Se a mensagem citar Activate Form, a UI usa o texto de ativação (sem pedir que a pessoa clique no e-mail de confirmação). Outras recusas usam o texto de rejeição. Timeout usa um terceiro texto. Rede/5xx/JSON inválido usam o texto de envio não confirmado.
 
 ### Opcional pós-ativação: invisible email
 
-Após a confirmação, o FormSubmit envia um **hash** chamado "invisible email" (ex.: `abc123...`). Ele pode ser usado no endpoint no lugar do e-mail:
+Após a confirmação, o FormSubmit envia um hash ("invisible email"). Ele pode substituir o e-mail no endpoint:
 
 ```
 POST https://formsubmit.co/ajax/<hash>
 ```
 
-Isso evita expor o endereço de destino na source do site. Para usá-lo, altere `FORMSUBMIT_ENDPOINT` em `src/lib/formsubmit.ts`. O hash não é um segredo — é apenas um identificador e não substitui proteção contra abuso.
-
-## Ativação em produção
-
-Repita o processo acima a partir do **domínio de produção** (não apenas de localhost). O FormSubmit pode exigir confirmação por origem.
+Altere `FORMSUBMIT_ENDPOINT` em `src/lib/formsubmit.ts`. O hash não é um segredo e não substitui proteção contra abuso.
 
 ## Proteções disponíveis
 
 ### Honeypot (`_honey`)
 
-Campo invisível presente no formulário (`name="_honey"`). Se um bot preencher este campo, o FormSubmit descarta o envio em silêncio. O campo tem `aria-hidden`, `tabIndex={-1}` e `autoComplete="off"` para não interferir com usuários reais.
-
-**Limitação:** não equivale a CAPTCHA. Bots sofisticados que ignorem campos ocultos não são bloqueados.
+Campo invisível (`name="_honey"`), depois dos campos reais para o gerenciador de senhas do desktop não preenchê-lo como se fosse o primeiro input. Se um bot preencher, o FormSubmit descarta o envio. Não equivale a CAPTCHA. Não remova este campo para contornar falha de envio.
 
 ### CAPTCHA no fluxo AJAX
 
-A documentação oficial do FormSubmit descreve o reCAPTCHA somente para formulários HTML tradicionais (com `action`). Os exemplos do endpoint `/ajax` (fetch e jQuery) **não** descrevem widget de CAPTCHA nem token de verificação. Sem um teste controlado contra o endpoint, não é possível afirmar se o CAPTCHA está ativo ou não neste fluxo.
-
-Por isso:
-- Este formulário **não** envia `_captcha: false` (para não desativar proteção que possa existir por suposição).
-- Este formulário **não** implementa widget de CAPTCHA (que seria ignorado pelo endpoint AJAX).
-- A documentação não afirma que CAPTCHA esteja ativo neste fluxo.
+A documentação descreve o reCAPTCHA só para formulários HTML com `action`. Os exemplos `/ajax` não descrevem widget nem token. Este formulário **não** envia `_captcha: false`.
 
 ## Template de e-mail
 
-O payload usa `_template: "table"`, que gera um e-mail formatado automaticamente pelo FormSubmit com os campos visíveis como tabela. Não é necessário HTML próprio.
-
-Campos enviados e como aparecem no e-mail:
+O payload usa `_template: "table"`.
 
 | Chave no payload        | Aparece na tabela como     |
 |-------------------------|----------------------------|
@@ -59,38 +75,33 @@ Campos enviados e como aparecem no e-mail:
 | `TELEFONE / WHATSAPP`   | TELEFONE / WHATSAPP        |
 | `PRODUTO DE INTERESSE`  | PRODUTO DE INTERESSE       |
 | `MENSAGEM`              | MENSAGEM                   |
-| `_replyto`              | Reply-To do e-mail (cabeçalho) — não aparece como linha de conteúdo |
-| `_subject`              | Assunto do e-mail          |
-| `_honey`                | Não aparece (campo especial) |
-
-O campo `email` do visitante aparece **uma única vez** como `EMAIL CORPORATIVO`. Não há linha duplicada porque `_replyto` é tratado como cabeçalho Reply-To, não como campo de conteúdo.
+| `_replyto`              | Reply-To (cabeçalho)       |
+| `_subject`              | Assunto                    |
+| `_honey`                | Não aparece                |
 
 ## Timeout
 
-O módulo usa `AbortController` com 15 segundos. Se o servidor demorar mais que isso, o formulário exibe a mensagem de resultado incerto ("Não foi possível confirmar o envio. Aguarde um momento antes de tentar novamente.") e libera o botão. Os dados são preservados. O servidor pode ter processado a requisição antes da interrupção, por isso a mensagem não afirma que o envio falhou.
+`AbortController` de 15 segundos. Se estourar, a UI mostra a mensagem de timeout (distinta da rejeição e da ativação) e preserva os campos. Não há reenvio automático. O serviço pode ter processado antes do abort.
 
-## Verificação manual
+No Network do Chrome, o envio correto mostra **um** `POST` para `formsubmit.co/ajax/...`, sem linha `Preflight` pendente. Se ainda aparecer `Preflight` + fetch `(canceled)` em 15.00 s, o `Content-Type` voltou a ser JSON.
 
-1. Ative a caixa conforme descrito acima.
-2. Preencha o formulário com dados reais e envie.
-3. Confira o e-mail em `comercial@iungo-ai.com` (incluindo spam).
-4. Responda ao e-mail: o Reply-To deve apontar para o endereço do visitante.
+## Verificação manual (um envio identificado)
 
-### Testando o estado de resultado incerto (offline)
+1. Preencha o formulário com dados claramente de teste (ex.: nome `TESTE IUNGO — ignorar`).
+2. Envie **uma** vez a partir do domínio já ativado.
+3. Confira `comercial@iungo-ai.com` (entrada e spam).
+4. Aceitação pelo FormSubmit (`success: true`) não é a mesma coisa que o e-mail visível na caixa.
 
-Para simular perda de conexão e verificar a mensagem "Não foi possível confirmar o envio":
+### Testando resultado incerto (offline)
 
-1. Abra `http://localhost:3000/solicitar-demonstracao` no navegador.
+1. Abra a página pelo servidor HTTP.
 2. Preencha o formulário.
-3. Abra o DevTools → aba **Network** → selecione **Offline** no menu de throttling.
-4. Clique em "Enviar mensagem": o formulário deve exibir a mensagem de resultado incerto e preservar os dados.
-5. Restaure a conexão em Network → **No throttling**.
+3. DevTools → Network → Offline.
+4. Envie: a mensagem de não confirmação deve aparecer e os dados permanecem.
+5. Restaure a conexão.
 
-> **Por que não basta parar o servidor Next.js?**
-> O formulário envia diretamente para `https://formsubmit.co/ajax/…` — um servidor externo.
-> O servidor Next.js serve apenas os assets e a página inicial; a requisição AJAX não passa por ele.
-> Parar o Next.js impede carregar a página, mas não simula perda de rede durante o envio.
+O POST vai para `formsubmit.co`, não para o Next.js. Parar `npm run dev` não simula perda de rede nesse envio.
 
-## Logs e depuração
+## Logs
 
-Erros de rede e respostas inesperadas são capturados em `sendRequestDemoEmail` e retornados como mensagem amigável ao usuário. Dados pessoais não são registrados em log.
+A classificação usa só status, categoria (`activation` / `rejection` / `uncertain`) e a mensagem ao visitante. Dados pessoais não são registrados.

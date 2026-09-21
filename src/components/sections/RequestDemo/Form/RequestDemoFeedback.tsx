@@ -15,9 +15,12 @@
 
 import type { ReactNode } from "react";
 
+import { COMMERCIAL_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
+
 import {
   requestDemoFeedbackErrorClassName,
   requestDemoFeedbackErrorIconClassName,
+  requestDemoFeedbackErrorLinkClassName,
   requestDemoFeedbackErrorTextClassName,
   requestDemoFeedbackSuccessClassName,
   requestDemoFeedbackSuccessIconClassName,
@@ -75,6 +78,30 @@ function XIcon() {
   );
 }
 
+function FeedbackMessage({
+  message,
+  className,
+}: Readonly<{ message: string; className: string }>) {
+  const parts = message.split(COMMERCIAL_EMAIL);
+
+  if (parts.length === 1) {
+    return <span className={className}>{message}</span>;
+  }
+
+  return (
+    <span className={className}>
+      {parts[0]}
+      <a
+        href={`mailto:${COMMERCIAL_EMAIL}`}
+        className={requestDemoFeedbackErrorLinkClassName}
+      >
+        {COMMERCIAL_EMAIL}
+      </a>
+      {parts.slice(1).join(COMMERCIAL_EMAIL)}
+    </span>
+  );
+}
+
 export default function RequestDemoFeedback({
   type,
   message,
@@ -92,7 +119,7 @@ export default function RequestDemoFeedback({
       <span className={iconClassName}>
         {isSuccess ? <CheckIcon /> : <XIcon />}
       </span>
-      <span className={textClassName}>{message}</span>
+      <FeedbackMessage message={message} className={textClassName} />
     </>
   );
 

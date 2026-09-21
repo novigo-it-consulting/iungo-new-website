@@ -1,3 +1,5 @@
+import { primaryFocusVisibleClassName } from "@/components/ui/buttonInteraction.styles";
+
 import type { ContactCardVariant } from "./contactCards.constants";
 
 const contactCardVariantClassNames: Record<
@@ -27,8 +29,11 @@ export const contactCardBaseClassName =
 export const contactCardTitleClassName =
   "m-0 font-reddit text-[15.48px] font-normal leading-[20.6px] tracking-[0]";
 
-export const contactCardContactClassName =
-  "mt-[11px] font-reddit text-[18.06px] font-normal leading-[25.8px] tracking-[0] underline-offset-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2";
+export const contactCardContactClassName = [
+  "mt-[11px] max-w-full min-w-0 [overflow-wrap:anywhere]",
+  "font-reddit text-[18.06px] font-normal leading-[25.8px] tracking-[0] underline-offset-2",
+  primaryFocusVisibleClassName,
+].join(" ");
 
 export const contactCardDescriptionClassName =
   "mt-[4.52px] m-0 font-reddit text-[15.48px] font-normal leading-[20.6px] tracking-[0]";

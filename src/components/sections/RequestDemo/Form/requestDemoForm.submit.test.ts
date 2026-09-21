@@ -165,6 +165,17 @@ describe("mapRequestDemoPayload", () => {
     const payload = mapRequestDemoPayload(values({ honey: "bot-value" }));
     expect(payload._honey).toBe("bot-value");
   });
+
+  it("lê o honeypot mesmo quando ele não é o primeiro campo do FormData", () => {
+    const data = new FormData();
+    data.set("name", "Ana Silva");
+    data.set("email", "ana@empresa.com.br");
+    data.set("company", "Empresa Exemplo");
+    data.set("contactType", "demonstracao");
+    data.set("_honey", "");
+
+    expect(readRequestDemoFormValuesFromData(data).honey).toBe("");
+  });
 });
 
 function createFormData(
@@ -229,5 +240,12 @@ describe("readRequestDemoFormValuesFromData", () => {
 
     expect(result.message).toBe(longMessage);
     expect(result.message).not.toContain("[object Object]");
+  });
+
+  it("não exige checkbox de consentimento: o aviso é informativo", () => {
+    const result = readForm();
+
+    expect(result).not.toHaveProperty("consent");
+    expect(validateRequestDemoForm(result)).toEqual({});
   });
 });

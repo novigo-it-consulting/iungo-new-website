@@ -3,8 +3,7 @@ export const requestDemoSectionClassName =
 
 // Passa ao PageContainer size="content1264" somente a estrutura de coluna flexível.
 // max-width, centralização e gutters laterais são de responsabilidade do PageContainer.
-export const requestDemoPageFrameClassName =
-  "flex min-w-0 w-full flex-col";
+export const requestDemoPageFrameClassName = "flex min-w-0 flex-col";
 
 export const requestDemoTitleClassName =
   "request-demo-title m-0 w-full max-w-[561.03px] font-reddit font-semibold tracking-[-0.01em] text-[#424241] text-[40px] leading-[48px] sm:text-[44px] sm:leading-[58px] md:text-[48px] md:leading-[64px]";

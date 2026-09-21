@@ -1,34 +1,64 @@
 /**
- * Envio AJAX para o FormSubmit. O destinatário fica só neste módulo;
- * nenhum campo do formulário define o e-mail de destino.
+ * Envio AJAX para o FormSubmit, disparado pelo navegador.
+ * O destinatário fica só neste módulo; nenhum campo do formulário
+ * define o e-mail de destino.
  *
- * CAPTCHA: a documentação AJAX oficial (formsubmit.co/documentation)
- * descreve o reCAPTCHA somente para formulários HTML tradicionais.
- * Os exemplos de fetch/jQuery no endpoint /ajax não mencionam widget
- * nem token de verificação. Sem teste controlado contra o endpoint,
- * este módulo não afirma CAPTCHA ativo nem envia _captcha=false para
- * não desativar proteção existente por suposição.
+ * Content-Type application/json dispara um preflight CORS (OPTIONS).
+ * No Chrome o OPTIONS para formsubmit.co fica pendente e o POST é
+ * cancelado aos 15s — o lead nem sai. application/x-www-form-urlencoded
+ * é pedido “simples”: o POST vai direto. Accept application/json continua
+ * para o serviço devolver JSON. Origin/Referer são os do navegador.
+ * Este módulo não inventa Origin, Referer nem `_url`.
  *
- * Honeypot (_honey): proteção documentada e disponível no fluxo AJAX.
- * Se preenchido, o FormSubmit ignora o envio. Não equivale a CAPTCHA.
+ * CAPTCHA: a documentação AJAX descreve o reCAPTCHA só para HTML
+ * tradicional. Este módulo não envia _captcha=false.
  *
- * Classificação de resultados:
+ * Honeypot (_honey): se preenchido, o FormSubmit ignora o envio.
  *
- *  SUCESSO   — response.ok E success === true ou "true".
- *
- *  REJEIÇÃO  — HTTP 4xx: o serviço recusou a solicitação explicitamente.
- *              A solicitação não foi aceita pelo destinatário.
- *
- *  INCERTO   — fetch() lançou (rede, abort, timeout), HTTP 5xx,
- *              JSON inválido, success ausente ou valor inesperado.
- *              O servidor pode ter processado antes da falha;
- *              nunca transformamos ausência de confirmação em rejeição.
+ * SUCESSO    — HTTP 2xx e success === true | "true".
+ * ATIVAÇÃO   — success false e mensagem de Activate Form (classificação
+ *              interna; a UI do visitante não instrui ativação).
+ * REJEIÇÃO   — success false sem ativação, ou HTTP 4xx.
+ * TIMEOUT    — AbortError do limite de 15s.
+ * INCERTO    — rede, HTTP 5xx, JSON inválido ou success ausente.
+ *              Não afirma que o e-mail não chegou.
  */
 
-export const FORMSUBMIT_ENDPOINT =
-  "https://formsubmit.co/ajax/comercial@iungo-ai.com";
+import {
+  COMMERCIAL_EMAIL,
+  FORMSUBMIT_MESSAGES,
+  type FormSubmitFailureReason,
+  type FormSubmitSendResult,
+} from "./formsubmit.messages";
+
+export {
+  FORMSUBMIT_MESSAGES,
+  type FormSubmitFailureReason,
+  type FormSubmitSendResult,
+} from "./formsubmit.messages";
+
+export const FORMSUBMIT_ENDPOINT = `https://formsubmit.co/ajax/${COMMERCIAL_EMAIL}`;
 
 const FORMSUBMIT_TIMEOUT_MS = 15_000;
+
+export const FORMSUBMIT_POST_HEADERS = {
+  "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+  Accept: "application/json",
+} as const;
+
+export function toFormSubmitBody(
+  payload: RequestDemoSubmitPayload,
+): URLSearchParams {
+  const params = new URLSearchParams();
+
+  for (const [key, value] of Object.entries(payload)) {
+    if (typeof value === "string") {
+      params.set(key, value);
+    }
+  }
+
+  return params;
+}
 
 /**
  * Tipo do payload enviado ao FormSubmit.
@@ -49,22 +79,13 @@ export type RequestDemoSubmitPayload = {
   _honey: string;
 };
 
-// Resultado incerto: não sabemos se o servidor processou.
-const UNCERTAIN_MESSAGE =
-  "Não foi possível confirmar o envio. Aguarde um momento antes de tentar novamente.";
-
-// Rejeição explícita: o serviço recusou a solicitação (HTTP 4xx).
-const REJECTION_MESSAGE =
-  "Não foi possível enviar sua mensagem. Tente novamente em instantes.";
-
 type FormSubmitBody = {
   success?: unknown;
+  message?: unknown;
 };
 
-/**
- * Verifica o campo success sem Boolean(), pois a string "false"
- * seria truthy. Aceita somente true (booleano) ou "true" (string).
- */
+let inFlight = false;
+
 export function isFormSubmitSuccess(body: unknown): boolean {
   if (typeof body !== "object" || body === null) {
     return false;
@@ -74,9 +95,98 @@ export function isFormSubmitSuccess(body: unknown): boolean {
   return success === true || success === "true";
 }
 
+export function isFormSubmitExplicitFailure(body: unknown): boolean {
+  if (typeof body !== "object" || body === null) {
+    return false;
+  }
+
+  const { success } = body as FormSubmitBody;
+  return success === false || success === "false";
+}
+
+export function isFormSubmitActivationMessage(serviceMessage: string): boolean {
+  const normalized = serviceMessage.toLowerCase();
+
+  return (
+    normalized.includes("activation") ||
+    normalized.includes("activate form") ||
+    normalized.includes("actived") ||
+    normalized.includes("confirmation link") ||
+    normalized.includes("confirm the form")
+  );
+}
+
+function readFormSubmitMessage(body: unknown): string {
+  if (typeof body !== "object" || body === null) {
+    return "";
+  }
+
+  const { message } = body as FormSubmitBody;
+  return typeof message === "string" ? message : "";
+}
+
+function visitorFailure(
+  reason: FormSubmitFailureReason,
+): Extract<FormSubmitSendResult, { ok: false }> {
+  const messageByReason: Record<FormSubmitFailureReason, string> = {
+    "in-flight": FORMSUBMIT_MESSAGES.inFlight,
+    timeout: FORMSUBMIT_MESSAGES.timeout,
+    rejection: FORMSUBMIT_MESSAGES.rejection,
+    activation: FORMSUBMIT_MESSAGES.activation,
+    uncertain: FORMSUBMIT_MESSAGES.unconfirmed,
+  };
+
+  return {
+    ok: false,
+    message: messageByReason[reason],
+    reason,
+  };
+}
+
+function isAbortError(error: unknown): boolean {
+  return (
+    (error instanceof DOMException && error.name === "AbortError") ||
+    (error instanceof Error && error.name === "AbortError")
+  );
+}
+
+export function classifyFormSubmitResponse(
+  status: number,
+  body: unknown,
+  jsonParseFailed: boolean,
+): FormSubmitSendResult {
+  const isServerError = status >= 500;
+
+  if (!jsonParseFailed && !isServerError) {
+    if (status >= 200 && status < 300 && isFormSubmitSuccess(body)) {
+      return { ok: true };
+    }
+
+    if (isFormSubmitExplicitFailure(body)) {
+      const serviceMessage = readFormSubmitMessage(body);
+      return visitorFailure(
+        isFormSubmitActivationMessage(serviceMessage)
+          ? "activation"
+          : "rejection",
+      );
+    }
+  }
+
+  if (status >= 400 && status < 500) {
+    return visitorFailure("rejection");
+  }
+
+  return visitorFailure("uncertain");
+}
+
 export async function sendRequestDemoEmail(
   payload: RequestDemoSubmitPayload,
-): Promise<{ ok: true } | { ok: false; message: string }> {
+): Promise<FormSubmitSendResult> {
+  if (inFlight) {
+    return visitorFailure("in-flight");
+  }
+
+  inFlight = true;
   const controller = new AbortController();
   const timeoutId = setTimeout(
     () => controller.abort(),
@@ -86,39 +196,25 @@ export async function sendRequestDemoEmail(
   try {
     const response = await fetch(FORMSUBMIT_ENDPOINT, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(payload),
+      headers: { ...FORMSUBMIT_POST_HEADERS },
+      body: toFormSubmitBody(payload),
       signal: controller.signal,
     });
 
-    // HTTP 4xx: o serviço recusou a solicitação explicitamente.
-    if (response.status >= 400 && response.status < 500) {
-      return { ok: false, message: REJECTION_MESSAGE };
-    }
+    let body: unknown = undefined;
+    let jsonParseFailed = false;
 
-    // Tenta decodificar o JSON. Falha aqui (5xx com HTML, resposta vazia,
-    // conteúdo inesperado) é resultado incerto: não sabemos se chegou.
-    let body: unknown;
     try {
       body = await response.json();
     } catch {
-      return { ok: false, message: UNCERTAIN_MESSAGE };
+      jsonParseFailed = true;
     }
 
-    // success ausente ou com valor inesperado → incerto.
-    // success === true | "true" → sucesso.
-    if (!isFormSubmitSuccess(body)) {
-      return { ok: false, message: UNCERTAIN_MESSAGE };
-    }
-
-    return { ok: true };
-  } catch {
-    // fetch() lançou: rede, abort ou timeout → resultado incerto.
-    return { ok: false, message: UNCERTAIN_MESSAGE };
+    return classifyFormSubmitResponse(response.status, body, jsonParseFailed);
+  } catch (error) {
+    return visitorFailure(isAbortError(error) ? "timeout" : "uncertain");
   } finally {
     clearTimeout(timeoutId);
+    inFlight = false;
   }
 }
