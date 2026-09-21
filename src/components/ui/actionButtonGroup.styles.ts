@@ -10,3 +10,12 @@ export const actionButtonPairClassName = [
   "grid w-full min-w-0 grid-cols-2",
   actionButtonGroupGapClassName,
 ].join(" ");
+
+/** Pílula azul compacta (Cases, ProductCard). Largura/altura ficam no consumidor. */
+export const ctaPillBaseClassName = [
+  "box-border inline-flex shrink-0 cursor-pointer items-center justify-center gap-[8.67px]",
+  "whitespace-nowrap rounded-[43.36px] border-0 px-[13.88px] py-[6.94px] shadow-none",
+].join(" ");
+
+export const ctaPillLabelClassName =
+  "h-auto w-fit whitespace-nowrap font-reddit text-[13.63px] font-bold leading-[20.8px] tracking-[0] text-white";

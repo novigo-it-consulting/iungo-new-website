@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 
 import PageContainer from "@/components/layout/PageContainer";
+import { homeSectionTitleClassName } from "@/components/ui/sectionTitle.styles";
 
 import { SCALE_PROOF_ITEMS } from "./scaleProof.constants";
 import "./homeScaleProof.css";
@@ -45,7 +46,7 @@ export default function ScaleProofSection() {
         <h2
           id="home-scale-proof-title"
           data-scale-proof-title
-          className="mb-8 text-center font-reddit text-[30px] font-semibold leading-[72.7px] tracking-[-0.01em] text-[#424241]"
+          className={`mb-8 ${homeSectionTitleClassName}`}
         >
           Tecnologia comprovada em operações de grande escala
         </h2>

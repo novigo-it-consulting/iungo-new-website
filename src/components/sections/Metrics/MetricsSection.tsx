@@ -1,4 +1,5 @@
 import PageContainer from "@/components/layout/PageContainer";
+import { homeSectionTitleClassName } from "@/components/ui/sectionTitle.styles";
 
 import MetricItem from "./MetricItem";
 import { METRICS } from "./metrics.constants";
@@ -16,7 +17,7 @@ export default function MetricsSection() {
       >
         <h2
           data-metrics-heading
-          className="w-full max-w-[900px] text-center font-reddit text-[30px] font-semibold leading-[72.7px] tracking-[-0.01em] text-[#424241] 2xl:mt-[50px]"
+          className={`${homeSectionTitleClassName} max-w-[900px] 2xl:mt-[50px]`}
         >
           Métricas que decisores enterprise levam a sério.
         </h2>

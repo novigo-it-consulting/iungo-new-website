@@ -4,6 +4,7 @@ import {
   primaryFocusVisibleClassName,
   solidButtonHoverClassName,
 } from "@/components/ui/buttonInteraction.styles";
+import { homeSectionSubtitleMobileClassName } from "@/components/ui/sectionTitle.styles";
 
 export const homeHeroTitleClassName = [
   "home-hero-title m-0 w-full min-w-0 font-reddit font-semibold tracking-[-0.01em] text-[#424241]",
@@ -18,8 +19,11 @@ export const homeHeroTitleHighlightClassName = [
   "font-bold text-[#0024AE]",
 ].join(" ");
 
-export const homeHeroDescriptionClassName =
-  "home-hero-description m-0 w-full font-reddit font-normal tracking-[0em] text-[#909090] text-sm leading-6 sm:text-[15px] sm:leading-[28px] xl:mt-0";
+export const homeHeroDescriptionClassName = [
+  "home-hero-description m-0 w-full font-reddit font-normal tracking-[0em] text-[#909090]",
+  homeSectionSubtitleMobileClassName,
+  "xl:mt-0",
+].join(" ");
 
 const homeHeroActionBaseClassName = [
   "inline-flex h-full min-h-[55px] w-full min-w-0 cursor-pointer items-center justify-center rounded-full px-2 py-2 text-center font-reddit text-[13px] font-bold leading-4 text-white",

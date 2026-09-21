@@ -34,6 +34,25 @@ export const caseCardInnerClassName =
 export const caseCardTagsClassName =
   "flex w-full flex-wrap items-center justify-start gap-2 overflow-visible p-0";
 
+/** Três métricas na mesma linha; o valor escala com a largura do card no mobile. */
+export const caseCardMetricsClassName = [
+  "@container flex w-full min-w-0 flex-row items-start",
+  "max-[360px]:gap-1 max-lg:gap-2 lg:gap-4",
+].join(" ");
+
+export const caseCardMetricItemClassName =
+  "flex min-w-0 flex-1 flex-col gap-0";
+
+export const caseCardMetricValueClassName = [
+  "max-w-full min-w-0 whitespace-nowrap font-reddit font-bold tracking-[-0.01em]",
+  "text-[clamp(14px,7.6cqi,24px)] leading-[1.333]",
+  "lg:text-[24px] lg:leading-[32px]",
+].join(" ");
+
+export const caseCardMetricLabelClassName =
+  "font-reddit text-[12px] font-normal leading-[16px] text-[#909090]";
+
+
 /**
  * Área de mídia dos cards: 16/9 (`aspect-video`).
  * Largura intrínseca pensada para retina no card de 596px (1280px − 64px de padding − 24px de gap).

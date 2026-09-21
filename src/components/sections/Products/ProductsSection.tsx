@@ -1,4 +1,8 @@
 import PageContainer from "@/components/layout/PageContainer";
+import {
+  homeProductsSubtitleClassName,
+  homeSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 import ProductCard from "./ProductCard";
 import {
@@ -19,18 +23,18 @@ export default function ProductsSection() {
       >
         <div
           data-products-heading-group
-          className="mx-auto flex w-full flex-col items-center gap-0 xl:h-[89.34px] xl:max-w-[1265.91px]"
+          className="mx-auto flex w-full flex-col items-center max-xl:gap-2 xl:h-[89.34px] xl:max-w-[1265.91px]"
         >
           <h2
             data-products-heading
-            className="m-0 block w-full text-center font-reddit text-[30px] font-semibold leading-[72.7px] tracking-[-0.01em] text-[#424241] xl:h-[59.06px] xl:w-[1265.91px]"
+            className={`${homeSectionTitleClassName} xl:h-[59.06px] xl:w-[1265.91px]`}
           >
             7 produtos. Um único cérebro.
           </h2>
 
           <p
             data-products-description
-            className="m-0 block w-full text-center font-reddit text-[15.14px] font-normal leading-[30.3px] tracking-[0] text-[#909090] xl:h-[30.28px] xl:max-w-[750.31px]"
+            className={homeProductsSubtitleClassName}
           >
             Nativamente integrados sobre 3 engines proprietárias de IA. Compre
             por módulo ou em pacotes Go-to-Market.
