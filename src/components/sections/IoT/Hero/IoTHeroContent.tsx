@@ -1,17 +1,14 @@
-import PrimaryLink from "@/components/ui/PrimaryLink";
-import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
+import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 import {
   productHeroContentClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 
 import { IOT_HERO_COPY } from "./iotHero.constants";
-import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
-import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
 export default function IoTHeroContent() {
   return (
@@ -41,12 +38,6 @@ export default function IoTHeroContent() {
           {IOT_HERO_COPY.paragraphs[1]}
         </p>
       </div>
-
-      <ProductHeroCta productSlug="iot">
-        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
-          Solicitar Demonstração
-        </PrimaryLink>
-      </ProductHeroCta>
     </div>
   );
 }

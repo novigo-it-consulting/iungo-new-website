@@ -1,14 +1,10 @@
-import PrimaryLink from "@/components/ui/PrimaryLink";
-import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
-  productHeroCtaCompactClassName,
   productHeroDescriptionBlockClassName,
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
@@ -33,12 +29,6 @@ export default function ConciergeHeroContent() {
         visual. Triggers em minutos, não horas. O único stack que orquestra
         usando o próprio. Behavior + Organizer AI PIM em tempo real.
       </p>
-
-      <ProductHeroCta productSlug="concierge" className={productHeroCtaCompactClassName}>
-        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
-          Solicitar Demonstração
-        </PrimaryLink>
-      </ProductHeroCta>
     </div>
   );
 }

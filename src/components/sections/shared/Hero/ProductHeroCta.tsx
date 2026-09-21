@@ -1,21 +1,34 @@
-import type { ReactNode } from "react";
+import PrimaryLink from "@/components/ui/PrimaryLink";
+import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 
-import { productHeroCtaClassName } from "./productHero.styles";
+import {
+  productHeroCtaClassName,
+  productHeroCtaCompactClassName,
+} from "./productHero.styles";
 
 type ProductHeroCtaProps = {
   productSlug: string;
+  compact?: boolean;
   className?: string;
-  children: ReactNode;
 };
 
 export default function ProductHeroCta({
   productSlug,
-  className = productHeroCtaClassName,
-  children,
+  compact = false,
+  className,
 }: Readonly<ProductHeroCtaProps>) {
+  const resolvedClassName =
+    className ??
+    (compact ? productHeroCtaCompactClassName : productHeroCtaClassName);
+
   return (
-    <div {...{ [`data-${productSlug}-hero-cta`]: true }} className={className}>
-      {children}
+    <div
+      {...{ [`data-${productSlug}-hero-cta`]: true }}
+      className={resolvedClassName}
+    >
+      <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
+        Solicitar Demonstração
+      </PrimaryLink>
     </div>
   );
 }

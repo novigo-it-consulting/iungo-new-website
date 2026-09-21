@@ -12,7 +12,10 @@ type ProductHeroLayoutProps = {
   titleId: string;
   gradientClassName: string;
   sectionClassName?: string;
-  children: ReactNode;
+  gridClassName?: string;
+  content: ReactNode;
+  visual: ReactNode;
+  cta: ReactNode;
 };
 
 export default function ProductHeroLayout({
@@ -20,20 +23,33 @@ export default function ProductHeroLayout({
   titleId,
   gradientClassName,
   sectionClassName = "",
-  children,
-}: ProductHeroLayoutProps) {
+  gridClassName = productHeroGridClassName,
+  content,
+  visual,
+  cta,
+}: Readonly<ProductHeroLayoutProps>) {
+  const sectionClassNames = [
+    productHeroSectionBaseClassName,
+    gradientClassName,
+    sectionClassName,
+  ]
+    .filter((value) => value.length > 0)
+    .join(" ");
+
   return (
     <section
       {...{ [`data-${scope}-hero-section`]: true }}
       aria-labelledby={titleId}
-      className={`${productHeroSectionBaseClassName} ${gradientClassName} ${sectionClassName}`.trim()}
+      className={sectionClassNames}
     >
       <PageContainer
         {...{ [`data-${scope}-hero-container`]: true }}
         size="content1264"
-        className="min-w-0"
+        className={["min-w-0", gridClassName].join(" ")}
       >
-        <div className={productHeroGridClassName}>{children}</div>
+        {content}
+        {visual}
+        {cta}
       </PageContainer>
     </section>
   );

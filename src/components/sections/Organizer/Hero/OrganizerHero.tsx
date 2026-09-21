@@ -1,27 +1,38 @@
-import PageContainer from "@/components/layout/PageContainer";
+import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
+import ProductHeroLayout from "@/components/sections/shared/Hero/ProductHeroLayout";
+import ProductHeroVisual from "@/components/sections/shared/Hero/ProductHeroVisual";
 import {
-  productHeroSectionBaseClassName,
+  productHeroCtaOrganizerClassName,
+  productHeroGridCenteredClassName,
+  productHeroVisualOrganizerClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
 import OrganizerHeroContent from "./OrganizerHeroContent";
-import OrganizerHeroVisual from "./OrganizerHeroVisual";
 
 export default function OrganizerHero() {
   return (
-    <section
-      data-organizer-hero-section
-      aria-label="Iungo Organizer"
-      className={`${productHeroSectionBaseClassName} bg-[linear-gradient(180deg,#FFFFFF_29%,#E9F5F0_100%)]`}
-    >
-      <PageContainer
-        data-organizer-hero-container
-        size="content1264"
-        className="grid min-w-0 grid-cols-1 items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,450px)] lg:gap-x-6 lg:gap-y-10 xl:gap-x-8 2xl:gap-x-10"
-      >
-        <OrganizerHeroContent />
-
-        <OrganizerHeroVisual />
-      </PageContainer>
-    </section>
+    <ProductHeroLayout
+      scope="organizer"
+      titleId="organizer-hero-title"
+      gradientClassName="bg-[linear-gradient(180deg,#FFFFFF_29%,#E9F5F0_100%)]"
+      gridClassName={productHeroGridCenteredClassName}
+      content={<OrganizerHeroContent />}
+      visual={
+        <ProductHeroVisual
+          productSlug="organizer"
+          src="/images/products/organizer/organizer-hero.png"
+          alt="Interface visual do Iungo Organizer"
+          width={450}
+          height={450}
+          className={productHeroVisualOrganizerClassName}
+        />
+      }
+      cta={
+        <ProductHeroCta
+          productSlug="organizer"
+          className={productHeroCtaOrganizerClassName}
+        />
+      }
+    />
   );
 }
