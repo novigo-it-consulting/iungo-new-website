@@ -28,18 +28,26 @@ export const headerActionsClassName = [
   actionButtonGroupGapClassName,
 ].join(" ");
 
-export const headerClientButtonClassName = [
-  "inline-flex h-10 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-[57.27px] bg-[#687681] px-4 text-center font-reddit text-sm font-bold leading-5 text-white",
-  mutedFocusVisibleClassName,
-  "xl:h-[41.64px] xl:w-[146.88px] xl:px-[18.33px] xl:text-[13.63px] xl:leading-[20.8px] 2xl:h-[41.64px] 2xl:w-[146.88px]",
+/** Base compartilhada dos dois botões de ação do header desktop.
+ *  Cores de fundo, foco e dimensões xl são definidos por cada variante. */
+const headerButtonBaseClassName = [
+  "inline-flex h-10 shrink-0 cursor-pointer items-center justify-center whitespace-nowrap rounded-[57.27px] px-4 text-center font-reddit text-sm font-bold leading-5 text-white",
   solidButtonHoverClassName,
+  "xl:px-[18.33px] xl:text-[13.63px] xl:leading-[20.8px]",
+].join(" ");
+
+export const headerClientButtonClassName = [
+  headerButtonBaseClassName,
+  "bg-[#687681]",
+  mutedFocusVisibleClassName,
+  "xl:h-[41.64px] xl:w-[146.88px] 2xl:h-[41.64px] 2xl:w-[146.88px]",
 ].join(" ");
 
 export const headerDemoButtonClassName = [
-  "inline-flex h-10 shrink-0 items-center justify-center whitespace-nowrap rounded-[57.27px] bg-[#0024AE] px-4 text-center font-reddit text-sm font-bold leading-5 text-white",
+  headerButtonBaseClassName,
+  "bg-[#0024AE]",
   primaryFocusVisibleClassName,
-  "xl:h-[40.88px] xl:w-[189.28px] xl:px-[18.33px] xl:text-[13.63px] xl:leading-[20.8px] 2xl:h-[40.88px] 2xl:w-[189.28px]",
-  solidButtonHoverClassName,
+  "xl:h-[40.88px] xl:w-[189.28px] 2xl:h-[40.88px] 2xl:w-[189.28px]",
 ].join(" ");
 
 export const headerButtonLabelClassName =

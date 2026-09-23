@@ -2,6 +2,7 @@ import { actionButtonGroupGapClassName } from "@/components/ui/actionButtonGroup
 import {
   iconButtonHoverClassName,
   outlineButtonHoverClassName,
+  primaryFocusVisibleClassName,
   solidButtonHoverClassName,
 } from "@/components/ui/buttonInteraction.styles";
 
@@ -23,8 +24,10 @@ export const cookieBannerTextClassName =
 export const cookieBannerActionsClassName =
   `flex w-full min-w-0 shrink-0 flex-col sm:flex-row sm:flex-wrap lg:w-auto lg:justify-end ${actionButtonGroupGapClassName}`;
 
-const cookieActionBaseClassName =
-  "inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-[50px] border px-4 py-2 text-center font-reddit text-sm font-semibold leading-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 sm:w-auto disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50";
+const cookieActionBaseClassName = [
+  "inline-flex min-h-11 w-full cursor-pointer items-center justify-center rounded-[50px] border px-4 py-2 text-center font-reddit text-sm font-semibold leading-5 sm:w-auto disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50",
+  primaryFocusVisibleClassName,
+].join(" ");
 
 export const cookieEqualActionClassName =
   `${cookieActionBaseClassName} border-[#0024AE] bg-white text-[#0024AE] ${outlineButtonHoverClassName}`;
