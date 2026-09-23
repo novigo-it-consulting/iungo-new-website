@@ -2,6 +2,7 @@ import PageContainer from "@/components/layout/PageContainer";
 
 import CtaButton from "./CtaButton";
 import CtaProductTitle from "./CtaProductTitle";
+import CtaSubtitle from "./CtaSubtitle";
 
 const defaultContentClassName =
   "flex w-full min-w-0 flex-col items-center";
@@ -13,6 +14,8 @@ type ProductPageCtaSectionProps = {
   line2: string;
   buttonHref: string;
   buttonLabel: string;
+  /** Texto exibido entre o título e o botão. Reutiliza CtaSubtitle. */
+  subtitle?: string;
   spacerClassName?: string;
   buttonVariant?: "default" | "convert";
   titleFrameClassName?: string;
@@ -26,6 +29,7 @@ export default function ProductPageCtaSection({
   line2,
   buttonHref,
   buttonLabel,
+  subtitle,
   spacerClassName = "h-8 w-full bg-white",
   buttonVariant = "default",
   titleFrameClassName,
@@ -67,9 +71,15 @@ export default function ProductPageCtaSection({
               frameClassName={titleFrameClassName}
             />
 
+            {subtitle ? (
+              <div className="mt-4 w-full">
+                <CtaSubtitle text={subtitle} />
+              </div>
+            ) : null}
+
             <div
               {...{ [`data-${dataPrefix}-action`]: true }}
-              className={usesFlexGap ? undefined : "mt-[25px]"}
+              className={usesFlexGap ? undefined : subtitle ? "mt-8" : "mt-[25px]"}
             >
               <CtaButton
                 href={buttonHref}

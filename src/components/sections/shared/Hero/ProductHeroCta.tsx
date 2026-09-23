@@ -1,5 +1,6 @@
 import PrimaryLink from "@/components/ui/PrimaryLink";
 import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
+import { PRODUCT_PAGE_CTA_LABEL } from "@/components/sections/shared/cta.constants";
 
 import {
   productHeroCtaClassName,
@@ -27,7 +28,7 @@ export default function ProductHeroCta({
       className={resolvedClassName}
     >
       <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
-        Solicitar Demonstração
+        {PRODUCT_PAGE_CTA_LABEL}
       </PrimaryLink>
     </div>
   );

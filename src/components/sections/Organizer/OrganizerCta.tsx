@@ -1,4 +1,4 @@
-import CtaSection from "@/components/sections/Cta/CtaSection";
+import ProductPageCtaSection from "@/components/sections/Cta/ProductPageCtaSection";
 import {
   ORGANIZER_CTA_BUTTON,
   ORGANIZER_CTA_SUBTITLE,
@@ -7,13 +7,15 @@ import {
 
 export default function OrganizerCta() {
   return (
-    <CtaSection
-      dataSection="organizer"
+    <ProductPageCtaSection
+      dataPrefix="organizer-cta"
       titleId="organizer-cta-title"
-      titleLine1={ORGANIZER_CTA_TITLE.line1}
-      titleLine2={ORGANIZER_CTA_TITLE.line2}
+      line1={ORGANIZER_CTA_TITLE.line1}
+      line2={ORGANIZER_CTA_TITLE.line2}
       subtitle={ORGANIZER_CTA_SUBTITLE}
-      cta={ORGANIZER_CTA_BUTTON}
+      buttonHref={ORGANIZER_CTA_BUTTON.href}
+      buttonLabel={ORGANIZER_CTA_BUTTON.label}
+      spacerClassName=""
     />
   );
 }
