@@ -1,14 +1,12 @@
 import type { ComponentPropsWithoutRef } from "react";
 
 import RequestDemoField from "./RequestDemoField";
-import {
-  requestDemoFormRowLeftColumnClassName,
-  requestDemoFormRowRightColumnClassName,
-} from "./requestDemoFormRow.styles";
+import { requestDemoFormRowColumnClassName } from "./requestDemoFormRow.styles";
 
 type RequestDemoInputFieldConfig = {
   id: string;
   label: string;
+  errorMessage?: string;
 } & Pick<
   ComponentPropsWithoutRef<"input">,
   | "name"
@@ -18,6 +16,8 @@ type RequestDemoInputFieldConfig = {
   | "spellCheck"
   | "autoCapitalize"
   | "inputMode"
+  | "maxLength"
+  | "required"
 >;
 
 type RequestDemoTwoColumnFieldsProps = {
@@ -35,11 +35,11 @@ export default function RequestDemoTwoColumnFields({
 }: Readonly<RequestDemoTwoColumnFieldsProps>) {
   return (
     <div {...{ [`data-${dataAttribute}`]: true }} className={rowClassName}>
-      <div className={requestDemoFormRowLeftColumnClassName}>
+      <div className={requestDemoFormRowColumnClassName}>
         <RequestDemoField {...leftField} />
       </div>
 
-      <div className={requestDemoFormRowRightColumnClassName}>
+      <div className={requestDemoFormRowColumnClassName}>
         <RequestDemoField {...rightField} />
       </div>
     </div>

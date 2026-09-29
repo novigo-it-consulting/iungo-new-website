@@ -4,6 +4,7 @@ import ProductCardCopy, {
 } from "./ProductCardCopy";
 import ProductCardCta from "./ProductCardCta";
 import ProductCardIcon from "./ProductCardIcon";
+import "@/components/ui/cardElevate.hover.css";
 
 export interface ProductCardIconConfig {
   src: string;
@@ -38,7 +39,7 @@ export default function ProductCard({
   contentGapClassName,
   cardPaddingClassName,
   children,
-}: ProductCardProps) {
+}: Readonly<ProductCardProps>) {
   const hasContent = icon || copy;
   const resolvedContentGapClassName =
     contentGapClassName ?? "2xl:gap-[38px]";
@@ -48,8 +49,9 @@ export default function ProductCard({
   return (
     <article
       data-product-card={productId}
+      data-card-elevate=""
       aria-label={productName}
-      className={`box-border flex w-full flex-col rounded-[20.03px] border border-[#D3D5D8] bg-[linear-gradient(180deg,_#FFFFFF_0%,_#EEF6FF_100%)] p-6 xl:p-8 ${resolvedPaddingClassName} ${className}`}
+      className={`box-border flex w-full flex-col rounded-[20.03px] border border-[#E4E4E7] bg-[linear-gradient(180deg,_#FFFFFF_0%,_#EEF6FF_100%)] p-6 xl:p-8 ${resolvedPaddingClassName} ${className}`}
     >
       {children}
 

@@ -1,18 +1,22 @@
-import PrimaryLink from "@/components/ui/PrimaryLink";
-import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import {
   productHeroTitleClassName,
   productHeroParagraphClassName,
+  productHeroContentPlacementClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
+const organizerHeroContentClassName = [
+  "flex min-w-0 flex-col items-start 2xl:pl-[3px]",
+  productHeroContentPlacementClassName,
+].join(" ");
+
 export default function OrganizerHeroContent() {
   return (
     <div
       data-organizer-hero-content
-      className="flex min-w-0 flex-col items-start gap-8 md:gap-10 xl:gap-12 2xl:gap-[58px] 2xl:pl-[3px]"
+      className={organizerHeroContentClassName}
     >
       <div
         data-organizer-hero-copy
@@ -20,7 +24,11 @@ export default function OrganizerHeroContent() {
       >
         <ProductHeroIcon {...PRODUCT_HERO_ICONS.organizer} />
 
-        <h1 data-organizer-hero-title className={productHeroTitleClassName}>
+        <h1
+          id="organizer-hero-title"
+          data-organizer-hero-title
+          className={productHeroTitleClassName}
+        >
           Iungo Organizer
         </h1>
 
@@ -33,10 +41,6 @@ export default function OrganizerHeroContent() {
           BR.
         </p>
       </div>
-
-      <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
-        Solicitar Demonstração
-      </PrimaryLink>
     </div>
   );
 }

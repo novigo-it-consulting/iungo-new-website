@@ -25,12 +25,5 @@
   }
 }
 
-/*
- * Com rails laterais (2xl), a coluna central fica estreita demais para
- * duas colunas legíveis — empilha até haver ~1000px úteis na linha.
- */
-@media (min-width: 1536px) and (max-width: 1653px) {
-  [data-hero-row] {
-    grid-template-columns: 1fr;
-  }
-}
+
+

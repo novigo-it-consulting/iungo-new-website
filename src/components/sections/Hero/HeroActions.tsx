@@ -1,28 +1,48 @@
 import Link from "next/link";
+
+import { isAvailableHref, PLATAFORMA_HREF, SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import PrimaryLink from "@/components/ui/PrimaryLink";
-import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 
 import {
+  homeHeroActionLabelClassName,
   homeHeroActionsClassName,
+  homeHeroPrimaryButtonClassName,
   homeHeroSecondaryButtonClassName,
 } from "./homeHero.styles";
 
 export default function HeroActions() {
+  const plataformaHref = PLATAFORMA_HREF;
+  const secondaryLabel = (
+    <span className={homeHeroActionLabelClassName}>Conhecer a Plataforma</span>
+  );
+
   return (
     <div data-hero-actions className={homeHeroActionsClassName}>
-      <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
+      <PrimaryLink
+        href={SOLICITAR_DEMONSTRACAO_HREF}
+        className={homeHeroPrimaryButtonClassName}
+        labelClassName={homeHeroActionLabelClassName}
+      >
         Solicitar Demonstração
       </PrimaryLink>
 
-      <Link
-        data-hero-secondary-cta
-        href="/plataformas"
-        className={homeHeroSecondaryButtonClassName}
-      >
-        <span className="inline-block shrink-0 whitespace-nowrap font-bold text-white xl:text-[13.63px] xl:leading-[20.8px]">
-          Conhecer a Plataforma
+      {isAvailableHref(plataformaHref) ? (
+        <Link
+          data-hero-secondary-cta
+          href={plataformaHref}
+          className={homeHeroSecondaryButtonClassName}
+        >
+          {secondaryLabel}
+        </Link>
+      ) : (
+        <span
+          data-hero-secondary-cta
+          className={homeHeroSecondaryButtonClassName}
+          aria-disabled="true"
+        >
+          {secondaryLabel}
         </span>
-      </Link>
+      )}
     </div>
   );
 }

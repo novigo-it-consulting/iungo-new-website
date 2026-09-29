@@ -1,4 +1,8 @@
 import ProductSectionEyebrow from "./ProductSectionEyebrow";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 
 type ProductSectionHeaderProps = {
   blockSlug: string;
@@ -10,11 +14,9 @@ type ProductSectionHeaderProps = {
   descriptionClassName?: string;
 };
 
-const DEFAULT_TITLE_CLASS =
-  "m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] text-center md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]";
+const DEFAULT_TITLE_CLASS = productSectionTitleClassName;
 
-const DEFAULT_DESCRIPTION_CLASS =
-  "m-0 font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A] text-center";
+const DEFAULT_DESCRIPTION_CLASS = productSectionDescriptionClassName;
 
 export default function ProductSectionHeader({
   blockSlug,

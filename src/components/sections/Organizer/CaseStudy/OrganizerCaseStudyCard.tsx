@@ -3,6 +3,7 @@ import DarkSectionEyebrow from "@/components/sections/shared/SectionHeader/DarkS
 import OrganizerCaseStudyDescription from "./OrganizerCaseStudyDescription";
 import OrganizerCaseStudyIndicators from "./OrganizerCaseStudyIndicators";
 import OrganizerCaseStudyLink from "./OrganizerCaseStudyLink";
+import { organizerCaseStudyResultsClassName } from "./organizerCaseStudy.styles";
 
 export default function OrganizerCaseStudyCard() {
   return (
@@ -27,7 +28,7 @@ export default function OrganizerCaseStudyCard() {
 
       <div
         data-organizer-case-study-results
-        className="min-w-0 bg-white p-10 lg:col-span-3"
+        className={organizerCaseStudyResultsClassName}
       >
         <div className="flex w-full min-w-0 flex-col gap-4">
           <OrganizerCaseStudyIndicators />

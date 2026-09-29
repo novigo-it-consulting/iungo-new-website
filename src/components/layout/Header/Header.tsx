@@ -1,5 +1,7 @@
 import Link from "next/link";
 
+import { isAvailableHref } from "@/constants/routes";
+
 import { HEADER_BUTTONS } from "./header.constants";
 import HeaderShell from "./HeaderShell";
 import {
@@ -10,6 +12,8 @@ import {
 } from "./header.styles";
 
 export default function Header() {
+  const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
+
   return (
     <header
       data-header
@@ -19,18 +23,32 @@ export default function Header() {
       <HeaderShell
         actions={
           <div data-header-actions className={headerActionsClassName}>
-            <Link
-              data-header-client-button
-              href={HEADER_BUTTONS.areaCliente.href}
-              className={headerClientButtonClassName}
-            >
-              <span
-                data-header-action-label="client-area"
-                className={headerButtonLabelClassName}
+            {isAvailableHref(areaClienteHref) ? (
+              <Link
+                data-header-client-button
+                href={areaClienteHref}
+                className={headerClientButtonClassName}
               >
-                {HEADER_BUTTONS.areaCliente.label}
+                <span
+                  data-header-action-label="client-area"
+                  className={headerButtonLabelClassName}
+                >
+                  {HEADER_BUTTONS.areaCliente.label}
+                </span>
+              </Link>
+            ) : (
+              <span
+                data-header-client-button
+                className={headerClientButtonClassName}
+              >
+                <span
+                  data-header-action-label="client-area"
+                  className={headerButtonLabelClassName}
+                >
+                  {HEADER_BUTTONS.areaCliente.label}
+                </span>
               </span>
-            </Link>
+            )}
             <Link
               data-header-demo-button
               href={HEADER_BUTTONS.solicitarDemo.href}

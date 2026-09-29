@@ -13,3 +13,20 @@ export const requestDemoFieldInputClassName =
 
 export const requestDemoSelectClassName =
   "box-border h-[54.18px] w-full min-w-0 appearance-none rounded-[64.49px] border-[1.29px] border-solid border-[#E4E4E7] bg-[#EFEFEF] px-[19.35px] font-reddit text-[18.06px] font-normal leading-[21.7px] tracking-[0] text-[#27272A] outline-none focus-visible:border-[#0024AE] focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 motion-reduce:transition-none";
+
+export const requestDemoFieldInvalidClassName =
+  "border-[#A72121] focus-visible:border-[#A72121] focus-visible:ring-[#A72121]";
+
+export function withRequestDemoInvalidClass(
+  baseClassName: string,
+  errorMessage?: string,
+): string {
+  if (!errorMessage) {
+    return baseClassName;
+  }
+
+  return `${baseClassName} ${requestDemoFieldInvalidClassName}`;
+}
+
+export const requestDemoFieldErrorTextClassName =
+  "mt-2 font-reddit text-[12.9px] font-normal leading-[19.3px] tracking-[0] text-[#A72121]";

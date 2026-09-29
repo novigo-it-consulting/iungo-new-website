@@ -1,5 +1,3 @@
-import PrimaryLink from "@/components/ui/PrimaryLink";
-import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
@@ -7,7 +5,6 @@ import {
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
@@ -33,18 +30,12 @@ export default function AttendantHeroContent() {
           className={productHeroParagraphClassName}
         >
           O agente que executa, não só responde.
-          <br />
+          <br className="max-xl:hidden" />
           Cancela pedido, troca tamanho, emite segunda via, atualiza endereço,
           gera nota fiscal. Operações reais via APIs do seu ERP, OMS e WMS —
           com auditoria completa.
         </p>
       </div>
-
-      <ProductHeroCta productSlug="attendant">
-        <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
-          Solicitar Demonstração
-        </PrimaryLink>
-      </ProductHeroCta>
     </div>
   );
 }

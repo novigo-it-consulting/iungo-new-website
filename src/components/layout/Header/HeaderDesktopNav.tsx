@@ -2,6 +2,8 @@
 
 import Link from "next/link";
 
+import { isAvailableHref } from "@/constants/routes";
+
 import { NAV_LINK_ITEMS } from "./header.constants";
 import {
   headerNavClassName,
@@ -11,12 +13,12 @@ import {
 import SolucoesMegaMenuTrigger from "./SolucoesMegaMenu/SolucoesMegaMenuTrigger";
 
 const NAV_ITEM_META: Record<
-  string,
+  (typeof NAV_LINK_ITEMS)[number]["id"],
   { navKey: string; desktopWidth: string }
 > = {
-  "/plataformas": { navKey: "plataforma", desktopWidth: "2xl:w-[66px]" },
-  "/cases": { navKey: "cases", desktopWidth: "2xl:w-[36px]" },
-  "/recursos": { navKey: "recursos", desktopWidth: "2xl:w-[55px]" },
+  plataforma: { navKey: "plataforma", desktopWidth: "2xl:w-[66px]" },
+  cases: { navKey: "cases", desktopWidth: "2xl:w-[36px]" },
+  recursos: { navKey: "recursos", desktopWidth: "2xl:w-[55px]" },
 };
 
 export default function HeaderDesktopNav() {
@@ -31,17 +33,24 @@ export default function HeaderDesktopNav() {
           <SolucoesMegaMenuTrigger />
         </li>
         {NAV_LINK_ITEMS.map((item) => {
-          const meta = NAV_ITEM_META[item.href];
+          const meta = NAV_ITEM_META[item.id];
+          const className = `${headerNavLinkClassName} ${meta.desktopWidth}`;
 
           return (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                data-header-nav-item={meta?.navKey}
-                className={`${headerNavLinkClassName} ${meta?.desktopWidth ?? ""}`}
-              >
-                {item.label}
-              </Link>
+            <li key={item.id}>
+              {isAvailableHref(item.href) ? (
+                <Link
+                  href={item.href}
+                  data-header-nav-item={meta.navKey}
+                  className={className}
+                >
+                  {item.label}
+                </Link>
+              ) : (
+                <span data-header-nav-item={meta.navKey} className={className}>
+                  {item.label}
+                </span>
+              )}
             </li>
           );
         })}

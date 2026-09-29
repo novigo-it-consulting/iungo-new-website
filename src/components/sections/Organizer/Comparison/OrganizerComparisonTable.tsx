@@ -1,5 +1,6 @@
 import CheckIcon from "@/components/icons/CheckIcon";
 import XIcon from "@/components/icons/XIcon";
+import ProductTableScroll from "@/components/sections/shared/DataTable/ProductTableScroll";
 import type { ComparisonValue } from "./organizerComparison.constants";
 import { COMPARISON_ROWS } from "./organizerComparison.constants";
 
@@ -50,14 +51,12 @@ const thBase =
 
 export default function OrganizerComparisonTable() {
   return (
-    <div
-      role="region"
-      aria-label="Comparação de plataformas PIM"
-      tabIndex={0}
-      className="mt-12 w-full overflow-x-auto overscroll-x-contain"
+    <ProductTableScroll
+      ariaLabel="Comparação de plataformas PIM"
+      className="mt-12"
+      frameClassName="min-w-[960px] rounded-[20px]"
     >
-      <div className="min-w-[960px] overflow-hidden rounded-[20px] border border-[#E4E4E7] bg-white">
-        <table className="w-full table-fixed border-collapse">
+      <table className="w-full table-fixed border-collapse">
           <caption className="sr-only">
             Comparação entre Iungo Organizer AI PIM, Akeneo e Salsify
           </caption>
@@ -128,7 +127,6 @@ export default function OrganizerComparisonTable() {
             ))}
           </tbody>
         </table>
-      </div>
-    </div>
+    </ProductTableScroll>
   );
 }

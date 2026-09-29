@@ -1,0 +1,24 @@
+[data-card-elevate] {
+  position: relative;
+  z-index: 0;
+  transition-property: transform, box-shadow;
+  transition-duration: 250ms;
+  transition-timing-function: ease-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-card-elevate]:hover {
+    z-index: 1;
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(4, 21, 39, 0.1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-card-elevate],
+  [data-card-elevate]:hover {
+    transition: none;
+    transform: none;
+    box-shadow: none;
+  }
+}

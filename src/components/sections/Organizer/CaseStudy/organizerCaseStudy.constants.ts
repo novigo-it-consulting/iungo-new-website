@@ -19,8 +19,13 @@ export const CASE_STUDY_INDICATORS = [
 export const CASE_STUDY_DESCRIPTION =
   "Classificação, padronização e proteção de marca em catálogo 3P de hiper-escala — apenas 1,48% requer curadoria humana.";
 
-export const CASE_STUDY_CTA = {
+export const CASE_STUDY_CTA: {
+  label: string;
+  arrow: string;
+  /** Defina o path quando a página do case existir. */
+  href: string | null;
+} = {
   label: "Ler case completo",
   arrow: "→",
-  href: "#",
-} as const;
+  href: null,
+};

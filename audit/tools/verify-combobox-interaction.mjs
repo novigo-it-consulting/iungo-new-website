@@ -46,7 +46,7 @@ try {
   );
   record(
     "privacy-email-period-spacing",
-    /dpo@iungo-ai\.com\./.test(privacyText),
+    /comercial@iungo-ai\.com\./.test(privacyText),
     privacyText,
   );
 

@@ -1,7 +1,22 @@
-import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";
+import {
+  primaryFocusVisibleClassName,
+  solidButtonHoverClassName,
+} from "@/components/ui/buttonInteraction.styles";
+import { ctaMobileSizeAndTypographyClassName } from "@/components/ui/ctaButton.styles";
 
-export const primaryLinkClassName =
-  `inline-flex h-[54px] w-full max-w-[250px] shrink-0 items-center justify-center gap-[11.45px] whitespace-nowrap rounded-[57.27px] bg-[#0024AE] px-[18.33px] py-[9.16px] text-center font-reddit text-[18px] font-bold leading-[27.49px] tracking-[0px] text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2 sm:w-[250px] xl:h-[41px] xl:max-w-[189px] xl:text-[13.63px] xl:leading-[20.8px] 2xl:h-[41px] 2xl:w-[189px] ${solidButtonHoverClassName}`;
+export const primaryLinkClassName = [
+  // Estrutura e cores (todas as telas)
+  "inline-flex w-fit max-w-full shrink-0 items-center justify-center gap-[11.45px] whitespace-nowrap text-center font-reddit bg-[#0024AE] text-white",
+  primaryFocusVisibleClassName,
+  solidButtonHoverClassName,
+  // Mobile: forma, tipografia e px alinhados ao CtaButton de referência
+  ctaMobileSizeAndTypographyClassName,
+  "py-[14px]",
+  // Desktop: restaura exatamente as dimensões e tipografia aprovadas (lg → xl → 2xl)
+  "lg:w-[250px] lg:max-w-[250px]",
+  "xl:h-[41px] xl:w-[189px] xl:max-w-[189px] xl:rounded-[57.27px] xl:px-[18.33px] xl:py-[9.16px] xl:text-[13.63px] xl:leading-[20.8px] xl:font-bold",
+  "2xl:h-[41px] 2xl:w-[189px]",
+].join(" ");
 
 export const primaryLinkLabelClassName =
-  "inline-block shrink-0 whitespace-nowrap font-bold text-white xl:text-[13.63px] xl:leading-[20.8px]";
+  "inline-block shrink-0 whitespace-nowrap font-semibold text-white xl:font-bold xl:text-[13.63px] xl:leading-[20.8px]";

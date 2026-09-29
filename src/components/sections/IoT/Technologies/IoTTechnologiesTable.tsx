@@ -20,13 +20,14 @@ const IOT_TECHNOLOGIES_TABLE_COLUMNS: readonly ProductTextTableColumn<IoTTechnol
       label: "Tecnologia",
       align: "left",
       width: "24.081%",
-      cellClassName: "text-[#27272A]",
+      cellClassName: "whitespace-nowrap text-[#27272A]",
     },
     {
       key: "range",
       label: "Alcance",
       align: "left",
       width: "14.706%",
+      cellClassName: "whitespace-nowrap text-[#71717A]",
     },
     {
       key: "idealCase",
@@ -40,7 +41,7 @@ const IOT_TECHNOLOGIES_TABLE_COLUMNS: readonly ProductTextTableColumn<IoTTechnol
       align: "right",
       headerAlign: "right",
       width: "17.095%",
-      cellClassName: "text-[#27272A]",
+      cellClassName: "whitespace-nowrap text-[#27272A]",
     },
   ] as const;
 
@@ -54,9 +55,8 @@ export default function IoTTechnologiesTable() {
       rows={IOT_TECHNOLOGIES_TABLE_ROWS}
       getRowKey={(row: IoTTechnologyTableRow) => row.id}
       rowHeaderKey="technology"
-      className="mt-16 w-full max-w-[1088px]"
-      containerClassName="xl:h-[371px]"
-      rowHeight={53}
+      className="mt-16 max-w-[1088px]"
+      containerClassName="min-w-[1088px] xl:h-[371px]"
     />
   );
 }

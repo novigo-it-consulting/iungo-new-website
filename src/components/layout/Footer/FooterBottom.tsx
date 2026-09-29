@@ -1,3 +1,5 @@
+import CookieSettingsButton from "@/components/layout/CookieConsent/CookieSettingsButton";
+
 import { FOOTER_COMPLIANCE_BADGES } from "./footer.constants";
 
 const currentYear = new Date().getFullYear();
@@ -37,17 +39,7 @@ export default function FooterBottom() {
             </span>
           ))}
 
-          {/*
-           * "Configurar cookies" — sem integração de consentimento no projeto.
-           * Manter como <span> até que um serviço (ex.: OneTrust, Osano) seja
-           * adicionado; nesse momento, substituir por <button type="button">.
-           */}
-          <span
-            data-footer-cookie-config
-            className="font-reddit text-[12px] font-normal leading-4 text-white/60"
-          >
-            Configurar cookies
-          </span>
+          <CookieSettingsButton />
         </div>
       </div>
     </div>

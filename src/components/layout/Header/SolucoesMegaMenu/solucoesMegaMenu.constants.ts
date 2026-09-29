@@ -25,7 +25,7 @@ export type SolucoesMegaMenuCategory = {
     | "iot"
   )[];
   /** Destino do link “Ver solução completa”. */
-  readonly viewSolutionHref: string;
+  readonly viewSolutionHref: string | null;
 };
 
 export const SOLUCOES_MEGA_MENU_CATEGORIES: readonly SolucoesMegaMenuCategory[] =

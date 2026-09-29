@@ -1,3 +1,4 @@
+import { RequestDemoFieldError } from "../RequestDemoFieldGroup";
 import {
   CONTACT_TYPE_FIELD_NAME,
   CONTACT_TYPE_LEGEND,
@@ -10,11 +11,21 @@ import {
   contactTypeOptionsClassName,
 } from "./contactType.styles";
 
-export default function ContactTypeField() {
+type ContactTypeFieldProps = {
+  errorMessage?: string;
+};
+
+export default function ContactTypeField({
+  errorMessage,
+}: Readonly<ContactTypeFieldProps>) {
+  const errorId = "request-demo-contactType-error";
+
   return (
     <fieldset
       data-request-demo-contact-type
       className={contactTypeFieldsetClassName}
+      aria-invalid={Boolean(errorMessage)}
+      aria-describedby={errorMessage ? errorId : undefined}
     >
       <legend className={contactTypeLegendClassName}>{CONTACT_TYPE_LEGEND}</legend>
 
@@ -29,6 +40,7 @@ export default function ContactTypeField() {
                 id={inputId}
                 name={CONTACT_TYPE_FIELD_NAME}
                 value={option.value}
+                required
                 className="sr-only"
               />
               {option.label}
@@ -36,6 +48,8 @@ export default function ContactTypeField() {
           );
         })}
       </div>
+
+      <RequestDemoFieldError id={errorId} message={errorMessage} />
     </fieldset>
   );
 }

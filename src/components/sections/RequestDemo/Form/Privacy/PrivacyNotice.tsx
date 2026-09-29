@@ -1,7 +1,9 @@
 import Link from "next/link";
 
+import { isAvailableHref } from "@/constants/routes";
+
 import {
-  PRIVACY_NOTICE_DPO_EMAIL,
+  PRIVACY_NOTICE_CONTACT_EMAIL,
   PRIVACY_POLICY_HREF,
 } from "./privacyNotice.constants";
 import {
@@ -26,7 +28,7 @@ export default function PrivacyNotice() {
 
         <p className={privacyNoticeTextClassName}>
           Li e concordo com a{" "}
-          {PRIVACY_POLICY_HREF ? (
+          {isAvailableHref(PRIVACY_POLICY_HREF) ? (
             <Link
               href={PRIVACY_POLICY_HREF}
               className={privacyNoticeLinkClassName}
@@ -39,10 +41,10 @@ export default function PrivacyNotice() {
             </span>
           )}{". Autorizo a Iungo Intelligence a tratar meus dados pessoais para fins de retorno comercial, conforme art. 7º, I e V da LGPD. Posso revogar este consentimento a qualquer momento via "}
           <a
-            href={`mailto:${PRIVACY_NOTICE_DPO_EMAIL}`}
+            href={`mailto:${PRIVACY_NOTICE_CONTACT_EMAIL}`}
             className={privacyNoticeEmailClassName}
           >
-            {PRIVACY_NOTICE_DPO_EMAIL}
+            {PRIVACY_NOTICE_CONTACT_EMAIL}
           </a>{"."}
         </p>
       </div>

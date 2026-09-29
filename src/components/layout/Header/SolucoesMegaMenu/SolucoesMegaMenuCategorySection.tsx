@@ -7,6 +7,7 @@ import SolucoesMegaMenuProductCard from "./SolucoesMegaMenuProductCard";
 import {
   solucoesMegaMenuCategoryViewLinkClassName,
   solucoesMegaMenuProductListClassName,
+  solucoesMegaMenuProductListItemClassName,
 } from "./solucoesMegaMenu.styles";
 
 type SolucoesMegaMenuCategorySectionProps = {
@@ -28,7 +29,7 @@ export default function SolucoesMegaMenuCategorySection({
         className={solucoesMegaMenuProductListClassName}
       >
         {products.map((product) => (
-          <li key={product.id} className="min-w-0">
+          <li key={product.id} className={solucoesMegaMenuProductListItemClassName}>
             <SolucoesMegaMenuProductCard
               product={product}
               onNavigate={onProductNavigate}

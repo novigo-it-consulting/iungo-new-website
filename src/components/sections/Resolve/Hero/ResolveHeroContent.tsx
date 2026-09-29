@@ -5,9 +5,6 @@ import {
   productHeroIconSpacingClassName,
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
-import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
-
-import ResolveHeroButton from "./ResolveHeroButton";
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
@@ -44,10 +41,6 @@ export default function ResolveHeroContent() {
           especialista — em segundos.
         </p>
       </div>
-
-      <ProductHeroCta productSlug="resolve">
-        <ResolveHeroButton />
-      </ProductHeroCta>
     </div>
   );
 }

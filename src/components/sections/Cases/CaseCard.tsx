@@ -1,26 +1,66 @@
-import type { ReactNode } from "react";
+import CaseCardContent from "./CaseCardContent";
+import CaseCardDescription from "./CaseCardDescription";
+import CaseCardMedia from "./CaseCardMedia";
+import CaseCardMetrics from "./CaseCardMetrics";
+import CaseCardTitle from "./CaseCardTitle";
+import CaseTag from "./CaseTag";
+import type { CaseData } from "./cases.constants";
+import {
+  caseCardClassName,
+  caseCardInnerClassName,
+  caseCardTagsClassName,
+} from "./casesSection.styles";
+import "@/components/ui/cardElevate.hover.css";
 
 type CaseCardProps = {
-  caseId: string;
-  accessibleName: string;
-  media?: ReactNode;
-  children?: ReactNode;
+  caseData: CaseData;
 };
 
-export default function CaseCard({
-  caseId,
-  accessibleName,
-  media,
-  children,
-}: CaseCardProps) {
+export default function CaseCard({ caseData }: Readonly<CaseCardProps>) {
+  const {
+    id,
+    accessibleName,
+    image,
+    tags,
+    title,
+    description,
+    metrics,
+    metricsValueClassName,
+  } = caseData;
+
   return (
     <article
-      data-case-card={caseId}
+      data-case-card={id}
+      data-card-elevate=""
       aria-label={accessibleName}
-      className="box-border flex w-full flex-col gap-0 overflow-hidden rounded-2xl border border-[#E4E4E7] bg-white shadow-none lg:min-h-[656.92px]"
+      className={caseCardClassName}
     >
-      {media}
-      {children}
+      <div className={caseCardInnerClassName}>
+        {image ? <CaseCardMedia caseId={id} image={image} /> : null}
+        <CaseCardContent>
+          <div
+            data-case-tags={id}
+            className={caseCardTagsClassName}
+          >
+            {tags.map((tag) => (
+              <CaseTag key={tag.label} tone={tag.tone}>
+                {tag.label}
+              </CaseTag>
+            ))}
+          </div>
+          <CaseCardTitle caseId={id}>{title}</CaseCardTitle>
+          <CaseCardDescription caseId={id}>{description}</CaseCardDescription>
+          <hr
+            data-case-divider={id}
+            className="m-0 h-px w-full border-0 bg-[#E4E4E7]"
+          />
+          <CaseCardMetrics
+            caseId={id}
+            metrics={metrics}
+            valueClassName={metricsValueClassName}
+          />
+        </CaseCardContent>
+      </div>
     </article>
   );
 }

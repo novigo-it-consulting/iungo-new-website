@@ -1,4 +1,10 @@
 import type { CaseMetric } from "./cases.constants";
+import {
+  caseCardMetricItemClassName,
+  caseCardMetricLabelClassName,
+  caseCardMetricValueClassName,
+  caseCardMetricsClassName,
+} from "./casesSection.styles";
 
 interface MetricItemProps {
   metric: CaseMetric;
@@ -7,15 +13,11 @@ interface MetricItemProps {
 
 function MetricItem({ metric, valueClassName }: MetricItemProps) {
   return (
-    <div className="flex flex-1 flex-col gap-0">
-      <span
-        className={`font-reddit text-[24px] font-bold leading-[32px] tracking-[-0.01em] ${valueClassName}`}
-      >
+    <div className={caseCardMetricItemClassName}>
+      <span className={`${caseCardMetricValueClassName} ${valueClassName}`}>
         {metric.value}
       </span>
-      <span className="font-reddit text-[12px] font-normal leading-[16px] text-[#909090]">
-        {metric.label}
-      </span>
+      <span className={caseCardMetricLabelClassName}>{metric.label}</span>
     </div>
   );
 }
@@ -34,7 +36,7 @@ export default function CaseCardMetrics({
   return (
     <div
       data-case-metrics={caseId}
-      className="flex w-full flex-row items-start gap-4"
+      className={caseCardMetricsClassName}
     >
       {metrics.map((metric) => (
         <MetricItem

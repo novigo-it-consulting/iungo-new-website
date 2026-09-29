@@ -1,20 +1,35 @@
+import type { ProductSystemScreensHeaderClassNames } from "./productSystemScreens.types";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
+
+const defaultContainerClassName =
+  "mx-auto flex w-full max-w-[672px] flex-col gap-3 text-center";
+
+const defaultTitleClassName = productSectionTitleClassName;
+
+const defaultDescriptionClassName = productSectionDescriptionClassName;
+
 type ProductSystemScreensHeaderProps = {
   productSlug: string;
   title: string;
   description: string;
+  classNames?: ProductSystemScreensHeaderClassNames;
 };
 
 export default function ProductSystemScreensHeader({
   productSlug,
   title,
   description,
+  classNames,
 }: ProductSystemScreensHeaderProps) {
   return (
     <div
       {...{
         [`data-${productSlug}-system-screens-header`]: true,
       }}
-      className="mx-auto flex w-full max-w-[672px] flex-col gap-3 text-center"
+      className={classNames?.container ?? defaultContainerClassName}
     >
       <div
         {...{
@@ -27,7 +42,7 @@ export default function ProductSystemScreensHeader({
           {...{
             [`data-${productSlug}-system-screens-title`]: true,
           }}
-          className="m-0 font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] md:text-[36px] md:leading-[40px] md:tracking-[-0.72px]"
+          className={classNames?.title ?? defaultTitleClassName}
         >
           {title}
         </h2>
@@ -37,7 +52,7 @@ export default function ProductSystemScreensHeader({
         {...{
           [`data-${productSlug}-system-screens-description`]: true,
         }}
-        className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
+        className={classNames?.description ?? defaultDescriptionClassName}
       >
         {description}
       </p>

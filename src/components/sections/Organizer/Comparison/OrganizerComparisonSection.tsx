@@ -26,7 +26,7 @@ export default function OrganizerComparisonSection() {
   return (
     <section
       aria-labelledby="organizer-comparison-title"
-      className="w-full bg-white py-16 lg:py-20 2xl:py-24"
+      className="w-full min-w-0 bg-white py-16 lg:py-20 2xl:py-24"
     >
       <PageContainer
         data-organizer-comparison-container

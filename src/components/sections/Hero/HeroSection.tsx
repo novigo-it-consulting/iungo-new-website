@@ -1,6 +1,7 @@
+import HeroActions from "./HeroActions";
 import HeroContent from "./HeroContent";
 import HeroVisual from "./HeroVisual";
-import PageSideRails from "@/components/layout/PageSideRails";
+import PageContainer from "@/components/layout/PageContainer";
 
 import { homeHeroRowClassName, homeHeroSectionClassName } from "./homeHero.styles";
 
@@ -15,15 +16,13 @@ export default function HeroSection() {
       aria-labelledby="hero-title"
       className={homeHeroSectionClassName}
     >
-      <PageSideRails
-        scope="hero"
-        className="mx-auto max-w-[1728px] px-4 md:px-8 2xl:max-w-none 2xl:px-0"
-      >
+      <PageContainer size="content1264" data-page-main-content="hero">
         <div data-hero-row className={homeHeroRowClassName}>
           <HeroContent />
           <HeroVisual />
+          <HeroActions />
         </div>
-      </PageSideRails>
+      </PageContainer>
     </section>
   );
 }

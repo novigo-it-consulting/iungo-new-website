@@ -1,106 +1,358 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
 import Link from "next/link";
+
+import { isAvailableHref } from "@/constants/routes";
+
 import { NAV_LINK_ITEMS, HEADER_BUTTONS } from "./header.constants";
+import {
+  mobileNavActionsClassName,
+  mobileNavClientButtonClassName,
+  mobileNavDemoButtonClassName,
+  mobileNavItemClassName,
+  mobileNavPanelClassName,
+  mobileNavPanelInnerClassName,
+  mobileNavToggleBarClassName,
+  mobileNavToggleBarMiddleClassName,
+  mobileNavToggleClassName,
+} from "./header.styles";
 import SolucoesMobileNavGroup from "./SolucoesMegaMenu/SolucoesMobileNavGroup";
+
+/** Mesmo ponto do `xl:hidden` deste menu (breakpoint `xl` padrão do Tailwind). */
+const HEADER_DESKTOP_MEDIA_QUERY = "(min-width: 80rem)";
+
+const TABBABLE_SELECTOR = [
+  "a[href]",
+  "button:not([disabled])",
+  "summary",
+  "input:not([disabled])",
+  "select:not([disabled])",
+  "textarea:not([disabled])",
+  '[tabindex]:not([tabindex="-1"])',
+].join(",");
+
+type MobileNavCloseReason = "toggle" | "escape" | "navigate" | "desktop";
+
+function getTabbableElements(root: HTMLElement) {
+  return [...root.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR)].filter(
+    (element) => {
+      if (element.tabIndex < 0) {
+        return false;
+      }
+
+      if (element.closest("[inert]")) {
+        return false;
+      }
+
+      const style = getComputedStyle(element);
+
+      if (style.visibility === "hidden" || style.display === "none") {
+        return false;
+      }
+
+      return element.getClientRects().length > 0;
+    },
+  );
+}
+
+/** `aria-modal` avisa leitores de tela, mas não tira o fundo da ordem de Tab. */
+function isolateFromBackground(keep: HTMLElement) {
+  const previousInert = new Map<HTMLElement, boolean>();
+  let current: HTMLElement | null = keep;
+
+  while (current) {
+    const parent: HTMLElement | null = current.parentElement;
+
+    if (!parent) {
+      break;
+    }
+
+    for (const sibling of parent.children) {
+      if (sibling === current || !(sibling instanceof HTMLElement)) {
+        continue;
+      }
+
+      previousInert.set(sibling, sibling.inert);
+      sibling.inert = true;
+    }
+
+    if (parent === document.body) {
+      break;
+    }
+
+    current = parent;
+  }
+
+  return () => {
+    for (const [element, wasInert] of previousInert) {
+      element.inert = wasInert;
+    }
+  };
+}
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const menuId = "mobile-navigation-menu";
+  const rootRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLDivElement>(null);
+  const toggleRef = useRef<HTMLButtonElement>(null);
+  const isOpenRef = useRef(false);
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
+    isOpenRef.current = isOpen;
   }, [isOpen]);
 
-  const close = () => setIsOpen(false);
+  const closeMenu = useCallback((reason: MobileNavCloseReason) => {
+    if (!isOpenRef.current) {
+      return;
+    }
+
+    const panel = panelRef.current;
+    const active = document.activeElement;
+    const focusInsidePanel = Boolean(
+      panel && active instanceof Node && panel.contains(active),
+    );
+
+    if (reason === "escape" || reason === "toggle") {
+      toggleRef.current?.focus({ preventScroll: true });
+    } else if (
+      reason === "desktop" &&
+      (focusInsidePanel || active === toggleRef.current)
+    ) {
+      const logo = document.querySelector<HTMLElement>("[data-header-logo]");
+      logo?.focus({ preventScroll: true });
+    }
+
+    setIsOpen(false);
+  }, []);
+
+  const closeByNavigate = useCallback(() => {
+    closeMenu("navigate");
+  }, [closeMenu]);
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia(HEADER_DESKTOP_MEDIA_QUERY);
+
+    const closeOnDesktop = () => {
+      if (desktopQuery.matches) {
+        closeMenu("desktop");
+      }
+    };
+
+    closeOnDesktop();
+    desktopQuery.addEventListener("change", closeOnDesktop);
+
+    return () => {
+      desktopQuery.removeEventListener("change", closeOnDesktop);
+    };
+  }, [closeMenu]);
+
+  useLayoutEffect(() => {
+    if (!isOpen) {
+      return;
+    }
+
+    const { body, documentElement } = document;
+    const root = rootRef.current;
+    const panel = panelRef.current;
+    const previousBodyOverscroll = body.style.overscrollBehavior;
+    const previousHtmlOverscroll = documentElement.style.overscrollBehavior;
+
+    body.style.overscrollBehavior = "none";
+    documentElement.style.overscrollBehavior = "none";
+
+    const restoreBackground = root ? isolateFromBackground(root) : undefined;
+
+    const isInsidePanel = (event: Event) => {
+      if (!panel) {
+        return false;
+      }
+
+      if (event.target instanceof Node && panel.contains(event.target)) {
+        return true;
+      }
+
+      if (event instanceof WheelEvent) {
+        const hit = document.elementFromPoint(event.clientX, event.clientY);
+        return Boolean(hit && panel.contains(hit));
+      }
+
+      if (event instanceof TouchEvent) {
+        const touch = event.touches[0] ?? event.changedTouches[0];
+
+        if (!touch) {
+          return false;
+        }
+
+        const hit = document.elementFromPoint(touch.clientX, touch.clientY);
+        return Boolean(hit && panel.contains(hit));
+      }
+
+      return false;
+    };
+
+    const stopBackgroundScroll = (event: Event) => {
+      if (isInsidePanel(event)) {
+        return;
+      }
+
+      event.preventDefault();
+    };
+
+    document.addEventListener("wheel", stopBackgroundScroll, { passive: false });
+    document.addEventListener("touchmove", stopBackgroundScroll, {
+      passive: false,
+    });
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closeMenu("escape");
+        return;
+      }
+
+      if (event.key !== "Tab" || !root) {
+        return;
+      }
+
+      const tabbable = getTabbableElements(root);
+
+      if (tabbable.length === 0) {
+        event.preventDefault();
+        return;
+      }
+
+      const first = tabbable[0];
+      const last = tabbable.at(-1);
+      if (!first || !last) {
+        event.preventDefault();
+        return;
+      }
+
+      const active = document.activeElement;
+      const isInside = active instanceof Node && root.contains(active);
+
+      if (event.shiftKey) {
+        if (!isInside || active === first) {
+          event.preventDefault();
+          last.focus();
+        }
+        return;
+      }
+
+      if (!isInside || active === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      body.style.overscrollBehavior = previousBodyOverscroll;
+      documentElement.style.overscrollBehavior = previousHtmlOverscroll;
+      restoreBackground?.();
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("wheel", stopBackgroundScroll);
+      document.removeEventListener("touchmove", stopBackgroundScroll);
+    };
+  }, [closeMenu, isOpen]);
+
+  const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
 
   return (
-    <div className="xl:hidden">
+    <div ref={rootRef} data-mobile-navigation className="xl:hidden">
       <button
+        ref={toggleRef}
         type="button"
         aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
         aria-expanded={isOpen}
         aria-controls={menuId}
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-md transition-colors hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2"
+        onClick={() => {
+          if (isOpen) {
+            closeMenu("toggle");
+            return;
+          }
+
+          setIsOpen(true);
+        }}
+        className={mobileNavToggleClassName}
       >
         <span
           aria-hidden="true"
           className={[
-            "block h-0.5 w-6 origin-center bg-[#383838] transition-transform duration-200",
+            mobileNavToggleBarClassName,
             isOpen ? "translate-y-[7px] rotate-45" : "",
           ].join(" ")}
         />
         <span
           aria-hidden="true"
           className={[
-            "block h-0.5 w-6 bg-[#383838] transition-opacity duration-200",
+            mobileNavToggleBarMiddleClassName,
             isOpen ? "opacity-0" : "",
           ].join(" ")}
         />
         <span
           aria-hidden="true"
           className={[
-            "block h-0.5 w-6 origin-center bg-[#383838] transition-transform duration-200",
+            mobileNavToggleBarClassName,
             isOpen ? "-translate-y-[7px] -rotate-45" : "",
           ].join(" ")}
         />
       </button>
 
       <div
+        ref={panelRef}
         id={menuId}
         role="dialog"
         aria-label="Menu de navegação"
-        aria-modal="true"
+        aria-modal={isOpen}
+        inert={!isOpen}
         className={[
-          "absolute left-0 top-full w-full bg-white shadow-lg transition-all duration-200",
-          isOpen ? "visible opacity-100" : "invisible opacity-0",
+          mobileNavPanelClassName,
+          isOpen ? "visible opacity-100" : "invisible pointer-events-none opacity-0",
         ].join(" ")}
       >
-        <div className="mx-auto w-full max-w-[1728px] px-4 py-6 md:px-8">
+        <div className={mobileNavPanelInnerClassName}>
           <nav aria-label="Navegação mobile">
             <ul className="mb-6 flex flex-col">
-              <SolucoesMobileNavGroup onNavigate={close} />
+              <SolucoesMobileNavGroup onNavigate={closeByNavigate} />
               {NAV_LINK_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={close}
-                    className="block min-h-[44px] py-3 font-reddit text-lg font-normal leading-8 text-[#383838] transition-opacity hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-1 rounded"
-                  >
-                    {item.label}
-                  </Link>
+                <li key={item.id}>
+                  {isAvailableHref(item.href) ? (
+                    <Link
+                      href={item.href}
+                      onClick={closeByNavigate}
+                      className={mobileNavItemClassName}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <span className={mobileNavItemClassName}>{item.label}</span>
+                  )}
                 </li>
               ))}
             </ul>
           </nav>
 
-          <div className="flex flex-col gap-4">
-            <Link
-              href={HEADER_BUTTONS.areaCliente.href}
-              onClick={close}
-              className="flex h-[55px] w-full items-center justify-center rounded-full bg-[#687681] px-[18.33px] font-reddit text-lg font-bold leading-[27.49px] text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#687681] focus-visible:ring-offset-2"
-            >
-              {HEADER_BUTTONS.areaCliente.label}
-            </Link>
+          <div className={mobileNavActionsClassName}>
+            {isAvailableHref(areaClienteHref) ? (
+              <Link
+                href={areaClienteHref}
+                onClick={closeByNavigate}
+                className={mobileNavClientButtonClassName}
+              >
+                {HEADER_BUTTONS.areaCliente.label}
+              </Link>
+            ) : (
+              <span className={mobileNavClientButtonClassName}>
+                {HEADER_BUTTONS.areaCliente.label}
+              </span>
+            )}
             <Link
               href={HEADER_BUTTONS.solicitarDemo.href}
-              onClick={close}
-              className="flex h-[54px] w-full items-center justify-center rounded-full bg-[#0024AE] px-[18.33px] font-reddit text-lg font-bold leading-[27.49px] text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2"
+              onClick={closeByNavigate}
+              className={mobileNavDemoButtonClassName}
             >
               {HEADER_BUTTONS.solicitarDemo.label}
             </Link>

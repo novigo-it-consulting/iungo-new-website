@@ -1,14 +1,18 @@
 import type { ComponentPropsWithoutRef } from "react";
 
-import RequestDemoFieldGroup from "./RequestDemoFieldGroup";
+import RequestDemoFieldGroup, {
+  requestDemoErrorDescribedBy,
+} from "./RequestDemoFieldGroup";
+import { withRequestDemoInvalidClass } from "./requestDemoField.styles";
 
 type RequestDemoTextareaFieldProps = {
   id: string;
   label: string;
   textareaClassName: string;
+  errorMessage?: string;
 } & Pick<
   ComponentPropsWithoutRef<"textarea">,
-  "name" | "placeholder" | "spellCheck"
+  "name" | "placeholder" | "spellCheck" | "maxLength"
 >;
 
 export default function RequestDemoTextareaField({
@@ -17,16 +21,27 @@ export default function RequestDemoTextareaField({
   name,
   placeholder,
   spellCheck,
+  maxLength,
   textareaClassName,
-}: RequestDemoTextareaFieldProps) {
+  errorMessage,
+}: Readonly<RequestDemoTextareaFieldProps>) {
+  const describedBy = requestDemoErrorDescribedBy(id, errorMessage);
+  const fieldClassName = withRequestDemoInvalidClass(
+    textareaClassName,
+    errorMessage,
+  );
+
   return (
-    <RequestDemoFieldGroup id={id} label={label}>
+    <RequestDemoFieldGroup id={id} label={label} errorMessage={errorMessage}>
       <textarea
         id={id}
         name={name}
         placeholder={placeholder}
         spellCheck={spellCheck}
-        className={textareaClassName}
+        maxLength={maxLength}
+        aria-invalid={Boolean(errorMessage)}
+        aria-describedby={describedBy}
+        className={fieldClassName}
       />
     </RequestDemoFieldGroup>
   );

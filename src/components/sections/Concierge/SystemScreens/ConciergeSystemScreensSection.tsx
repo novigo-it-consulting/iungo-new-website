@@ -1,4 +1,8 @@
 import PageContainer from "@/components/layout/PageContainer";
+import {
+  productSectionDescriptionClassName,
+  productSectionTitleClassName,
+} from "@/components/ui/sectionTitle.styles";
 import ConciergeSystemScreensCards from "./ConciergeSystemScreensCards";
 import ConciergeSystemScreensFilters from "./ConciergeSystemScreensFilters";
 import ConciergeSystemScreensVisual from "./ConciergeSystemScreensVisual";
@@ -29,7 +33,7 @@ export default function ConciergeSystemScreensSection() {
               <h2
                 id="concierge-system-screens-title"
                 data-concierge-system-screens-title
-                className="w-full max-w-[621px] text-center font-reddit text-[28px] font-bold leading-[34px] tracking-[-0.56px] text-[#27272A] sm:text-[32px] sm:leading-[38px] sm:tracking-[-0.64px] xl:text-[36px] xl:leading-[40px] xl:tracking-[-0.72px]"
+                className={`${productSectionTitleClassName} w-full max-w-[621px]`}
               >
                 O canvas que marketing opera sozinho.
               </h2>
@@ -37,7 +41,7 @@ export default function ConciergeSystemScreensSection() {
 
             <p
               data-concierge-system-screens-description
-              className="w-full max-w-[604px] text-center font-reddit text-[14px] font-normal leading-[22px] tracking-normal text-[#71717A] sm:text-[15px] sm:leading-[23px] xl:text-[16px] xl:leading-[24px]"
+              className={`${productSectionDescriptionClassName} max-w-[604px]`}
             >
               Jornadas visuais, splits inteligentes, A/B test embarcado e
               métricas ao vivo por etapa.
@@ -46,7 +50,7 @@ export default function ConciergeSystemScreensSection() {
 
           <div
             data-concierge-system-screens-content
-            className="px-6 sm:px-8"
+            className="sm:px-8"
           >
             <ConciergeSystemScreensFilters />
 
