@@ -4,6 +4,7 @@ import { isAvailableHref } from "@/constants/routes";
 
 import { HEADER_BUTTONS } from "./header.constants";
 import HeaderShell from "./HeaderShell";
+import LanguageSelector from "./LanguageSelector";
 import {
   headerActionsClassName,
   headerButtonLabelClassName,
@@ -61,6 +62,7 @@ export default function Header() {
                 {HEADER_BUTTONS.solicitarDemo.label}
               </span>
             </Link>
+            <LanguageSelector />
           </div>
         }
       />

@@ -38,7 +38,7 @@ const headerButtonBaseClassName = [
 
 export const headerClientButtonClassName = [
   headerButtonBaseClassName,
-  "bg-[#687681]",
+  "bg-action-muted",
   mutedFocusVisibleClassName,
   "xl:h-[41.64px] xl:w-[146.88px] 2xl:h-[41.64px] 2xl:w-[146.88px]",
 ].join(" ");
@@ -78,7 +78,7 @@ const mobileNavActionBaseClassName =
 
 export const mobileNavClientButtonClassName = [
   mobileNavActionBaseClassName,
-  "bg-[#687681]",
+  "bg-action-muted",
   mutedFocusVisibleClassName,
   solidButtonHoverClassName,
 ].join(" ");

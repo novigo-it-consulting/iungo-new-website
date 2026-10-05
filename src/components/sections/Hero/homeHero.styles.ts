@@ -44,7 +44,7 @@ export const homeHeroPrimaryButtonClassName = [
 
 export const homeHeroSecondaryButtonClassName = [
   homeHeroActionBaseClassName,
-  "bg-[#687681]",
+  "bg-action-muted",
   mutedFocusVisibleClassName,
   "xl:h-[42px] xl:w-[192px] xl:max-w-[192px]",
   solidButtonHoverClassName,
