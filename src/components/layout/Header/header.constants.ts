@@ -20,6 +20,9 @@ export const NAV_LINK_ITEMS: NavItem[] = [
   { id: "recursos", label: "Recursos", href: RECURSOS_HREF },
 ];
 
+/** Mesmo ponto do `xl:` do Tailwind (80rem). Usado pelo menu mobile e pelo seletor de idioma. */
+export const HEADER_DESKTOP_MEDIA_QUERY = "(min-width: 80rem)";
+
 export const HEADER_BUTTONS = {
   areaCliente: {
     label: "Área do Cliente",

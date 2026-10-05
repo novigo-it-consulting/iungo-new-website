@@ -12,6 +12,8 @@ import {
   type RefObject,
 } from "react";
 
+import { useDismissOnOutsideAndEscape } from "../useDismissOnOutsideAndEscape";
+
 type SolucoesMegaMenuContextValue = {
   isOpen: boolean;
   open: () => void;
@@ -83,41 +85,23 @@ export function SolucoesMegaMenuProvider({
     };
   }, [clearCloseTimer]);
 
-  useEffect(() => {
-    if (!isOpen) {
-      return;
-    }
+  const handleEscape = useCallback(() => {
+    close();
+    triggerRef.current?.focus();
+  }, [close]);
 
-    const handlePointerDown = (event: MouseEvent) => {
-      const target = event.target as Node;
+  const isInsideMenu = useCallback((target: Node) => {
+    return Boolean(
+      triggerRef.current?.contains(target) || panelRef.current?.contains(target),
+    );
+  }, []);
 
-      if (
-        triggerRef.current?.contains(target) ||
-        panelRef.current?.contains(target)
-      ) {
-        return;
-      }
-
-      close();
-    };
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key !== "Escape") {
-        return;
-      }
-
-      close();
-      triggerRef.current?.focus();
-    };
-
-    document.addEventListener("mousedown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [close, isOpen]);
+  useDismissOnOutsideAndEscape({
+    isOpen,
+    isInside: isInsideMenu,
+    onOutside: close,
+    onEscape: handleEscape,
+  });
 
   const value = useMemo(
     () => ({

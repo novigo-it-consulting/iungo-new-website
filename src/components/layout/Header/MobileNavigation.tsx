@@ -5,7 +5,11 @@ import Link from "next/link";
 
 import { isAvailableHref } from "@/constants/routes";
 
-import { NAV_LINK_ITEMS, HEADER_BUTTONS } from "./header.constants";
+import {
+  HEADER_BUTTONS,
+  HEADER_DESKTOP_MEDIA_QUERY,
+  NAV_LINK_ITEMS,
+} from "./header.constants";
 import {
   mobileNavActionsClassName,
   mobileNavClientButtonClassName,
@@ -18,9 +22,6 @@ import {
   mobileNavToggleClassName,
 } from "./header.styles";
 import SolucoesMobileNavGroup from "./SolucoesMegaMenu/SolucoesMobileNavGroup";
-
-/** Mesmo ponto do `xl:hidden` deste menu (breakpoint `xl` padrão do Tailwind). */
-const HEADER_DESKTOP_MEDIA_QUERY = "(min-width: 80rem)";
 
 const TABBABLE_SELECTOR = [
   "a[href]",
