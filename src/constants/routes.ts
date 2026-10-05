@@ -1,6 +1,15 @@
 /** Rota canônica para solicitar demonstração / agendar diagnóstico. */
 export const SOLICITAR_DEMONSTRACAO_HREF = "/solicitar-demonstracao" as const;
 
+/** Páginas de produto publicadas em src/app/produtos. */
+export const ORGANIZER_HREF = "/produtos/organizer" as const;
+export const BEHAVIOR_HREF = "/produtos/behavior" as const;
+export const CONCIERGE_HREF = "/produtos/concierge" as const;
+export const RESOLVE_HREF = "/produtos/resolve" as const;
+export const ATTENDANT_HREF = "/produtos/attendant" as const;
+export const CONVERT_HREF = "/produtos/convert" as const;
+export const IOT_HREF = "/produtos/iot" as const;
+
 /**
  * Destinos ainda sem página no App Router.
  * Para reativar um item, substitua `null` pelo path comentado.

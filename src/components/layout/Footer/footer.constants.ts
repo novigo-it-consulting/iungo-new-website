@@ -1,4 +1,13 @@
-import { CASES_HREF } from "@/constants/routes";
+import {
+  ATTENDANT_HREF,
+  BEHAVIOR_HREF,
+  CASES_HREF,
+  CONCIERGE_HREF,
+  CONVERT_HREF,
+  IOT_HREF,
+  ORGANIZER_HREF,
+  RESOLVE_HREF,
+} from "@/constants/routes";
 
 export type FooterNavLink = {
   label: string;
@@ -20,13 +29,13 @@ export const FOOTER_NAV_GROUPS: readonly FooterNavGroup[] = [
   {
     title: "Produtos",
     links: [
-      { label: "Iungo Organizer AI PIM", href: null },
-      { label: "Iungo Behavior CDP", href: null },
-      { label: "Iungo Concierge", href: null },
-      { label: "Iungo Resolve", href: null },
-      { label: "Iungo Attendant", href: null },
-      { label: "Iungo Convert", href: null },
-      { label: "Iungo IoT", href: null },
+      { label: "Iungo Organizer AI PIM", href: ORGANIZER_HREF },
+      { label: "Iungo Behavior CDP", href: BEHAVIOR_HREF },
+      { label: "Iungo Concierge", href: CONCIERGE_HREF },
+      { label: "Iungo Resolve", href: RESOLVE_HREF },
+      { label: "Iungo Attendant", href: ATTENDANT_HREF },
+      { label: "Iungo Convert", href: CONVERT_HREF },
+      { label: "Iungo IoT", href: IOT_HREF },
     ],
   },
   {

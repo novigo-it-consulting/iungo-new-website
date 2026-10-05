@@ -1,9 +1,19 @@
+import {
+  ATTENDANT_HREF,
+  BEHAVIOR_HREF,
+  CONCIERGE_HREF,
+  CONVERT_HREF,
+  IOT_HREF,
+  ORGANIZER_HREF,
+  RESOLVE_HREF,
+} from "@/constants/routes";
+
 export const FIRST_ROW_PRODUCTS = [
   {
     id: "organizer",
     name: "Iungo Organizer",
     className: "min-h-[360px] xl:col-span-3 xl:h-[346.74px]",
-    ctaHref: "/produtos/organizer",
+    ctaHref: ORGANIZER_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: "Saiba mais sobre o Iungo Organizer",
     copy: {
@@ -22,7 +32,7 @@ export const FIRST_ROW_PRODUCTS = [
     id: "concierge",
     name: "Iungo Concierge",
     className: "min-h-[360px] xl:col-span-3 xl:h-[346.76px]",
-    ctaHref: "/produtos/concierge",
+    ctaHref: CONCIERGE_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: null,
     copy: {
@@ -41,7 +51,7 @@ export const FIRST_ROW_PRODUCTS = [
     id: "behavior",
     name: "Iungo Behavior",
     className: "min-h-[360px] xl:col-span-2 xl:h-[346.76px]",
-    ctaHref: "/produtos/behavior",
+    ctaHref: BEHAVIOR_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: null,
     copy: {
@@ -63,7 +73,7 @@ export const SECOND_ROW_PRODUCTS = [
     id: "resolve",
     name: "Iungo Resolve",
     className: "min-h-[360px] xl:col-span-2 xl:h-[333.14px]",
-    ctaHref: "/produtos/resolve",
+    ctaHref: RESOLVE_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: null,
     copy: {
@@ -82,7 +92,7 @@ export const SECOND_ROW_PRODUCTS = [
     id: "attendant",
     name: "Iungo Attendant",
     className: "min-h-[360px] xl:col-span-2 xl:h-[334.53px]",
-    ctaHref: "/produtos/attendant",
+    ctaHref: ATTENDANT_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: null,
     copy: {
@@ -101,7 +111,7 @@ export const SECOND_ROW_PRODUCTS = [
     id: "convert",
     name: "Iungo Convert",
     className: "min-h-[360px] xl:col-span-2 xl:h-[334.53px]",
-    ctaHref: "/produtos/convert",
+    ctaHref: CONVERT_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: null,
     copy: {
@@ -120,7 +130,7 @@ export const SECOND_ROW_PRODUCTS = [
     id: "iot",
     name: "Iungo IoT",
     className: "min-h-[360px] xl:col-span-2 xl:h-[334.53px]",
-    ctaHref: "/produtos/iot",
+    ctaHref: IOT_HREF,
     ctaLabel: "Saiba mais",
     ctaAriaLabel: null,
     copy: {
