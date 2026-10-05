@@ -47,3 +47,4 @@ audit/review/
 audit/lighthouse-*.json
 audit/lighthouse-*.html
 audit/tools/changed-files.txt
+audit/tools/*.png

@@ -5,9 +5,9 @@
 import {
   AUDIT_BASE_URL as BASE_URL,
   createResultRecorder,
-  openAuditMobileMenu,
   withAuditBrowser,
-} from "./mobile-nav-audit.shared.mjs";
+} from "./audit.shared.mjs";
+import { openAuditMobileMenu } from "./mobile-nav-audit.shared.mjs";
 
 const { record, printAndExit } = createResultRecorder();
 

@@ -6,7 +6,7 @@ import {
   AUDIT_BASE_URL,
   createResultRecorder,
   withAuditBrowser,
-} from "./mobile-nav-audit.shared.mjs";
+} from "./audit.shared.mjs";
 
 const { record, printAndExit } = createResultRecorder();
 const PAGE_PATH = "/solicitar-demonstracao";
