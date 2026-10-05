@@ -32,7 +32,12 @@ export const languageSelectorOptionClassName = [
   darkSurfaceFocusVisibleClassName,
 ].join(" ");
 
-export const languageSelectorRootClassName = "relative w-[89px] shrink-0";
+/**
+ * z-[60] no root: a lista absoluta herda este stacking context e fica acima
+ * do painel mobile (z-50), que é irmão — não descendente — do seletor.
+ */
+export const languageSelectorRootClassName =
+  "relative z-[60] w-[89px] shrink-0";
 
 /**
  * Único fundo da lista aberta: 89×126, raio 21px, action-muted-strong.

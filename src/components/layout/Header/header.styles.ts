@@ -53,8 +53,11 @@ export const headerDemoButtonClassName = [
 export const headerButtonLabelClassName =
   "inline-block shrink-0 whitespace-nowrap font-bold text-white xl:text-[13.63px] xl:leading-[20.8px]";
 
+/** Grupo mobile: seletor (somente com o menu aberto) + botão ☰, gap-4 (16px). */
+export const mobileNavRootClassName = "flex items-center gap-4 xl:hidden";
+
 export const mobileNavToggleClassName = [
-  "flex h-11 w-11 flex-col items-center justify-center gap-[5px] rounded-md transition-colors hover:bg-gray-100",
+  "flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md transition-colors hover:bg-gray-100",
   primaryFocusVisibleClassName,
 ].join(" ");
 

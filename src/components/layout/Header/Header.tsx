@@ -62,7 +62,7 @@ export default function Header() {
                 {HEADER_BUTTONS.solicitarDemo.label}
               </span>
             </Link>
-            <LanguageSelector />
+            <LanguageSelector instance="desktop" />
           </div>
         }
       />

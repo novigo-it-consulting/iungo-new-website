@@ -1,15 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useId, useRef, useState } from "react";
 
 import LanguageSelectorChevronIcon from "@/components/icons/LanguageSelectorChevronIcon";
 
-import { HEADER_DESKTOP_MEDIA_QUERY } from "./header.constants";
+import { useHeaderClient } from "./HeaderClientContext";
 import {
-  DEFAULT_LANGUAGE_CODE,
   LANGUAGE_SELECTOR_FLAG_SIZE,
-  LANGUAGE_SELECTOR_LIST_ID,
   getHeaderLanguage,
   getOtherHeaderLanguages,
   type HeaderLanguage,
@@ -26,11 +24,18 @@ import {
   languageSelectorOptionClassName,
   languageSelectorRootClassName,
 } from "./languageSelector.styles";
+import { useCloseOnHeaderDesktopMediaQuery } from "./useCloseOnHeaderDesktopMediaQuery";
 import { useDismissOnOutsideAndEscape } from "./useDismissOnOutsideAndEscape";
 
 type FocusOrigin = "keyboard" | "pointer";
 
 type FocusWithVisibility = FocusOptions & { focusVisible?: boolean };
+
+export type LanguageSelectorInstance = "desktop" | "mobile";
+
+type LanguageSelectorProps = {
+  instance: LanguageSelectorInstance;
+};
 
 function focusTrigger(
   element: HTMLElement | null,
@@ -69,15 +74,22 @@ function LanguageFlag({ language }: Readonly<{ language: HeaderLanguage }>) {
   );
 }
 
-export default function LanguageSelector() {
-  const [currentCode, setCurrentCode] =
-    useState<HeaderLanguageCode>(DEFAULT_LANGUAGE_CODE);
+export default function LanguageSelector({
+  instance,
+}: Readonly<LanguageSelectorProps>) {
+  const {
+    languageCode: currentCode,
+    setLanguageCode: setCurrentCode,
+  } = useHeaderClient();
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
+  const listId = useId();
 
   const currentLanguage = getHeaderLanguage(currentCode);
   const otherLanguages = getOtherHeaderLanguages(currentCode);
+  const closeOnDesktop =
+    instance === "mobile" ? "enter-desktop" : "leave-desktop";
 
   const close = useCallback(() => {
     setIsOpen(false);
@@ -93,7 +105,7 @@ export default function LanguageSelector() {
       setCurrentCode(code);
       closeAndRestoreFocus(origin);
     },
-    [closeAndRestoreFocus],
+    [closeAndRestoreFocus, setCurrentCode],
   );
 
   const isInsideSelector = useCallback((target: Node) => {
@@ -109,29 +121,16 @@ export default function LanguageSelector() {
     isInside: isInsideSelector,
     onOutside: close,
     onEscape: closeFromEscape,
+    consumeEscape: true,
   });
 
-  useEffect(() => {
-    const desktopQuery = window.matchMedia(HEADER_DESKTOP_MEDIA_QUERY);
-
-    const closeBelowDesktop = () => {
-      if (!desktopQuery.matches) {
-        setIsOpen(false);
-      }
-    };
-
-    closeBelowDesktop();
-    desktopQuery.addEventListener("change", closeBelowDesktop);
-
-    return () => {
-      desktopQuery.removeEventListener("change", closeBelowDesktop);
-    };
-  }, []);
+  useCloseOnHeaderDesktopMediaQuery(closeOnDesktop, close);
 
   return (
     <div
       ref={rootRef}
       data-header-language-root
+      data-header-language-instance={instance}
       className={languageSelectorRootClassName}
       onBlur={(event) => {
         if (!isOpen) {
@@ -163,7 +162,7 @@ export default function LanguageSelector() {
         data-header-language-selector
         aria-label={`Idioma: ${currentLanguage.name}`}
         aria-expanded={isOpen}
-        aria-controls={LANGUAGE_SELECTOR_LIST_ID}
+        aria-controls={listId}
         className={languageSelectorButtonClassName}
         onPointerDown={(event) => {
           if (event.pointerType === "mouse" || event.pointerType === "touch") {
@@ -188,7 +187,7 @@ export default function LanguageSelector() {
       </button>
       {isOpen ? (
         <ul
-          id={LANGUAGE_SELECTOR_LIST_ID}
+          id={listId}
           data-header-language-list
           className={languageSelectorListClassName}
         >

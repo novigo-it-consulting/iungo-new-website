@@ -78,7 +78,9 @@ function isRotate180(style) {
 
 async function triggerFocusState(page) {
   return page.evaluate(() => {
-    const el = document.querySelector("[data-header-language-selector]");
+    const el = document.querySelector(
+      '[data-header-language-instance="desktop"] [data-header-language-selector]',
+    );
     return {
       focused: el?.matches(":focus") ?? false,
       focusVisible: el?.matches(":focus-visible") ?? false,
@@ -96,15 +98,18 @@ async function mouseClickCenter(page, selector) {
 
 async function measureLanguageSelector(page) {
   return page.evaluate(() => {
+    const root = document.querySelector(
+      '[data-header-language-instance="desktop"]',
+    );
     const header = document.querySelector("[data-header]");
-    const trigger = document.querySelector("[data-header-language-selector]");
-    const list = document.querySelector("[data-header-language-list]");
-    const column = document.querySelector("[data-header-language-open-column]");
+    const trigger = root?.querySelector("[data-header-language-selector]");
+    const list = root?.querySelector("[data-header-language-list]");
+    const column = root?.querySelector("[data-header-language-open-column]");
     const options = [
-      ...document.querySelectorAll("[data-header-language-option]"),
+      ...(root?.querySelectorAll("[data-header-language-option]") ?? []),
     ];
     const flags = [
-      ...document.querySelectorAll("[data-header-language-flag]"),
+      ...(root?.querySelectorAll("[data-header-language-flag]") ?? []),
     ];
 
     const headerRect = header?.getBoundingClientRect();
@@ -173,7 +178,7 @@ async function measureLanguageSelector(page) {
         };
       }),
       chevron: (() => {
-        const el = document.querySelector("[data-header-language-chevron]");
+        const el = root?.querySelector("[data-header-language-chevron]");
         if (!el) {
           return null;
         }
@@ -189,8 +194,13 @@ async function measureLanguageSelector(page) {
 }
 
 async function openList(page) {
-  await page.click("[data-header-language-selector]");
-  await page.waitForSelector("[data-header-language-list]", { timeout: 5000 });
+  await page.click(
+    '[data-header-language-instance="desktop"] [data-header-language-selector]',
+  );
+  await page.waitForSelector(
+    '[data-header-language-instance="desktop"] [data-header-language-list]',
+    { timeout: 5000 },
+  );
 }
 
 let chrome;
@@ -217,7 +227,8 @@ try {
     await page
       .waitForNetworkIdle({ idleTime: 500, timeout: 10000 })
       .catch(() => {});
-    await page.waitForSelector("[data-header-language-selector]", {
+    await page.waitForSelector(
+      '[data-header-language-instance="desktop"] [data-header-language-selector]', {
       timeout: 10000,
     });
 
@@ -363,7 +374,7 @@ try {
     if (viewport.name === "1920") {
       const clip = await page.evaluate(() => {
         const column = document.querySelector(
-          "[data-header-language-open-column]",
+          '[data-header-language-instance="desktop"] [data-header-language-open-column]',
         );
         const rect = column?.getBoundingClientRect();
         if (!rect) {
@@ -388,18 +399,25 @@ try {
 
     await page.keyboard.press("Escape");
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
-    const afterEscape = await page.evaluate(() => ({
-      listClosed: document.querySelector("[data-header-language-list]") === null,
-      expanded: document
-        .querySelector("[data-header-language-selector]")
-        ?.getAttribute("aria-expanded"),
-      triggerFocused: document.activeElement?.hasAttribute(
-        "data-header-language-selector",
-      ),
-    }));
+    const afterEscape = await page.evaluate(() => {
+      const trigger = document.querySelector(
+        '[data-header-language-instance="desktop"] [data-header-language-selector]',
+      );
+      return {
+        listClosed:
+          document.querySelector(
+            '[data-header-language-instance="desktop"] [data-header-language-list]',
+          ) === null,
+        expanded: trigger?.getAttribute("aria-expanded"),
+        triggerFocused: document.activeElement === trigger,
+      };
+    });
     record(
       `${prefix}-escape-closes-and-focuses`,
       afterEscape.listClosed &&
@@ -419,13 +437,19 @@ try {
     });
     await page.mouse.click(outsidePoint.x, outsidePoint.y);
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     record(
       `${prefix}-click-outside-closes`,
       await page.evaluate(
-        () => document.querySelector("[data-header-language-list]") === null,
+        () =>
+          document.querySelector(
+            '[data-header-language-instance="desktop"] [data-header-language-list]',
+          ) === null,
       ),
     );
 
@@ -434,24 +458,37 @@ try {
     await page.keyboard.press("Tab");
     await page.keyboard.press("Tab");
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     record(
       `${prefix}-tab-out-closes`,
       await page.evaluate(
-        () => document.querySelector("[data-header-language-list]") === null,
+        () =>
+          document.querySelector(
+            '[data-header-language-instance="desktop"] [data-header-language-list]',
+          ) === null,
       ),
     );
 
     await openList(page);
-    await page.click('[data-header-language-option="en"]');
+    await page.click(
+      '[data-header-language-instance="desktop"] [data-header-language-option="en"]',
+    );
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     const afterEn = await page.evaluate(() => {
-      const trigger = document.querySelector("[data-header-language-selector]");
+      const trigger = document.querySelector(
+        '[data-header-language-instance="desktop"] [data-header-language-selector]',
+      );
       return {
         label: trigger?.textContent?.replace(/\s+/g, " ").trim() ?? "",
         aria: trigger?.getAttribute("aria-label") ?? "",
@@ -487,15 +524,22 @@ try {
     await page
       .waitForNetworkIdle({ idleTime: 500, timeout: 10000 })
       .catch(() => {});
-    await page.waitForSelector("[data-header-language-selector]", {
+    await page.waitForSelector(
+      '[data-header-language-instance="desktop"] [data-header-language-selector]', {
       timeout: 10000,
     });
 
     const focusA = await triggerFocusState(page);
     record(`${prefix}-focus-a-load`, focusA.focusVisible === false, focusA);
 
-    await mouseClickCenter(page, "[data-header-language-selector]");
-    await page.waitForSelector("[data-header-language-list]", { timeout: 5000 });
+    await mouseClickCenter(
+      page,
+      '[data-header-language-instance="desktop"] [data-header-language-selector]',
+    );
+    await page.waitForSelector(
+        '[data-header-language-instance="desktop"] [data-header-language-list]',
+        { timeout: 5000 },
+      );
     const focusB = await triggerFocusState(page);
     record(
       `${prefix}-focus-b-mouse-open`,
@@ -503,9 +547,15 @@ try {
       focusB,
     );
 
-    await mouseClickCenter(page, "[data-header-language-selector]");
+    await mouseClickCenter(
+      page,
+      '[data-header-language-instance="desktop"] [data-header-language-selector]',
+    );
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     const focusC = await triggerFocusState(page);
@@ -515,11 +565,23 @@ try {
       focusC,
     );
 
-    await mouseClickCenter(page, "[data-header-language-selector]");
-    await page.waitForSelector("[data-header-language-list]", { timeout: 5000 });
-    await mouseClickCenter(page, '[data-header-language-option="en"]');
+    await mouseClickCenter(
+      page,
+      '[data-header-language-instance="desktop"] [data-header-language-selector]',
+    );
+    await page.waitForSelector(
+        '[data-header-language-instance="desktop"] [data-header-language-list]',
+        { timeout: 5000 },
+      );
+    await mouseClickCenter(
+      page,
+      '[data-header-language-instance="desktop"] [data-header-language-option="en"]',
+    );
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     const focusD = await triggerFocusState(page);
@@ -529,8 +591,14 @@ try {
       focusD,
     );
 
-    await mouseClickCenter(page, "[data-header-language-selector]");
-    await page.waitForSelector("[data-header-language-list]", { timeout: 5000 });
+    await mouseClickCenter(
+      page,
+      '[data-header-language-instance="desktop"] [data-header-language-selector]',
+    );
+    await page.waitForSelector(
+        '[data-header-language-instance="desktop"] [data-header-language-list]',
+        { timeout: 5000 },
+      );
     const outsideAfterOpen = await page.evaluate(() => {
       const header = document.querySelector("[data-header]");
       const rect = header?.getBoundingClientRect();
@@ -541,7 +609,10 @@ try {
     });
     await page.mouse.click(outsideAfterOpen.x, outsideAfterOpen.y);
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     const focusE = await triggerFocusState(page);
@@ -551,11 +622,20 @@ try {
       focusE,
     );
 
-    await mouseClickCenter(page, "[data-header-language-selector]");
-    await page.waitForSelector("[data-header-language-list]", { timeout: 5000 });
+    await mouseClickCenter(
+      page,
+      '[data-header-language-instance="desktop"] [data-header-language-selector]',
+    );
+    await page.waitForSelector(
+        '[data-header-language-instance="desktop"] [data-header-language-list]',
+        { timeout: 5000 },
+      );
     await page.keyboard.press("Escape");
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     const focusF = await triggerFocusState(page);
@@ -572,13 +652,19 @@ try {
       deviceScaleFactor: 1,
     });
     await page.waitForFunction(
-      () => !document.querySelector("[data-header-language-list]"),
+      () =>
+        !document.querySelector(
+          '[data-header-language-instance="desktop"] [data-header-language-list]',
+        ),
       { timeout: 5000 },
     );
     record(
       `${prefix}-below-xl-closes`,
       await page.evaluate(
-        () => document.querySelector("[data-header-language-list]") === null,
+        () =>
+          document.querySelector(
+            '[data-header-language-instance="desktop"] [data-header-language-list]',
+          ) === null,
       ),
     );
   }
