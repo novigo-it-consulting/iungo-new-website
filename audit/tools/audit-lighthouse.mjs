@@ -8,10 +8,11 @@ import { fileURLToPath } from "node:url";
 import * as chromeLauncher from "chrome-launcher";
 import lighthouse from "lighthouse";
 
+import { AUDIT_BASE_URL as BASE_URL } from "./audit.shared.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
 const OUT = join(ROOT, "audit", "review");
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3003";
 const RUNS = 3;
 
 const PAGES = [
@@ -108,7 +109,11 @@ try {
   process.exitCode = 1;
 } finally {
   if (chrome) {
-    await chrome.kill().catch(() => {});
+    try {
+      await chrome.kill();
+    } catch {
+      // No Windows o Chrome às vezes ainda segura a pasta temporária.
+    }
   }
 
   if (process.exitCode === 1) {

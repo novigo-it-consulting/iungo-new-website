@@ -1,0 +1,17 @@
+{
+  "nav": {
+    "solutions": "Solutions",
+    "platform": "Platform",
+    "cases": "Cases",
+    "resources": "Resources",
+    "primary": "Main navigation"
+  },
+  "actions": {
+    "clientArea": "Client area",
+    "requestDemo": "Request a demo"
+  },
+  "logo": {
+    "homeAria": "Iungo Intelligence — home page",
+    "alt": "Iungo Intelligence"
+  }
+}

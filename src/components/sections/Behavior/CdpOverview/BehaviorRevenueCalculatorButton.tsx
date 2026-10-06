@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import { solidButtonHoverClassName } from "@/components/ui/buttonInteraction.styles";

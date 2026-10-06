@@ -1,28 +1,33 @@
-export const HEADER_LANGUAGES = [
-  {
-    code: "pt-BR",
+import { routing, type Locale } from "@/i18n/routing";
+
+const LANGUAGE_PRESENTATION = {
+  "pt-BR": {
     label: "PT",
     name: "Português",
     flagSrc: "/images/flags/pt-BR.svg",
   },
-  {
-    code: "en",
+  en: {
     label: "EN",
     name: "English",
     flagSrc: "/images/flags/en.svg",
   },
-  {
-    code: "es",
+  es: {
     label: "ES",
     name: "Español",
     flagSrc: "/images/flags/es.svg",
   },
-] as const;
+} as const satisfies Record<
+  Locale,
+  { label: string; name: string; flagSrc: string }
+>;
+
+export const HEADER_LANGUAGES = routing.locales.map((code) => ({
+  code,
+  ...LANGUAGE_PRESENTATION[code],
+}));
 
 export type HeaderLanguage = (typeof HEADER_LANGUAGES)[number];
-export type HeaderLanguageCode = HeaderLanguage["code"];
-
-export const DEFAULT_LANGUAGE_CODE: HeaderLanguageCode = "pt-BR";
+export type HeaderLanguageCode = Locale;
 
 export const LANGUAGE_SELECTOR_FLAG_SIZE = 25;
 

@@ -20,6 +20,7 @@ export const LANGUAGE_SELECTOR = {
   openColumn: "[data-header-language-open-column]",
   option: "[data-header-language-option]",
   optionEn: '[data-header-language-option="en"]',
+  optionPt: '[data-header-language-option="pt-BR"]',
   flag: "[data-header-language-flag]",
   chevron: "[data-header-language-chevron]",
 };
@@ -27,7 +28,9 @@ export const LANGUAGE_SELECTOR = {
 export const DESKTOP_TRIGGER = `${LANGUAGE_SELECTOR.desktopInstance} ${LANGUAGE_SELECTOR.trigger}`;
 export const DESKTOP_LIST = `${LANGUAGE_SELECTOR.desktopInstance} ${LANGUAGE_SELECTOR.list}`;
 export const DESKTOP_OPTION_EN = `${LANGUAGE_SELECTOR.desktopInstance} ${LANGUAGE_SELECTOR.optionEn}`;
+export const DESKTOP_OPTION_PT = `${LANGUAGE_SELECTOR.desktopInstance} ${LANGUAGE_SELECTOR.optionPt}`;
 export const DESKTOP_COLUMN = `${LANGUAGE_SELECTOR.desktopInstance} ${LANGUAGE_SELECTOR.openColumn}`;
 export const MOBILE_TRIGGER = `${LANGUAGE_SELECTOR.mobileInstance} ${LANGUAGE_SELECTOR.trigger}`;
 export const MOBILE_LIST = `${LANGUAGE_SELECTOR.mobileInstance} ${LANGUAGE_SELECTOR.list}`;
 export const MOBILE_OPTION_EN = `${LANGUAGE_SELECTOR.mobileInstance} ${LANGUAGE_SELECTOR.optionEn}`;
+export const MOBILE_OPTION_PT = `${LANGUAGE_SELECTOR.mobileInstance} ${LANGUAGE_SELECTOR.optionPt}`;

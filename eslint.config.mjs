@@ -13,6 +13,29 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    files: ["src/**/*.{ts,tsx}"],
+    ignores: ["src/i18n/**"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          paths: [
+            {
+              name: "next/link",
+              message: "Importe Link de @/i18n/navigation.",
+            },
+            {
+              name: "next/navigation",
+              importNames: ["useRouter", "usePathname", "redirect"],
+              message:
+                "Importe useRouter, usePathname e redirect de @/i18n/navigation.",
+            },
+          ],
+        },
+      ],
+    },
+  },
 ]);
 
 export default eslintConfig;

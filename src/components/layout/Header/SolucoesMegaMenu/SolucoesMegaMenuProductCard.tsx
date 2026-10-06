@@ -1,7 +1,10 @@
 "use client";
 
+import type { ProductId } from "@/components/sections/Products/products.constants";
 import Image from "next/image";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 
 import type { SolucoesMegaMenuProduct } from "./solucoesMegaMenu.products";
 import SolucoesMegaMenuBadge from "./SolucoesMegaMenuBadge";
@@ -22,15 +25,40 @@ type SolucoesMegaMenuProductCardProps = {
   onNavigate?: () => void;
 };
 
+function productMenuDescription(id: ProductId, t: ReturnType<typeof useTranslations<"products">>) {
+  switch (id) {
+    case "organizer":
+      return t("organizer.description");
+    case "concierge":
+      return t("concierge.description");
+    case "behavior":
+      return t("behavior.description");
+    case "resolve":
+      return t("resolve.description");
+    case "attendant":
+      return t("attendant.description");
+    case "convert":
+      return t("convert.description");
+    case "iot":
+      return t("iot.description");
+    default: {
+      const exhaustive: never = id;
+      return exhaustive;
+    }
+  }
+}
+
 export default function SolucoesMegaMenuProductCard({
   product,
   onNavigate,
 }: Readonly<SolucoesMegaMenuProductCardProps>) {
-  const titleLeadingClassName = product.badge
+  const tProducts = useTranslations("products");
+  const tMegaMenu = useTranslations("megaMenu");
+  const titleLeadingClassName = product.badgeId
     ? solucoesMegaMenuProductTitleLeadingGroupClassName
     : solucoesMegaMenuProductTitleGroupClassName;
 
-  const titleRowClassName = product.badge
+  const titleRowClassName = product.badgeId
     ? solucoesMegaMenuProductTitleRowWithBadgeClassName
     : solucoesMegaMenuProductTitleRowClassName;
 
@@ -61,12 +89,12 @@ export default function SolucoesMegaMenuProductCard({
             {product.name}
           </span>
         </span>
-        {product.badge ? (
-          <SolucoesMegaMenuBadge variant="product" label={product.badge.label} />
+        {product.badgeId === "new" ? (
+          <SolucoesMegaMenuBadge variant="product" label={tMegaMenu("badges.new")} />
         ) : null}
       </span>
       <p className={solucoesMegaMenuProductDescriptionClassName}>
-        {product.description}
+        {productMenuDescription(product.id, tProducts)}
       </p>
     </Link>
   );

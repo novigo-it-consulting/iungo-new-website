@@ -1,63 +1,42 @@
-import {
-  FIRST_ROW_PRODUCTS,
-  SECOND_ROW_PRODUCTS,
-} from "@/components/sections/Products/products.constants";
+import { getProductById } from "@/components/sections/Products/products.constants";
 
 import type { SolucoesMegaMenuCategory } from "./solucoesMegaMenu.constants";
 
-const ALL_PRODUCTS = [...FIRST_ROW_PRODUCTS, ...SECOND_ROW_PRODUCTS];
-
-const PRODUCT_BY_ID = Object.fromEntries(
-  ALL_PRODUCTS.map((product) => [product.id, product] as const),
-) as Record<(typeof ALL_PRODUCTS)[number]["id"], (typeof ALL_PRODUCTS)[number]>;
-
-export type SolucoesMegaMenuProductBadge = {
-  readonly label: string;
-};
+export type SolucoesMegaMenuProductBadgeId = "new";
 
 export type SolucoesMegaMenuProduct = {
-  readonly id: (typeof ALL_PRODUCTS)[number]["id"];
+  readonly id: ReturnType<typeof getProductById>["id"];
   readonly name: string;
-  readonly description: string;
   readonly href: string;
   readonly iconSrc: string;
   readonly iconBackgroundClassName: string;
   readonly titleColorClassName: string;
-  readonly badge?: SolucoesMegaMenuProductBadge;
+  readonly badgeId?: SolucoesMegaMenuProductBadgeId;
 };
 
 function toTitleColorClassName(backgroundClassName: string): string {
   return backgroundClassName.replace("bg-", "text-");
 }
 
-/** Textos específicos do mega menu quando diferem dos cards da home. */
-const MEGA_MENU_DESCRIPTION_OVERRIDES: Partial<
-  Record<(typeof ALL_PRODUCTS)[number]["id"], string>
-> = {
-  iot: "RFID, RTLS e gestão de ativos",
-};
-
 const MEGA_MENU_PRODUCT_BADGES: Partial<
-  Record<(typeof ALL_PRODUCTS)[number]["id"], SolucoesMegaMenuProductBadge>
+  Record<SolucoesMegaMenuProduct["id"], SolucoesMegaMenuProductBadgeId>
 > = {
-  iot: { label: "NOVO" },
+  iot: "new",
 };
 
 export function getSolucoesMegaMenuProduct(
-  productId: (typeof ALL_PRODUCTS)[number]["id"],
+  productId: SolucoesMegaMenuProduct["id"],
 ): SolucoesMegaMenuProduct {
-  const product = PRODUCT_BY_ID[productId];
+  const product = getProductById(productId);
 
   return {
     id: product.id,
     name: product.name,
-    description:
-      MEGA_MENU_DESCRIPTION_OVERRIDES[productId] ?? product.copy.description,
     href: product.ctaHref,
     iconSrc: product.icon.src,
     iconBackgroundClassName: product.icon.backgroundClassName,
     titleColorClassName: toTitleColorClassName(product.icon.backgroundClassName),
-    badge: MEGA_MENU_PRODUCT_BADGES[productId],
+    badgeId: MEGA_MENU_PRODUCT_BADGES[productId],
   };
 }
 

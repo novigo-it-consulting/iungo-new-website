@@ -1,17 +1,16 @@
 "use client";
 
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useId, useRef, useState } from "react";
 
 import LanguageSelectorChevronIcon from "@/components/icons/LanguageSelectorChevronIcon";
-
-import { useHeaderClient } from "./HeaderClientContext";
+import { Link, usePathname } from "@/i18n/navigation";
 import {
   LANGUAGE_SELECTOR_FLAG_SIZE,
   getHeaderLanguage,
   getOtherHeaderLanguages,
   type HeaderLanguage,
-  type HeaderLanguageCode,
 } from "./languageSelector.constants";
 import {
   languageSelectorButtonClassName,
@@ -55,10 +54,6 @@ function focusTrigger(
   } as FocusWithVisibility);
 }
 
-function clickOrigin(event: { detail: number }): FocusOrigin {
-  return event.detail === 0 ? "keyboard" : "pointer";
-}
-
 function LanguageFlag({ language }: Readonly<{ language: HeaderLanguage }>) {
   return (
     <Image
@@ -77,10 +72,9 @@ function LanguageFlag({ language }: Readonly<{ language: HeaderLanguage }>) {
 export default function LanguageSelector({
   instance,
 }: Readonly<LanguageSelectorProps>) {
-  const {
-    languageCode: currentCode,
-    setLanguageCode: setCurrentCode,
-  } = useHeaderClient();
+  const currentCode = useLocale();
+  const pathname = usePathname();
+  const t = useTranslations("languageSelector");
   const [isOpen, setIsOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
@@ -99,14 +93,6 @@ export default function LanguageSelector({
     setIsOpen(false);
     focusTrigger(triggerRef.current, origin);
   }, []);
-
-  const selectLanguage = useCallback(
-    (code: HeaderLanguageCode, origin: FocusOrigin) => {
-      setCurrentCode(code);
-      closeAndRestoreFocus(origin);
-    },
-    [closeAndRestoreFocus, setCurrentCode],
-  );
 
   const isInsideSelector = useCallback((target: Node) => {
     return Boolean(rootRef.current?.contains(target));
@@ -160,7 +146,7 @@ export default function LanguageSelector({
         ref={triggerRef}
         type="button"
         data-header-language-selector
-        aria-label={`Idioma: ${currentLanguage.name}`}
+        aria-label={t("current", { languageName: currentLanguage.name })}
         aria-expanded={isOpen}
         aria-controls={listId}
         className={languageSelectorButtonClassName}
@@ -193,8 +179,10 @@ export default function LanguageSelector({
         >
           {otherLanguages.map((language) => (
             <li key={language.code}>
-              <button
-                type="button"
+              <Link
+                href={pathname}
+                locale={language.code}
+                hrefLang={language.code}
                 data-header-language-option={language.code}
                 className={languageSelectorOptionClassName}
                 onPointerDown={(event) => {
@@ -205,9 +193,6 @@ export default function LanguageSelector({
                     focusTrigger(event.currentTarget, "pointer");
                   }
                 }}
-                onClick={(event) => {
-                  selectLanguage(language.code, clickOrigin(event));
-                }}
               >
                 <LanguageFlag language={language} />
                 <span className={languageSelectorLabelClassName}>
@@ -216,7 +201,7 @@ export default function LanguageSelector({
                 <span className="sr-only" lang={language.code}>
                   {language.name}
                 </span>
-              </button>
+              </Link>
             </li>
           ))}
         </ul>

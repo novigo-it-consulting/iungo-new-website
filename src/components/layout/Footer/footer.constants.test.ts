@@ -1,30 +1,16 @@
 import { describe, expect, it } from "vitest";
 
+import { isAvailableHref } from "@/constants/routes";
 import {
-  ATTENDANT_HREF,
-  BEHAVIOR_HREF,
-  CONCIERGE_HREF,
-  CONVERT_HREF,
-  IOT_HREF,
-  ORGANIZER_HREF,
-  RESOLVE_HREF,
-  isAvailableHref,
-} from "@/constants/routes";
+  FOOTER_PRODUCT_IDS,
+  getProductById,
+  getProductFooterName,
+} from "@/components/sections/Products/products.constants";
 
 import { FOOTER_NAV_GROUPS } from "./footer.constants";
 
-const PUBLISHED_PRODUCT_LINKS = [
-  ["Iungo Organizer AI PIM", ORGANIZER_HREF],
-  ["Iungo Behavior CDP", BEHAVIOR_HREF],
-  ["Iungo Concierge", CONCIERGE_HREF],
-  ["Iungo Resolve", RESOLVE_HREF],
-  ["Iungo Attendant", ATTENDANT_HREF],
-  ["Iungo Convert", CONVERT_HREF],
-  ["Iungo IoT", IOT_HREF],
-] as const;
-
 function productLinks() {
-  const group = FOOTER_NAV_GROUPS.find((item) => item.title === "Produtos");
+  const group = FOOTER_NAV_GROUPS.find((item) => item.id === "products");
 
   if (!group) {
     throw new Error("Grupo Produtos ausente no Footer.");
@@ -37,22 +23,26 @@ describe("links de produto do Footer", () => {
   it("aponta cada produto com página publicada para a rota canônica", () => {
     const links = productLinks();
 
-    expect(links).toHaveLength(PUBLISHED_PRODUCT_LINKS.length);
+    expect(links).toHaveLength(FOOTER_PRODUCT_IDS.length);
 
-    for (const [label, href] of PUBLISHED_PRODUCT_LINKS) {
-      const link = links.find((item) => item.label === label);
+    for (const id of FOOTER_PRODUCT_IDS) {
+      const link = links.find((item) => item.kind === "product" && item.id === id);
 
-      expect(link?.href).toBe(href);
-      expect(isAvailableHref(link?.href)).toBe(true);
+      expect(link?.kind).toBe("product");
+
+      if (link?.kind !== "product") {
+        continue;
+      }
+
+      expect(getProductById(link.id).ctaHref).toBe(getProductById(id).ctaHref);
+      expect(isAvailableHref(getProductById(link.id).ctaHref)).toBe(true);
+      expect(getProductFooterName(id).length).toBeGreaterThan(0);
     }
   });
 
   it("mantém href nulo nos itens que ainda não têm página", () => {
-    const publishedLabels = new Set<string>(
-      PUBLISHED_PRODUCT_LINKS.map(([label]) => label),
-    );
     const unpublished = FOOTER_NAV_GROUPS.flatMap((group) => group.links).filter(
-      (link) => !publishedLabels.has(link.label),
+      (link) => link.kind === "text",
     );
 
     expect(unpublished.length).toBeGreaterThan(0);

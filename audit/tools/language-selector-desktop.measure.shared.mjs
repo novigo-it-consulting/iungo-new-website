@@ -72,7 +72,7 @@ function readDesktopChoices(sel) {
     }),
     flags: flags.map((item) => {
       const rect = item.getBoundingClientRect();
-      const parent = item.closest("button");
+      const parent = item.closest("a, button");
       const parentRect = parent?.getBoundingClientRect();
       return {
         code: item.getAttribute("data-header-language-flag"),

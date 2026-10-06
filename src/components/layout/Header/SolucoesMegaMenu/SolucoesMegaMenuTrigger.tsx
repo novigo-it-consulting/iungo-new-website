@@ -1,8 +1,8 @@
 "use client";
 
-import ChevronDownIcon from "@/components/icons/ChevronDownIcon";
+import { useTranslations } from "next-intl";
 
-import { SOLUCOES_NAV_LABEL } from "../header.constants";
+import ChevronDownIcon from "@/components/icons/ChevronDownIcon";
 import {
   SOLUCOES_MEGA_MENU_PANEL_ID,
 } from "./solucoesMegaMenu.constants";
@@ -23,6 +23,7 @@ export default function SolucoesMegaMenuTrigger() {
     cancelScheduledClose,
     triggerRef,
   } = useSolucoesMegaMenu();
+  const t = useTranslations("header");
 
   return (
     <button
@@ -40,7 +41,7 @@ export default function SolucoesMegaMenuTrigger() {
       onFocus={cancelScheduledClose}
       onClick={toggle}
     >
-      <span>{SOLUCOES_NAV_LABEL}</span>
+      <span>{t("nav.solutions")}</span>
       <ChevronDownIcon
         className={[
           solucoesMegaMenuChevronClassName,

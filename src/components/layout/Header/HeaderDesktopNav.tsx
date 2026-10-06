@@ -1,6 +1,8 @@
 "use client";
 
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref } from "@/constants/routes";
 
@@ -22,10 +24,12 @@ const NAV_ITEM_META: Record<
 };
 
 export default function HeaderDesktopNav() {
+  const t = useTranslations("header");
+
   return (
     <nav
       data-header-nav
-      aria-label="Navegação principal"
+      aria-label={t("nav.primary")}
       className={headerNavClassName}
     >
       <ul className={headerNavListClassName}>
@@ -44,11 +48,11 @@ export default function HeaderDesktopNav() {
                   data-header-nav-item={meta.navKey}
                   className={className}
                 >
-                  {item.label}
+                  {t(item.labelKey)}
                 </Link>
               ) : (
                 <span data-header-nav-item={meta.navKey} className={className}>
-                  {item.label}
+                  {t(item.labelKey)}
                 </span>
               )}
             </li>

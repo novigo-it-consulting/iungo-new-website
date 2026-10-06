@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 import type { SolucoesMegaMenuCategory } from "./solucoesMegaMenu.constants";
 import SolucoesMegaMenuBadge from "./SolucoesMegaMenuBadge";
 import {
@@ -12,14 +16,16 @@ type SolucoesMegaMenuCategoryHeaderProps = {
 export default function SolucoesMegaMenuCategoryHeader({
   category,
 }: Readonly<SolucoesMegaMenuCategoryHeaderProps>) {
+  const t = useTranslations("megaMenu");
+
   return (
     <div
       data-solucoes-mega-menu-category-header={category.id}
       className={solucoesMegaMenuCategoryHeaderClassName}
     >
-      <SolucoesMegaMenuBadge variant="category" label={category.badge} />
+      <SolucoesMegaMenuBadge variant="category" label={t(category.badgeKey)} />
       <p className={solucoesMegaMenuCategorySubtitleClassName}>
-        {category.subtitle}
+        {t(category.subtitleKey)}
       </p>
     </div>
   );

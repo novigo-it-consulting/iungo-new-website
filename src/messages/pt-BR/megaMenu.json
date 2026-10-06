@@ -1,0 +1,26 @@
+{
+  "viewSolution": "Ver solução completa",
+  "badges": {
+    "new": "NOVO"
+  },
+  "categories": {
+    "commerceIntelligence": {
+      "badge": "COMMERCE INTELLIGENCE",
+      "subtitle": "Catálogo, dados de cliente e jornadas — no mesmo motor de IA."
+    },
+    "cxAiAgents": {
+      "badge": "CX AI AGENTS",
+      "subtitle": "Atendimento e operação automatizados — com auditoria total."
+    },
+    "salesConnected": {
+      "badge": "SALES & CONNECTED",
+      "subtitle": "Venda conversacional e ativos físicos no mesmo tecido de dados."
+    }
+  },
+  "featuredCase": {
+    "badge": "CASO EM DESTAQUE",
+    "title": "+R$ 600 mil em 15 dias",
+    "subtitle": "Líder de moda premium ativou 6 marcas simultaneamente com Iungo Concierge.",
+    "readCase": "Ler caso completo"
+  }
+}

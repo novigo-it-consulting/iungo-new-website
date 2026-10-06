@@ -1,0 +1,23 @@
+{
+  "organizer": {
+    "description": "El mejor AI PIM para enriquecer catálogos con IA generativa, con onboarding en 14 días e integración nativa con Mercado Livre y Amazon BR."
+  },
+  "concierge": {
+    "description": "El Journey Orchestrator para orquestar recorridos en tiempo real, con estudio visual no-code y disparadores en minutos."
+  },
+  "behavior": {
+    "description": "El CDP en tiempo real de Brasil, con visión 360º predictiva, motor de comportamiento y semántica propietaria."
+  },
+  "resolve": {
+    "description": "El Knowledge Agent que conoce su catálogo y resuelve atenciones L1/L2 con IA generativa en menos de 8 segundos."
+  },
+  "attendant": {
+    "description": "El Transactional Agent para automatizar pedidos, devoluciones y operaciones administrativas con IA agéntica."
+  },
+  "convert": {
+    "description": "El Sales AI Agent conversacional que vende 24/7 usando el catálogo PIM y el perfil CDP en tiempo real."
+  },
+  "iot": {
+    "description": "RFID, RTLS y gestión de activos"
+  }
+}

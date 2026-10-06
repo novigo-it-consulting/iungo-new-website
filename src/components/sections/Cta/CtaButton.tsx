@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { ctaMobileSizeAndTypographyClassName } from "@/components/ui/ctaButton.styles";
 

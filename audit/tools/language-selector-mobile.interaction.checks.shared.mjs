@@ -6,7 +6,6 @@ import {
   LANGUAGE_SELECTOR,
   MOBILE_LIST,
   MOBILE_OPTION_EN,
-  MOBILE_TRIGGER,
 } from "./language-selector-audit.selectors.shared.mjs";
 import {
   clickMenuToggle,
@@ -27,6 +26,7 @@ import {
   openListAndMeasure,
   openMenuAndMeasure,
 } from "./language-selector-mobile.checks.shared.mjs";
+import { checkLocaleSwitch } from "./language-selector-locale.checks.shared.mjs";
 
 export async function checkClickPanelClosesList(page, prefix, record) {
   const panelClick = await page.evaluate((panelSelector) => {
@@ -82,24 +82,28 @@ export async function checkSelectionKeepsMenuOpen(page, prefix, record) {
   await waitForMenuExpanded(page, true);
   await clickMobileSelector(page);
   await page.waitForSelector(MOBILE_OPTION_EN, { timeout: 5000 });
-  await page.click(MOBILE_OPTION_EN);
-  await page.waitForFunction(
-    (triggerSelector) =>
-      document.querySelector(triggerSelector)?.textContent?.includes("EN"),
-    { timeout: 5000 },
-    MOBILE_TRIGGER,
-  );
+  await Promise.all([
+    page.waitForFunction(() => document.documentElement.lang === "en", {
+      timeout: 10000,
+    }),
+    page.click(MOBILE_OPTION_EN),
+  ]);
   const afterSelect = await measureMobileHeader(page);
   record(
-    `${prefix}-select-en-keeps-menu-open`,
-    afterSelect.menuExpanded === true &&
+    `${prefix}-select-en-navigates`,
+    afterSelect.menuExpanded === false &&
       afterSelect.list === null &&
-      afterSelect.triggerLabel.includes("EN"),
+      afterSelect.mobileSelectorInDom === false,
     { menuExpanded: afterSelect.menuExpanded, label: afterSelect.triggerLabel },
   );
 }
 
 export async function checkCloseMenuRemovesSelector(page, prefix, record) {
+  const current = await measureMobileHeader(page);
+  if (!current.menuExpanded) {
+    await clickMenuToggle(page);
+    await waitForMenuExpanded(page, true);
+  }
   await clickMenuToggle(page);
   await waitForMenuExpanded(page, false);
   const afterMenuClose = await measureMobileHeader(page);
@@ -126,13 +130,12 @@ export async function checkSharedStateAfterResize(page, record) {
   await waitForMenuExpanded(page, true);
   await clickMobileSelector(page);
   await page.waitForSelector(MOBILE_OPTION_EN, { timeout: 5000 });
-  await page.click(MOBILE_OPTION_EN);
-  await page.waitForFunction(
-    (triggerSelector) =>
-      document.querySelector(triggerSelector)?.textContent?.includes("EN"),
-    { timeout: 5000 },
-    MOBILE_TRIGGER,
-  );
+  await Promise.all([
+    page.waitForFunction(() => document.documentElement.lang === "en", {
+      timeout: 10000,
+    }),
+    page.click(MOBILE_OPTION_EN),
+  ]);
   await page.setViewport({
     width: 1440,
     height: 900,
@@ -152,7 +155,7 @@ export async function checkSharedStateAfterResize(page, record) {
   record(
     "shared-state-en-after-resize-to-1440",
     shared.desktopLabel.includes("EN") &&
-      shared.desktopAria === "Idioma: English" &&
+      shared.desktopAria === "Language: English" &&
       shared.desktopFlag === "en" &&
       shared.mobileGone,
     shared,
@@ -196,4 +199,7 @@ export async function runMobileViewport(page, viewport, ctx) {
   await checkTwoStepEscape(page, prefix, record);
   await checkSelectionKeepsMenuOpen(page, prefix, record);
   await checkCloseMenuRemovesSelector(page, prefix, record);
+  if (viewport.name === "375") {
+    await checkLocaleSwitch(page, viewport, record);
+  }
 }

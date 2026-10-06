@@ -1,0 +1,26 @@
+{
+  "viewSolution": "View the full solution",
+  "badges": {
+    "new": "NEW"
+  },
+  "categories": {
+    "commerceIntelligence": {
+      "badge": "COMMERCE INTELLIGENCE",
+      "subtitle": "Catalog, customer data and journeys — on the same AI engine."
+    },
+    "cxAiAgents": {
+      "badge": "CX AI AGENTS",
+      "subtitle": "Automated service and operations — with full auditability."
+    },
+    "salesConnected": {
+      "badge": "SALES & CONNECTED",
+      "subtitle": "Conversational selling and physical assets on the same data fabric."
+    }
+  },
+  "featuredCase": {
+    "badge": "FEATURED CASE",
+    "title": "+R$600K in 15 days",
+    "subtitle": "A premium fashion leader activated 6 brands at the same time with Iungo Concierge.",
+    "readCase": "Read the full case"
+  }
+}

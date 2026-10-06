@@ -146,3 +146,40 @@ export const SECOND_ROW_PRODUCTS = [
     cardPaddingClassName: "2xl:px-[25.02px] 2xl:py-[25.73px]",
   },
 ] as const;
+
+export type ProductId =
+  | (typeof FIRST_ROW_PRODUCTS)[number]["id"]
+  | (typeof SECOND_ROW_PRODUCTS)[number]["id"];
+
+const ALL_PRODUCTS = [...FIRST_ROW_PRODUCTS, ...SECOND_ROW_PRODUCTS];
+
+export const FOOTER_PRODUCT_IDS = [
+  "organizer",
+  "behavior",
+  "concierge",
+  "resolve",
+  "attendant",
+  "convert",
+  "iot",
+] as const satisfies readonly ProductId[];
+
+export function getProductById(id: ProductId) {
+  const product = ALL_PRODUCTS.find((item) => item.id === id);
+
+  if (!product) {
+    throw new Error(`Produto não cadastrado: ${id}`);
+  }
+
+  return product;
+}
+
+export function getProductFooterName(id: ProductId): string {
+  switch (id) {
+    case "organizer":
+      return "Iungo Organizer AI PIM";
+    case "behavior":
+      return "Iungo Behavior CDP";
+    default:
+      return getProductById(id).name;
+  }
+}

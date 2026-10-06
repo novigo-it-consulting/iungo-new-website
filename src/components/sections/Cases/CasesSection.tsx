@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { CASES_HREF, isAvailableHref } from "@/constants/routes";
 import {

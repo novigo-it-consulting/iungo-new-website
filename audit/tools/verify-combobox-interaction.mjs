@@ -5,7 +5,7 @@
 import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer-core";
 
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3003";
+import { AUDIT_BASE_URL as BASE_URL, clickClearOfCookieBanner } from "./audit.shared.mjs";
 
 const results = [];
 
@@ -55,7 +55,7 @@ try {
     throw new Error("Combobox trigger not found");
   }
 
-  await trigger.click();
+  await clickClearOfCookieBanner(page, "#request-demo-product-interest");
   await page.waitForSelector("#request-demo-product-interest-listbox");
 
   await page.keyboard.press("ArrowDown");
@@ -76,7 +76,7 @@ try {
   );
   record("keyboard-enter-selects", afterEnter.expanded === "false" && afterEnter.value !== "", afterEnter);
 
-  await trigger.click();
+  await clickClearOfCookieBanner(page, "#request-demo-product-interest");
   await page.waitForSelector("#request-demo-product-interest-listbox");
 
   await page.click("#request-demo-product-interest-listbox li:nth-child(4) [role=\"option\"]");
@@ -86,7 +86,7 @@ try {
   );
   record("mouse-click-selects", afterMouseClick !== "", afterMouseClick);
 
-  await trigger.click();
+  await clickClearOfCookieBanner(page, "#request-demo-product-interest");
   await page.waitForSelector("#request-demo-product-interest-listbox");
 
   const valueBeforeCancel = await page.$eval(

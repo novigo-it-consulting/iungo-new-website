@@ -6,6 +6,19 @@ import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer-core";
 
 export const AUDIT_BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3000";
+
+/** O banner de cookies cobre o combobox em 1366×768. Sobe o campo antes do clique. */
+export async function clickClearOfCookieBanner(page, selector) {
+  await page.$eval(selector, (element) => {
+    const banner = document.querySelector("[data-cookie-banner]");
+    const bannerTop = banner?.getBoundingClientRect().top ?? window.innerHeight;
+    const rect = element.getBoundingClientRect();
+    if (rect.bottom > bannerTop - 8) {
+      window.scrollBy(0, rect.bottom - (bannerTop - 8));
+    }
+  });
+  await page.click(selector);
+}
 export const AUDIT_UI_SETTLE_MS = 150;
 export const AUDIT_TOOLS_DIR = import.meta.dirname;
 

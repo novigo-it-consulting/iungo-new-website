@@ -1,0 +1,34 @@
+{
+  "banner": {
+    "title": "Cookies y privacidad",
+    "description": "Usamos solo cookies esenciales para que el sitio funcione y recuerde sus preferencias. Para saber más o ajustar su elección, haga clic en “Personalizar cookies”."
+  },
+  "actions": {
+    "acceptAll": "Aceptar todas las cookies",
+    "rejectNonEssential": "Rechazar cookies no necesarias",
+    "personalize": "Personalizar cookies",
+    "savePreferences": "Guardar preferencias",
+    "closePreferences": "Cerrar preferencias de cookies",
+    "settings": "Configurar cookies"
+  },
+  "choice": {
+    "legend": "Cómo desea tratar las cookies opcionales",
+    "requiredHint": "Seleccione una opción para guardar sus preferencias."
+  },
+  "dialog": {
+    "title": "Centro de preferencias de cookies",
+    "description": "Solo hay cookies estrictamente necesarias. En este momento no utilizamos cookies opcionales. Aceptar todas las cookies y rechazar las cookies no necesarias registran la misma decisión por ahora."
+  },
+  "necessary": {
+    "title": "Estrictamente necesarias",
+    "alwaysOn": "Siempre activas",
+    "description": "Esenciales para el funcionamiento básico del sitio y para recordar su elección de privacidad. Permanecen siempre activas.",
+    "purpose": "Finalidad: funcionamiento del sitio y registro local de su decisión de cookies.",
+    "vendor": "Proveedor: Iungo Intelligence (este sitio).",
+    "duration": "Duración: hasta 365 días en el navegador. Este plazo es una elección técnica configurable, pendiente de validación del responsable — no es un plazo legal de la política institucional.",
+    "technology": "Tecnología: localStorage en este dispositivo. No es una cookie HTTP y no lo identifica en un servidor de Iungo."
+  },
+  "browserManagement": "También puede bloquear o borrar cookies y datos de sitios en la configuración de su navegador. Eso puede afectar el funcionamiento de algunas páginas. Este sitio no puede borrar cookies HttpOnly ni de otros dominios mediante JavaScript.",
+  "contactPrefix": "Consultas de privacidad: ",
+  "sessionOnlyNotice": "Esta elección vale solo para esta sesión, porque el navegador bloqueó el almacenamiento permanente."
+}

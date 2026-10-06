@@ -1,14 +1,8 @@
 "use client";
 
-import PageContainer from "@/components/layout/PageContainer";
+import { useTranslations } from "next-intl";
 
-import {
-  COOKIE_ACCEPT_ALL_LABEL,
-  COOKIE_BANNER_DESCRIPTION,
-  COOKIE_BANNER_TITLE,
-  COOKIE_PERSONALIZE_LABEL,
-  COOKIE_REJECT_NON_ESSENTIAL_LABEL,
-} from "./cookieConsent.constants";
+import PageContainer from "@/components/layout/PageContainer";
 import {
   cookieBannerAcceptActionClassName,
   cookieBannerActionsClassName,
@@ -23,6 +17,7 @@ import { useCookieConsent } from "./CookieConsentContext";
 
 export default function CookieBanner() {
   const { acceptAll, rejectNonEssential, openPreferences } = useCookieConsent();
+  const t = useTranslations("cookies");
 
   return (
     <section
@@ -38,13 +33,13 @@ export default function CookieBanner() {
               id="cookie-banner-title"
               className={cookieBannerTitleClassName}
             >
-              {COOKIE_BANNER_TITLE}
+              {t("banner.title")}
             </h2>
             <p
               id="cookie-banner-description"
               className={cookieBannerTextClassName}
             >
-              {COOKIE_BANNER_DESCRIPTION}
+              {t("banner.description")}
             </p>
           </div>
 
@@ -57,21 +52,21 @@ export default function CookieBanner() {
                 openPreferences(event.currentTarget);
               }}
             >
-              {COOKIE_PERSONALIZE_LABEL}
+              {t("actions.personalize")}
             </button>
             <button
               type="button"
               className={cookieEqualActionClassName}
               onClick={rejectNonEssential}
             >
-              {COOKIE_REJECT_NON_ESSENTIAL_LABEL}
+              {t("actions.rejectNonEssential")}
             </button>
             <button
               type="button"
               className={cookieBannerAcceptActionClassName}
               onClick={acceptAll}
             >
-              {COOKIE_ACCEPT_ALL_LABEL}
+              {t("actions.acceptAll")}
             </button>
           </div>
         </div>

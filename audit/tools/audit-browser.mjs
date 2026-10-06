@@ -8,10 +8,11 @@ import { fileURLToPath } from "node:url";
 import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer-core";
 
+import { AUDIT_BASE_URL as BASE_URL, clickClearOfCookieBanner } from "./audit.shared.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
 const OUT = join(ROOT, "audit", "review");
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3003";
 
 const ROUTES = [
   "/",
@@ -144,7 +145,7 @@ try {
     throw new Error("Combobox trigger #request-demo-product-interest not found");
   }
 
-  await trigger.click();
+  await clickClearOfCookieBanner(page, "#request-demo-product-interest");
   await page.waitForSelector("#request-demo-product-interest-listbox");
 
   comboboxResults.push(
@@ -190,7 +191,7 @@ try {
     },
   );
 
-  await trigger.click();
+  await clickClearOfCookieBanner(page, "#request-demo-product-interest");
   await page.keyboard.press("Escape");
   comboboxResults.push({
     test: "escape-closes",
@@ -296,7 +297,7 @@ try {
 } finally {
   await browser?.close().catch(() => {});
   if (chrome) {
-    await chrome.kill().catch(() => {});
+    await chrome.kill();
   }
 
   if (process.exitCode === 1) {

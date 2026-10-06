@@ -8,7 +8,9 @@ import {
   useCallback,
   type ReactNode,
 } from "react";
-import Link from "next/link";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref } from "@/constants/routes";
 
@@ -266,6 +268,8 @@ export default function MobileNavigation({
     };
   }, [closeMenu, isOpen]);
 
+  const t = useTranslations("header");
+  const tMobile = useTranslations("mobileNav");
   const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
 
   return (
@@ -275,7 +279,7 @@ export default function MobileNavigation({
         ref={toggleRef}
         type="button"
         data-mobile-navigation-toggle
-        aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+        aria-label={isOpen ? tMobile("closeMenu") : tMobile("openMenu")}
         aria-expanded={isOpen}
         aria-controls={menuId}
         onClick={() => {
@@ -315,7 +319,7 @@ export default function MobileNavigation({
         ref={panelRef}
         id={menuId}
         role="dialog"
-        aria-label="Menu de navegação"
+        aria-label={tMobile("dialog")}
         aria-modal={isOpen}
         inert={!isOpen}
         className={[
@@ -324,7 +328,7 @@ export default function MobileNavigation({
         ].join(" ")}
       >
         <div className={mobileNavPanelInnerClassName}>
-          <nav aria-label="Navegação mobile">
+          <nav aria-label={tMobile("nav")}>
             <ul className="mb-6 flex flex-col">
               <SolucoesMobileNavGroup onNavigate={closeByNavigate} />
               {NAV_LINK_ITEMS.map((item) => (
@@ -335,10 +339,10 @@ export default function MobileNavigation({
                       onClick={closeByNavigate}
                       className={mobileNavItemClassName}
                     >
-                      {item.label}
+                      {t(item.labelKey)}
                     </Link>
                   ) : (
-                    <span className={mobileNavItemClassName}>{item.label}</span>
+                    <span className={mobileNavItemClassName}>{t(item.labelKey)}</span>
                   )}
                 </li>
               ))}
@@ -352,11 +356,11 @@ export default function MobileNavigation({
                 onClick={closeByNavigate}
                 className={mobileNavClientButtonClassName}
               >
-                {HEADER_BUTTONS.areaCliente.label}
+                {t(HEADER_BUTTONS.areaCliente.labelKey)}
               </Link>
             ) : (
               <span className={mobileNavClientButtonClassName}>
-                {HEADER_BUTTONS.areaCliente.label}
+                {t(HEADER_BUTTONS.areaCliente.labelKey)}
               </span>
             )}
             <Link
@@ -364,7 +368,7 @@ export default function MobileNavigation({
               onClick={closeByNavigate}
               className={mobileNavDemoButtonClassName}
             >
-              {HEADER_BUTTONS.solicitarDemo.label}
+              {t(HEADER_BUTTONS.solicitarDemo.labelKey)}
             </Link>
           </div>
         </div>

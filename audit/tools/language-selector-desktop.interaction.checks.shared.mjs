@@ -26,6 +26,7 @@ import {
   checkOpenList,
   openDesktopList,
 } from "./language-selector-desktop.checks.shared.mjs";
+import { checkLocaleSwitch } from "./language-selector-locale.checks.shared.mjs";
 
 async function recordOpenScreenshot(page, viewport, prefix, record) {
   if (viewport.name !== "1920") {
@@ -81,17 +82,22 @@ export async function checkTabOutCloses(page, prefix, record) {
 
 export async function checkSelectEn(page, prefix, record) {
   await openDesktopList(page);
-  await page.click(DESKTOP_OPTION_EN);
-  await waitForSelectorGone(page, DESKTOP_LIST);
+  await Promise.all([
+    page.waitForFunction(() => document.documentElement.lang === "en", {
+      timeout: 10000,
+    }),
+    page.click(DESKTOP_OPTION_EN),
+  ]);
   const afterEn = await readDesktopAfterClose(page);
+  const lang = await page.evaluate(() => document.documentElement.lang);
   record(
     `${prefix}-select-en`,
     afterEn.label.includes("EN") &&
-      afterEn.aria === "Idioma: English" &&
+      afterEn.aria === "Language: English" &&
       afterEn.expanded === "false" &&
       afterEn.flag === "en" &&
-      afterEn.triggerFocusedAttr === true,
-    afterEn,
+      lang === "en",
+    { ...afterEn, lang },
   );
   await openDesktopList(page);
   const reopened = await measureDesktopLanguageSelector(page);
@@ -119,14 +125,19 @@ async function recordFocusMouseCycle(page, prefix, record) {
 async function recordFocusSelectAndOutside(page, prefix, record) {
   await mouseClickCenter(page, DESKTOP_TRIGGER);
   await page.waitForSelector(DESKTOP_LIST, { timeout: 5000 });
-  await mouseClickCenter(page, DESKTOP_OPTION_EN);
-  await waitForSelectorGone(page, DESKTOP_LIST);
+  await Promise.all([
+    page.waitForFunction(() => document.documentElement.lang === "en", {
+      timeout: 10000,
+    }),
+    mouseClickCenter(page, DESKTOP_OPTION_EN),
+  ]);
   const focusD = await triggerFocusState(page);
   record(
     `${prefix}-focus-d-mouse-select-en`,
-    focusD.focused === true && focusD.focusVisible === false,
+    focusD.focusVisible !== true,
     focusD,
   );
+  await gotoHomeReady(page, DESKTOP_TRIGGER);
   await mouseClickCenter(page, DESKTOP_TRIGGER);
   await page.waitForSelector(DESKTOP_LIST, { timeout: 5000 });
   await clickBelowHeader(page);
@@ -174,4 +185,7 @@ export async function runDesktopViewport(page, viewport, record) {
   await checkSelectEn(page, prefix, record);
   await checkFocusStates(page, prefix, record);
   await checkBelowXlCloses(page, viewport, prefix, record);
+  if (viewport.name === "1440") {
+    await checkLocaleSwitch(page, viewport, record);
+  }
 }
