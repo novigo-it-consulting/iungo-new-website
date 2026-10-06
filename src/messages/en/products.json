@@ -18,6 +18,7 @@
     "description": "The conversational Sales AI Agent that sells 24/7 using the PIM catalog and the real-time CDP profile."
   },
   "iot": {
-    "description": "RFID, RTLS and asset management"
+    "description": "RFID, RTLS and asset management",
+    "homeDescription": "Connected intelligence for physical assets: RFID, RTLS, NFC and LoRa. The only Brazilian platform that unites the digital catalog and real-time physical tracking."
   }
 }

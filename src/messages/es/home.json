@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "title": "<line>Catálogo. Cliente.</line><line>Atención. Ventas.</line><highlight>En una IA unificada.</highlight>",
+    "description": "La única plataforma de Brasil que integra PIM, CDP, Concierge, AI Agents e IoT sobre una infraestructura propietaria de IA lista para el retail digital de alta complejidad.",
+    "imageAlt": "Íconos que representan atención, automatización, integración, ventas y análisis de la plataforma Iungo"
+  },
+  "scaleProof": {
+    "title": "Tecnología comprobada en operaciones de gran escala",
+    "items": {
+      "trackedAssets": "70.000+ activos rastreados",
+      "deploymentValue": "R$ 600k en 15 días",
+      "simultaneousBrands": "6 marcas simultáneas",
+      "raiaDrogasil": "Raia Drogasil",
+      "premiumFashionLeader": "Líder de moda premium"
+    }
+  },
+  "metrics": {
+    "title": "Métricas que los decisores enterprise toman en serio.",
+    "revenue": "de ingresos incrementales anuales proyectados en e-commerce (Líder Moda)",
+    "conversion": "la tasa de conversión media del sitio tras Iungo Concierge",
+    "automation": "de automatización en tickets L1/L2 con Iungo Resolve",
+    "trackedAssets": "activos físicos rastreados en tiempo real (Raia Drogasil)"
+  },
+  "products": {
+    "title": "7 productos. Un solo cerebro.",
+    "subtitle": "Integrados de forma nativa sobre 3 engines propietarios de IA. Compre por módulo o en paquetes Go-to-Market."
+  },
+  "cases": {
+    "badge": "CASOS DE ÉXITO",
+    "title": "Resultados en producción. No en un pitch deck.",
+    "allCases": "Ver los casos",
+    "liderModaPremium": {
+      "accessibleName": "Caso de éxito Líder Moda Premium",
+      "title": "+R$ 600 mil en 15 días, en 6 marcas simultáneas",
+      "description": "La mayor holding de moda premium de Latinoamérica activó Concierge en 6 marcas y duplicó la CVR frente a la media del sitio, con una proyección de R$ 14M de ingresos incrementales anuales.",
+      "tags": {
+        "fashion": "MODA",
+        "concierge": "CONCIERGE",
+        "cdp": "CDP"
+      },
+      "metrics": {
+        "sales": "ventas en 15 días",
+        "cvr": "CVR vs sitio",
+        "brands": "marcas activas"
+      }
+    },
+    "raiaDrogasil": {
+      "accessibleName": "Caso de éxito Raia Drogasil",
+      "title": "70.000+ activos rastreados, del portátil al terminal de tienda",
+      "description": "La mayor red de farmacias de Brasil estructuró la gestión de patrimonio con Iungo IoT (RFID + RTLS), eliminando pérdidas y optimizando operaciones en 3.000 tiendas.",
+      "tags": {
+        "pharmaHealth": "FARMA Y SALUD",
+        "iot": "IOT",
+        "rfid": "RFID"
+      },
+      "metrics": {
+        "trackedAssets": "activos rastreados",
+        "rollout": "de PoC al rollout",
+        "stores": "tiendas atendidas"
+      }
+    }
+  },
+  "roi": {
+    "badge": "PRÓXIMO PASO",
+    "title": "¿Calculamos el ROI<br></br>de su operación?",
+    "description": "En 30 minutos, mostramos con sus datos cuánto recupera Iungo de ingresos perdidos en su embudo — gratuito, sin compromiso."
+  }
+}

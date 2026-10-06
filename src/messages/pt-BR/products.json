@@ -18,6 +18,7 @@
     "description": "O Sales AI Agent conversacional que vende 24/7 usando o catálogo PIM e o perfil CDP em tempo real."
   },
   "iot": {
-    "description": "RFID, RTLS e gestão de ativos"
+    "description": "RFID, RTLS e gestão de ativos",
+    "homeDescription": "Inteligência conectada para ativos físicos: RFID, RTLS, NFC e LoRa. A única plataforma brasileira que une catálogo digital e rastreamento físico em tempo real."
   }
 }

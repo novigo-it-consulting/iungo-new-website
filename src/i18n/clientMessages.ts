@@ -15,6 +15,7 @@ export function pickClientMessages(messages: AppMessages): ClientMessages {
     cookies: messages.cookies,
     languageSelector: messages.languageSelector,
     products: messages.products,
+    common: messages.common,
   };
 
   const pickedKeys = Object.keys(picked);

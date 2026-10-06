@@ -8,6 +8,9 @@ export const MESSAGE_NAMESPACES = [
   "cookies",
   "languageSelector",
   "products",
+  "common",
+  "home",
+  "productPages",
 ] as const;
 
 export type MessageNamespace = (typeof MESSAGE_NAMESPACES)[number];
@@ -21,6 +24,7 @@ export const CLIENT_MESSAGE_NAMESPACES = [
   "cookies",
   "languageSelector",
   "products",
+  "common",
 ] as const satisfies readonly MessageNamespace[];
 
 export type ClientMessageNamespace = (typeof CLIENT_MESSAGE_NAMESPACES)[number];

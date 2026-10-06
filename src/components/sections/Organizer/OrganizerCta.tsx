@@ -1,11 +1,14 @@
 import ProductPageCtaSection from "@/components/sections/Cta/ProductPageCtaSection";
+import { getRequestDemoLabel } from "@/components/sections/shared/requestDemoLabel";
 import {
   ORGANIZER_CTA_BUTTON,
   ORGANIZER_CTA_SUBTITLE,
   ORGANIZER_CTA_TITLE,
 } from "./Cta/organizerCta.constants";
 
-export default function OrganizerCta() {
+export default async function OrganizerCta() {
+  const requestDemoLabel = await getRequestDemoLabel();
+
   return (
     <ProductPageCtaSection
       dataPrefix="organizer-cta"
@@ -14,7 +17,7 @@ export default function OrganizerCta() {
       line2={ORGANIZER_CTA_TITLE.line2}
       subtitle={ORGANIZER_CTA_SUBTITLE}
       buttonHref={ORGANIZER_CTA_BUTTON.href}
-      buttonLabel={ORGANIZER_CTA_BUTTON.label}
+      buttonLabel={requestDemoLabel}
       spacerClassName=""
     />
   );

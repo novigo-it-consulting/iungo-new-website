@@ -10,6 +10,7 @@ import ptFooterNewsletter from "@/messages/pt-BR/footerNewsletter.json";
 import ptCookies from "@/messages/pt-BR/cookies.json";
 import ptLanguageSelector from "@/messages/pt-BR/languageSelector.json";
 import ptProducts from "@/messages/pt-BR/products.json";
+import { homeCatalog } from "@/i18n/catalog/homeCatalog";
 
 import enMetadata from "@/messages/en/metadata.json";
 import enHeader from "@/messages/en/header.json";
@@ -41,6 +42,9 @@ const ptBRMessages = {
   cookies: ptCookies,
   languageSelector: ptLanguageSelector,
   products: ptProducts,
+  common: homeCatalog["pt-BR"].common,
+  home: homeCatalog["pt-BR"].home,
+  productPages: homeCatalog["pt-BR"].productPages,
 } satisfies Record<MessageNamespace, unknown>;
 
 export type AppMessages = typeof ptBRMessages;
@@ -55,6 +59,9 @@ const enMessages = {
   cookies: enCookies,
   languageSelector: enLanguageSelector,
   products: enProducts,
+  common: homeCatalog.en.common,
+  home: homeCatalog.en.home,
+  productPages: homeCatalog.en.productPages,
 } satisfies AppMessages;
 
 const esMessages = {
@@ -67,6 +74,9 @@ const esMessages = {
   cookies: esCookies,
   languageSelector: esLanguageSelector,
   products: esProducts,
+  common: homeCatalog.es.common,
+  home: homeCatalog.es.home,
+  productPages: homeCatalog.es.productPages,
 } satisfies AppMessages;
 
 const catalogs: Record<Locale, AppMessages> = {

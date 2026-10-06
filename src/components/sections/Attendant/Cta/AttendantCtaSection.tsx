@@ -1,11 +1,14 @@
 import ProductPageCtaSection from "@/components/sections/Cta/ProductPageCtaSection";
+import { getRequestDemoLabel } from "@/components/sections/shared/requestDemoLabel";
 
 import {
   ATTENDANT_CTA_BUTTON,
   ATTENDANT_CTA_TITLE,
 } from "./attendantCta.constants";
 
-export default function AttendantCtaSection() {
+export default async function AttendantCtaSection() {
+  const requestDemoLabel = await getRequestDemoLabel();
+
   return (
     <ProductPageCtaSection
       dataPrefix="attendant-final-cta"
@@ -13,7 +16,7 @@ export default function AttendantCtaSection() {
       line1={ATTENDANT_CTA_TITLE.line1}
       line2={ATTENDANT_CTA_TITLE.line2}
       buttonHref={ATTENDANT_CTA_BUTTON.href}
-      buttonLabel={ATTENDANT_CTA_BUTTON.label}
+      buttonLabel={requestDemoLabel}
       spacerClassName="h-[187px] w-full bg-white"
     />
   );

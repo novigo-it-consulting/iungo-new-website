@@ -269,6 +269,7 @@ export default function MobileNavigation({
   }, [closeMenu, isOpen]);
 
   const t = useTranslations("header");
+  const tCommon = useTranslations("common");
   const tMobile = useTranslations("mobileNav");
   const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
 
@@ -368,7 +369,7 @@ export default function MobileNavigation({
               onClick={closeByNavigate}
               className={mobileNavDemoButtonClassName}
             >
-              {t(HEADER_BUTTONS.solicitarDemo.labelKey)}
+              {tCommon("requestDemo")}
             </Link>
           </div>
         </div>

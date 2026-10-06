@@ -12,14 +12,14 @@ import {
 interface ProductCardCtaProps {
   productId: string;
   href: string;
-  label?: string;
+  label: string;
   ariaLabel?: string;
 }
 
 export default function ProductCardCta({
   productId,
   href,
-  label = "Saiba mais",
+  label,
   ariaLabel,
 }: ProductCardCtaProps) {
   return (

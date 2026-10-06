@@ -16,9 +16,10 @@ import {
 
 export default async function Header() {
   const t = await getTranslations("header");
+  const tCommon = await getTranslations("common");
   const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
   const clientAreaLabel = t(HEADER_BUTTONS.areaCliente.labelKey);
-  const requestDemoLabel = t(HEADER_BUTTONS.solicitarDemo.labelKey);
+  const requestDemoLabel = tCommon("requestDemo");
 
   return (
     <header

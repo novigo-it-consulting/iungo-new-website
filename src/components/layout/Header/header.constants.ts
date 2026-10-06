@@ -21,7 +21,6 @@ export const HEADER_BUTTONS = {
     href: AREA_CLIENTE_HREF,
   },
   solicitarDemo: {
-    labelKey: "actions.requestDemo",
     href: SOLICITAR_DEMONSTRACAO_HREF,
   },
 } as const;

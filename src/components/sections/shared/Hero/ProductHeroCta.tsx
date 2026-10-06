@@ -1,6 +1,7 @@
+import { getTranslations } from "next-intl/server";
+
 import PrimaryLink from "@/components/ui/PrimaryLink";
 import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
-import { PRODUCT_PAGE_CTA_LABEL } from "@/components/sections/shared/cta.constants";
 
 import {
   productHeroCtaClassName,
@@ -13,11 +14,12 @@ type ProductHeroCtaProps = {
   className?: string;
 };
 
-export default function ProductHeroCta({
+export default async function ProductHeroCta({
   productSlug,
   compact = false,
   className,
 }: Readonly<ProductHeroCtaProps>) {
+  const t = await getTranslations("common");
   const resolvedClassName =
     className ??
     (compact ? productHeroCtaCompactClassName : productHeroCtaClassName);
@@ -28,7 +30,7 @@ export default function ProductHeroCta({
       className={resolvedClassName}
     >
       <PrimaryLink href={SOLICITAR_DEMONSTRACAO_HREF}>
-        {PRODUCT_PAGE_CTA_LABEL}
+        {t("requestDemo")}
       </PrimaryLink>
     </div>
   );
