@@ -34,3 +34,12 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## Textos traduzidos
+
+Os textos visíveis ficam em `src/messages/{pt-BR,en,es}/`. O pt-BR é a fonte da tipagem. A lista de namespaces está em `src/i18n/namespaces.ts` e a montagem em `src/i18n/loadMessages.ts`.
+
+Para adicionar um texto: copie a frase atual para o JSON do pt-BR, traduza a mesma chave em en e es, e leia com `getTranslations` no servidor ou `useTranslations` no cliente. Texto repetido entra em `common.json`. O glossário está em `docs/i18n/glossary.md`.
+
+A paridade das chaves, dos placeholders e das tags de rich text roda com `npm test`.
+

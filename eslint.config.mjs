@@ -2,6 +2,8 @@ import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
 
+import jsxNoUiLiterals from "./eslint/jsx-no-ui-literals.mjs";
+
 const eslintConfig = defineConfig([
   ...nextVitals,
   ...nextTs,
@@ -34,6 +36,19 @@ const eslintConfig = defineConfig([
           ],
         },
       ],
+    },
+  },
+  {
+    files: ["src/components/**/*.{tsx}", "src/app/**/*.{tsx}"],
+    plugins: {
+      iungo: {
+        rules: {
+          "jsx-no-ui-literals": jsxNoUiLiterals,
+        },
+      },
+    },
+    rules: {
+      "iungo/jsx-no-ui-literals": "error",
     },
   },
 ]);

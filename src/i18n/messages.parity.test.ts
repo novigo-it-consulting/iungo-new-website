@@ -27,6 +27,30 @@ function assertFilled(value: unknown, path: string): void {
   }
 }
 
+function collectStrings(value: unknown, prefix = ""): Array<[string, string]> {
+  if (typeof value === "string") {
+    return [[prefix, value]];
+  }
+
+  if (value !== null && typeof value === "object" && !Array.isArray(value)) {
+    return Object.entries(value).flatMap(([key, child]) =>
+      collectStrings(child, prefix === "" ? key : `${prefix}.${key}`),
+    );
+  }
+
+  return [];
+}
+
+function markupSignature(value: string): string {
+  const tags = [...value.matchAll(/<\/?[A-Za-z][A-Za-z0-9]*\s*\/?>/g)].map(
+    (match) => match[0],
+  );
+  const placeholders = [...value.matchAll(/\{[A-Za-z0-9_]+\}/g)].map(
+    (match) => match[0],
+  );
+  return JSON.stringify({ tags, placeholders });
+}
+
 describe("paridade das mensagens", () => {
   const source = loadMessages("pt-BR");
   const sourceKeys = collectKeys(source).sort();
@@ -40,6 +64,18 @@ describe("paridade das mensagens", () => {
       const messages = loadMessages(locale);
       expect(collectKeys(messages).sort(), locale).toEqual(sourceKeys);
       assertFilled(messages, locale);
+    }
+  });
+
+  it("repete placeholders e tags de rich text do pt-BR", () => {
+    const sourceMarkup = new Map(
+      collectStrings(source).map(([key, value]) => [key, markupSignature(value)]),
+    );
+
+    for (const locale of routing.locales) {
+      for (const [key, value] of collectStrings(loadMessages(locale))) {
+        expect(markupSignature(value), `${locale}:${key}`).toBe(sourceMarkup.get(key));
+      }
     }
   });
 });

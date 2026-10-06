@@ -1,5 +1,6 @@
 /**
  * Infra genérica dos scripts de auditoria (browser, viewport, resultados).
+ * Os scripts antigos abrem rotas sem prefixo de idioma: isso é o pt-BR.
  */
 import path from "node:path";
 import * as chromeLauncher from "chrome-launcher";

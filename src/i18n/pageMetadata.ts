@@ -8,17 +8,14 @@ import { setLocale, type LocaleParams } from "./locale";
 import { getPathname } from "./navigation";
 import { routing, type Locale } from "./routing";
 
-const HERO_PAGE_NAMESPACES = [
-  "productPages.organizer",
-  "productPages.behavior",
-  "productPages.concierge",
-  "productPages.resolve",
-  "productPages.attendant",
-  "productPages.convert",
-  "productPages.iot",
-] as const;
-
-export type HeroPageNamespace = (typeof HERO_PAGE_NAMESPACES)[number];
+export type HeroPageNamespace =
+  | "productPages.organizer"
+  | "productPages.behavior"
+  | "productPages.concierge"
+  | "productPages.resolve"
+  | "productPages.attendant"
+  | "productPages.convert"
+  | "productPages.iot";
 
 function plainMessage(value: string): string {
   return value.replaceAll(/<[^>]+>/g, " ").replaceAll(/\s+/g, " ").trim();

@@ -64,7 +64,7 @@
     "privacy": {
       "beforePolicy": "I have read and agree to the ",
       "policy": "Privacy Policy",
-      "between": ". I authorize Iungo Intelligence to process my personal data for commercial follow-up, pursuant to Art. 7, I and V of the LGPD. I may withdraw this consent at any time via ",
+      "between": ". I authorize Iungo Intelligence to process my personal data for commercial follow-up, under Art. 7, I and V of the LGPD. I can withdraw this consent anytime via ",
       "afterEmail": "."
     },
     "honey": "Do not fill in this field",
