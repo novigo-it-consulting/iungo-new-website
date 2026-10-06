@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "title": "Hablemos | Iungo Intelligence",
+    "description": "Solicite una demostración o agende un diagnóstico con Iungo Intelligence."
+  },
+  "title": "Hablemos.",
+  "contactAside": "Canales de contacto",
+  "cards": {
+    "commercial": {
+      "title": "COMERCIAL",
+      "description": "Respuesta en 1 día hábil"
+    },
+    "support": {
+      "title": "SOPORTE",
+      "description": "Clientes activos · 24/7"
+    },
+    "dpo": {
+      "title": "DPO · LGPD",
+      "description": "Derechos del titular · Art. 18"
+    },
+    "phone": {
+      "title": "TELÉFONO",
+      "description": "Comercial · lun-vie · 9-18h"
+    }
+  },
+  "form": {
+    "contactType": {
+      "legend": "TIPO DE CONTACTO",
+      "demonstracao": "Demostración",
+      "comercial": "Comercial",
+      "suporte": "Soporte"
+    },
+    "name": {
+      "label": "NOMBRE",
+      "placeholder": "Su nombre completo"
+    },
+    "email": {
+      "label": "CORREO CORPORATIVO",
+      "placeholder": "voce@empresa.com.br"
+    },
+    "company": {
+      "label": "EMPRESA",
+      "placeholder": "Razón social"
+    },
+    "phone": {
+      "label": "TELÉFONO / WHATSAPP",
+      "placeholder": "+55 11 9 0000-0000"
+    },
+    "productInterest": {
+      "label": "PRODUCTO DE INTERÉS",
+      "placeholder": "Seleccione...",
+      "organizer": "Iungo Organizer",
+      "concierge": "Iungo Concierge",
+      "behavior": "Iungo Behavior",
+      "resolve": "Iungo Resolve",
+      "attendant": "Iungo Attendant",
+      "convert": "Iungo Convert",
+      "iot": "Iungo IoT"
+    },
+    "message": {
+      "label": "MENSAJE",
+      "placeholder": "Cuéntenos sobre su escenario, el GMV y los principales desafíos..."
+    },
+    "privacy": {
+      "beforePolicy": "Leí y acepto la ",
+      "policy": "Política de Privacidad",
+      "between": ". Autorizo a Iungo Intelligence a tratar mis datos personales para fines de contacto comercial, conforme al art. 7, I y V de la LGPD. Puedo revocar este consentimiento en cualquier momento a través de ",
+      "afterEmail": "."
+    },
+    "honey": "No complete este campo",
+    "submit": "Enviar mensaje",
+    "submitting": "Enviando...",
+    "security": "RECIBIMOS · CIFRADO TLS 1.3 · REGISTRO FIRMADO · RETENCIÓN 12 MESES",
+    "success": "Mensaje enviado con éxito. Pronto, nuestro equipo se pondrá en contacto.",
+    "validation": {
+      "required": "Complete este campo.",
+      "email": "Indique un correo corporativo válido.",
+      "option": "Seleccione una opción válida.",
+      "tooLong": "El texto supera el límite permitido.",
+      "phone": "Indique un teléfono válido."
+    }
+  },
+  "feedback": {
+    "unconfirmed": "No pudimos confirmar el envío ahora. También puede contactarnos por el correo comercial@iungo-ai.com.",
+    "timeout": "La confirmación tardó más de lo esperado. Los datos se conservaron. También puede contactarnos por el correo comercial@iungo-ai.com.",
+    "rejection": "No fue posible enviar su mensaje. Inténtelo de nuevo en unos instantes. También puede contactarnos por el correo comercial@iungo-ai.com.",
+    "activation": "No pudimos completar el envío en este momento. También puede contactarnos por el correo comercial@iungo-ai.com.",
+    "inFlight": "El envío ya está en curso. Espere la confirmación antes de enviar de nuevo."
+  }
+}

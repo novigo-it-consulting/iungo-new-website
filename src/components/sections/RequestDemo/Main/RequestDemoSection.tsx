@@ -1,8 +1,15 @@
+import { getLocale } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 import ContactCardsColumn from "@/components/sections/RequestDemo/ContactCards/ContactCardsColumn";
 import RequestDemoFormCard from "@/components/sections/RequestDemo/Form/RequestDemoFormCard";
+import { pickRequestDemoMessages } from "@/i18n/catalog/requestDemoCatalog";
 
-import { REQUEST_DEMO_TITLE, REQUEST_DEMO_TITLE_TO_MAIN_GAP_CLASS } from "./requestDemo.constants";
+import {
+  buildRequestDemoFormCopy,
+  localizeContactCards,
+} from "../requestDemoView";
+import { REQUEST_DEMO_TITLE_TO_MAIN_GAP_CLASS } from "./requestDemo.constants";
 import {
   requestDemoFormColumnClassName,
   requestDemoMainContainerClassName,
@@ -14,7 +21,9 @@ import {
 
 import "./requestDemo.css";
 
-export default function RequestDemoSection() {
+export default async function RequestDemoSection() {
+  const messages = pickRequestDemoMessages(await getLocale());
+
   return (
     <section
       data-request-demo-section
@@ -28,7 +37,7 @@ export default function RequestDemoSection() {
         className={requestDemoPageFrameClassName}
       >
         <h1 id="request-demo-title" className={requestDemoTitleClassName}>
-          {REQUEST_DEMO_TITLE}
+          {messages.title}
         </h1>
 
         <div
@@ -41,10 +50,13 @@ export default function RequestDemoSection() {
             className={requestDemoMainLayoutClassName}
           >
             <div data-demo-form-card className={requestDemoFormColumnClassName}>
-              <RequestDemoFormCard />
+              <RequestDemoFormCard copy={buildRequestDemoFormCopy(messages)} />
             </div>
 
-            <ContactCardsColumn />
+            <ContactCardsColumn
+              label={messages.contactAside}
+              cards={localizeContactCards(messages.cards)}
+            />
           </div>
         </div>
       </PageContainer>

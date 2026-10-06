@@ -2,8 +2,9 @@
 
 import { useRef, useState, type FormEvent } from "react";
 
-import { sendRequestDemoEmail } from "@/lib/formsubmit";
+import { sendRequestDemoEmail, type FormSubmitSendResult } from "@/lib/formsubmit";
 
+import type { RequestDemoFormCopy } from "../requestDemoView";
 import CompanyPhoneFields from "./CompanyPhone/CompanyPhoneFields";
 import ContactTypeField from "./ContactType/ContactTypeField";
 import MessageField from "./Message/MessageField";
@@ -14,10 +15,10 @@ import RequestDemoFeedback, {
   type RequestDemoFeedbackType,
 } from "./RequestDemoFeedback";
 import RequestDemoSubmitButton from "./Submit/RequestDemoSubmitButton";
+import { messageForFormSubmitReason } from "./formSubmitFeedback";
 import {
   mapRequestDemoPayload,
   readRequestDemoFormValues,
-  REQUEST_DEMO_MESSAGES,
   validateRequestDemoForm,
   type RequestDemoFieldErrors,
 } from "./requestDemoForm.submit";
@@ -33,7 +34,33 @@ type FeedbackState = {
   message: string;
 } | null;
 
-export default function RequestDemoFormCard() {
+type RequestDemoFormCardProps = {
+  copy: RequestDemoFormCopy;
+};
+
+function reportSubmitResult(
+  result: FormSubmitSendResult,
+  form: HTMLFormElement,
+  copy: RequestDemoFormCopy,
+  setFeedback: (feedback: FeedbackState) => void,
+  bumpSelectResetKey: () => void,
+): void {
+  if (!result.ok) {
+    setFeedback({
+      type: "error",
+      message: messageForFormSubmitReason(result.reason, copy.feedback),
+    });
+    return;
+  }
+
+  form.reset();
+  bumpSelectResetKey();
+  setFeedback({ type: "success", message: copy.success });
+}
+
+export default function RequestDemoFormCard({
+  copy,
+}: Readonly<RequestDemoFormCardProps>) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [fieldErrors, setFieldErrors] = useState<RequestDemoFieldErrors>({});
   const [feedback, setFeedback] = useState<FeedbackState>(null);
@@ -54,7 +81,7 @@ export default function RequestDemoFormCard() {
 
     try {
       const values = readRequestDemoFormValues(form);
-      const errors = validateRequestDemoForm(values);
+      const errors = validateRequestDemoForm(values, copy.validation);
 
       if (Object.keys(errors).length > 0) {
         setFieldErrors(errors);
@@ -67,18 +94,8 @@ export default function RequestDemoFormCard() {
       setFieldErrors({});
 
       const result = await sendRequestDemoEmail(mapRequestDemoPayload(values));
-
-      if (!result.ok) {
-        // Dados preservados: não reseta o formulário em caso de falha.
-        setFeedback({ type: "error", message: result.message });
-        return;
-      }
-
-      form.reset();
-      setSelectResetKey((current) => current + 1);
-      setFeedback({
-        type: "success",
-        message: REQUEST_DEMO_MESSAGES.success,
+      reportSubmitResult(result, form, copy, setFeedback, () => {
+        setSelectResetKey((current) => current + 1);
       });
     } finally {
       inFlightRef.current = false;
@@ -97,21 +114,36 @@ export default function RequestDemoFormCard() {
         onSubmit={handleSubmit}
         aria-busy={isSubmitting}
       >
-        <ContactTypeField errorMessage={fieldErrors.contactType} />
+        <ContactTypeField
+          legend={copy.contactType.legend}
+          options={copy.contactType.options}
+          errorMessage={fieldErrors.contactType}
+        />
         <NameEmailFields
           nameError={fieldErrors.name}
           emailError={fieldErrors.email}
+          nameField={copy.name}
+          emailField={copy.email}
         />
         <CompanyPhoneFields
           companyError={fieldErrors.company}
           phoneError={fieldErrors.phone}
+          companyField={copy.company}
+          phoneField={copy.phone}
         />
         <ProductInterestField
           resetKey={selectResetKey}
           errorMessage={fieldErrors.productInterest}
+          label={copy.productInterest.label}
+          placeholder={copy.productInterest.placeholder}
+          options={copy.productInterest.options}
         />
-        <MessageField errorMessage={fieldErrors.message} />
-        <PrivacyNotice />
+        <MessageField
+          label={copy.message.label}
+          placeholder={copy.message.placeholder}
+          errorMessage={fieldErrors.message}
+        />
+        <PrivacyNotice {...copy.privacy} />
         {/*
          * Honeypot (_honey): depois dos campos reais. No desktop o
          * gerenciador de senhas costuma preencher o primeiro <input type="text">
@@ -130,7 +162,7 @@ export default function RequestDemoFormCard() {
             height: 0,
           }}
         >
-          <label htmlFor="request-demo-honey">Não preencha este campo</label>
+          <label htmlFor="request-demo-honey">{copy.honey}</label>
           <input
             type="text"
             id="request-demo-honey"
@@ -144,7 +176,12 @@ export default function RequestDemoFormCard() {
             data-1p-ignore="true"
           />
         </div>
-        <RequestDemoSubmitButton isSubmitting={isSubmitting} />
+        <RequestDemoSubmitButton
+          isSubmitting={isSubmitting}
+          label={copy.submit}
+          submittingLabel={copy.submitting}
+          securityNotice={copy.security}
+        />
         {/*
          * Feedback posicionado após o botão: o usuário clica, acompanha
          * "Enviando…" no botão e vê a resposta imediatamente abaixo.

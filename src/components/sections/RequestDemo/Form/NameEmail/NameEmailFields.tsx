@@ -2,14 +2,23 @@ import RequestDemoTwoColumnFields from "../RequestDemoTwoColumnFields";
 import { REQUEST_DEMO_FIELD_LIMITS } from "../requestDemoForm.submit";
 import { nameEmailRowClassName } from "./nameEmail.styles";
 
+type TextFieldCopy = {
+  label: string;
+  placeholder: string;
+};
+
 type NameEmailFieldsProps = {
   nameError?: string;
   emailError?: string;
+  nameField: TextFieldCopy;
+  emailField: TextFieldCopy;
 };
 
 export default function NameEmailFields({
   nameError,
   emailError,
+  nameField,
+  emailField,
 }: Readonly<NameEmailFieldsProps>) {
   return (
     <RequestDemoTwoColumnFields
@@ -18,9 +27,9 @@ export default function NameEmailFields({
       leftField={{
         id: "request-demo-name",
         name: "name",
-        label: "NOME",
+        label: nameField.label,
         type: "text",
-        placeholder: "Seu nome completo",
+        placeholder: nameField.placeholder,
         autoComplete: "name",
         maxLength: REQUEST_DEMO_FIELD_LIMITS.name,
         required: true,
@@ -29,9 +38,9 @@ export default function NameEmailFields({
       rightField={{
         id: "request-demo-email",
         name: "email",
-        label: "EMAIL CORPORATIVO",
+        label: emailField.label,
         type: "email",
-        placeholder: "voce@empresa.com.br",
+        placeholder: emailField.placeholder,
         autoComplete: "email",
         spellCheck: false,
         autoCapitalize: "none",

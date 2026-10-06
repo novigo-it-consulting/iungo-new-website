@@ -1,16 +1,24 @@
 import ContactCard from "./ContactCard";
-import { REQUEST_DEMO_CONTACT_CARDS } from "./contactCards.constants";
+import type { ContactCardData } from "./contactCards.constants";
 import { contactCardsColumnClassName } from "./contactCard.styles";
 
-export default function ContactCardsColumn() {
+type ContactCardsColumnProps = {
+  label: string;
+  cards: readonly ContactCardData[];
+};
+
+export default function ContactCardsColumn({
+  label,
+  cards,
+}: Readonly<ContactCardsColumnProps>) {
   return (
     <aside
       data-request-demo-contact-cards
       data-demo-contact-card
-      aria-label="Canais de contato"
+      aria-label={label}
       className={contactCardsColumnClassName}
     >
-      {REQUEST_DEMO_CONTACT_CARDS.map((card) => (
+      {cards.map((card) => (
         <ContactCard key={card.id} {...card} />
       ))}
     </aside>

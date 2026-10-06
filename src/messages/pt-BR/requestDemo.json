@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "title": "Vamos conversar | Iungo Intelligence",
+    "description": "Solicite uma demonstração ou agende um diagnóstico com a Iungo Intelligence."
+  },
+  "title": "Vamos conversar.",
+  "contactAside": "Canais de contato",
+  "cards": {
+    "commercial": {
+      "title": "COMERCIAL",
+      "description": "Resposta em 1 dia útil"
+    },
+    "support": {
+      "title": "SUPORTE",
+      "description": "Clientes ativos · 24/7"
+    },
+    "dpo": {
+      "title": "DPO · LGPD",
+      "description": "Direitos do titular · Art. 18"
+    },
+    "phone": {
+      "title": "TELEFONE",
+      "description": "Comercial · seg-sex · 9-18h"
+    }
+  },
+  "form": {
+    "contactType": {
+      "legend": "TIPO DE CONTATO",
+      "demonstracao": "Demonstração",
+      "comercial": "Comercial",
+      "suporte": "Suporte"
+    },
+    "name": {
+      "label": "NOME",
+      "placeholder": "Seu nome completo"
+    },
+    "email": {
+      "label": "EMAIL CORPORATIVO",
+      "placeholder": "voce@empresa.com.br"
+    },
+    "company": {
+      "label": "EMPRESA",
+      "placeholder": "Razão social"
+    },
+    "phone": {
+      "label": "TELEFONE / WHATSAPP",
+      "placeholder": "+55 11 9 0000-0000"
+    },
+    "productInterest": {
+      "label": "PRODUTO DE INTERESSE",
+      "placeholder": "Selecione...",
+      "organizer": "Iungo Organizer",
+      "concierge": "Iungo Concierge",
+      "behavior": "Iungo Behavior",
+      "resolve": "Iungo Resolve",
+      "attendant": "Iungo Attendant",
+      "convert": "Iungo Convert",
+      "iot": "Iungo IoT"
+    },
+    "message": {
+      "label": "MENSAGEM",
+      "placeholder": "Conte um pouco sobre seu cenário, GMV, principais dores..."
+    },
+    "privacy": {
+      "beforePolicy": "Li e concordo com a ",
+      "policy": "Política de Privacidade",
+      "between": ". Autorizo a Iungo Intelligence a tratar meus dados pessoais para fins de retorno comercial, conforme art. 7º, I e V da LGPD. Posso revogar este consentimento a qualquer momento via ",
+      "afterEmail": "."
+    },
+    "honey": "Não preencha este campo",
+    "submit": "Enviar mensagem",
+    "submitting": "Enviando...",
+    "security": "RECEBEMOS · CRIPTOGRAFIA TLS 1.3 · LOG ASSINADO · RETENÇÃO 12 MESES",
+    "success": "Mensagem enviada com sucesso! Em breve, nossa equipe entrará em contato.",
+    "validation": {
+      "required": "Preencha este campo.",
+      "email": "Informe um e-mail corporativo válido.",
+      "option": "Selecione uma opção válida.",
+      "tooLong": "O texto ultrapassa o limite permitido.",
+      "phone": "Informe um telefone válido."
+    }
+  },
+  "feedback": {
+    "unconfirmed": "Não conseguimos confirmar o envio agora. Você também pode entrar em contato pelo e-mail comercial@iungo-ai.com.",
+    "timeout": "A confirmação demorou mais do que o esperado. Os dados foram preservados. Você também pode entrar em contato pelo e-mail comercial@iungo-ai.com.",
+    "rejection": "Não foi possível enviar sua mensagem. Tente novamente em instantes. Você também pode entrar em contato pelo e-mail comercial@iungo-ai.com.",
+    "activation": "Não conseguimos concluir o envio neste momento. Você também pode entrar em contato pelo e-mail comercial@iungo-ai.com.",
+    "inFlight": "O envio já está em andamento. Aguarde a confirmação antes de enviar de novo."
+  }
+}

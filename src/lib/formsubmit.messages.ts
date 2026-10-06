@@ -1,14 +1,14 @@
 import { COMMERCIAL_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
+import ptRequestDemo from "@/messages/pt-BR/requestDemo.json";
 
 export { COMMERCIAL_EMAIL };
 
 export const FORMSUBMIT_MESSAGES = {
-  unconfirmed: `Não conseguimos confirmar o envio agora. Você também pode entrar em contato pelo e-mail ${COMMERCIAL_EMAIL}.`,
-  timeout: `A confirmação demorou mais do que o esperado. Os dados foram preservados. Você também pode entrar em contato pelo e-mail ${COMMERCIAL_EMAIL}.`,
-  rejection: `Não foi possível enviar sua mensagem. Tente novamente em instantes. Você também pode entrar em contato pelo e-mail ${COMMERCIAL_EMAIL}.`,
-  activation: `Não conseguimos concluir o envio neste momento. Você também pode entrar em contato pelo e-mail ${COMMERCIAL_EMAIL}.`,
-  inFlight:
-    "O envio já está em andamento. Aguarde a confirmação antes de enviar de novo.",
+  unconfirmed: ptRequestDemo.feedback.unconfirmed,
+  timeout: ptRequestDemo.feedback.timeout,
+  rejection: ptRequestDemo.feedback.rejection,
+  activation: ptRequestDemo.feedback.activation,
+  inFlight: ptRequestDemo.feedback.inFlight,
 } as const;
 
 export type FormSubmitFailureReason =
