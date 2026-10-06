@@ -6,10 +6,10 @@ import ConciergeTestimonialsSection from "@/components/sections/Concierge/Testim
 import ConciergeTriggersSection from "@/components/sections/Concierge/Triggers/ConciergeTriggersSection";
 import { CONCIERGE_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, CONCIERGE_HREF);
+  return createHeroPageMetadata(params, CONCIERGE_HREF, "productPages.concierge");
 }
 
 export default async function IungoConciergePage({ params }: LocaleParams) {

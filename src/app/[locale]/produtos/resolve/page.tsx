@@ -3,10 +3,10 @@ import ResolveCtaSection from "@/components/sections/Resolve/Cta/ResolveCtaSecti
 import ResolveHeroSection from "@/components/sections/Resolve/Hero/ResolveHeroSection";
 import { RESOLVE_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, RESOLVE_HREF);
+  return createHeroPageMetadata(params, RESOLVE_HREF, "productPages.resolve");
 }
 
 export default async function IungoResolvePage({ params }: LocaleParams) {

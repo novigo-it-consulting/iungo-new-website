@@ -6,10 +6,10 @@ import BehaviorCtaSection from "@/components/sections/Behavior/Cta/BehaviorCtaSe
 import BehaviorTestimonialsSection from "@/components/sections/Behavior/Testimonials/BehaviorTestimonialsSection";
 import { BEHAVIOR_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, BEHAVIOR_HREF);
+  return createHeroPageMetadata(params, BEHAVIOR_HREF, "productPages.behavior");
 }
 
 export default async function IungoBehaviorPage({ params }: LocaleParams) {

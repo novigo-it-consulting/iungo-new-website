@@ -3,10 +3,10 @@ import AttendantCtaSection from "@/components/sections/Attendant/Cta/AttendantCt
 import AttendantHeroSection from "@/components/sections/Attendant/Hero/AttendantHeroSection";
 import { ATTENDANT_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, ATTENDANT_HREF);
+  return createHeroPageMetadata(params, ATTENDANT_HREF, "productPages.attendant");
 }
 
 export default async function IungoAttendantPage({ params }: LocaleParams) {

@@ -3,10 +3,10 @@ import ConvertCtaSection from "@/components/sections/Convert/Cta/ConvertCtaSecti
 import ConvertHeroSection from "@/components/sections/Convert/Hero/ConvertHeroSection";
 import { CONVERT_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, CONVERT_HREF);
+  return createHeroPageMetadata(params, CONVERT_HREF, "productPages.convert");
 }
 
 export default async function IungoConvertPage({ params }: LocaleParams) {

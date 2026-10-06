@@ -7,10 +7,10 @@ import OrganizerComparisonSection from "@/components/sections/Organizer/Comparis
 import OrganizerCaseStudySection from "@/components/sections/Organizer/CaseStudy/OrganizerCaseStudySection";
 import { ORGANIZER_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, ORGANIZER_HREF);
+  return createHeroPageMetadata(params, ORGANIZER_HREF, "productPages.organizer");
 }
 
 export default async function IungoOrganizerPage({ params }: LocaleParams) {

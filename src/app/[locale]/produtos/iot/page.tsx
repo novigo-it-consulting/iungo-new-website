@@ -3,10 +3,10 @@ import IoTCtaSection from "@/components/sections/IoT/Cta/IoTCtaSection";
 import IoTHeroSection from "@/components/sections/IoT/Hero/IoTHeroSection";
 import { IOT_HREF } from "@/constants/routes";
 import { setLocale, type LocaleParams } from "@/i18n/locale";
-import { createPageMetadata } from "@/i18n/pageMetadata";
+import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
-  return createPageMetadata(params, IOT_HREF);
+  return createHeroPageMetadata(params, IOT_HREF, "productPages.iot");
 }
 
 export default async function IungoIoTPage({ params }: LocaleParams) {
