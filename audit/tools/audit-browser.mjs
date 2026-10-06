@@ -7,7 +7,7 @@ import path from "node:path";
 import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer-core";
 
-import { AUDIT_BASE_URL, runSequentially } from "./audit.shared.mjs";
+import { AUDIT_BASE_URL, createResultRecorder, runSequentially } from "./audit.shared.mjs";
 import { captureRouteViewport } from "./audit-browser.capture.measure.shared.mjs";
 import { auditCombobox } from "./audit-browser.combobox.checks.shared.mjs";
 import {
@@ -57,8 +57,8 @@ try {
     timeout: 30000,
   });
   await page.waitForNetworkIdle({ idleTime: 500, timeout: 10000 }).catch(() => {});
-  const comboboxResults = [];
-  await auditCombobox(page, comboboxResults);
+  const { record, results: comboboxResults } = createResultRecorder();
+  await auditCombobox(page, record);
   writeReports(fontReport, screenshotLog, comboboxResults);
 } catch (error) {
   console.error(error);
