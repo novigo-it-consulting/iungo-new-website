@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import { Fragment } from "react";
 
 import PageContainer from "@/components/layout/PageContainer";
@@ -7,6 +8,16 @@ import { SCALE_PROOF_ITEMS } from "./scaleProof.constants";
 import "./homeScaleProof.css";
 
 type ScaleProofEmphasis = (typeof SCALE_PROOF_ITEMS)[number]["emphasis"];
+type ScaleProofLabelKey = (typeof SCALE_PROOF_ITEMS)[number]["labelKey"];
+type ScaleProofTranslator = Awaited<
+  ReturnType<typeof getTranslations<"home.scaleProof">>
+>;
+
+type ScaleProofView = {
+  id: string;
+  label: string;
+  emphasis: ScaleProofEmphasis;
+};
 
 function itemClassName(emphasis: ScaleProofEmphasis): string {
   if (emphasis === "strong") {
@@ -18,10 +29,43 @@ function itemClassName(emphasis: ScaleProofEmphasis): string {
   return "shrink-0 whitespace-nowrap font-reddit text-sm font-normal leading-5 text-[#71717A]";
 }
 
-function ScaleProofItems({ groupId }: { readonly groupId: string }) {
+function scaleProofLabel(labelKey: ScaleProofLabelKey, t: ScaleProofTranslator): string {
+  switch (labelKey) {
+    case "trackedAssets":
+      return t("items.trackedAssets");
+    case "deploymentValue":
+      return t("items.deploymentValue");
+    case "simultaneousBrands":
+      return t("items.simultaneousBrands");
+    case "raiaDrogasil":
+      return t("items.raiaDrogasil");
+    case "premiumFashionLeader":
+      return t("items.premiumFashionLeader");
+    default: {
+      const exhaustive: never = labelKey;
+      return exhaustive;
+    }
+  }
+}
+
+function scaleProofViews(t: ScaleProofTranslator): readonly ScaleProofView[] {
+  return SCALE_PROOF_ITEMS.map((item) => ({
+    id: item.id,
+    emphasis: item.emphasis,
+    label: scaleProofLabel(item.labelKey, t),
+  }));
+}
+
+function ScaleProofItems({
+  groupId,
+  items,
+}: {
+  readonly groupId: string;
+  readonly items: readonly ScaleProofView[];
+}) {
   return (
     <>
-      {SCALE_PROOF_ITEMS.map((item) => (
+      {items.map((item) => (
         <Fragment key={`${groupId}-${item.id}`}>
           <span className={`${itemClassName(item.emphasis)} px-6`}>
             {item.label}
@@ -35,7 +79,10 @@ function ScaleProofItems({ groupId }: { readonly groupId: string }) {
   );
 }
 
-export default function ScaleProofSection() {
+export default async function ScaleProofSection() {
+  const t = await getTranslations("home.scaleProof");
+  const items = scaleProofViews(t);
+
   return (
     <section
       aria-labelledby="home-scale-proof-title"
@@ -48,15 +95,14 @@ export default function ScaleProofSection() {
           data-scale-proof-title
           className={`mb-8 ${homeSectionTitleClassName}`}
         >
-          Tecnologia comprovada em operações de grande escala
+          {t("title")}
         </h2>
 
         <div data-scale-proof-viewport className="overflow-hidden">
           <div data-scale-proof-track className="flex w-max items-center">
-
             {/* Grupo 1 — acessível para leitores de tela */}
             <div data-scale-proof-group className="flex shrink-0 items-center">
-              <ScaleProofItems groupId="primary" />
+              <ScaleProofItems groupId="primary" items={items} />
             </div>
 
             {/* Grupo 2 — cópia decorativa, oculta de leitores de tela */}
@@ -65,9 +111,8 @@ export default function ScaleProofSection() {
               aria-hidden="true"
               className="flex shrink-0 items-center"
             >
-              <ScaleProofItems groupId="duplicate" />
+              <ScaleProofItems groupId="duplicate" items={items} />
             </div>
-
           </div>
         </div>
       </PageContainer>

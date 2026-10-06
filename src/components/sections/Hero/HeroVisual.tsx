@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
 import {
@@ -6,12 +7,14 @@ import {
   homeHeroVisualClassName,
 } from "./homeHero.styles";
 
-export default function HeroVisual() {
+export default async function HeroVisual() {
+  const t = await getTranslations("home.hero");
+
   return (
     <div data-hero-visual className={homeHeroVisualClassName}>
       <Image
         src="/images/hero/hero-platform-icons.png"
-        alt="Ícones representando atendimento, automação, integração, vendas e análise da plataforma Iungo"
+        alt={t("imageAlt")}
         fill
         preload
         sizes={homeHeroImageSizes}

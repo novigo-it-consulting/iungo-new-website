@@ -1,4 +1,8 @@
-export default function RoiCalculatorBadge() {
+import { getTranslations } from "next-intl/server";
+
+export default async function RoiCalculatorBadge() {
+  const t = await getTranslations("home.roi");
+
   return (
     <span
       data-roi="badge"
@@ -8,7 +12,7 @@ export default function RoiCalculatorBadge() {
         data-roi="badge-text"
         className="whitespace-nowrap font-reddit text-[11.2px] font-medium leading-[16.8px] tracking-[0] text-white/92"
       >
-        PRÓXIMO PASSO
+        {t("badge")}
       </span>
     </span>
   );
