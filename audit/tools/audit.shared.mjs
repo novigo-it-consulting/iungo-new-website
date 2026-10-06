@@ -41,34 +41,32 @@ export function createResultRecorder() {
 
 /**
  * Roda itens um a um na mesma página do navegador.
- * Precisa ser sequencial: os testes compartilham page/estado (viewport,
- * menu, idioma, lista). Promise.all quebraria as medições.
+ * Precisa ser sequencial: os testes compartilham page/estado.
  */
-export async function runSequentially(items, runItem) {
-  for (const item of items) {
-    await runItem(item);
+export async function runSequentially(items, runItem, index = 0) {
+  if (index >= items.length) {
+    return;
   }
+
+  await runItem(items[index]);
+  await runSequentially(items, runItem, index + 1);
 }
 
 /**
  * Repete um passo até a condição, na mesma página do navegador.
- * Precisa ser sequencial: cada tentativa depende da anterior
- * (foco, rolagem ou rede). Em paralelo o estado se perderia.
+ * Precisa ser sequencial: cada tentativa depende da anterior.
  */
-export async function repeatUntil(step, isDone, maxAttempts) {
-  let last;
-  let attempt = 0;
-
-  while (attempt < maxAttempts) {
-    last = await step(attempt);
-    const finished = isDone(last, attempt);
-    attempt += 1;
-    if (finished) {
-      break;
-    }
+export async function repeatUntil(step, isDone, maxAttempts, attempt = 0) {
+  if (attempt >= maxAttempts) {
+    return undefined;
   }
 
-  return last;
+  const last = await step(attempt);
+  if (isDone(last, attempt) || attempt + 1 >= maxAttempts) {
+    return last;
+  }
+
+  return repeatUntil(step, isDone, maxAttempts, attempt + 1);
 }
 
 export async function wait(ms) {
