@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Iungo IoT",
+    "presentation": "The physical layer of the Iungo platform. Assets, people, environments — all of them as real-time data.",
+    "description": "RFID, BLE, LoRa, NFC, and GPS unified on a single platform — Iungo Asset Cloud. The same infrastructure that tracks 70,000+ assets at one of the largest retailers in Brazil.",
+    "imageAlt": "Iungo IoT illustration with a gold cloud connecting RFID, BLE, LoRa, NFC, and GPS devices."
+  },
+  "contentAria": "Iungo IoT content",
+  "metrics": {
+    "title": "IN PRODUCTION",
+    "trackedAssets": {
+      "value": "70,000+",
+      "label": "tracked assets"
+    },
+    "connectedStores": {
+      "value": "3,000+",
+      "label": "connected stores"
+    },
+    "inventoryAccuracy": {
+      "value": "98.7%",
+      "label": "inventory accuracy"
+    },
+    "countingCost": {
+      "value": "-90%",
+      "label": "counting cost"
+    }
+  },
+  "cta": {
+    "line1": "The physical asset becomes data.",
+    "line2": "The data becomes intelligence."
+  }
+}

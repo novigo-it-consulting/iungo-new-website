@@ -1,0 +1,87 @@
+{
+  "hero": {
+    "title": "Iungo Convert",
+    "presentation": "The only Sales Agent that knows your PIM catalog and the CDP profile in real time.",
+    "description": "It identifies intent. It recommends the product. It negotiates terms. It closes the sale. And it makes a clean handoff to a human when that makes sense — with full context.",
+    "imageAlt": "Iungo Convert illustration with a sales funnel, customer profiles, and conversion indicators."
+  },
+  "contentAria": "Iungo Convert content",
+  "handoff": {
+    "eyebrow": "HUMAN HANDOFF",
+    "title": "When it hands off to a human seller, it hands off everything.",
+    "description": "95% of chatbots pass the customer to a human \"from zero\". Iungo Convert passes a ready briefing:",
+    "summary": {
+      "title": "SUMMARY",
+      "description": "Intent, objections raised, accepted price range, and perceived urgency."
+    },
+    "products": {
+      "title": "PRODUCTS",
+      "description": "Top 3 suggestions already calibrated, with stock and margin confirmed."
+    },
+    "profile": {
+      "title": "PROFILE",
+      "description": "History, LTV, segment, whether they are VIP, and brand allergies or preferences."
+    },
+    "nextAction": {
+      "title": "NEXT ACTION",
+      "description": "A concrete recommendation: \"offer interest-free installments and close on WhatsApp\"."
+    }
+  },
+  "systemScreens": {
+    "title": "Where the sales team sees the pipeline with AI.",
+    "description": "AI-generated pipeline, live conversations, handoff briefings, and metrics per seller.",
+    "ariaLabel": "Iungo Convert system screens",
+    "badges": {
+      "pipeline": "Pipeline · AI",
+      "conversation": "Live conversation",
+      "briefing": "Handoff briefing",
+      "performance": "Seller performance"
+    },
+    "alts": {
+      "main": "Iungo Convert sales pipeline with detected opportunities, conversations, handoffs, and closed sales.",
+      "conversation": "Iungo Convert sales conversation with a product recommendation and a closed sale.",
+      "briefing": "Seller briefing with customer context in Iungo Convert.",
+      "performance": "Iungo Convert sales team performance with metrics per seller."
+    }
+  },
+  "testimonials": {
+    "title": "Sales that close on their own — and open the door for the seller.",
+    "description": "Sales directors who stopped losing hot demand after hours and started handing a warm pipeline to the team.",
+    "daniel": {
+      "quote": "We used to lose hot site visits after hours. Today Iungo Convert closes at 1 a.m. and hands a ready ticket to the human seller only for B2B cases. Average ticket doubled in the digital operation.",
+      "name": "Daniel P.",
+      "role": "Sales Director · Outdoor footwear · under NDA",
+      "metricLabel": "AVG. TICKET"
+    },
+    "vivian": {
+      "quote": "Drift and Intercom recommended in a generic way. Iungo recommends by looking at the real catalog — and at the customer history in the CDP. A better recommendation means higher conversion. No mystery.",
+      "name": "Vivian K.",
+      "role": "Head of Digital Sales · Fashion marketplace",
+      "metricLabel": "CHAT CVR"
+    }
+  },
+  "why": {
+    "eyebrow": "WHY IT SELLS MORE",
+    "title": "It knows the catalog. It knows the customer. It knows the moment.",
+    "description": "Drift, Intercom, and Regie.ai run on scripts. Iungo Convert runs on the live data of your operation.",
+    "catalog": {
+      "category": "CATALOG",
+      "title": "It recommends with technical criteria",
+      "description": "It knows compatibility, specifications, stock, and the current price. It suggests the right product, not the most expensive one."
+    },
+    "profile": {
+      "category": "PROFILE",
+      "title": "It adapts tone and offer",
+      "description": "If they are VIP, it offers a pre-sale. If they are price-sensitive, it offers a coupon. If they are B2B, it offers corporate terms."
+    },
+    "moment": {
+      "category": "MOMENT",
+      "title": "It acts at the right instant",
+      "description": "Behavior Engine triggers: 3rd visit to the same category, premium cart abandonment, and a price drop on a favorited item."
+    }
+  },
+  "cta": {
+    "line1": "The Sales Agent that",
+    "line2": "understands your business."
+  }
+}

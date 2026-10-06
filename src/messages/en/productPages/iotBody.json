@@ -1,0 +1,81 @@
+{
+  "assetCloud": {
+    "eyebrow": "PLATFORM",
+    "title": "Iungo Asset Cloud",
+    "primary": "The software layer that unifies every capture technology into a single data model.",
+    "secondary": "Web dashboards, a mobile app for blind inventory, configurable alerts, REST APIs, and webhooks. Natively integrated with SAP, Oracle, TOTVS, Senior, and Protheus.",
+    "imageAlt": "Iungo Asset Cloud dashboard showing monitored zones and movements per hour",
+    "blindInventory": "Blind inventory at 98–99% accuracy",
+    "geofence": "Geofence with real-time alerts",
+    "auditTrail": "Movement audit trail",
+    "multiTenant": "Multi-tenant for large chains",
+    "pimConnector": "Native connector for Iungo Organizer AI PIM (syncs physical asset ↔ digital catalog)"
+  },
+  "systemScreens": {
+    "title": "The Asset Cloud that unites RFID, BLE, LoRa, and GPS.",
+    "description": "Zone map, mobile blind inventory, geofence, and asset reconciliation in SAP.",
+    "ariaLabel": "Iungo Asset Cloud system screens",
+    "badges": {
+      "mapZones": "Zone map",
+      "blindInventory": "Blind inventory app",
+      "geofence": "Geofence & alerts",
+      "erp": "ERP reconciliation"
+    },
+    "alts": {
+      "main": "Iungo Asset Cloud zone map with real-time events.",
+      "blindInventory": "Iungo Asset Cloud blind inventory app with variances highlighted.",
+      "geofence": "Iungo Asset Cloud geofence configurator with rules and alerts.",
+      "erp": "Iungo Asset Cloud SAP asset reconciliation with accuracy and variances."
+    }
+  },
+  "caseStudy": {
+    "ariaLabel": "Raia Drogasil case and Iungo Asset Cloud IoT screens",
+    "eyebrow": "CASE",
+    "title": "Raia Drogasil",
+    "summary": "Largest pharmacy chain in Brazil. 3,000+ stores. R$ 26.5 billion in annual revenue.",
+    "detailsTitle": "From laptop audit to full operation.",
+    "detailsDescription": "From 2,500 laptops in January 2023 to more than 70,000 assets tracked today — continuous growth without changing the platform, rewinding historical data, or disrupting the operation.",
+    "notebooks": "Laptops",
+    "notebooksValue": "2,500",
+    "corporateAssets": "Corporate assets",
+    "corporateAssetsValue": "6,000",
+    "itEquipment": "IT equipment",
+    "itEquipmentValue": "4,000",
+    "phase4": "Phase 4 expansion",
+    "phase4Value": "12,000",
+    "currentOperation": "Operation today",
+    "currentOperationValue": "70,000+",
+    "phase1": {
+      "date": "JAN/23",
+      "line": "<strong>Phase 1</strong> · 2,500 laptops · controlled pilot"
+    },
+    "phase2": {
+      "date": "JUN/23",
+      "line": "<strong>Phase 2</strong> · +6,000 corporate · IT expansion"
+    },
+    "phase3": {
+      "date": "DEC/23",
+      "line": "<strong>Phase 3</strong> · +4,000 devices · full coverage"
+    },
+    "phase4Line": {
+      "date": "JUN/24",
+      "line": "<strong>Phase 4</strong> · +12,000 assets · full scale"
+    }
+  },
+  "testimonials": {
+    "title": "Those who track critical assets, speak up.",
+    "description": "IT and supply chain directors who reduced loss, the accounting close, and physical audit.",
+    "luis": {
+      "quote": "Before Iungo IoT, the quarterly count locked the IT team for a full week. Today I run a blind inventory in 2 hours with 1 person, and the variance fell from 8% to below 1%.",
+      "name": "Luis F.",
+      "role": "Infrastructure Manager · National pharmacy chain",
+      "metricLabel": "VARIANCE"
+    },
+    "claudia": {
+      "quote": "What I sold the CFO was automatic asset reconciliation. What he noticed later was compliance: every movement has an auditable trail, and the external audit stopped asking for a manual report.",
+      "name": "Cláudia B.",
+      "role": "Supply Chain Director · Industrial group · under NDA",
+      "metricLabel": "COUNT COST"
+    }
+  }
+}

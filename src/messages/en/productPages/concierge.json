@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": "Iungo Concierge",
+    "description": "Real-time multichannel journey orchestration. A visual no-code studio. Triggers in minutes, not hours. The only stack that orchestrates on its own Behavior + Organizer AI PIM, in real time.",
+    "imageAlt": "Iungo Concierge illustration connecting people, processes, and goals"
+  },
+  "studio": {
+    "eyebrow": "IUNGO JOURNEY STUDIO",
+    "title": "Drag-and-drop. No code. No<br></br>dependency on IT.",
+    "description": "Marketing builds, tests, and publishes journeys on its own. Trigger, conditions,<br></br>splits,<br></br>A/B testing — all visual.",
+    "behavior": "And unlike Braze or Klaviyo, Studio uses the native <strong>Behavior Engine</strong>:<br></br>you<br></br>do not export segments, refresh audiences, or wait for a sync.",
+    "imageAlt": "Automated Iungo Journey Studio flow"
+  },
+  "systemScreens": {
+    "title": "The canvas marketing runs on its own.",
+    "description": "Visual journeys, smart splits, built-in A/B tests, and live metrics per step.",
+    "filtersAria": "Canvas capabilities",
+    "canvasAlt": "Iungo Concierge drag-and-drop canvas with a cart recovery journey",
+    "badges": {
+      "canvas": "Drag-and-drop canvas",
+      "templates": "Journey templates",
+      "abTest": "A/B test",
+      "stepMetrics": "Metrics per step"
+    },
+    "alts": {
+      "templates": "Ready-made Iungo Concierge templates with 14 journeys validated in Brazilian retail",
+      "abTest": "Built-in Iungo Concierge A/B test with automatic statistical significance",
+      "funnel": "Iungo Concierge step funnel showing where the journey wins and where it loses"
+    }
+  },
+  "testimonials": {
+    "title": "Marketing ships journeys without IT.",
+    "description": "CMOs and CRM leads who stopped waiting on engineering tickets to test a journey.",
+    "patricia": {
+      "quote": "We used to brief tech to adjust a journey and wait 2 sprints. Today a CRM intern publishes an A/B test on the canvas in 20 minutes. The operation's learning speed doubled.",
+      "name": "Patricia M.",
+      "role": "CMO · Premium fashion group · 6 brands",
+      "metricValue": "2.5x",
+      "metricLabel": "CVR VS SITE"
+    },
+    "eduardo": {
+      "quote": "We replaced a Braze + Klaviyo + Segment stack with a single orchestrator. ROI came in 60 days from cost cuts alone — we treat the sales lift as a bonus.",
+      "name": "Eduardo F.",
+      "role": "Head of CRM · Beauty & care · under NDA",
+      "metricValue": "60 days",
+      "metricLabel": "PAYBACK"
+    }
+  },
+  "triggers": {
+    "eyebrow": "READY SMART JOURNEYS",
+    "title": "Triggers that convert in real production.",
+    "cartAbandonment": {
+      "title": "Cart abandonment",
+      "description": "Average CVR (Outlet Premium)"
+    },
+    "navigationAbandonment": {
+      "title": "Browse abandonment",
+      "description": "Average CVR (top performer)"
+    },
+    "priceReduction": {
+      "title": "Price drop",
+      "description": "Average CVR"
+    },
+    "repurchaseKids": {
+      "title": "Repurchase (kids)",
+      "description": "CVR (kids category)"
+    }
+  },
+  "cta": {
+    "line1": "Triggers that convert",
+    "line2": "2.5x more than the site."
+  }
+}

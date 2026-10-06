@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
@@ -8,9 +10,9 @@ import {
   productHeroParagraphClassName,
 } from "@/components/sections/shared/Hero/productHero.styles";
 
-import { IOT_HERO_COPY } from "./iotHero.constants";
+export default async function IoTHeroContent() {
+  const t = await getTranslations("productPages.iot.hero");
 
-export default function IoTHeroContent() {
   return (
     <div data-iot-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
@@ -19,7 +21,7 @@ export default function IoTHeroContent() {
 
       <ProductHeroTitle
         id="iot-hero-title"
-        title={IOT_HERO_COPY.title}
+        title={t("title")}
         dataPrefix="iot"
       />
 
@@ -28,14 +30,14 @@ export default function IoTHeroContent() {
         className={`${productHeroDescriptionBlockClassName} max-w-[615px]`}
       >
         <p data-iot-hero-presentation className={productHeroParagraphClassName}>
-          {IOT_HERO_COPY.paragraphs[0]}
+          {t("presentation")}
         </p>
 
         <p
           data-iot-hero-description
           className={`mt-[14px] ${productHeroParagraphClassName}`}
         >
-          {IOT_HERO_COPY.paragraphs[1]}
+          {t("description")}
         </p>
       </div>
     </div>

@@ -1,9 +1,10 @@
-export type ComparisonValue =
-  | { type: "text"; value: string }
+export type ComparisonCell =
+  | { type: "text" }
   | { type: "check"; tone: "brand" | "neutral" }
   | { type: "cross" };
 
 export interface ComparisonRow {
+  id: ComparisonRowId;
   criterion: string;
   iungo: ComparisonValue;
   akeneo: ComparisonValue;
@@ -11,47 +12,66 @@ export interface ComparisonRow {
   height: number;
 }
 
-export const COMPARISON_ROWS: ComparisonRow[] = [
+export type ComparisonValue =
+  | { type: "text"; value: string }
+  | { type: "check"; tone: "brand" | "neutral" }
+  | { type: "cross" };
+
+export type ComparisonRowId =
+  | "onboarding"
+  | "nativeIntegration"
+  | "generativeAi"
+  | "dam"
+  | "pricing"
+  | "lgpd";
+
+export const COMPARISON_ROWS: readonly {
+  id: ComparisonRowId;
+  iungo: ComparisonCell;
+  akeneo: ComparisonCell;
+  salsify: ComparisonCell;
+  height: number;
+}[] = [
   {
-    criterion: "Onboarding",
-    iungo: { type: "text", value: "14 dias" },
-    akeneo: { type: "text", value: "3-6 meses" },
-    salsify: { type: "text", value: "2-4 meses" },
+    id: "onboarding",
+    iungo: { type: "text" },
+    akeneo: { type: "text" },
+    salsify: { type: "text" },
     height: 54,
   },
   {
-    criterion: "Integração ML + Amazon BR nativa",
+    id: "nativeIntegration",
     iungo: { type: "check", tone: "brand" },
-    akeneo: { type: "text", value: "App Store" },
+    akeneo: { type: "text" },
     salsify: { type: "cross" },
     height: 62,
   },
   {
-    criterion: "IA Generativa nativa",
+    id: "generativeAi",
     iungo: { type: "check", tone: "brand" },
-    akeneo: { type: "text", value: "Add-on" },
-    salsify: { type: "text", value: "Add-on" },
+    akeneo: { type: "text" },
+    salsify: { type: "text" },
     height: 62,
   },
   {
-    criterion: "DAM incluído",
+    id: "dam",
     iungo: { type: "check", tone: "brand" },
-    akeneo: { type: "text", value: "Add-on" },
+    akeneo: { type: "text" },
     salsify: { type: "check", tone: "neutral" },
     height: 62,
   },
   {
-    criterion: "Pricing transparente em BRL",
+    id: "pricing",
     iungo: { type: "check", tone: "brand" },
-    akeneo: { type: "text", value: "USD, sob consulta" },
-    salsify: { type: "text", value: "USD, sob consulta" },
+    akeneo: { type: "text" },
+    salsify: { type: "text" },
     height: 62,
   },
   {
-    criterion: "LGPD nativo",
+    id: "lgpd",
     iungo: { type: "check", tone: "brand" },
-    akeneo: { type: "text", value: "GDPR" },
-    salsify: { type: "text", value: "GDPR" },
+    akeneo: { type: "text" },
+    salsify: { type: "text" },
     height: 61.5,
   },
 ];

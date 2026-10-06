@@ -1,7 +1,13 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductSystemScreensImage from "@/components/sections/shared/SystemScreens/ProductSystemScreensImage";
 import { productSystemScreensMainSizes } from "@/components/sections/shared/SystemScreens/productSystemScreens.styles";
 
-export default function ConciergeSystemScreensVisual() {
+import { CONCIERGE_SYSTEM_SCREEN_CANVAS } from "./conciergeSystemScreens.constants";
+
+export default async function ConciergeSystemScreensVisual() {
+  const t = await getTranslations("productPages.concierge.systemScreens");
+
   return (
     <div
       data-concierge-system-screens-visual
@@ -9,10 +15,8 @@ export default function ConciergeSystemScreensVisual() {
     >
       <ProductSystemScreensImage
         image={{
-          src: "/images/products/concierge/system-screens-canvas.svg",
-          alt: "Canvas drag-and-drop do Iungo Concierge com régua de recuperação de carrinho",
-          width: 1216,
-          height: 408,
+          ...CONCIERGE_SYSTEM_SCREEN_CANVAS,
+          alt: t("canvasAlt"),
         }}
         sizes={productSystemScreensMainSizes}
       />

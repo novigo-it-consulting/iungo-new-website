@@ -1,10 +1,14 @@
+import { getTranslations } from "next-intl/server";
+
 import BehaviorTestimonialContent from "./BehaviorTestimonialContent";
 
-export default function BehaviorTestimonialSection() {
+export default async function BehaviorTestimonialSection() {
+  const t = await getTranslations("productPages.behavior.spotlight");
+
   return (
     <section
       data-behavior-testimonial-section
-      aria-label="Depoimento de cliente sobre o Iungo Behavior CDP"
+      aria-label={t("ariaLabel")}
       className="w-full min-w-0 bg-[rgba(244,244,245,0.40)] xl:min-h-[280px]"
     >
       <div

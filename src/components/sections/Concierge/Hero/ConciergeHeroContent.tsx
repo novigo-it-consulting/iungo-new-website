@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
@@ -8,7 +10,9 @@ import {
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
-export default function ConciergeHeroContent() {
+export default async function ConciergeHeroContent() {
+  const t = await getTranslations("productPages.concierge.hero");
+
   return (
     <div data-concierge-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
@@ -17,7 +21,7 @@ export default function ConciergeHeroContent() {
 
       <ProductHeroTitle
         id="concierge-hero-title"
-        title="Iungo Concierge"
+        title={t("title")}
         dataPrefix="concierge"
       />
 
@@ -25,9 +29,7 @@ export default function ConciergeHeroContent() {
         data-concierge-hero-description
         className={`${productHeroDescriptionBlockClassName} max-w-[623px] ${productHeroParagraphClassName}`}
       >
-        Orquestração de jornadas multicanal em tempo real. Studio no-code
-        visual. Triggers em minutos, não horas. O único stack que orquestra
-        usando o próprio. Behavior + Organizer AI PIM em tempo real.
+        {t("description")}
       </p>
     </div>
   );

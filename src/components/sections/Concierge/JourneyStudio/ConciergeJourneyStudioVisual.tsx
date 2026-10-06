@@ -1,6 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export default function ConciergeJourneyStudioVisual() {
+export default async function ConciergeJourneyStudioVisual() {
+  const t = await getTranslations("productPages.concierge.studio");
+
   return (
     <div
       data-concierge-studio-visual
@@ -12,7 +15,7 @@ export default function ConciergeJourneyStudioVisual() {
       >
         <Image
           src="/images/products/concierge/journey-studio-flow.svg"
-          alt="Fluxo automatizado do Iungo Journey Studio"
+          alt={t("imageAlt")}
           width={609}
           height={235}
           unoptimized

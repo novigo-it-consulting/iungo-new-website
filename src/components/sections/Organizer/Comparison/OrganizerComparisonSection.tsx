@@ -1,3 +1,4 @@
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import PageContainer from "@/components/layout/PageContainer";
 import SectionHeader from "@/components/ui/SectionHeader";
@@ -22,7 +23,9 @@ function OrganizerIconBadge() {
   );
 }
 
-export default function OrganizerComparisonSection() {
+export default async function OrganizerComparisonSection() {
+  const t = await getTranslations("productPages.organizer.comparison");
+
   return (
     <section
       aria-labelledby="organizer-comparison-title"
@@ -35,9 +38,9 @@ export default function OrganizerComparisonSection() {
       >
         <SectionHeader
           titleId="organizer-comparison-title"
-          eyebrow="IUNGO ORGANIZER AI PIM VS CONCORRENTES"
+          eyebrow={t("eyebrow")}
           eyebrowIcon={<OrganizerIconBadge />}
-          title="Por que enterprise BR escolhe Iungo"
+          title={t("title")}
           titleSize="comparison"
         />
 

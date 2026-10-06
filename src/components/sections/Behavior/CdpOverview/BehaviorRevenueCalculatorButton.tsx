@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import { Link } from "@/i18n/navigation";
 
 import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
@@ -16,14 +18,16 @@ const behaviorRevenueCalculatorButtonClassName = [
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#000D3F] focus-visible:ring-offset-2",
 ].join(" ");
 
-export default function BehaviorRevenueCalculatorButton() {
+export default async function BehaviorRevenueCalculatorButton() {
+  const t = await getTranslations("productPages.behavior.calculator");
+
   return (
     <Link
       href={SOLICITAR_DEMONSTRACAO_HREF}
       data-behavior-revenue-calculator-cta
       className={behaviorRevenueCalculatorButtonClassName}
     >
-      Calcular meu caso
+      {t("cta")}
     </Link>
   );
 }

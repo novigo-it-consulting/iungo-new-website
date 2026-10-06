@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 import {
   productSectionDescriptionClassName,
@@ -7,7 +9,9 @@ import ConciergeSystemScreensCards from "./ConciergeSystemScreensCards";
 import ConciergeSystemScreensFilters from "./ConciergeSystemScreensFilters";
 import ConciergeSystemScreensVisual from "./ConciergeSystemScreensVisual";
 
-export default function ConciergeSystemScreensSection() {
+export default async function ConciergeSystemScreensSection() {
+  const t = await getTranslations("productPages.concierge.systemScreens");
+
   return (
     <section
       data-concierge-system-screens-section
@@ -35,7 +39,7 @@ export default function ConciergeSystemScreensSection() {
                 data-concierge-system-screens-title
                 className={`${productSectionTitleClassName} w-full max-w-[621px]`}
               >
-                O canvas que marketing opera sozinho.
+                {t("title")}
               </h2>
             </div>
 
@@ -43,8 +47,7 @@ export default function ConciergeSystemScreensSection() {
               data-concierge-system-screens-description
               className={`${productSectionDescriptionClassName} max-w-[604px]`}
             >
-              Jornadas visuais, splits inteligentes, A/B test embarcado e
-              métricas ao vivo por etapa.
+              {t("description")}
             </p>
           </div>
 

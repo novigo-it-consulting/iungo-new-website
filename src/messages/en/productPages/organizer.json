@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "title": "Iungo Organizer",
+    "description": "The AI PIM built to enrich catalogs with generative AI, with onboarding in 14 days and a native integration with Mercado Livre and Amazon BR.",
+    "imageAlt": "Iungo Organizer visual interface"
+  },
+  "capabilities": {
+    "eyebrow": "CAPABILITIES",
+    "title": "Everything a modern PIM needs.",
+    "generativeEnrichment": {
+      "title": "Generative enrichment",
+      "description": "AI writes descriptions, attributes, and tags in your brand voice, in PT-BR, EN, and ES."
+    },
+    "duplicateDetection": {
+      "title": "Duplicate detection",
+      "description": "Finds repeated products by semantic similarity, not only by SKU."
+    },
+    "autoSyndication": {
+      "title": "Auto-Syndication",
+      "description": "Automatic distribution to 7+ channels, with format adapted per marketplace."
+    },
+    "nativeDam": {
+      "title": "Native DAM",
+      "description": "Image, video, and media management with tags and versioning per channel."
+    },
+    "approvalWorkflow": {
+      "title": "Approval workflow",
+      "description": "Reviews tailored by team (e-commerce, legal, marketing) before publishing."
+    },
+    "pxInsights": {
+      "title": "PX Insights",
+      "description": "Product performance by channel, with search, AI search, and conversion signals."
+    }
+  },
+  "steps": {
+    "eyebrow": "HOW IT WORKS",
+    "title": "From spreadsheet to channel, in 3 steps.",
+    "importCatalog": {
+      "title": "Import your catalog",
+      "description": "CSV, Excel, Google spreadsheets, ERP, or native VTEX/Shopify/Magento connectors. Automatic attribute mapping."
+    },
+    "enrich": {
+      "title": "AI enriches it",
+      "description": "Descriptions, attributes, tags, category classification, duplicate detection, and data validation — at a scale of millions."
+    },
+    "publish": {
+      "title": "Publish to every channel",
+      "description": "Each channel gets the optimized product version: Mercado Livre titles, Amazon descriptions, VTEX specifications. No manual work."
+    }
+  },
+  "systemScreens": {
+    "title": "The real interface, every day, in production.",
+    "description": "Product record, editorial workflow, attribute governance, and multi-channel publishing.",
+    "ariaLabel": "Iungo Organizer system screens",
+    "badges": {
+      "productSheet": "Product record",
+      "editorialWorkflow": "Editorial workflow",
+      "attributesTaxonomy": "Attributes & taxonomy",
+      "channelsPublication": "Channels & publishing"
+    },
+    "alts": {
+      "main": "Iungo Organizer product screen with attributes, record completeness, and publishing channels.",
+      "editorialWorkflow": "Editorial workflow with approval steps and publishing status.",
+      "attributesTaxonomy": "Product attributes and taxonomy organized by category.",
+      "aiPanel": "AI panel with enrichment suggestions and detected inconsistencies."
+    }
+  },
+  "comparison": {
+    "eyebrow": "IUNGO ORGANIZER AI PIM VS COMPETITORS",
+    "title": "Why Brazilian enterprises choose Iungo",
+    "ariaLabel": "PIM platform comparison",
+    "caption": "Comparison of Iungo Organizer AI PIM, Akeneo, and Salsify",
+    "columns": {
+      "criterion": "Criterion",
+      "iungo": "Iungo Organizer AI PIM",
+      "akeneo": "Akeneo",
+      "salsify": "Salsify"
+    },
+    "onboarding": {
+      "criterion": "Onboarding",
+      "iungo": "14 days",
+      "akeneo": "3-6 months",
+      "salsify": "2-4 months"
+    },
+    "nativeIntegration": {
+      "criterion": "Native ML + Amazon BR integration",
+      "akeneo": "App Store"
+    },
+    "generativeAi": {
+      "criterion": "Native generative AI",
+      "akeneo": "Add-on",
+      "salsify": "Add-on"
+    },
+    "dam": {
+      "criterion": "DAM included",
+      "akeneo": "Add-on"
+    },
+    "pricing": {
+      "criterion": "Transparent BRL pricing",
+      "akeneo": "USD, on request",
+      "salsify": "USD, on request"
+    },
+    "lgpd": {
+      "criterion": "Native LGPD",
+      "akeneo": "GDPR",
+      "salsify": "GDPR"
+    }
+  },
+  "caseStudy": {
+    "eyebrow": "CASE STUDY",
+    "title": "Fashion marketplace at hyper-scale",
+    "subtitle": "6.49 million SKUs under active governance",
+    "description": "Classification, standardization, and brand protection in a hyper-scale 3P catalog — only 1.48% needs human curation.",
+    "automation": "automation",
+    "newOffers": "new offers/month",
+    "updates": "updates/month"
+  },
+  "cta": {
+    "line1": "See your catalog",
+    "line2": "enriched in 14 days.",
+    "subtitle": "A free demo with your own SKUs. See the AI in action."
+  }
+}

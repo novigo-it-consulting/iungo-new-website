@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 
 import AttendantCompliance from "./Compliance/AttendantCompliance";
@@ -7,11 +9,15 @@ import ProductTestimonialsSection from "@/components/sections/shared/Testimonial
 
 import { ATTENDANT_TESTIMONIALS } from "./Testimonials/attendantTestimonials.constants";
 
-export default function AttendantContentSection() {
+export default async function AttendantContentSection() {
+  const t = await getTranslations("productPages.attendant");
+  const tQuotes = await getTranslations("productPages.attendant.testimonials");
+  const [sandra, henrique] = ATTENDANT_TESTIMONIALS;
+
   return (
     <section
       data-attendant-content-section
-      aria-label="Conteúdo do Iungo Attendant"
+      aria-label={t("contentAria")}
       className="box-border w-full min-w-0 bg-white pt-[60px]"
     >
       <div className="mx-auto w-[calc(100%_-_48px)] min-w-0 max-w-[960px] sm:w-[calc(100%_-_64px)]">
@@ -33,9 +39,24 @@ export default function AttendantContentSection() {
       >
         <ProductTestimonialsSection
           productSlug="attendant"
-          title="Operação que não dorme."
-          description="Heads de operação e back-office que pararam de tratar tarefa mecânica como trabalho humano."
-          testimonials={ATTENDANT_TESTIMONIALS}
+          title={tQuotes("title")}
+          description={tQuotes("description")}
+          testimonials={[
+            {
+              ...sandra,
+              quote: tQuotes("sandra.quote"),
+              name: tQuotes("sandra.name"),
+              role: tQuotes("sandra.role"),
+              metricLabel: tQuotes("sandra.metricLabel"),
+            },
+            {
+              ...henrique,
+              quote: tQuotes("henrique.quote"),
+              name: tQuotes("henrique.name"),
+              role: tQuotes("henrique.role"),
+              metricLabel: tQuotes("henrique.metricLabel"),
+            },
+          ]}
           variant="attendant"
         />
       </PageContainer>

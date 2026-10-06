@@ -1,9 +1,37 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 import ConciergeTriggerCard from "./ConciergeTriggerCard";
 import ConciergeTriggersHeader from "./ConciergeTriggersHeader";
 import { CONCIERGE_TRIGGERS } from "./conciergeTriggers.constants";
 
-export default function ConciergeTriggersSection() {
+function triggerCopy(
+  t: Awaited<ReturnType<typeof getTranslations<"productPages.concierge.triggers">>>,
+) {
+  return {
+    "cart-abandonment": {
+      title: t("cartAbandonment.title"),
+      description: t("cartAbandonment.description"),
+    },
+    "navigation-abandonment": {
+      title: t("navigationAbandonment.title"),
+      description: t("navigationAbandonment.description"),
+    },
+    "price-reduction": {
+      title: t("priceReduction.title"),
+      description: t("priceReduction.description"),
+    },
+    "repurchase-kids": {
+      title: t("repurchaseKids.title"),
+      description: t("repurchaseKids.description"),
+    },
+  };
+}
+
+export default async function ConciergeTriggersSection() {
+  const t = await getTranslations("productPages.concierge.triggers");
+  const copy = triggerCopy(t);
+
   return (
     <section
       data-concierge-triggers-section
@@ -26,8 +54,8 @@ export default function ConciergeTriggersSection() {
               <ConciergeTriggerCard
                 key={trigger.id}
                 value={trigger.value}
-                title={trigger.title}
-                description={trigger.description}
+                title={copy[trigger.id].title}
+                description={copy[trigger.id].description}
               />
             ))}
           </ul>

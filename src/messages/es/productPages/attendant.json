@@ -1,0 +1,86 @@
+{
+  "hero": {
+    "title": "Iungo Attendant",
+    "description": "El agente que ejecuta, no solo responde.<br></br>Cancela el pedido, cambia el talle, emite una segunda vía, actualiza la dirección y genera la factura. Operaciones reales vía APIs de su ERP, OMS y WMS — con auditoría completa.",
+    "imageAlt": "Ilustración de Iungo Attendant con conversaciones y módulos de operaciones automatizadas."
+  },
+  "contentAria": "Contenido de Iungo Attendant",
+  "compliance": {
+    "eyebrow": "CUMPLIMIENTO",
+    "title": "Auditoría y trazabilidad total",
+    "description": "Cada operación ejecutada genera un log firmado: identificación del cliente (con enmascaramiento LGPD), payload de la llamada, respuesta de la API y hash del consentimiento. Listo para auditoría interna, ANPD o Procon.",
+    "retentionValue": "5 años",
+    "loggedOperations": "Operaciones registradas",
+    "logRetention": "Retención de logs",
+    "signature": "Firma criptográfica"
+  },
+  "systemScreens": {
+    "title": "La operación que no exige un humano para tareas mecánicas.",
+    "description": "Consola de transacciones, conectores, log de auditoría y panel de excepciones.",
+    "ariaLabel": "Pantallas del sistema Iungo Attendant",
+    "badges": {
+      "liveOperations": "Operaciones en vivo",
+      "connectors": "Conectores · ERP/OMS",
+      "auditLog": "Log de auditoría",
+      "exceptions": "Panel de excepciones"
+    },
+    "alts": {
+      "main": "Consola de operaciones en vivo de Iungo Attendant con transacciones en tiempo real.",
+      "connectors": "Panel de conectores ERP y OMS de Iungo Attendant.",
+      "auditLog": "Log de auditoría de Iungo Attendant con historial de acciones y eventos.",
+      "exceptions": "Panel de excepciones de Iungo Attendant con alertas y cola de pendientes."
+    }
+  },
+  "testimonials": {
+    "title": "Operación que no duerme.",
+    "description": "Heads de operación y back-office que dejaron de tratar la tarea mecánica como trabajo humano.",
+    "sandra": {
+      "quote": "Tenía 8 personas solo para reemitir boleto, actualizar dirección y cancelar pedido. Hoy son 2, y solo tocan la excepción. El resto corre 24/7 con auditoría firmada — algo que mi equipo humano no hacía.",
+      "name": "Sandra V.",
+      "role": "Head de Operaciones · Retailer omnicanal",
+      "metricLabel": "HEADCOUNT BO"
+    },
+    "henrique": {
+      "quote": "Lo que me ganó el board fue la auditoría. Cada operación tiene hash firmado, retención de 5 años y consentimiento rastreado. La preauditoría de LGPD pasó sin salvedades por primera vez.",
+      "name": "Henrique L.",
+      "role": "CFO y DPO interino · Red de farmacias",
+      "metricLabel": "SALVEDADES LGPD"
+    }
+  },
+  "operations": {
+    "eyebrow": "OPERACIONES SOPORTADAS",
+    "title": "42 operaciones transaccionales listas para usar.",
+    "description": "Conectores nativos para los principales ERP y OMS del retail brasileño. Configurables por regla de negocio.",
+    "orders": {
+      "title": "PEDIDOS",
+      "status": "Estado y rastreo",
+      "cancel": "Cancelación",
+      "exchange": "Cambio de talle/color",
+      "return": "Devolución",
+      "invoiceCopy": "Segunda vía de NF-e",
+      "address": "Actualización de dirección"
+    },
+    "account": {
+      "title": "CUENTA",
+      "profile": "Actualización de registro",
+      "password": "Reset de contraseña",
+      "history": "Historial de compras",
+      "loyalty": "Programa de fidelidad",
+      "cashback": "Cashback y cupones",
+      "subscriptions": "Suscripciones"
+    },
+    "payment": {
+      "title": "PAGO",
+      "boleto": "Segunda vía de boleto",
+      "pix": "PIX copia y pega",
+      "refund": "Reembolso parcial",
+      "installments": "Cuotas renegociadas",
+      "receipts": "Comprobantes",
+      "reconciliation": "Conciliación"
+    }
+  },
+  "cta": {
+    "line1": "Atención que",
+    "line2": "ejecuta de verdad."
+  }
+}

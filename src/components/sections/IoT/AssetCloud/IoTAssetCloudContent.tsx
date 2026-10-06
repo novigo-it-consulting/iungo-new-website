@@ -1,11 +1,11 @@
+import { getTranslations } from "next-intl/server";
+
 import DarkSectionEyebrow from "@/components/sections/shared/SectionHeader/DarkSectionEyebrow";
 
-import { IOT_ASSET_CLOUD_CONTENT } from "./iotAssetCloud.constants";
 import IoTAssetCloudTopics from "./IoTAssetCloudTopics";
 
-export default function IoTAssetCloudContent() {
-  const { eyebrow, title, descriptionPrimary, descriptionSecondary } =
-    IOT_ASSET_CLOUD_CONTENT;
+export default async function IoTAssetCloudContent() {
+  const t = await getTranslations("productPages.iot.assetCloud");
 
   return (
     <div
@@ -14,7 +14,7 @@ export default function IoTAssetCloudContent() {
     >
       <div data-iot-asset-cloud-eyebrow>
         <DarkSectionEyebrow
-          label={eyebrow}
+          label={t("eyebrow")}
           dataAttribute="data-iot-asset-cloud-eyebrow-badge"
         />
       </div>
@@ -24,19 +24,19 @@ export default function IoTAssetCloudContent() {
           id="iot-asset-cloud-title"
           className="m-0 w-full font-reddit text-[48px] font-bold leading-[48px] tracking-[-0.96px] text-white"
         >
-          {title}
+          {t("title")}
         </h2>
       </div>
 
       <div data-iot-asset-cloud-description-primary className="pt-2">
         <p className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-[0px] text-white/70">
-          {descriptionPrimary}
+          {t("primary")}
         </p>
       </div>
 
       <div data-iot-asset-cloud-description-secondary>
         <p className="m-0 w-full font-reddit text-base font-normal leading-6 tracking-[0px] text-white/60">
-          {descriptionSecondary}
+          {t("secondary")}
         </p>
       </div>
 

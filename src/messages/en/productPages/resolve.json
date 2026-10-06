@@ -1,0 +1,89 @@
+{
+  "hero": {
+    "title": "Iungo Resolve",
+    "presentation": "An L1/L2 support agent with deep knowledge of your product.",
+    "description": "It reads the Iungo Organizer AI PIM catalog in real time. It checks the Iungo Behavior CDP profile. It resolves technical questions like a specialist — in seconds.",
+    "imageAlt": "Iungo Resolve illustration with service flows and connected modules."
+  },
+  "contentAria": "Iungo Resolve content",
+  "metrics": {
+    "automatedResolution": {
+      "description": "Automated resolution",
+      "complement": "with no handoff to a human"
+    },
+    "responseTime": {
+      "description": "L1/L2 response",
+      "complement": "vs. 4min for a human"
+    },
+    "ticketCost": {
+      "description": "Cost per ticket",
+      "complement": "first 90 days"
+    }
+  },
+  "differentials": {
+    "eyebrow": "DIFFERENTIATOR",
+    "title": "Why Iungo Resolve sees what Zendesk and Intercom do not.",
+    "subtitle": "Not another chatbot trained on an FAQ. An agent plugged into the live data of your operation.",
+    "catalog": {
+      "title": "A live catalog via Iungo Organizer AI PIM",
+      "description": "Every answer is grounded in the technical sheet, attributes, compatibility, and current stock. Zero product hallucination."
+    },
+    "profile": {
+      "title": "360° profile via Iungo Behavior CDP",
+      "description": "It knows if the customer is VIP, the last purchase, and the preferred category. It personalizes tone and recommendation."
+    },
+    "handoff": {
+      "title": "Human handoff with full context",
+      "description": "When it escalates, the agent gets a ready briefing: history, intent, sentiment, and next best action."
+    },
+    "channels": {
+      "title": "Native multi-channel",
+      "description": "WhatsApp Business, web chat, email, Instagram DM. The same intelligence, the same conversation memory, the same customer."
+    },
+    "citations": {
+      "title": "Verifiable citations",
+      "description": "Every answer links to the source (PDP, policy, manual). Auditable, in PT-BR, in your brand voice."
+    },
+    "learning": {
+      "title": "It learns from every ticket",
+      "description": "It detects recurring questions and suggests PIM updates. The catalog improves on its own with every interaction."
+    }
+  },
+  "systemScreens": {
+    "title": "The console the CX supervisor watches all day.",
+    "description": "Operations console, PIM training, quality metrics, and handoff supervision.",
+    "ariaLabel": "Iungo Resolve system screens",
+    "badges": {
+      "console": "Service console",
+      "training": "PIM training",
+      "quality": "Quality assurance",
+      "supervision": "Supervision · handoff"
+    },
+    "alts": {
+      "main": "Iungo Resolve console with live conversations and service indicators.",
+      "training": "PIM training with product FAQs and answers grounded in the catalog.",
+      "quality": "Quality assurance panel with FAQ review and approval status.",
+      "supervision": "Supervision and handoff panel with conversations in transfer and service status."
+    }
+  },
+  "testimonials": {
+    "title": "CX that grows without inflating headcount.",
+    "description": "Service leaders who automated L1/L2 without losing quality or CSAT.",
+    "renata": {
+      "quote": "The human team now takes only what matters: a hard case, an upset VIP, a systemic issue. Iungo Resolve absorbed the flood of ‘what size?’ and ‘is it in stock?’ — and CSAT went up, not down.",
+      "name": "Renata D.",
+      "role": "Head of CX · Marketplace · under NDA",
+      "metricLabel": "CSAT"
+    },
+    "felipe": {
+      "quote": "What I sold internally was the number of tickets resolved without a human. What I actually bought was the handoff briefing: when the agent passes it to me, I already know everything. I do not ask the customer twice.",
+      "name": "Felipe N.",
+      "role": "Service coordinator · Electronics retail",
+      "metricLabel": "COST/TICKET"
+    }
+  },
+  "cta": {
+    "line1": "87% automation.",
+    "line2": "0% hallucination."
+  }
+}

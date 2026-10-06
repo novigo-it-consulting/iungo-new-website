@@ -1,0 +1,89 @@
+{
+  "hero": {
+    "title": "Iungo Resolve",
+    "presentation": "Agente de suporte L1/L2 com conhecimento profundo do seu produto.",
+    "description": "Lê o catálogo do Iungo Organizer AI PIM em tempo real. Consulta o perfil do Iungo Behavior CDP. Resolve dúvidas técnicas como um especialista — em segundos.",
+    "imageAlt": "Ilustração do Iungo Resolve com fluxos de atendimento e módulos conectados."
+  },
+  "contentAria": "Conteúdo do Iungo Resolve",
+  "metrics": {
+    "automatedResolution": {
+      "description": "Resolução automatizada",
+      "complement": "sem escalada para humano"
+    },
+    "responseTime": {
+      "description": "Resposta L1/L2",
+      "complement": "vs. 4min do humano"
+    },
+    "ticketCost": {
+      "description": "Custo por ticket",
+      "complement": "primeiros 90 dias"
+    }
+  },
+  "differentials": {
+    "eyebrow": "DIFERENCIAL",
+    "title": "Por que o Iungo Resolve vê o que Zendesk e Intercom não veem.",
+    "subtitle": "Não é mais um chatbot treinado em FAQ. É um agente plugado nos dados vivos da sua operação.",
+    "catalog": {
+      "title": "Catálogo vivo via Iungo Organizer AI PIM",
+      "description": "Cada resposta é grounded em ficha técnica, atributos, compatibilidade e estoque atual. Zero alucinação sobre produto."
+    },
+    "profile": {
+      "title": "Perfil 360° via Iungo Behavior CDP",
+      "description": "Sabe se o cliente é VIP, qual a última compra, qual a categoria preferida. Personaliza o tom e a recomendação."
+    },
+    "handoff": {
+      "title": "Handoff humano com contexto completo",
+      "description": "Quando escala, entrega ao atendente um briefing pronto: histórico, intenção, sentimento, próxima melhor ação."
+    },
+    "channels": {
+      "title": "Multi-canal nativo",
+      "description": "WhatsApp Business, web chat, email, Instagram DM. Mesma inteligência, mesma memória de conversa, mesmo cliente."
+    },
+    "citations": {
+      "title": "Citações verificáveis",
+      "description": "Cada resposta linka à fonte (PDP, política, manual). Auditável, em PT-BR, com tom de voz da sua marca."
+    },
+    "learning": {
+      "title": "Aprende com cada ticket",
+      "description": "Detecta dúvidas recorrentes e sugere atualizações no PIM. O catálogo melhora sozinho a cada interação."
+    }
+  },
+  "systemScreens": {
+    "title": "O console que o supervisor de CX olha o dia inteiro.",
+    "description": "Console de operação, treinamento via PIM, métricas de qualidade e supervisão de handoff.",
+    "ariaLabel": "Telas do sistema Iungo Resolve",
+    "badges": {
+      "console": "Console de atendimento",
+      "training": "Treinamento via PIM",
+      "quality": "Quality assurance",
+      "supervision": "Supervisão · handoff"
+    },
+    "alts": {
+      "main": "Console do Iungo Resolve com conversas ao vivo e indicadores de atendimento.",
+      "training": "Treinamento via PIM com FAQs de produto e respostas grounded no catálogo.",
+      "quality": "Painel de quality assurance com revisão de FAQs e status de aprovação.",
+      "supervision": "Painel de supervisão e handoff com conversas em transferência e status de atendimento."
+    }
+  },
+  "testimonials": {
+    "title": "CX que cresce sem inflar headcount.",
+    "description": "Líderes de atendimento que automatizaram L1/L2 sem perder qualidade nem CSAT.",
+    "renata": {
+      "quote": "O time humano hoje só pega o que importa: caso difícil, cliente VIP irritado, problema sistêmico. O Iungo Resolve absorveu a chuva de ‘qual o tamanho?’ e ‘tem em estoque?’ — e o CSAT subiu, não caiu.",
+      "name": "Renata D.",
+      "role": "Head de CX · Marketplace · sob NDA",
+      "metricLabel": "CSAT"
+    },
+    "felipe": {
+      "quote": "O que vendi internamente foi o número de tickets resolvidos sem humano. O que comprei de verdade foi o briefing de handoff: quando o agente passa pra mim, eu já sei tudo. Não pergunto duas vezes ao cliente.",
+      "name": "Felipe N.",
+      "role": "Coordenador de Atendimento · Varejo de eletrônicos",
+      "metricLabel": "CUSTO/TICKET"
+    }
+  },
+  "cta": {
+    "line1": "87% de automação.",
+    "line2": "0% de alucinação."
+  }
+}

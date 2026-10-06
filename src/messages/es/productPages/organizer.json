@@ -1,0 +1,123 @@
+{
+  "hero": {
+    "title": "Iungo Organizer",
+    "description": "El AI PIM para enriquecer catálogos con IA generativa, con onboarding en 14 días e integración nativa con Mercado Livre y Amazon BR.",
+    "imageAlt": "Interfaz visual de Iungo Organizer"
+  },
+  "capabilities": {
+    "eyebrow": "CAPACIDADES",
+    "title": "Todo lo que un PIM moderno necesita.",
+    "generativeEnrichment": {
+      "title": "Enriquecimiento generativo",
+      "description": "La IA genera descripciones, atributos y tags con el tono de su marca, en PT-BR, EN y ES."
+    },
+    "duplicateDetection": {
+      "title": "Detección de duplicados",
+      "description": "Identifica productos repetidos por similitud semántica, no solo por SKU."
+    },
+    "autoSyndication": {
+      "title": "Auto-Syndication",
+      "description": "Distribución automática a más de 7 canales, con formato adaptado por marketplace."
+    },
+    "nativeDam": {
+      "title": "DAM nativo",
+      "description": "Gestión de imágenes, videos y medios con tags y versiones por canal."
+    },
+    "approvalWorkflow": {
+      "title": "Flujo de aprobación",
+      "description": "Revisiones configurables por equipo (e-commerce, legal, marketing) antes de publicar."
+    },
+    "pxInsights": {
+      "title": "PX Insights",
+      "description": "Desempeño de producto por canal, con señales de búsqueda, AI search y conversión."
+    }
+  },
+  "steps": {
+    "eyebrow": "CÓMO FUNCIONA",
+    "title": "De la planilla al canal, en 3 pasos.",
+    "importCatalog": {
+      "title": "Importe su catálogo",
+      "description": "CSV, Excel, planillas de Google, ERP o conectores nativos de VTEX/Shopify/Magento. Mapeo automático de atributos."
+    },
+    "enrich": {
+      "title": "La IA enriquece",
+      "description": "Generación de descripciones, atributos, tags, clasificación por categoría, detección de duplicados y validación de datos — a escala de millones."
+    },
+    "publish": {
+      "title": "Publique en todos los canales",
+      "description": "Cada canal recibe la versión optimizada del producto: títulos de Mercado Livre, descripciones de Amazon, especificaciones de VTEX. Sin trabajo manual."
+    }
+  },
+  "systemScreens": {
+    "title": "La interfaz real, todos los días, en producción.",
+    "description": "Ficha de producto, flujo editorial, gobernanza de atributos y publicación multicanal.",
+    "ariaLabel": "Pantallas del sistema Iungo Organizer",
+    "badges": {
+      "productSheet": "Ficha de producto",
+      "editorialWorkflow": "Flujo editorial",
+      "attributesTaxonomy": "Atributos y taxonomía",
+      "channelsPublication": "Canales y publicación"
+    },
+    "alts": {
+      "main": "Pantalla de producto de Iungo Organizer con atributos, completitud del registro y canales de publicación.",
+      "editorialWorkflow": "Flujo editorial con etapas de aprobación y estado de publicación.",
+      "attributesTaxonomy": "Atributos y taxonomía del producto organizados por categoría.",
+      "aiPanel": "Panel de IA con sugerencias de enriquecimiento e inconsistencias detectadas."
+    }
+  },
+  "comparison": {
+    "eyebrow": "IUNGO ORGANIZER AI PIM VS COMPETIDORES",
+    "title": "Por qué el enterprise de Brasil elige Iungo",
+    "ariaLabel": "Comparación de plataformas PIM",
+    "caption": "Comparación entre Iungo Organizer AI PIM, Akeneo y Salsify",
+    "columns": {
+      "criterion": "Criterio",
+      "iungo": "Iungo Organizer AI PIM",
+      "akeneo": "Akeneo",
+      "salsify": "Salsify"
+    },
+    "onboarding": {
+      "criterion": "Onboarding",
+      "iungo": "14 días",
+      "akeneo": "3-6 meses",
+      "salsify": "2-4 meses"
+    },
+    "nativeIntegration": {
+      "criterion": "Integración nativa ML + Amazon BR",
+      "akeneo": "App Store"
+    },
+    "generativeAi": {
+      "criterion": "IA generativa nativa",
+      "akeneo": "Add-on",
+      "salsify": "Add-on"
+    },
+    "dam": {
+      "criterion": "DAM incluido",
+      "akeneo": "Add-on"
+    },
+    "pricing": {
+      "criterion": "Precio transparente en BRL",
+      "akeneo": "USD, bajo consulta",
+      "salsify": "USD, bajo consulta"
+    },
+    "lgpd": {
+      "criterion": "LGPD nativo",
+      "akeneo": "GDPR",
+      "salsify": "GDPR"
+    }
+  },
+  "caseStudy": {
+    "eyebrow": "CASO DE ESTUDIO",
+    "title": "Marketplace de moda a hiperescala",
+    "subtitle": "6,49 millones de SKUs bajo gobernanza activa",
+    "description": "Clasificación, estandarización y protección de marca en un catálogo 3P de hiperescala — solo el 1,48% requiere curaduría humana.",
+    "automation": "automatización",
+    "newOffers": "ofertas nuevas/mes",
+    "updates": "updates/mes"
+  },
+  "cta": {
+    "line1": "Vea su catálogo",
+    "line2": "enriquecido en 14 días.",
+    "subtitle": "Demostración gratuita con sus propios SKUs. Vea la IA en acción."
+  }
+}

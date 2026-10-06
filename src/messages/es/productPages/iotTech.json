@@ -1,0 +1,51 @@
+{
+  "technologies": {
+    "eyebrow": "TECNOLOGÍAS",
+    "title": "La tecnología correcta para cada escenario.",
+    "description": "No vendemos un chip — elegimos el stack ideal para su operación.",
+    "caption": "Comparativo de tecnologías IoT por alcance, caso de uso y costo por tag",
+    "ariaLabel": "Tabla comparativa de tecnologías IoT",
+    "columns": {
+      "technology": "Tecnología",
+      "range": "Alcance",
+      "idealCase": "Caso ideal",
+      "cost": "Costo / tag"
+    },
+    "rfidUhf": {
+      "technology": "RFID UHF pasivo",
+      "range": "hasta 12m",
+      "idealCase": "Inventario de tienda, CD, textil",
+      "cost": "R$ 0,15–0,80"
+    },
+    "rfidHf": {
+      "technology": "RFID HF / NFC",
+      "range": "hasta 10cm",
+      "idealCase": "Autenticación, antifalsificación, joyas",
+      "cost": "R$ 0,80–4,00"
+    },
+    "ble": {
+      "technology": "BLE (Bluetooth LE)",
+      "range": "hasta 50m",
+      "idealCase": "Ubicación indoor, RTLS, personas",
+      "cost": "R$ 25–80"
+    },
+    "lora": {
+      "technology": "LoRa / LoRaWAN",
+      "range": "hasta 10km",
+      "idealCase": "Sensores remotos, agro, flota",
+      "cost": "R$ 60–180"
+    },
+    "gps": {
+      "technology": "GPS / GSM",
+      "range": "global",
+      "idealCase": "Vehículos, contenedores, milk run",
+      "cost": "R$ 200–600"
+    },
+    "barcode": {
+      "technology": "Barcode 2D / QR",
+      "range": "visual",
+      "idealCase": "Onboarding, procesos puntuales",
+      "cost": "R$ 0,01"
+    }
+  }
+}

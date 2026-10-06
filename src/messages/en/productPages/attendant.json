@@ -1,0 +1,86 @@
+{
+  "hero": {
+    "title": "Iungo Attendant",
+    "description": "The agent that executes, not only replies.<br></br>It cancels an order, changes the size, issues a second copy, updates the address, and generates the invoice. Real operations through your ERP, OMS, and WMS APIs — with a full audit.",
+    "imageAlt": "Iungo Attendant illustration with conversations and automated operations modules."
+  },
+  "contentAria": "Iungo Attendant content",
+  "compliance": {
+    "eyebrow": "COMPLIANCE",
+    "title": "Full audit and traceability",
+    "description": "Every executed operation writes a signed log: customer identification (with LGPD masking), call payload, API response, and consent hash. Ready for internal audit, ANPD, or Procon.",
+    "retentionValue": "5 years",
+    "loggedOperations": "Logged operations",
+    "logRetention": "Log retention",
+    "signature": "Cryptographic signature"
+  },
+  "systemScreens": {
+    "title": "The operation that does not need a human for mechanical tasks.",
+    "description": "Transaction console, connectors, audit log, and exceptions panel.",
+    "ariaLabel": "Iungo Attendant system screens",
+    "badges": {
+      "liveOperations": "Live operations",
+      "connectors": "Connectors · ERP/OMS",
+      "auditLog": "Audit log",
+      "exceptions": "Exceptions panel"
+    },
+    "alts": {
+      "main": "Iungo Attendant live operations console with real-time transactions.",
+      "connectors": "Iungo Attendant ERP and OMS connectors panel.",
+      "auditLog": "Iungo Attendant audit log with action and event history.",
+      "exceptions": "Iungo Attendant exceptions panel with alerts and a pending queue."
+    }
+  },
+  "testimonials": {
+    "title": "An operation that does not sleep.",
+    "description": "Operations and back-office heads who stopped treating mechanical tasks as human work.",
+    "sandra": {
+      "quote": "I had 8 people just to reissue a boleto, update an address, and cancel an order. Today there are 2, and they only handle exceptions. The rest runs 24/7 with a signed audit — something my human team did not do.",
+      "name": "Sandra V.",
+      "role": "Head of Operations · Omnichannel retailer",
+      "metricLabel": "BO HEADCOUNT"
+    },
+    "henrique": {
+      "quote": "What won the board was the audit. Every operation has a signed hash, 5-year retention, and tracked consent. The LGPD pre-audit passed with no findings for the first time.",
+      "name": "Henrique L.",
+      "role": "CFO & interim DPO · Pharmacy chain",
+      "metricLabel": "LGPD FINDINGS"
+    }
+  },
+  "operations": {
+    "eyebrow": "SUPPORTED OPERATIONS",
+    "title": "42 transactional operations, ready to use.",
+    "description": "Native connectors for the main ERPs and OMS platforms in Brazilian retail. Configurable by business rule.",
+    "orders": {
+      "title": "ORDERS",
+      "status": "Status & tracking",
+      "cancel": "Cancellation",
+      "exchange": "Size/color exchange",
+      "return": "Return",
+      "invoiceCopy": "Duplicate NF-e",
+      "address": "Address update"
+    },
+    "account": {
+      "title": "ACCOUNT",
+      "profile": "Profile update",
+      "password": "Password reset",
+      "history": "Purchase history",
+      "loyalty": "Loyalty program",
+      "cashback": "Cashback & coupons",
+      "subscriptions": "Subscriptions"
+    },
+    "payment": {
+      "title": "PAYMENT",
+      "boleto": "Duplicate boleto",
+      "pix": "PIX copy & paste",
+      "refund": "Partial refund",
+      "installments": "Renegotiated installments",
+      "receipts": "Receipts",
+      "reconciliation": "Reconciliation"
+    }
+  },
+  "cta": {
+    "line1": "Service that",
+    "line2": "actually executes."
+  }
+}

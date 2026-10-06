@@ -1,13 +1,17 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 
 import BehaviorCdpComparison from "./BehaviorCdpComparison";
 import BehaviorRevenueCalculatorCard from "./BehaviorRevenueCalculatorCard";
 
-export default function BehaviorCdpOverviewSection() {
+export default async function BehaviorCdpOverviewSection() {
+  const t = await getTranslations("productPages.behavior.overview");
+
   return (
     <section
       data-behavior-cdp-overview-section
-      aria-label="Visão geral do Iungo Behavior CDP"
+      aria-label={t("ariaLabel")}
       className="w-full min-w-0 bg-white xl:min-h-[942px]"
     >
       <PageContainer

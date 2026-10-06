@@ -1,0 +1,89 @@
+{
+  "hero": {
+    "title": "Iungo Resolve",
+    "presentation": "Agente de soporte L1/L2 con conocimiento profundo de su producto.",
+    "description": "Lee el catálogo de Iungo Organizer AI PIM en tiempo real. Consulta el perfil de Iungo Behavior CDP. Resuelve dudas técnicas como un especialista — en segundos.",
+    "imageAlt": "Ilustración de Iungo Resolve con flujos de atención y módulos conectados."
+  },
+  "contentAria": "Contenido de Iungo Resolve",
+  "metrics": {
+    "automatedResolution": {
+      "description": "Resolución automatizada",
+      "complement": "sin escalar a un humano"
+    },
+    "responseTime": {
+      "description": "Respuesta L1/L2",
+      "complement": "vs. 4min de un humano"
+    },
+    "ticketCost": {
+      "description": "Costo por ticket",
+      "complement": "primeros 90 días"
+    }
+  },
+  "differentials": {
+    "eyebrow": "DIFERENCIAL",
+    "title": "Por qué Iungo Resolve ve lo que Zendesk e Intercom no ven.",
+    "subtitle": "No es otro chatbot entrenado en un FAQ. Es un agente conectado a los datos vivos de su operación.",
+    "catalog": {
+      "title": "Catálogo vivo vía Iungo Organizer AI PIM",
+      "description": "Cada respuesta está grounded en ficha técnica, atributos, compatibilidad y stock actual. Cero alucinación sobre el producto."
+    },
+    "profile": {
+      "title": "Perfil 360° vía Iungo Behavior CDP",
+      "description": "Sabe si el cliente es VIP, cuál fue la última compra y cuál es la categoría preferida. Personaliza el tono y la recomendación."
+    },
+    "handoff": {
+      "title": "Handoff humano con contexto completo",
+      "description": "Cuando escala, entrega al agente un briefing listo: historial, intención, sentimiento y próxima mejor acción."
+    },
+    "channels": {
+      "title": "Multicanal nativo",
+      "description": "WhatsApp Business, web chat, e-mail, Instagram DM. La misma inteligencia, la misma memoria de conversación, el mismo cliente."
+    },
+    "citations": {
+      "title": "Citas verificables",
+      "description": "Cada respuesta enlaza a la fuente (PDP, política, manual). Auditable, en PT-BR, con el tono de su marca."
+    },
+    "learning": {
+      "title": "Aprende con cada ticket",
+      "description": "Detecta dudas recurrentes y sugiere actualizaciones en el PIM. El catálogo mejora solo con cada interacción."
+    }
+  },
+  "systemScreens": {
+    "title": "La consola que el supervisor de CX mira todo el día.",
+    "description": "Consola de operación, entrenamiento vía PIM, métricas de calidad y supervisión de handoff.",
+    "ariaLabel": "Pantallas del sistema Iungo Resolve",
+    "badges": {
+      "console": "Consola de atención",
+      "training": "Entrenamiento PIM",
+      "quality": "Quality assurance",
+      "supervision": "Supervisión · handoff"
+    },
+    "alts": {
+      "main": "Consola de Iungo Resolve con conversaciones en vivo e indicadores de atención.",
+      "training": "Entrenamiento vía PIM con FAQs de producto y respuestas grounded en el catálogo.",
+      "quality": "Panel de quality assurance con revisión de FAQs y estado de aprobación.",
+      "supervision": "Panel de supervisión y handoff con conversaciones en transferencia y estado de atención."
+    }
+  },
+  "testimonials": {
+    "title": "CX que crece sin inflar el headcount.",
+    "description": "Líderes de atención que automatizaron L1/L2 sin perder calidad ni CSAT.",
+    "renata": {
+      "quote": "El equipo humano hoy solo toma lo que importa: caso difícil, cliente VIP molesto, problema sistémico. Iungo Resolve absorbió la lluvia de ‘¿cuál es el talle?’ y ‘¿hay stock?’ — y el CSAT subió, no bajó.",
+      "name": "Renata D.",
+      "role": "Head de CX · Marketplace · bajo NDA",
+      "metricLabel": "CSAT"
+    },
+    "felipe": {
+      "quote": "Lo que vendí internamente fue el número de tickets resueltos sin humano. Lo que compré de verdad fue el briefing de handoff: cuando el agente me lo pasa, ya lo sé todo. No le pregunto dos veces al cliente.",
+      "name": "Felipe N.",
+      "role": "Coordinador de atención · Retail de electrónicos",
+      "metricLabel": "COSTO/TICKET"
+    }
+  },
+  "cta": {
+    "line1": "87% de automatización.",
+    "line2": "0% de alucinación."
+  }
+}

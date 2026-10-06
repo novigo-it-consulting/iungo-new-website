@@ -1,8 +1,12 @@
+import { getTranslations } from "next-intl/server";
+
 import SectionHeader from "@/components/ui/SectionHeader";
 import PageContainer from "@/components/layout/PageContainer";
 import OrganizerCapabilitiesGrid from "./OrganizerCapabilitiesGrid";
 
-export default function OrganizerCapabilitiesSection() {
+export default async function OrganizerCapabilitiesSection() {
+  const t = await getTranslations("productPages.organizer.capabilities");
+
   return (
     <section
       aria-labelledby="organizer-capabilities-title"
@@ -14,8 +18,8 @@ export default function OrganizerCapabilitiesSection() {
         className="flex min-w-0 flex-col items-center justify-start gap-16"
       >
         <SectionHeader
-          eyebrow="CAPACIDADES"
-          title="Tudo que um PIM moderno precisa ter."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
           titleId="organizer-capabilities-title"
         />
 

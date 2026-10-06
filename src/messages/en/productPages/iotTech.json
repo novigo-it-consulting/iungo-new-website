@@ -1,0 +1,51 @@
+{
+  "technologies": {
+    "eyebrow": "TECHNOLOGIES",
+    "title": "The right technology for each scenario.",
+    "description": "We do not sell a chip — we choose the right stack for your operation.",
+    "caption": "Comparison of IoT technologies by range, use case, and cost per tag",
+    "ariaLabel": "Comparative table of IoT technologies",
+    "columns": {
+      "technology": "Technology",
+      "range": "Range",
+      "idealCase": "Ideal case",
+      "cost": "Cost / tag"
+    },
+    "rfidUhf": {
+      "technology": "Passive RFID UHF",
+      "range": "up to 12m",
+      "idealCase": "Store, DC, and textile inventory",
+      "cost": "R$ 0.15–0.80"
+    },
+    "rfidHf": {
+      "technology": "RFID HF / NFC",
+      "range": "up to 10cm",
+      "idealCase": "Authentication, anti-counterfeit, jewelry",
+      "cost": "R$ 0.80–4.00"
+    },
+    "ble": {
+      "technology": "BLE (Bluetooth LE)",
+      "range": "up to 50m",
+      "idealCase": "Indoor location, RTLS, people",
+      "cost": "R$ 25–80"
+    },
+    "lora": {
+      "technology": "LoRa / LoRaWAN",
+      "range": "up to 10km",
+      "idealCase": "Remote sensors, agribusiness, fleet",
+      "cost": "R$ 60–180"
+    },
+    "gps": {
+      "technology": "GPS / GSM",
+      "range": "global",
+      "idealCase": "Vehicles, containers, milk run",
+      "cost": "R$ 200–600"
+    },
+    "barcode": {
+      "technology": "Barcode 2D / QR",
+      "range": "visual",
+      "idealCase": "Onboarding, one-off processes",
+      "cost": "R$ 0.01"
+    }
+  }
+}

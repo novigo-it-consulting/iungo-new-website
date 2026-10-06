@@ -1,12 +1,43 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductSectionHeader from "@/components/sections/shared/SectionHeader/ProductSectionHeader";
 
 import ConvertWhySellsMoreCard from "./ConvertWhySellsMoreCard";
 import {
-  CONVERT_WHY_SELLS_MORE_CARDS,
-  CONVERT_WHY_SELLS_MORE_HEADER,
+  CONVERT_WHY_SELLS_MORE_CARD_IDS,
+  type ConvertWhySellsMoreCardItem,
 } from "./whySellsMore.constants";
 
-export default function ConvertWhySellsMore() {
+type WhyTranslator = Awaited<
+  ReturnType<typeof getTranslations<"productPages.convert.why">>
+>;
+
+function whyCards(t: WhyTranslator): ConvertWhySellsMoreCardItem[] {
+  return [
+    {
+      id: CONVERT_WHY_SELLS_MORE_CARD_IDS[0],
+      category: t("catalog.category"),
+      title: t("catalog.title"),
+      description: t("catalog.description"),
+    },
+    {
+      id: CONVERT_WHY_SELLS_MORE_CARD_IDS[1],
+      category: t("profile.category"),
+      title: t("profile.title"),
+      description: t("profile.description"),
+    },
+    {
+      id: CONVERT_WHY_SELLS_MORE_CARD_IDS[2],
+      category: t("moment.category"),
+      title: t("moment.title"),
+      description: t("moment.description"),
+    },
+  ];
+}
+
+export default async function ConvertWhySellsMore() {
+  const t = await getTranslations("productPages.convert.why");
+
   return (
     <div
       data-convert-why-sells-more
@@ -15,17 +46,17 @@ export default function ConvertWhySellsMore() {
     >
       <ProductSectionHeader
         blockSlug="convert-why-sells-more"
-        eyebrow={CONVERT_WHY_SELLS_MORE_HEADER.eyebrow}
-        title={CONVERT_WHY_SELLS_MORE_HEADER.title}
+        eyebrow={t("eyebrow")}
+        title={t("title")}
         titleId="convert-why-sells-more-title"
-        description={CONVERT_WHY_SELLS_MORE_HEADER.description}
+        description={t("description")}
       />
 
       <div
         data-convert-why-sells-more-cards
         className="mx-auto mt-16 grid w-full max-w-[1088px] grid-cols-1 gap-6 lg:grid-cols-3"
       >
-        {CONVERT_WHY_SELLS_MORE_CARDS.map((card) => (
+        {whyCards(t).map((card) => (
           <ConvertWhySellsMoreCard key={card.id} card={card} />
         ))}
       </div>
