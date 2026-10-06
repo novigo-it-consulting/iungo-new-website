@@ -45,7 +45,7 @@ function markupSignature(value: string): string {
   const tags = [...value.matchAll(/<\/?[A-Za-z][A-Za-z0-9]*\s*\/?>/g)].map(
     (match) => match[0],
   );
-  const placeholders = [...value.matchAll(/\{[A-Za-z0-9_]+\}/g)].map(
+  const placeholders = [...value.matchAll(/\{\w+\}/g)].map(
     (match) => match[0],
   );
   return JSON.stringify({ tags, placeholders });
@@ -53,16 +53,25 @@ function markupSignature(value: string): string {
 
 describe("paridade das mensagens", () => {
   const source = loadMessages("pt-BR");
-  const sourceKeys = collectKeys(source).sort();
+  const sourceKeys = collectKeys(source).sort((left, right) =>
+    left.localeCompare(right),
+  );
 
   it("declara cada namespace uma única vez", () => {
-    expect(Object.keys(source).sort()).toEqual([...MESSAGE_NAMESPACES].sort());
+    expect(
+      Object.keys(source).sort((left, right) => left.localeCompare(right)),
+    ).toEqual(
+      [...MESSAGE_NAMESPACES].sort((left, right) => left.localeCompare(right)),
+    );
   });
 
   it("repete as chaves do pt-BR em todos os locales, sem valor vazio", () => {
     for (const locale of routing.locales) {
       const messages = loadMessages(locale);
-      expect(collectKeys(messages).sort(), locale).toEqual(sourceKeys);
+      expect(
+        collectKeys(messages).sort((left, right) => left.localeCompare(right)),
+        locale,
+      ).toEqual(sourceKeys);
       assertFilled(messages, locale);
     }
   });

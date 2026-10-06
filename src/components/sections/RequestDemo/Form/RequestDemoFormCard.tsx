@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useRef, useState, type SubmitEvent } from "react";
 
 import { sendRequestDemoEmail, type FormSubmitSendResult } from "@/lib/formsubmit";
 
@@ -67,7 +67,7 @@ export default function RequestDemoFormCard({
   const [selectResetKey, setSelectResetKey] = useState(0);
   const inFlightRef = useRef(false);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
 
     if (inFlightRef.current) {

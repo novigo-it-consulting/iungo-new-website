@@ -1,5 +1,4 @@
 import { hasLocale } from "next-intl";
-import { setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 
 import { routing, type Locale } from "./routing";
@@ -27,6 +26,5 @@ export async function setLocale(
     notFound();
   }
 
-  setRequestLocale(locale);
   return locale;
 }

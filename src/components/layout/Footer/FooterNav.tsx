@@ -57,7 +57,7 @@ export default async function FooterNav() {
                     : t(link.messageKey);
 
                 return (
-                  <li key={link.kind === "product" ? link.id : link.id}>
+                  <li key={link.id}>
                     <FooterNavItem link={link} label={label} />
                   </li>
                 );

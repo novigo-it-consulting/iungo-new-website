@@ -7,6 +7,21 @@ import CtaSubtitle from "./CtaSubtitle";
 const defaultContentClassName =
   "flex w-full min-w-0 flex-col items-center";
 
+function actionSpacingClassName(
+  usesFlexGap: boolean,
+  hasSubtitle: boolean,
+): string | undefined {
+  if (usesFlexGap) {
+    return undefined;
+  }
+
+  if (hasSubtitle) {
+    return "mt-8";
+  }
+
+  return "mt-[25px]";
+}
+
 type ProductPageCtaSectionProps = {
   dataPrefix: string;
   titleId: string;
@@ -79,7 +94,7 @@ export default function ProductPageCtaSection({
 
             <div
               {...{ [`data-${dataPrefix}-action`]: true }}
-              className={usesFlexGap ? undefined : subtitle ? "mt-8" : "mt-[25px]"}
+              className={actionSpacingClassName(usesFlexGap, Boolean(subtitle))}
             >
               <CtaButton
                 href={buttonHref}

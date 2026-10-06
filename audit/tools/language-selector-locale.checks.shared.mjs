@@ -32,16 +32,25 @@ async function readHeaderLanguage(page) {
   }));
 }
 
+function languageOptionSelector(code, isMobile) {
+  if (code === "en" && isMobile) {
+    return MOBILE_OPTION_EN;
+  }
+
+  if (code === "en") {
+    return DESKTOP_OPTION_EN;
+  }
+
+  if (isMobile) {
+    return MOBILE_OPTION_PT;
+  }
+
+  return DESKTOP_OPTION_PT;
+}
+
 async function chooseLanguage(page, viewport, code) {
   const isMobile = viewport.width < 1280;
-  const option =
-    code === "en"
-      ? isMobile
-        ? MOBILE_OPTION_EN
-        : DESKTOP_OPTION_EN
-      : isMobile
-        ? MOBILE_OPTION_PT
-        : DESKTOP_OPTION_PT;
+  const option = languageOptionSelector(code, isMobile);
 
   if (isMobile) {
     await clickMenuToggle(page);

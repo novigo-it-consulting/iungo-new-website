@@ -1,8 +1,10 @@
 /**
  * Helpers específicos do menu mobile.
  */
-const OPEN_MENU_SELECTOR = '[aria-label="Abrir menu"]';
-const CLOSE_MENU_SELECTOR = '[aria-label="Fechar menu"]';
+export const OPEN_MENU_SELECTOR = '[aria-label="Abrir menu"]';
+export const CLOSE_MENU_SELECTOR = '[aria-label="Fechar menu"]';
+export const MOBILE_MENU_SELECTOR = "#mobile-navigation-menu";
+export const MOBILE_NAV_ROOT_SELECTOR = "[data-mobile-navigation]";
 
 export async function openAuditMobileMenu(page) {
   const hamburgerReady = await page
