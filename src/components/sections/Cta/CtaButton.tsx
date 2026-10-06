@@ -17,7 +17,7 @@ export default function CtaButton({
   href,
   label,
   variant = "default",
-}: CtaButtonProps) {
+}: Readonly<CtaButtonProps>) {
   return (
     <Link
       href={href}

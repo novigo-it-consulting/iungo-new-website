@@ -18,6 +18,9 @@ export const LAYOUT_LOCALES = [
 
 export const LAYOUT_WIDTHS = [375, 768, 1280, 1440];
 
+/** Larguras extras só do Organizer, onde a tabela larga vazava a página. */
+export const ORGANIZER_EXTRA_WIDTHS = [320, 396, 480];
+
 export function layoutPath(prefix, route) {
   if (route === "/") {
     return prefix || "/";

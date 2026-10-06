@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 import * as chromeLauncher from "chrome-launcher";
 import lighthouse from "lighthouse";
 
-import { AUDIT_BASE_URL as BASE_URL } from "./audit.shared.mjs";
+import { AUDIT_BASE_URL as BASE_URL, runSequentially } from "./audit.shared.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -73,15 +73,18 @@ try {
     pages: {},
   };
 
-  for (const page of PAGES) {
-    const url = `${BASE_URL}${page.path}`;
+  async function pushLighthouseRun(url, runs) {
+    runs.push(await runOnce(url, chrome));
+  }
+
+  async function measureLighthousePage(entry) {
+    const url = `${BASE_URL}${entry.path}`;
     const runs = [];
+    const attempts = Array.from({ length: RUNS }, (_, index) => index);
 
-    for (let i = 0; i < RUNS; i += 1) {
-      runs.push(await runOnce(url, chrome));
-    }
+    await runSequentially(attempts, () => pushLighthouseRun(url, runs));
 
-    report.pages[page.id] = {
+    report.pages[entry.id] = {
       url,
       runs,
       median: {
@@ -98,6 +101,8 @@ try {
       unusedJsSamples: runs[0]?.unusedJs ?? [],
     };
   }
+
+  await runSequentially(PAGES, (entry) => measureLighthousePage(entry));
 
   writeFileSync(
     join(OUT, "lighthouse-median.json"),

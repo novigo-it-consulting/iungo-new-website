@@ -13,7 +13,7 @@ export default function ProductHeroTitle({
   id,
   title,
   dataPrefix,
-}: ProductHeroTitleProps) {
+}: Readonly<ProductHeroTitleProps>) {
   return (
     <div
       {...{ [`data-${dataPrefix}-hero-title-frame`]: true }}

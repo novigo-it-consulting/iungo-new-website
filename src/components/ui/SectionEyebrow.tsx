@@ -24,7 +24,7 @@ export default function SectionEyebrow({
   children,
   icon,
   variant = "default",
-}: SectionEyebrowProps) {
+}: Readonly<SectionEyebrowProps>) {
   return (
     <span
       data-section-eyebrow

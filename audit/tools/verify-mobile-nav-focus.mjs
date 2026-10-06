@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -109,10 +110,14 @@ async function inspectOpenMenu(page) {
   );
 
   const tabStops = [];
-  for (let index = 0; index < 16; index += 1) {
+  async function pressTab() {
     await page.keyboard.press("Tab");
     tabStops.push(await readFocusStop(page));
   }
+  await runSequentially(
+    Array.from({ length: 16 }, (_, index) => index),
+    () => pressTab(),
+  );
 
   const tabEscaped = tabStops.filter((stop) => !stop.inside);
   record("open:tab-stays-inside", tabEscaped.length === 0, {
@@ -127,12 +132,16 @@ async function inspectOpenMenu(page) {
   );
 
   const shiftStops = [];
-  for (let index = 0; index < 16; index += 1) {
+  async function pressShiftTab() {
     await page.keyboard.down("Shift");
     await page.keyboard.press("Tab");
     await page.keyboard.up("Shift");
     shiftStops.push(await readFocusStop(page));
   }
+  await runSequentially(
+    Array.from({ length: 16 }, (_, index) => index),
+    () => pressShiftTab(),
+  );
 
   const shiftEscaped = shiftStops.filter((stop) => !stop.inside);
   record("open:shift-tab-stays-inside", shiftEscaped.length === 0, {

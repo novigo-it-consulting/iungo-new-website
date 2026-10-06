@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -104,10 +105,12 @@ try {
       request.continue();
     });
 
-    for (const viewport of [
+    const submitViewports = [
       { name: "393", width: 393, height: 852 },
       { name: "1920", width: 1920, height: 1080 },
-    ]) {
+    ];
+
+    async function submitLargeViewport(viewport) {
       events.length = 0;
       await page.setViewport({
         width: viewport.width,
@@ -148,6 +151,8 @@ try {
         outcome,
       });
     }
+
+    await runSequentially(submitViewports, (viewport) => submitLargeViewport(viewport));
 
     events.length = 0;
     await page.setViewport({ width: 393, height: 852 });

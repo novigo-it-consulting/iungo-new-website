@@ -3,10 +3,7 @@ import {
   mutedFocusVisibleClassName,
   solidButtonHoverClassName,
 } from "@/components/ui/buttonInteraction.styles";
-import {
-  disclosureChevronClassName,
-  disclosureChevronOpenClassName,
-} from "@/components/ui/disclosureChevron.styles";
+import { disclosureChevronClassName } from "@/components/ui/disclosureChevron.styles";
 
 /**
  * Base compartilhada do botão e dos itens da lista.
@@ -61,8 +58,7 @@ export const languageSelectorChevronClassName = [
   disclosureChevronClassName,
 ].join(" ");
 
-export const languageSelectorChevronOpenClassName =
-  disclosureChevronOpenClassName;
+export { disclosureChevronOpenClassName as languageSelectorChevronOpenClassName } from "@/components/ui/disclosureChevron.styles";
 
 /** Rótulo: reaproveita ctaPillLabelClassName (mesma fonte, peso, tamanho, tracking e cor). */
 export { ctaPillLabelClassName as languageSelectorLabelClassName } from "@/components/ui/actionButtonGroup.styles";

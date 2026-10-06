@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -182,7 +183,20 @@ function recordProductHeroAssertions(slug, viewport, metrics) {
 
 try {
   await withAuditBrowser(async (page) => {
-    for (const product of PRODUCTS) {
+    async function inspectProductViewport(product, viewport) {
+      await page.setViewport({
+        width: viewport.width,
+        height: viewport.height,
+      });
+      const metrics = await page.evaluate(readProductHeroMetrics, product.slug);
+      if (!metrics) {
+        record(`${product.slug}@${viewport.name}:hero`, false, "missing-nodes");
+        return;
+      }
+      recordProductHeroAssertions(product.slug, viewport, metrics);
+    }
+
+    async function inspectProduct(product) {
       await page.goto(`${AUDIT_BASE_URL}${product.path}`, {
         waitUntil: "domcontentloaded",
         timeout: 30000,
@@ -190,20 +204,12 @@ try {
       await page.waitForSelector(`[data-${product.slug}-hero-section]`, {
         timeout: 15000,
       });
-
-      for (const viewport of VIEWPORTS) {
-        await page.setViewport({
-          width: viewport.width,
-          height: viewport.height,
-        });
-        const metrics = await page.evaluate(readProductHeroMetrics, product.slug);
-        if (!metrics) {
-          record(`${product.slug}@${viewport.name}:hero`, false, "missing-nodes");
-          continue;
-        }
-        recordProductHeroAssertions(product.slug, viewport, metrics);
-      }
+      await runSequentially(VIEWPORTS, (viewport) =>
+        inspectProductViewport(product, viewport),
+      );
     }
+
+    await runSequentially(PRODUCTS, (product) => inspectProduct(product));
   });
 } catch (error) {
   record("script-error", false, String(error));

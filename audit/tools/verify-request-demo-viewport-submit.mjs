@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -244,7 +245,7 @@ try {
       });
     });
 
-    for (const viewport of VIEWPORTS) {
+    async function submitViewport(viewport) {
       captured.length = 0;
       consoleErrors.length = 0;
       await openPage(page, viewport);
@@ -263,6 +264,8 @@ try {
         consoleErrors,
       });
     }
+
+    await runSequentially(VIEWPORTS, (viewport) => submitViewport(viewport));
 
     captured.length = 0;
     consoleErrors.length = 0;

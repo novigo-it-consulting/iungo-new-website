@@ -16,7 +16,7 @@ export default function ProductSystemScreenBadge({
   label,
   isActive = false,
   inactiveBorderClassName,
-}: ProductSystemScreenBadgeProps) {
+}: Readonly<ProductSystemScreenBadgeProps>) {
   return (
     <li
       {...{

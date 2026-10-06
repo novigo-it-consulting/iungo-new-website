@@ -7,11 +7,11 @@ export default function OrganizerComparisonValue({
   value,
   yesLabel,
   noLabel,
-}: {
+}: Readonly<{
   value: ComparisonValue;
   yesLabel: string;
   noLabel: string;
-}) {
+}>) {
   if (value.type === "text") {
     return (
       <span className="font-reddit text-[14px] font-normal leading-5 tracking-[0px] text-[#27272A]">

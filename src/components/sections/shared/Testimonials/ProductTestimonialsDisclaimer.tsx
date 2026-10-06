@@ -6,7 +6,7 @@ type ProductTestimonialsDisclaimerProps = {
 
 export default async function ProductTestimonialsDisclaimer({
   productSlug,
-}: ProductTestimonialsDisclaimerProps) {
+}: Readonly<ProductTestimonialsDisclaimerProps>) {
   const t = await getTranslations("productPages.shared.testimonials");
 
   return (

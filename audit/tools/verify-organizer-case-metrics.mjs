@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -172,7 +173,7 @@ try {
     });
     await page.evaluate(() => document.fonts.ready);
 
-    for (const viewport of VIEWPORTS) {
+    async function inspectCaseStudyViewport(viewport) {
       await page.setViewport({
         width: viewport.width,
         height: viewport.height,
@@ -181,10 +182,12 @@ try {
       const metrics = await page.evaluate(readCaseStudyMetrics);
       if (!metrics) {
         record(`${viewport.name}:metrics`, false, "missing-nodes");
-        continue;
+        return;
       }
       recordCaseStudyAssertions(viewport, metrics);
     }
+
+    await runSequentially(VIEWPORTS, (viewport) => inspectCaseStudyViewport(viewport));
   });
 } catch (error) {
   record("script-error", false, String(error));

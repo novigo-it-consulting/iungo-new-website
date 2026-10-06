@@ -50,6 +50,27 @@ export async function runSequentially(items, runItem) {
   }
 }
 
+/**
+ * Repete um passo até a condição, na mesma página do navegador.
+ * Precisa ser sequencial: cada tentativa depende da anterior
+ * (foco, rolagem ou rede). Em paralelo o estado se perderia.
+ */
+export async function repeatUntil(step, isDone, maxAttempts) {
+  let last;
+  let attempt = 0;
+
+  while (attempt < maxAttempts) {
+    last = await step(attempt);
+    const finished = isDone(last, attempt);
+    attempt += 1;
+    if (finished) {
+      break;
+    }
+  }
+
+  return last;
+}
+
 export async function wait(ms) {
   await new Promise((resolve) => {
     setTimeout(resolve, ms);

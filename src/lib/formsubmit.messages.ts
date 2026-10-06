@@ -1,7 +1,6 @@
-import { COMMERCIAL_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
 import ptRequestDemo from "@/messages/pt-BR/requestDemo.json";
 
-export { COMMERCIAL_EMAIL };
+export { COMMERCIAL_EMAIL } from "@/components/sections/RequestDemo/ContactCards/contactCards.constants";
 
 export const FORMSUBMIT_MESSAGES = {
   unconfirmed: ptRequestDemo.feedback.unconfirmed,

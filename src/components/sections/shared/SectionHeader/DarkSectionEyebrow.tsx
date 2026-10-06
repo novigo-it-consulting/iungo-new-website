@@ -6,7 +6,7 @@ type DarkSectionEyebrowProps = {
 export default function DarkSectionEyebrow({
   label,
   dataAttribute,
-}: DarkSectionEyebrowProps) {
+}: Readonly<DarkSectionEyebrowProps>) {
   return (
     <span
       {...(dataAttribute ? { [dataAttribute]: true } : {})}

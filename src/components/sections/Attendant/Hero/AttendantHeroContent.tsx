@@ -10,6 +10,10 @@ import {
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
+function renderAttendantLineBreak() {
+  return <br className="max-xl:hidden" />;
+}
+
 export default async function AttendantHeroContent() {
   const t = await getTranslations("productPages.attendant.hero");
 
@@ -34,7 +38,7 @@ export default async function AttendantHeroContent() {
           className={productHeroParagraphClassName}
         >
           {t.rich("description", {
-            br: () => <br className="max-xl:hidden" />,
+            br: renderAttendantLineBreak,
           })}
         </p>
       </div>

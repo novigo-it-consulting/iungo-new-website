@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
-import type { ReactNode } from "react";
 
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
+import { renderInkStrong } from "@/components/ui/richText";
 import {
   homeSectionTitleMobileClassName,
   productSectionDescriptionBaseClassName,
@@ -9,10 +9,6 @@ import {
 
 function StudioBreak() {
   return <br className="hidden xl:block" />;
-}
-
-function StudioStrong({ children }: { children: ReactNode }) {
-  return <strong className="font-bold text-[#27272A]">{children}</strong>;
 }
 
 export default async function ConciergeJourneyStudioContent() {
@@ -34,14 +30,14 @@ export default async function ConciergeJourneyStudioContent() {
           "xl:text-[32px] xl:leading-[40px] xl:tracking-[-0.64px]",
         ].join(" ")}
       >
-        {t.rich("title", { br: () => <StudioBreak /> })}
+        {t.rich("title", { br: StudioBreak })}
       </h2>
 
       <p
         data-concierge-studio-description
         className={productSectionDescriptionBaseClassName}
       >
-        {t.rich("description", { br: () => <StudioBreak /> })}
+        {t.rich("description", { br: StudioBreak })}
       </p>
 
       <p
@@ -49,8 +45,8 @@ export default async function ConciergeJourneyStudioContent() {
         className={productSectionDescriptionBaseClassName}
       >
         {t.rich("behavior", {
-          strong: (chunks: ReactNode) => <StudioStrong>{chunks}</StudioStrong>,
-          br: () => <StudioBreak />,
+          strong: renderInkStrong,
+          br: StudioBreak,
         })}
       </p>
     </div>

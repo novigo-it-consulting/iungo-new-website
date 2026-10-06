@@ -34,7 +34,7 @@ export default function ProductPageCtaSection({
   buttonVariant = "default",
   titleFrameClassName,
   titleToButtonGapClassName,
-}: ProductPageCtaSectionProps) {
+}: Readonly<ProductPageCtaSectionProps>) {
   const usesFlexGap = Boolean(titleToButtonGapClassName);
 
   return (

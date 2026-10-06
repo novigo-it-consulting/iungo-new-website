@@ -1,7 +1,7 @@
 import RequestDemoSection from "@/components/sections/RequestDemo/Main/RequestDemoSection";
 import { SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import { pickRequestDemoMessages } from "@/i18n/catalog/requestDemoCatalog";
-import { setLocale, type LocaleParams } from "@/i18n/locale";
+import { setLocale, type LocalePageProps, type LocaleParams } from "@/i18n/locale";
 import { createPageMetadata } from "@/i18n/pageMetadata";
 
 export async function generateMetadata({ params }: LocaleParams) {
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: LocaleParams) {
 
 export default async function SolicitarDemonstracaoPage({
   params,
-}: LocaleParams) {
+}: LocalePageProps) {
   await setLocale(params);
 
   return (

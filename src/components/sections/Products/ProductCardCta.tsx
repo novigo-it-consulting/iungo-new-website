@@ -21,7 +21,7 @@ export default function ProductCardCta({
   href,
   label,
   ariaLabel,
-}: ProductCardCtaProps) {
+}: Readonly<ProductCardCtaProps>) {
   return (
     <Link
       data-product-cta={productId}

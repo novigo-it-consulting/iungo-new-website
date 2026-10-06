@@ -15,7 +15,7 @@ export default async function ProductTestimonialsHeader({
   productSlug,
   title,
   description,
-}: ProductTestimonialsHeaderProps) {
+}: Readonly<ProductTestimonialsHeaderProps>) {
   const t = await getTranslations("common");
 
   return (

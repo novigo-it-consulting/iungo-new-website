@@ -59,12 +59,12 @@ function readDesktopChoices(sel) {
 
   return {
     optionCodes: options.map((item) =>
-      item.getAttribute("data-header-language-option"),
+      item.dataset.headerLanguageOption ?? null,
     ),
     optionBoxes: options.map((item) => {
       const rect = item.getBoundingClientRect();
       return {
-        code: item.getAttribute("data-header-language-option"),
+        code: item.dataset.headerLanguageOption ?? null,
         width: rect.width,
         height: rect.height,
         backgroundColor: getComputedStyle(item).backgroundColor,
@@ -75,7 +75,7 @@ function readDesktopChoices(sel) {
       const parent = item.closest("a, button");
       const parentRect = parent?.getBoundingClientRect();
       return {
-        code: item.getAttribute("data-header-language-flag"),
+        code: item.dataset.headerLanguageFlag ?? null,
         width: rect.width,
         height: rect.height,
         x: rect.x,
@@ -124,7 +124,7 @@ export async function readDesktopAfterClose(page) {
       aria: trigger?.getAttribute("aria-label") ?? "",
       flag: trigger
         ?.querySelector(sel.flag)
-        ?.getAttribute("data-header-language-flag"),
+        ?.dataset.headerLanguageFlag ?? null,
       triggerFocusedAttr: document.activeElement?.hasAttribute(
         "data-header-language-selector",
       ),

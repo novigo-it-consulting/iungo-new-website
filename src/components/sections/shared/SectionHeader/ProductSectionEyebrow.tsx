@@ -6,7 +6,7 @@ type ProductSectionEyebrowProps = {
 export default function ProductSectionEyebrow({
   label,
   dataAttribute,
-}: ProductSectionEyebrowProps) {
+}: Readonly<ProductSectionEyebrowProps>) {
   return (
     <span
       {...(dataAttribute ? { [dataAttribute]: true } : {})}

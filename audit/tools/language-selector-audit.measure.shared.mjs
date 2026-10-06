@@ -41,7 +41,7 @@ export function parseRgb(value) {
 
 export function isRgb(value, r, g, b) {
   const parsed = parseRgb(value);
-  return Boolean(parsed && parsed.r === r && parsed.g === g && parsed.b === b);
+  return Boolean(parsed?.r === r && parsed?.g === g && parsed?.b === b);
 }
 
 export function isTransparent(value) {
@@ -49,7 +49,7 @@ export function isTransparent(value) {
     return true;
   }
   const parsed = parseRgb(value);
-  return Boolean(parsed && parsed.a === 0);
+  return parsed?.a === 0;
 }
 
 export function isRotate180(style) {

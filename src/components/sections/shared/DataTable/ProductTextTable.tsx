@@ -57,7 +57,7 @@ export default function ProductTextTable<
   containerClassName = "",
   rowHeight = 53,
   rowHeaderKey,
-}: ProductTextTableProps<T, Row>) {
+}: Readonly<ProductTextTableProps<T, Row>>) {
   return (
     <ProductTableScroll
       ariaLabel={ariaLabel}

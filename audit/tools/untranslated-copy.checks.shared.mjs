@@ -84,12 +84,81 @@ export function looksPortuguese(value) {
     .some((word) => PORTUGUESE_WORDS.has(word));
 }
 
+function isLocalEmailChar(char) {
+  return /[A-Za-z0-9_+.-]/.test(char);
+}
+
+function isDomainEmailChar(char) {
+  return /[A-Za-z0-9_.-]/.test(char);
+}
+
+function isEmailLetter(char) {
+  return /[A-Za-z]/.test(char);
+}
+
+function domainBodyIsValid(domain, dot) {
+  if (dot < 1) {
+    return false;
+  }
+
+  for (let index = 0; index < dot; index += 1) {
+    if (!isDomainEmailChar(domain[index])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+function tldLength(domain, dot) {
+  let letters = 0;
+  let cursor = dot + 1;
+
+  while (cursor < domain.length && isEmailLetter(domain[cursor])) {
+    letters += 1;
+    cursor += 1;
+  }
+
+  return letters;
+}
+
+function domainHasEmailEnding(domain) {
+  let dot = domain.indexOf(".");
+
+  while (dot !== -1) {
+    const bodyOk = domainBodyIsValid(domain, dot);
+    if (bodyOk && tldLength(domain, dot) >= 2) {
+      return true;
+    }
+    if (!bodyOk) {
+      return false;
+    }
+    dot = domain.indexOf(".", dot + 1);
+  }
+
+  return false;
+}
+
+/** Acha um e-mail no texto, sem a regex antiga que volta atrás. */
+function containsEmailAddress(value) {
+  let at = value.indexOf("@");
+
+  while (at !== -1) {
+    if (at > 0 && isLocalEmailChar(value[at - 1]) && domainHasEmailEnding(value.slice(at + 1))) {
+      return true;
+    }
+    at = value.indexOf("@", at + 1);
+  }
+
+  return false;
+}
+
 export function isAllowlistedCopy(value) {
   if (EXACT_ALLOWLIST.has(value)) {
     return true;
   }
 
-  if (/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(value) && !looksPortuguese(value)) {
+  if (containsEmailAddress(value) && !looksPortuguese(value)) {
     return true;
   }
 

@@ -4,7 +4,7 @@ type CaseCardContentProps = {
   children: ReactNode;
 };
 
-export default function CaseCardContent({ children }: CaseCardContentProps) {
+export default function CaseCardContent({ children }: Readonly<CaseCardContentProps>) {
   return (
     <div
       data-case-content=""

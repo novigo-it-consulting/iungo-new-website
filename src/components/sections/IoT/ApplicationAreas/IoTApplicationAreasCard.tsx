@@ -13,7 +13,7 @@ const CARD_CONTENT_CLASS = "m-0 w-full max-w-[239px] font-reddit";
 
 export default function IoTApplicationAreasCard({
   card,
-}: IoTApplicationAreasCardProps) {
+}: Readonly<IoTApplicationAreasCardProps>) {
   return (
     <article
       data-iot-application-areas-card={card.id}

@@ -8,7 +8,7 @@ export default function ConciergeTriggerCard({
   value,
   title,
   description,
-}: ConciergeTriggerCardProps) {
+}: Readonly<ConciergeTriggerCardProps>) {
   return (
     <li
       data-concierge-trigger-card

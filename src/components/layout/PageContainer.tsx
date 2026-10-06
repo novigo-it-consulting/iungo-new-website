@@ -44,7 +44,7 @@ export default function PageContainer({
   size = "default",
   className = "",
   ...props
-}: PageContainerProps) {
+}: Readonly<PageContainerProps>) {
   return (
     <div
       className={`mx-auto ${sizeClasses[size]} ${className}`}

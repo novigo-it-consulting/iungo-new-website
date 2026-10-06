@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export default function AutoSyndicationIcon(props: SVGProps<SVGSVGElement>) {
+export default function AutoSyndicationIcon(props: Readonly<SVGProps<SVGSVGElement>>) {
   return (
     <svg
       viewBox="0 0 17 14"

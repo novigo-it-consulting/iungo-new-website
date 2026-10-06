@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -121,7 +122,7 @@ try {
     await page.waitForSelector(SELECTORS.scaleProof, { timeout: 15000 });
     await page.evaluate(() => document.fonts.ready);
 
-    for (const viewport of VIEWPORTS) {
+    async function inspectHomeSectionViewport(viewport) {
       await page.setViewport({
         width: viewport.width,
         height: viewport.height,
@@ -193,6 +194,8 @@ try {
         );
       }
     }
+
+    await runSequentially(VIEWPORTS, (viewport) => inspectHomeSectionViewport(viewport));
   });
 } catch (error) {
   record("script-error", false, String(error));

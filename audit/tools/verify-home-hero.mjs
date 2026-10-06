@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -260,9 +261,7 @@ async function inspectHero(page, viewport) {
 
 try {
   await withAuditBrowser(async (page) => {
-    for (const viewport of VIEWPORTS) {
-      await inspectHero(page, viewport);
-    }
+    await runSequentially(VIEWPORTS, (viewport) => inspectHero(page, viewport));
   });
 } catch (error) {
   record("script-error", false, String(error));

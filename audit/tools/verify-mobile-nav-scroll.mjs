@@ -5,6 +5,8 @@
 import {
   AUDIT_BASE_URL as BASE_URL,
   createResultRecorder,
+  repeatUntil,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 import { openAuditMobileMenu } from "./mobile-nav-audit.shared.mjs";
@@ -145,21 +147,25 @@ async function wheelPanel(page, panelBox, deltaY, stopAtTop) {
   await page.mouse.move(panelBox.x, panelBox.y);
   await new Promise((resolve) => setTimeout(resolve, 100));
   let previousScrollTop = -1;
-  for (let step = 0; step < 24; step += 1) {
-    const scrollTop = await page.$eval(
-      "#mobile-navigation-menu",
-      (element) => element.scrollTop,
-    );
-    if (stopAtTop && scrollTop === 0) {
-      break;
-    }
-    if (!stopAtTop && step > 0 && scrollTop === previousScrollTop) {
-      break;
-    }
-    previousScrollTop = scrollTop;
-    await page.mouse.wheel({ deltaY });
-    await new Promise((resolve) => setTimeout(resolve, 40));
-  }
+  await repeatUntil(
+    async (step) => {
+      const scrollTop = await page.$eval(
+        "#mobile-navigation-menu",
+        (element) => element.scrollTop,
+      );
+      const reachedTop = stopAtTop && scrollTop === 0;
+      const stuck = !stopAtTop && step > 0 && scrollTop === previousScrollTop;
+      if (reachedTop || stuck) {
+        return true;
+      }
+      previousScrollTop = scrollTop;
+      await page.mouse.wheel({ deltaY });
+      await new Promise((resolve) => setTimeout(resolve, 40));
+      return false;
+    },
+    (done) => done === true,
+    24,
+  );
 }
 
 async function waitForPanelScrollEnd(page) {
@@ -701,9 +707,7 @@ async function inspectDesktopAfterMobileOpen(page) {
 
 try {
   await withAuditBrowser(async (page) => {
-    for (const viewport of VIEWPORTS) {
-      await inspectViewport(page, viewport);
-    }
+    await runSequentially(VIEWPORTS, (viewport) => inspectViewport(page, viewport));
     await inspectDesktopAfterMobileOpen(page);
     await inspectDesktop(page);
   });

@@ -8,7 +8,7 @@ export default function MetricItem({
   metricId,
   value,
   description,
-}: MetricItemProps) {
+}: Readonly<MetricItemProps>) {
   return (
     <div
       data-metric-item={metricId}

@@ -5,7 +5,7 @@ type CaseTranslator = Awaited<
   ReturnType<typeof getTranslations<"productPages.iot.caseStudy">>
 >;
 
-function PhaseDateBadge({ label }: { label: string }) {
+function PhaseDateBadge({ label }: Readonly<{ label: string }>) {
   return (
     <span className="inline-flex h-6 shrink-0 items-center justify-center rounded bg-[#B8860B]/[0.12] px-2 py-1 font-reddit text-xs font-normal leading-4 tracking-[0px] text-[#B8860B]">
       {label}
@@ -13,27 +13,25 @@ function PhaseDateBadge({ label }: { label: string }) {
   );
 }
 
-function PhaseStrong({ children }: { children: ReactNode }) {
-  return <strong className="font-bold">{children}</strong>;
+function renderPhaseStrong(chunks: ReactNode) {
+  return <strong className="font-bold">{chunks}</strong>;
 }
 
 function phaseCopy(
   t: CaseTranslator,
   id: "phase-1" | "phase-2" | "phase-3" | "phase-4",
 ) {
-  const strong = (chunks: ReactNode) => <PhaseStrong>{chunks}</PhaseStrong>;
-
   switch (id) {
     case "phase-1":
-      return { date: t("phase1.date"), line: t.rich("phase1.line", { strong }) };
+      return { date: t("phase1.date"), line: t.rich("phase1.line", { strong: renderPhaseStrong }) };
     case "phase-2":
-      return { date: t("phase2.date"), line: t.rich("phase2.line", { strong }) };
+      return { date: t("phase2.date"), line: t.rich("phase2.line", { strong: renderPhaseStrong }) };
     case "phase-3":
-      return { date: t("phase3.date"), line: t.rich("phase3.line", { strong }) };
+      return { date: t("phase3.date"), line: t.rich("phase3.line", { strong: renderPhaseStrong }) };
     case "phase-4":
       return {
         date: t("phase4Line.date"),
-        line: t.rich("phase4Line.line", { strong }),
+        line: t.rich("phase4Line.line", { strong: renderPhaseStrong }),
       };
   }
 }

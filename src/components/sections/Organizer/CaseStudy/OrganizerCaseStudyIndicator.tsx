@@ -12,7 +12,7 @@ interface OrganizerCaseStudyIndicatorProps {
 export default function OrganizerCaseStudyIndicator({
   value,
   label,
-}: OrganizerCaseStudyIndicatorProps) {
+}: Readonly<OrganizerCaseStudyIndicatorProps>) {
   return (
     <div className={organizerCaseStudyIndicatorClassName}>
       <span className={organizerCaseStudyIndicatorValueClassName}>{value}</span>

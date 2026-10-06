@@ -14,7 +14,7 @@ export default function PageSideRails({
   children,
   className = "",
   mainClassName = "",
-}: PageSideRailsProps) {
+}: Readonly<PageSideRailsProps>) {
   return (
     <div
       data-page-rail-layout={scope}

@@ -6,7 +6,7 @@ import MetricsSection from "@/components/sections/Metrics/MetricsSection";
 import ProductsSection from "@/components/sections/Products/ProductsSection";
 import RoiCalculatorSection from "@/components/sections/RoiCalculator/RoiCalculatorSection";
 import ScaleProofSection from "@/components/sections/ScaleProof/ScaleProofSection";
-import { setLocale, type LocaleParams } from "@/i18n/locale";
+import { setLocale, type LocalePageProps, type LocaleParams } from "@/i18n/locale";
 import { createPageMetadata } from "@/i18n/pageMetadata";
 
 export async function generateMetadata({ params }: LocaleParams) {
@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: LocaleParams) {
   });
 }
 
-export default async function Home({ params }: LocaleParams) {
+export default async function Home({ params }: LocalePageProps) {
   await setLocale(params);
 
   return (

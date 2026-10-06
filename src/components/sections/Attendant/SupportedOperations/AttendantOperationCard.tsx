@@ -6,7 +6,7 @@ type AttendantOperationCardProps = {
 
 export default function AttendantOperationCard({
   category,
-}: AttendantOperationCardProps) {
+}: Readonly<AttendantOperationCardProps>) {
   return (
     <article
       data-attendant-supported-operations-card

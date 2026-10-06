@@ -4,7 +4,7 @@ interface CtaTitleProps {
   line2: string;
 }
 
-export default function CtaTitle({ titleId, line1, line2 }: CtaTitleProps) {
+export default function CtaTitle({ titleId, line1, line2 }: Readonly<CtaTitleProps>) {
   return (
     <div className="flex w-full min-w-0 flex-col items-center">
       <h2

@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export default function NativeDamIcon(props: SVGProps<SVGSVGElement>) {
+export default function NativeDamIcon(props: Readonly<SVGProps<SVGSVGElement>>) {
   return (
     <svg
       viewBox="0 0 15 15"

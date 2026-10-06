@@ -5,14 +5,14 @@ import ConciergeSystemScreensSection from "@/components/sections/Concierge/Syste
 import ConciergeTestimonialsSection from "@/components/sections/Concierge/Testimonials/ConciergeTestimonialsSection";
 import ConciergeTriggersSection from "@/components/sections/Concierge/Triggers/ConciergeTriggersSection";
 import { CONCIERGE_HREF } from "@/constants/routes";
-import { setLocale, type LocaleParams } from "@/i18n/locale";
+import { setLocale, type LocalePageProps, type LocaleParams } from "@/i18n/locale";
 import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
   return createHeroPageMetadata(params, CONCIERGE_HREF, "productPages.concierge");
 }
 
-export default async function IungoConciergePage({ params }: LocaleParams) {
+export default async function IungoConciergePage({ params }: LocalePageProps) {
   await setLocale(params);
 
   return (

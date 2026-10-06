@@ -138,7 +138,7 @@ export async function readSharedDesktopLanguage(page) {
       desktopAria: desktop?.getAttribute("aria-label") ?? "",
       desktopFlag: desktop
         ?.querySelector(sel.flag)
-        ?.getAttribute("data-header-language-flag"),
+        ?.dataset.headerLanguageFlag ?? null,
       mobileGone: document.querySelector(sel.mobileInstance) === null,
     };
   }, LANGUAGE_SELECTOR);

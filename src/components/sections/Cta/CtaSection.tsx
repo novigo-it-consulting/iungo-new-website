@@ -27,7 +27,7 @@ export default function CtaSection({
   cta,
   dataSection = "product-cta",
   children,
-}: CtaSectionProps) {
+}: Readonly<CtaSectionProps>) {
   return (
     <section
       data-product-cta={dataSection}

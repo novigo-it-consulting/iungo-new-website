@@ -21,7 +21,7 @@ const titleIconComponents = {
 
 export default function ResolveDifferentialCard({
   card,
-}: ResolveDifferentialCardProps) {
+}: Readonly<ResolveDifferentialCardProps>) {
   const label = String(card.number).padStart(2, "0");
   const TitleIcon = card.titleIcon
     ? titleIconComponents[card.titleIcon]

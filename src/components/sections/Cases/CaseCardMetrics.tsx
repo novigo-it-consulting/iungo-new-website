@@ -11,7 +11,7 @@ interface MetricItemProps {
   valueClassName: string;
 }
 
-function MetricItem({ metric, valueClassName }: MetricItemProps) {
+function MetricItem({ metric, valueClassName }: Readonly<MetricItemProps>) {
   return (
     <div className={caseCardMetricItemClassName}>
       <span className={`${caseCardMetricValueClassName} ${valueClassName}`}>
@@ -32,7 +32,7 @@ export default function CaseCardMetrics({
   caseId,
   metrics,
   valueClassName = "text-[#A72121]",
-}: CaseCardMetricsProps) {
+}: Readonly<CaseCardMetricsProps>) {
   return (
     <div
       data-case-metrics={caseId}

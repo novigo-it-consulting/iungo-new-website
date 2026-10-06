@@ -11,7 +11,7 @@ const toneClasses: Record<CaseTagTone, string> = {
   yellow: "border-[#B8860B]/25 bg-[#B8860B]/5 text-[#B8860B]",
 };
 
-export default function CaseTag({ children, tone }: CaseTagProps) {
+export default function CaseTag({ children, tone }: Readonly<CaseTagProps>) {
   return (
     <span
       data-case-tag={children.toLowerCase()}

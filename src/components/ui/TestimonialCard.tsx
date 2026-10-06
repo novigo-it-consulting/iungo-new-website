@@ -58,7 +58,7 @@ export default function TestimonialCard({
   metricValue,
   metricLabel,
   variant = "default",
-}: TestimonialCardProps) {
+}: Readonly<TestimonialCardProps>) {
   return (
     <article
       data-testimonial-card

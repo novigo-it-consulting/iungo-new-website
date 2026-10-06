@@ -6,14 +6,14 @@ import OrganizerSystemScreensSection from "@/components/sections/Organizer/Syste
 import OrganizerComparisonSection from "@/components/sections/Organizer/Comparison/OrganizerComparisonSection";
 import OrganizerCaseStudySection from "@/components/sections/Organizer/CaseStudy/OrganizerCaseStudySection";
 import { ORGANIZER_HREF } from "@/constants/routes";
-import { setLocale, type LocaleParams } from "@/i18n/locale";
+import { setLocale, type LocalePageProps, type LocaleParams } from "@/i18n/locale";
 import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
   return createHeroPageMetadata(params, ORGANIZER_HREF, "productPages.organizer");
 }
 
-export default async function IungoOrganizerPage({ params }: LocaleParams) {
+export default async function IungoOrganizerPage({ params }: LocalePageProps) {
   await setLocale(params);
 
   return (

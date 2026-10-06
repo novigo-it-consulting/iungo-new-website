@@ -146,7 +146,7 @@ export async function checkSharedStateAfterResize(page, record) {
   await page.waitForFunction(
     (desktopTrigger) => {
       const desktop = document.querySelector(desktopTrigger);
-      return Boolean(desktop && desktop.getClientRects().length > 0);
+      return (desktop?.getClientRects().length ?? 0) > 0;
     },
     { timeout: 5000 },
     DESKTOP_TRIGGER,

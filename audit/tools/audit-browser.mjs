@@ -8,7 +8,11 @@ import { fileURLToPath } from "node:url";
 import * as chromeLauncher from "chrome-launcher";
 import puppeteer from "puppeteer-core";
 
-import { AUDIT_BASE_URL as BASE_URL, clickClearOfCookieBanner } from "./audit.shared.mjs";
+import {
+  AUDIT_BASE_URL as BASE_URL,
+  clickClearOfCookieBanner,
+  runSequentially,
+} from "./audit.shared.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -70,8 +74,7 @@ try {
   const fontReport = [];
   const screenshotLog = [];
 
-  for (const route of ROUTES) {
-    for (const viewport of VIEWPORTS) {
+  async function captureRouteViewport(route, viewport) {
       await page.setViewport(viewport);
       await page.goto(`${BASE_URL}${route}`, {
         waitUntil: "domcontentloaded",
@@ -128,8 +131,14 @@ try {
         });
         fontReport.push(...formFonts);
       }
-    }
   }
+
+  const shots = ROUTES.flatMap((route) =>
+    VIEWPORTS.map((viewport) => ({ route, viewport })),
+  );
+  await runSequentially(shots, (shot) =>
+    captureRouteViewport(shot.route, shot.viewport),
+  );
 
   await page.setViewport({ width: 1366, height: 768 });
   await page.goto(`${BASE_URL}/solicitar-demonstracao`, {

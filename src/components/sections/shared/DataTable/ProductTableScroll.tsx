@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { primaryFocusVisibleClassName } from "@/components/ui/buttonInteraction.styles";
 
 const productTableScrollClassName = [
-  "w-full min-w-0 overflow-x-auto overscroll-x-contain",
+  "w-full min-w-0 contain-paint overflow-x-auto overscroll-x-contain",
   primaryFocusVisibleClassName,
 ].join(" ");
 

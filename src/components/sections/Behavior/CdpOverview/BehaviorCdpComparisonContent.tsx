@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import type { ReactNode } from "react";
 
+import { renderInkStrong } from "@/components/ui/richText";
 import BehaviorFeatureCheckIcon from "./BehaviorFeatureCheckIcon";
 import { BEHAVIOR_CDP_FEATURE_IDS } from "./behaviorCdpComparison.constants";
 import {
@@ -36,10 +36,6 @@ function featureLabel(t: CdpTranslator, id: (typeof BEHAVIOR_CDP_FEATURE_IDS)[nu
     case "integrations":
       return t("integrations");
   }
-}
-
-function Emphasis({ children }: { children: ReactNode }) {
-  return <strong className="font-bold text-[#27272A]">{children}</strong>;
 }
 
 export default async function BehaviorCdpComparisonContent() {
@@ -78,7 +74,7 @@ export default async function BehaviorCdpComparisonContent() {
       >
         <p data-behavior-cdp-comparison-paragraph-2 className={productSectionDescriptionBaseClassName}>
           {t.rich("live", {
-            strong: (chunks: ReactNode) => <Emphasis>{chunks}</Emphasis>,
+            strong: renderInkStrong,
           })}
         </p>
       </div>

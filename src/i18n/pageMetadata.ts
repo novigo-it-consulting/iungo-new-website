@@ -6,6 +6,7 @@ import { getSiteUrl } from "@/constants/site";
 import { buildPageAlternates, type PageAlternates } from "./alternates";
 import { setLocale, type LocaleParams } from "./locale";
 import { getPathname } from "./navigation";
+import { plainMessage } from "./plainMessage";
 import { routing, type Locale } from "./routing";
 
 export type HeroPageNamespace =
@@ -16,10 +17,6 @@ export type HeroPageNamespace =
   | "productPages.attendant"
   | "productPages.convert"
   | "productPages.iot";
-
-function plainMessage(value: string): string {
-  return value.replaceAll(/<[^>]+>/g, " ").replaceAll(/\s+/g, " ").trim();
-}
 
 export function getPageAlternates(
   pathname: string,

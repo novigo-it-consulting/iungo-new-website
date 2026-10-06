@@ -1,6 +1,6 @@
 import { getTranslations } from "next-intl/server";
-import type { ReactNode } from "react";
 
+import { renderInkStrong } from "@/components/ui/richText";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 import BehaviorRevenueCalculatorButton from "./BehaviorRevenueCalculatorButton";
@@ -41,9 +41,7 @@ export default async function BehaviorRevenueCalculatorCard() {
             className="m-0 w-full text-center font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
           >
             {t.rich("description", {
-              strong: (chunks: ReactNode) => (
-                <strong className="font-bold text-[#27272A]">{chunks}</strong>
-              ),
+              strong: renderInkStrong,
             })}
           </p>
         </div>

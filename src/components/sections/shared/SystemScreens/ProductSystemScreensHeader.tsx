@@ -23,7 +23,7 @@ export default function ProductSystemScreensHeader({
   title,
   description,
   classNames,
-}: ProductSystemScreensHeaderProps) {
+}: Readonly<ProductSystemScreensHeaderProps>) {
   return (
     <div
       {...{

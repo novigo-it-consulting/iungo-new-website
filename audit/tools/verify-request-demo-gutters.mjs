@@ -5,6 +5,7 @@
 import {
   AUDIT_BASE_URL,
   createResultRecorder,
+  runSequentially,
   withAuditBrowser,
 } from "./audit.shared.mjs";
 
@@ -269,7 +270,7 @@ try {
       timeout: 15000,
     });
 
-    for (const viewport of VIEWPORTS) {
+    async function inspectGutterViewport(viewport) {
       await page.setViewport({
         width: viewport.width,
         height: viewport.height,
@@ -277,7 +278,7 @@ try {
       const metrics = await page.evaluate(readRequestDemoGutters);
       if (!metrics) {
         record(`${viewport.name}:layout`, false, "missing-nodes");
-        continue;
+        return;
       }
       recordGutterAssertions(viewport, metrics);
 
@@ -285,6 +286,8 @@ try {
         await inspectFormStates(page, viewport.name);
       }
     }
+
+    await runSequentially(VIEWPORTS, (viewport) => inspectGutterViewport(viewport));
   });
 } catch (error) {
   record("script-error", false, String(error));

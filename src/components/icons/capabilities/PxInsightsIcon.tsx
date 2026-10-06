@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export default function PxInsightsIcon(props: SVGProps<SVGSVGElement>) {
+export default function PxInsightsIcon(props: Readonly<SVGProps<SVGSVGElement>>) {
   return (
     <svg
       viewBox="0 0 17 17"

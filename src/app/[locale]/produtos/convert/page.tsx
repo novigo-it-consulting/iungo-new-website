@@ -2,14 +2,14 @@ import ConvertContentSection from "@/components/sections/Convert/ConvertContentS
 import ConvertCtaSection from "@/components/sections/Convert/Cta/ConvertCtaSection";
 import ConvertHeroSection from "@/components/sections/Convert/Hero/ConvertHeroSection";
 import { CONVERT_HREF } from "@/constants/routes";
-import { setLocale, type LocaleParams } from "@/i18n/locale";
+import { setLocale, type LocalePageProps, type LocaleParams } from "@/i18n/locale";
 import { createHeroPageMetadata } from "@/i18n/pageMetadata";
 
 export function generateMetadata({ params }: LocaleParams) {
   return createHeroPageMetadata(params, CONVERT_HREF, "productPages.convert");
 }
 
-export default async function IungoConvertPage({ params }: LocaleParams) {
+export default async function IungoConvertPage({ params }: LocalePageProps) {
   await setLocale(params);
 
   return (

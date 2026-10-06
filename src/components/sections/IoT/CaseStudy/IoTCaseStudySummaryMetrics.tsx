@@ -14,7 +14,7 @@ type IoTCaseStudySummaryMetricRowProps = {
 function IoTCaseStudySummaryMetricRow({
   metric,
   isLast,
-}: IoTCaseStudySummaryMetricRowProps) {
+}: Readonly<IoTCaseStudySummaryMetricRowProps>) {
   const { label, value, highlighted = false } = metric;
 
   const rowClassName = isLast
@@ -49,7 +49,7 @@ type IoTCaseStudySummaryMetricsProps = {
 
 export default function IoTCaseStudySummaryMetrics({
   metrics,
-}: IoTCaseStudySummaryMetricsProps) {
+}: Readonly<IoTCaseStudySummaryMetricsProps>) {
   const lastMetricIndex = metrics.length - 1;
 
   return (

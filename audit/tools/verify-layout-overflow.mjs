@@ -13,6 +13,7 @@ import {
   LAYOUT_LOCALES,
   LAYOUT_ROUTES,
   LAYOUT_WIDTHS,
+  ORGANIZER_EXTRA_WIDTHS,
   compareControlHeights,
   layoutJobKey,
   layoutPath,
@@ -45,11 +46,20 @@ function readLayoutSnapshot() {
   return { overflow, controls };
 }
 
-const jobs = LAYOUT_ROUTES.flatMap((route) =>
-  LAYOUT_WIDTHS.flatMap((width) =>
-    LAYOUT_LOCALES.map((locale) => ({ route, width, locale })),
+const jobs = [
+  ...LAYOUT_ROUTES.flatMap((route) =>
+    LAYOUT_WIDTHS.flatMap((width) =>
+      LAYOUT_LOCALES.map((locale) => ({ route, width, locale })),
+    ),
   ),
-);
+  ...ORGANIZER_EXTRA_WIDTHS.flatMap((width) =>
+    LAYOUT_LOCALES.map((locale) => ({
+      route: "/produtos/organizer",
+      width,
+      locale,
+    })),
+  ),
+];
 
 await withAuditBrowser(async (page) => {
   const baseline = new Map();
@@ -62,18 +72,13 @@ await withAuditBrowser(async (page) => {
 
     if (job.locale.id === "pt-BR") {
       baseline.set(key, snapshot);
-      record(
-        `overflow ${job.locale.id} ${key}`,
-        true,
-        snapshot.overflow ? "já existia no pt-BR" : undefined,
-      );
+      record(`overflow ${job.locale.id} ${key}`, !snapshot.overflow);
       return;
     }
 
     const source = baseline.get(key);
     const grown = compareControlHeights(source?.controls ?? {}, snapshot.controls);
-    const overflowIsNew = snapshot.overflow && !source?.overflow;
-    record(`overflow ${job.locale.id} ${key}`, !overflowIsNew);
+    record(`overflow ${job.locale.id} ${key}`, !snapshot.overflow);
     record(
       `height ${job.locale.id} ${key}`,
       grown.length === 0,

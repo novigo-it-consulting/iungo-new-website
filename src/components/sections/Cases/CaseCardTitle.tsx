@@ -3,7 +3,7 @@ type CaseCardTitleProps = {
   children: string;
 };
 
-export default function CaseCardTitle({ caseId, children }: CaseCardTitleProps) {
+export default function CaseCardTitle({ caseId, children }: Readonly<CaseCardTitleProps>) {
   return (
     <h3
       data-case-title={caseId}

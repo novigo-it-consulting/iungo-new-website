@@ -85,7 +85,7 @@ export const cookieChoiceRadioClassName =
 export const cookieChoiceDotClassName =
   "pointer-events-none col-start-1 row-start-1 size-2.5 shrink-0 rounded-full bg-transparent peer-checked:bg-[#0024AE]";
 
-export const cookieSaveActionClassName = cookieBannerAcceptActionClassName;
+export { cookieBannerAcceptActionClassName as cookieSaveActionClassName };
 
 export const cookieSettingsButtonClassName =
   "cursor-pointer border-0 bg-transparent p-0 font-reddit text-[12px] font-normal leading-4 tracking-normal text-white/60 transition-colors hover:text-white focus-visible:rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40";

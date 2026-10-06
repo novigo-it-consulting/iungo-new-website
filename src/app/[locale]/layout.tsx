@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Reddit_Sans } from "next/font/google";
-import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 
@@ -10,7 +9,7 @@ import Header from "@/components/layout/Header/Header";
 import { getSiteUrl } from "@/constants/site";
 import { getPageAlternates } from "@/i18n/pageMetadata";
 import { pickClientMessages } from "@/i18n/clientMessages";
-import { setLocale, type LocaleParams } from "@/i18n/locale";
+import { setLocale, type LocaleLayoutProps, type LocaleParams } from "@/i18n/locale";
 import { routing } from "@/i18n/routing";
 
 import "../globals.css";
@@ -20,10 +19,6 @@ const redditSans = Reddit_Sans({
   subsets: ["latin"],
   weight: ["400", "600", "700"],
 });
-
-type RootLayoutProps = LocaleParams & {
-  children: ReactNode;
-};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -48,7 +43,7 @@ export async function generateMetadata({
 export default async function RootLayout({
   children,
   params,
-}: Readonly<RootLayoutProps>) {
+}: LocaleLayoutProps) {
   const locale = await setLocale(params);
   const messages = pickClientMessages(await getMessages());
 
