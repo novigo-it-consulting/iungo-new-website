@@ -1,0 +1,53 @@
+{
+  "logo": {
+    "homeAria": "Iungo Intelligence — página de inicio",
+    "alt": "Iungo"
+  },
+  "description": "A Brazilian AI Commerce Platform. Catálogo, datos, recorrido, atención, ventas e IoT — en una sola infraestructura.",
+  "address": "AV. BRIG. FARIA LIMA, 1234 - CONJ. 111 - JARDIM PAULISTANO - SÃO PAULO, SP - 01451-913",
+  "legal": {
+    "company": "© {year} IUNGO INTELLIGENCE LTDA. - CNPJ 63.246.325/0001-79",
+    "controller": "NOVIGO TECNOLOGIA DA INFORMAÇÃO S.A. - GRUPO CONTROLADOR"
+  },
+  "badges": {
+    "lgpd": "LGPD",
+    "iso": "ISO 27001 · IMPL.",
+    "soc2": "SOC 2 · IMPL."
+  },
+  "navLabel": "Navegación del pie de página",
+  "columns": {
+    "products": "Productos",
+    "solutions": "Soluciones",
+    "company": "Empresa",
+    "resources": "Recursos",
+    "trust": "Confianza"
+  },
+  "solutions": {
+    "commerceIntelligenceSuite": "Commerce Intelligence Suite",
+    "cxAiAgents": "CX AI Agents",
+    "salesConnected": "Sales & Connected",
+    "phygitalIntelligence": "Phygital Intelligence"
+  },
+  "company": {
+    "about": "Acerca de",
+    "cases": "Casos",
+    "contact": "Contacto",
+    "careers": "Carreras",
+    "press": "Prensa"
+  },
+  "resources": {
+    "technicalBlog": "Blog técnico",
+    "whitepapers": "Whitepapers",
+    "comparisons": "Comparativas",
+    "glossary": "Glosario",
+    "apiDocs": "API & Docs"
+  },
+  "trust": {
+    "trustCenter": "Trust Center",
+    "lgpdDpo": "LGPD y DPO",
+    "privacy": "Privacidad",
+    "cookies": "Cookies",
+    "subprocessors": "Subprocesadores",
+    "status": "Estado"
+  }
+}

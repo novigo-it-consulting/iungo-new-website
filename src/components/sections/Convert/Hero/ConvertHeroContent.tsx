@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
@@ -8,7 +10,9 @@ import {
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
-export default function ConvertHeroContent() {
+export default async function ConvertHeroContent() {
+  const t = await getTranslations("productPages.convert.hero");
+
   return (
     <div data-convert-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
@@ -17,7 +21,7 @@ export default function ConvertHeroContent() {
 
       <ProductHeroTitle
         id="convert-hero-title"
-        title="Iungo Convert"
+        title={t("title")}
         dataPrefix="convert"
       />
 
@@ -26,17 +30,14 @@ export default function ConvertHeroContent() {
         className={`${productHeroDescriptionBlockClassName} max-w-[615px]`}
       >
         <p data-convert-hero-presentation className={productHeroParagraphClassName}>
-          O único Sales Agent que conhece seu catálogo PIM e o perfil CDP em
-          tempo real.
+          {t("presentation")}
         </p>
 
         <p
           data-convert-hero-description
           className={`mt-[14px] ${productHeroParagraphClassName}`}
         >
-          Identifica intenção. Recomenda produto. Negocia condição. Fecha venda.
-          E faz handoff perfeito ao humano quando faz sentido — com contexto
-          completo.
+          {t("description")}
         </p>
       </div>
     </div>

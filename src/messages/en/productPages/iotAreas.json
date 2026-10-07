@@ -1,0 +1,39 @@
+{
+  "areas": {
+    "eyebrow": "APPLICATION AREAS",
+    "title": "8 areas. One platform.",
+    "description": "From the factory floor to the luxury showroom, from the stockroom to the operating room.",
+    "assetMonitoring": {
+      "title": "Asset monitoring",
+      "description": "Laptops, equipment, furniture, tools. Location and status in real time."
+    },
+    "peopleMonitoring": {
+      "title": "People monitoring",
+      "description": "Access, presence, flow. Smart badges and authorized zones."
+    },
+    "nr36": {
+      "title": "NR-36 & safety",
+      "description": "Automated compliance for cold-storage plants and critical environments."
+    },
+    "coldChain": {
+      "title": "Cold chain & temperature",
+      "description": "Cold rooms, vaccines, medicines. Alerts before the deviation."
+    },
+    "milkRun": {
+      "title": "Milk run & logistics",
+      "description": "Routing and tracking across DCs, stores, and suppliers."
+    },
+    "ppe": {
+      "title": "PPE & mandatory use",
+      "description": "Automatic validation of helmet, glove, and goggle use before a critical zone."
+    },
+    "hospitality": {
+      "title": "Hotels & hospitality",
+      "description": "Linens, minibar, amenities. Automatic check-in and operational pull."
+    },
+    "highValue": {
+      "title": "High added value",
+      "description": "Jewelry, watches, premium electronics. Anti-theft and proof of authenticity."
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export default function CheckIcon(props: SVGProps<SVGSVGElement>) {
+export default function CheckIcon(props: Readonly<SVGProps<SVGSVGElement>>) {
   return (
     <svg
       viewBox="0 0 14 14"

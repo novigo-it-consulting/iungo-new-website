@@ -1,14 +1,18 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 
 import IoTSystemScreens from "@/components/sections/IoT/SystemScreens/IoTSystemScreens";
 
 import IoTCaseStudyCard from "./IoTCaseStudyCard";
 
-export default function IoTCaseStudySection() {
+export default async function IoTCaseStudySection() {
+  const t = await getTranslations("productPages.iot.caseStudy");
+
   return (
     <section
       data-iot-case-study-section
-      aria-label="Case Raia Drogasil e telas do Iungo Asset Cloud IoT"
+      aria-label={t("ariaLabel")}
       className="box-border w-full min-w-0 bg-white pt-[96px]"
     >
       <PageContainer data-iot-case-study-container size="organizerComparison">

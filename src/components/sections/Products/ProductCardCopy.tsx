@@ -11,7 +11,7 @@ export default function ProductCardCopy({
   productId,
   title,
   description,
-}: ProductCardCopyProps) {
+}: Readonly<ProductCardCopyProps>) {
   return (
     <div
       data-product-copy={productId}

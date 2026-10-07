@@ -1,6 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export default function IoTAssetCloudVisual() {
+export default async function IoTAssetCloudVisual() {
+  const t = await getTranslations("productPages.iot.assetCloud");
+
   return (
     <div
       data-iot-asset-cloud-visual
@@ -8,7 +11,7 @@ export default function IoTAssetCloudVisual() {
     >
       <Image
         src="/images/products/iot/asset-cloud-dashboard.svg"
-        alt="Dashboard do Iungo Asset Cloud exibindo zonas monitoradas e movimentos por hora"
+        alt={t("imageAlt")}
         width={601}
         height={319}
         unoptimized

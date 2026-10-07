@@ -1,12 +1,14 @@
-import { TESTIMONIALS_DISCLAIMER_TEXT } from "@/components/sections/shared/testimonials.constants";
+import { getTranslations } from "next-intl/server";
 
 type ProductTestimonialsDisclaimerProps = {
   productSlug: string;
 };
 
-export default function ProductTestimonialsDisclaimer({
+export default async function ProductTestimonialsDisclaimer({
   productSlug,
-}: ProductTestimonialsDisclaimerProps) {
+}: Readonly<ProductTestimonialsDisclaimerProps>) {
+  const t = await getTranslations("productPages.shared.testimonials");
+
   return (
     <p
       {...{
@@ -14,7 +16,7 @@ export default function ProductTestimonialsDisclaimer({
       }}
       className="mt-10 w-full max-w-[1088px] text-center font-reddit text-[12px] font-normal leading-[16px] tracking-normal text-[#71717A]"
     >
-      {TESTIMONIALS_DISCLAIMER_TEXT}
+      {t("disclaimer")}
     </p>
   );
 }

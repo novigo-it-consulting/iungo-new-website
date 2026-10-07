@@ -1,5 +1,8 @@
+import { getTranslations } from "next-intl/server";
+
+import { renderInkStrong } from "@/components/ui/richText";
 import BehaviorFeatureCheckIcon from "./BehaviorFeatureCheckIcon";
-import { BEHAVIOR_CDP_FEATURES } from "./behaviorCdpComparison.constants";
+import { BEHAVIOR_CDP_FEATURE_IDS } from "./behaviorCdpComparison.constants";
 import {
   homeSectionTitleMobileClassName,
   productSectionDescriptionBaseClassName,
@@ -16,7 +19,28 @@ const titleClassName = [
 const featureClassName =
   "font-reddit text-[14px] font-normal leading-[20px] text-[#27272A]";
 
-export default function BehaviorCdpComparisonContent() {
+type CdpTranslator = Awaited<
+  ReturnType<typeof getTranslations<"productPages.behavior.cdp">>
+>;
+
+function featureLabel(t: CdpTranslator, id: (typeof BEHAVIOR_CDP_FEATURE_IDS)[number]) {
+  switch (id) {
+    case "ingestion":
+      return t("ingestion");
+    case "identity":
+      return t("identity");
+    case "predictions":
+      return t("predictions");
+    case "lgpd":
+      return t("lgpd");
+    case "integrations":
+      return t("integrations");
+  }
+}
+
+export default async function BehaviorCdpComparisonContent() {
+  const t = await getTranslations("productPages.behavior.cdp");
+
   return (
     <div
       data-behavior-cdp-comparison-content
@@ -31,7 +55,7 @@ export default function BehaviorCdpComparisonContent() {
           data-behavior-cdp-comparison-title
           className={titleClassName}
         >
-          Behavior CDP, não Traditional CDP.
+          {t("title")}
         </h2>
       </div>
 
@@ -40,8 +64,7 @@ export default function BehaviorCdpComparisonContent() {
         className={miniContainerClassName}
       >
         <p data-behavior-cdp-comparison-paragraph-1 className={productSectionDescriptionBaseClassName}>
-          CDPs tradicionais consolidam dados em batches noturnos. Quando o time
-          de marketing acorda, a oportunidade já passou.
+          {t("batch")}
         </p>
       </div>
 
@@ -50,10 +73,9 @@ export default function BehaviorCdpComparisonContent() {
         className={miniContainerClassName}
       >
         <p data-behavior-cdp-comparison-paragraph-2 className={productSectionDescriptionBaseClassName}>
-          O Iungo Behavior CDP processa eventos em{" "}
-          <strong className="font-bold text-[#27272A]">&lt; 200ms</strong>,
-          alimenta jornadas e sales agents instantaneamente, e mantém um perfil
-          unificado vivo de cada cliente.
+          {t.rich("live", {
+            strong: renderInkStrong,
+          })}
         </p>
       </div>
 
@@ -65,9 +87,9 @@ export default function BehaviorCdpComparisonContent() {
           data-behavior-cdp-comparison-features
           className="m-0 flex list-none flex-col gap-3 p-0 pr-2"
         >
-          {BEHAVIOR_CDP_FEATURES.map((feature) => (
+          {BEHAVIOR_CDP_FEATURE_IDS.map((featureId) => (
             <li
-              key={feature}
+              key={featureId}
               data-behavior-cdp-comparison-feature-item
               className="flex w-full min-w-0 items-start gap-3"
             >
@@ -77,7 +99,7 @@ export default function BehaviorCdpComparisonContent() {
               >
                 <BehaviorFeatureCheckIcon className="h-[10px] w-[14px] shrink-0" />
               </span>
-              <span className={featureClassName}>{feature}</span>
+              <span className={featureClassName}>{featureLabel(t, featureId)}</span>
             </li>
           ))}
         </ul>

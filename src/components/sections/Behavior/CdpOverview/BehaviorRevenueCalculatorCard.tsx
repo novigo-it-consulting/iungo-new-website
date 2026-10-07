@@ -1,8 +1,13 @@
+import { getTranslations } from "next-intl/server";
+
+import { renderInkStrong } from "@/components/ui/richText";
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 
 import BehaviorRevenueCalculatorButton from "./BehaviorRevenueCalculatorButton";
 
-export default function BehaviorRevenueCalculatorCard() {
+export default async function BehaviorRevenueCalculatorCard() {
+  const t = await getTranslations("productPages.behavior.calculator");
+
   return (
     <section
       data-behavior-revenue-calculator-card
@@ -11,7 +16,7 @@ export default function BehaviorRevenueCalculatorCard() {
     >
       <div className="flex w-full flex-col items-center gap-4 px-[48px] py-[48px]">
         <SectionEyebrow variant="compact">
-          CALCULADORA DE RECEITA PERDIDA
+          {t("eyebrow")}
         </SectionEyebrow>
 
         <div
@@ -23,7 +28,7 @@ export default function BehaviorRevenueCalculatorCard() {
             data-behavior-revenue-calculator-title
             className="m-0 w-full text-center font-reddit text-[30px] font-bold leading-[36px] tracking-[-0.6px] text-[#27272A]"
           >
-            Quanto você perde por não ter visão 360° unificada?
+            {t("title")}
           </h2>
         </div>
 
@@ -35,11 +40,9 @@ export default function BehaviorRevenueCalculatorCard() {
             data-behavior-revenue-calculator-subtitle
             className="m-0 w-full text-center font-reddit text-base font-normal leading-6 tracking-normal text-[#71717A]"
           >
-            Empresas com GMV acima de R$ 50M perdem em média{" "}
-            <strong className="font-bold text-[#27272A]">
-              3,2% de receita
-            </strong>{" "}
-            por dados de cliente fragmentados. Calcule seu caso.
+            {t.rich("description", {
+              strong: renderInkStrong,
+            })}
           </p>
         </div>
 

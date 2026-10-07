@@ -1,6 +1,8 @@
+import type { RequestDemoSubmitPayload } from "@/lib/formsubmit";
+import ptRequestDemo from "@/messages/pt-BR/requestDemo.json";
+
 import { CONTACT_TYPE_OPTIONS } from "./ContactType/contactType.constants";
 import { PRODUCT_INTEREST_OPTIONS } from "./ProductInterest/productInterest.constants";
-import type { RequestDemoSubmitPayload } from "@/lib/formsubmit";
 
 export type RequestDemoFormValues = {
   contactType: string;
@@ -35,14 +37,14 @@ export const REQUEST_DEMO_FIELD_LIMITS = {
 } as const;
 
 export const REQUEST_DEMO_MESSAGES = {
-  required: "Preencha este campo.",
-  email: "Informe um e-mail corporativo válido.",
-  option: "Selecione uma opção válida.",
-  tooLong: "O texto ultrapassa o limite permitido.",
-  phone: "Informe um telefone válido.",
-  success:
-    "Mensagem enviada com sucesso! Em breve, nossa equipe entrará em contato.",
+  ...ptRequestDemo.form.validation,
+  success: ptRequestDemo.form.success,
 } as const;
+
+export type RequestDemoValidationMessages = Pick<
+  typeof REQUEST_DEMO_MESSAGES,
+  "required" | "email" | "option" | "tooLong" | "phone"
+>;
 
 const CONTACT_TYPE_VALUES = new Set<string>(
   CONTACT_TYPE_OPTIONS.map((option) => option.value),
@@ -144,34 +146,35 @@ export function readRequestDemoFormValues(
 
 export function validateRequestDemoForm(
   values: RequestDemoFormValues,
+  messages: RequestDemoValidationMessages = REQUEST_DEMO_MESSAGES,
 ): RequestDemoFieldErrors {
   const errors: RequestDemoFieldErrors = {};
 
   if (!values.contactType) {
-    errors.contactType = REQUEST_DEMO_MESSAGES.required;
+    errors.contactType = messages.required;
   } else if (!CONTACT_TYPE_VALUES.has(values.contactType)) {
-    errors.contactType = REQUEST_DEMO_MESSAGES.option;
+    errors.contactType = messages.option;
   }
 
   if (!values.name) {
-    errors.name = REQUEST_DEMO_MESSAGES.required;
+    errors.name = messages.required;
   } else if (values.name.length > REQUEST_DEMO_FIELD_LIMITS.name) {
-    errors.name = REQUEST_DEMO_MESSAGES.tooLong;
+    errors.name = messages.tooLong;
   }
 
   if (!values.email) {
-    errors.email = REQUEST_DEMO_MESSAGES.required;
+    errors.email = messages.required;
   } else if (
     values.email.length > REQUEST_DEMO_FIELD_LIMITS.email ||
     !isWellFormedEmail(values.email)
   ) {
-    errors.email = REQUEST_DEMO_MESSAGES.email;
+    errors.email = messages.email;
   }
 
   if (!values.company) {
-    errors.company = REQUEST_DEMO_MESSAGES.required;
+    errors.company = messages.required;
   } else if (values.company.length > REQUEST_DEMO_FIELD_LIMITS.company) {
-    errors.company = REQUEST_DEMO_MESSAGES.tooLong;
+    errors.company = messages.tooLong;
   }
 
   if (values.phone) {
@@ -179,7 +182,7 @@ export function validateRequestDemoForm(
       values.phone.length > REQUEST_DEMO_FIELD_LIMITS.phone ||
       countDigits(values.phone) < 8
     ) {
-      errors.phone = REQUEST_DEMO_MESSAGES.phone;
+      errors.phone = messages.phone;
     }
   }
 
@@ -187,11 +190,11 @@ export function validateRequestDemoForm(
     values.productInterest &&
     !PRODUCT_INTEREST_VALUES.has(values.productInterest)
   ) {
-    errors.productInterest = REQUEST_DEMO_MESSAGES.option;
+    errors.productInterest = messages.option;
   }
 
   if (values.message.length > REQUEST_DEMO_FIELD_LIMITS.message) {
-    errors.message = REQUEST_DEMO_MESSAGES.tooLong;
+    errors.message = messages.tooLong;
   }
 
   return errors;

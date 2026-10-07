@@ -1,10 +1,14 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroLayout from "@/components/sections/shared/Hero/ProductHeroLayout";
 import ProductHeroVisual from "@/components/sections/shared/Hero/ProductHeroVisual";
 
 import BehaviorHeroContent from "./BehaviorHeroContent";
 
-export default function BehaviorHeroSection() {
+export default async function BehaviorHeroSection() {
+  const t = await getTranslations("productPages.behavior.hero");
+
   return (
     <ProductHeroLayout
       scope="behavior"
@@ -15,7 +19,7 @@ export default function BehaviorHeroSection() {
         <ProductHeroVisual
           productSlug="behavior"
           src="/images/products/behavior/behavior-hero.png"
-          alt="Ilustração do Iungo Behavior com radar comportamental, perfil e métricas em tempo real"
+          alt={t("imageAlt")}
           width={900}
           height={900}
         />

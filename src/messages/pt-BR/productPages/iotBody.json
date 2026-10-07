@@ -1,0 +1,81 @@
+{
+  "assetCloud": {
+    "eyebrow": "PLATAFORMA",
+    "title": "Iungo Asset Cloud",
+    "primary": "A camada de software que unifica todas as tecnologias de captura em um único modelo de dados.",
+    "secondary": "Dashboards web, app mobile para inventário cego, alertas configuráveis, APIs REST e webhooks. Integrado nativamente com SAP, Oracle, TOTVS, Senior, Protheus.",
+    "imageAlt": "Dashboard do Iungo Asset Cloud exibindo zonas monitoradas e movimentos por hora",
+    "blindInventory": "Inventário cego com 98–99% de acurácia",
+    "geofence": "Geofence com alertas em tempo real",
+    "auditTrail": "Trilha de auditoria de movimentação",
+    "multiTenant": "Multi-tenant para grandes redes",
+    "pimConnector": "Conector nativo para o Iungo Organizer AI PIM (sincroniza ativo físico ↔ catálogo digital)"
+  },
+  "systemScreens": {
+    "title": "O Asset Cloud que une RFID, BLE, LoRa e GPS.",
+    "description": "Mapa de zonas, inventário cego mobile, geofence e conciliação patrimonial em SAP.",
+    "ariaLabel": "Telas do sistema Iungo Asset Cloud",
+    "badges": {
+      "mapZones": "Mapa - zonas",
+      "blindInventory": "Inventário cego - app",
+      "geofence": "Geofence & alertas",
+      "erp": "Conciliação - ERP"
+    },
+    "alts": {
+      "main": "Mapa de zonas do Iungo Asset Cloud com eventos em tempo real.",
+      "blindInventory": "App de inventário cego do Iungo Asset Cloud com divergências em destaque.",
+      "geofence": "Configurador de geofence do Iungo Asset Cloud com regras e alertas.",
+      "erp": "Conciliação patrimonial SAP do Iungo Asset Cloud com acurácia e divergências."
+    }
+  },
+  "caseStudy": {
+    "ariaLabel": "Case Raia Drogasil e telas do Iungo Asset Cloud IoT",
+    "eyebrow": "CASE",
+    "title": "Raia Drogasil",
+    "summary": "Maior rede farmacêutica do Brasil. 3.000+ lojas. R$ 26,5 bi de receita anual.",
+    "detailsTitle": "Da auditoria de notebooks à operação total.",
+    "detailsDescription": "De 2.500 notebooks em janeiro de 2023 a mais de 70.000 ativos rastreados hoje — crescimento contínuo sem trocar a plataforma, sem rebobinar dados históricos, sem disrupção de operação.",
+    "notebooks": "Notebooks",
+    "notebooksValue": "2.500",
+    "corporateAssets": "Ativos corporativos",
+    "corporateAssetsValue": "6.000",
+    "itEquipment": "Equipamentos TI",
+    "itEquipmentValue": "4.000",
+    "phase4": "Expansão fase 4",
+    "phase4Value": "12.000",
+    "currentOperation": "Operação hoje",
+    "currentOperationValue": "70.000+",
+    "phase1": {
+      "date": "JAN/23",
+      "line": "<strong>Fase 1</strong> · 2.500 notebooks · piloto controlado"
+    },
+    "phase2": {
+      "date": "JUN/23",
+      "line": "<strong>Fase 2</strong> · +6.000 corporativos · expansão TI"
+    },
+    "phase3": {
+      "date": "DEZ/23",
+      "line": "<strong>Fase 3</strong> · +4.000 equipamentos · cobertura completa"
+    },
+    "phase4Line": {
+      "date": "JUN/24",
+      "line": "<strong>Fase 4</strong> · +12.000 ativos · escala total"
+    }
+  },
+  "testimonials": {
+    "title": "Quem rastreia ativo crítico, fala.",
+    "description": "Diretores de TI e supply chain que reduziram prejuízo, fechamento contábil e auditoria física.",
+    "luis": {
+      "quote": "Antes do Iungo IoT, contagem trimestral travava o time de TI por uma semana inteira. Hoje rodo inventário cego em 2 horas com 1 pessoa, e a divergência caiu de 8% para abaixo de 1%.",
+      "name": "Luis F.",
+      "role": "Gerente de Infraestrutura · Rede de farmácias nacional",
+      "metricLabel": "DIVERGÊNCIA"
+    },
+    "claudia": {
+      "quote": "O que vendi pro CFO foi conciliação patrimonial automática. O que ele percebeu depois foi compliance: cada movimento tem trilha auditável, e auditoria externa parou de pedir relatório manual.",
+      "name": "Cláudia B.",
+      "role": "Diretora de Supply Chain · Grupo industrial · sob NDA",
+      "metricLabel": "CUSTO CONTAGEM"
+    }
+  }
+}

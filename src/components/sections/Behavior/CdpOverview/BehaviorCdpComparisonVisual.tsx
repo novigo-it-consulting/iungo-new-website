@@ -1,6 +1,9 @@
+import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 
-export default function BehaviorCdpComparisonVisual() {
+export default async function BehaviorCdpComparisonVisual() {
+  const t = await getTranslations("productPages.behavior.cdp");
+
   return (
     <div
       data-behavior-cdp-comparison-visual
@@ -12,7 +15,7 @@ export default function BehaviorCdpComparisonVisual() {
       >
         <Image
           src="/images/products/behavior/behavior-unified-profile.svg"
-          alt="Perfil unificado do cliente com eventos em tempo real e jornada disparada"
+          alt={t("imageAlt")}
           width={753}
           height={494}
           unoptimized

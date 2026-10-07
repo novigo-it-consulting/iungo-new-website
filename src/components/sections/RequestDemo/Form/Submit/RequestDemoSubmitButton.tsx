@@ -1,9 +1,4 @@
 import {
-  REQUEST_DEMO_SECURITY_NOTICE,
-  REQUEST_DEMO_SUBMIT_LABEL,
-  REQUEST_DEMO_SUBMITTING_LABEL,
-} from "./submitButton.constants";
-import {
   submitButtonClassName,
   submitButtonRowClassName,
   submitSecurityNoticeClassName,
@@ -11,10 +6,16 @@ import {
 
 type RequestDemoSubmitButtonProps = {
   isSubmitting: boolean;
+  label: string;
+  submittingLabel: string;
+  securityNotice: string;
 };
 
 export default function RequestDemoSubmitButton({
   isSubmitting,
+  label,
+  submittingLabel,
+  securityNotice,
 }: Readonly<RequestDemoSubmitButtonProps>) {
   return (
     <div data-request-demo-submit className={submitButtonRowClassName}>
@@ -23,11 +24,11 @@ export default function RequestDemoSubmitButton({
         className={submitButtonClassName}
         disabled={isSubmitting}
       >
-        {isSubmitting ? REQUEST_DEMO_SUBMITTING_LABEL : REQUEST_DEMO_SUBMIT_LABEL}
+        {isSubmitting ? submittingLabel : label}
       </button>
 
       <p data-request-demo-security-notice className={submitSecurityNoticeClassName}>
-        {REQUEST_DEMO_SECURITY_NOTICE}
+        {securityNotice}
       </p>
     </div>
   );

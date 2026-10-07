@@ -1,11 +1,61 @@
+import { getTranslations } from "next-intl/server";
+
 import ResolveDifferentialCard from "./ResolveDifferentialCard";
-import { RESOLVE_DIFFERENTIAL_CARDS } from "./resolveDifferentials.constants";
+import {
+  RESOLVE_DIFFERENTIAL_CARDS,
+  type ResolveDifferentialCardData,
+} from "./resolveDifferentials.constants";
 import {
   productSectionDescriptionClassName,
   productSectionTitleClassName,
 } from "@/components/ui/sectionTitle.styles";
 
-export default function ResolveDifferentials() {
+type DifferentialsTranslator = Awaited<
+  ReturnType<typeof getTranslations<"productPages.resolve.differentials">>
+>;
+
+function differentialCopy(t: DifferentialsTranslator) {
+  return {
+    "differential-1": {
+      title: t("catalog.title"),
+      description: t("catalog.description"),
+    },
+    "differential-2": {
+      title: t("profile.title"),
+      description: t("profile.description"),
+    },
+    "differential-3": {
+      title: t("handoff.title"),
+      description: t("handoff.description"),
+    },
+    "differential-4": {
+      title: t("channels.title"),
+      description: t("channels.description"),
+    },
+    "differential-5": {
+      title: t("citations.title"),
+      description: t("citations.description"),
+    },
+    "differential-6": {
+      title: t("learning.title"),
+      description: t("learning.description"),
+    },
+  };
+}
+
+function differentialCards(t: DifferentialsTranslator): ResolveDifferentialCardData[] {
+  const copy = differentialCopy(t);
+
+  return RESOLVE_DIFFERENTIAL_CARDS.map((card) => ({
+    ...card,
+    title: copy[card.id].title,
+    description: copy[card.id].description,
+  }));
+}
+
+export default async function ResolveDifferentials() {
+  const t = await getTranslations("productPages.resolve.differentials");
+
   return (
     <div
       data-resolve-differentials
@@ -19,7 +69,7 @@ export default function ResolveDifferentials() {
           data-resolve-differentials-eyebrow
           className="inline-flex items-center justify-center rounded-[999px] border border-[#0024AE]/[0.18] bg-[#0024AE]/[0.07] px-[14px] py-[6px] font-reddit text-[11.2px] font-medium leading-[16.8px] tracking-[0.67px] text-[#0024AE]"
         >
-          DIFERENCIAL
+          {t("eyebrow")}
         </span>
 
         <h2
@@ -27,15 +77,14 @@ export default function ResolveDifferentials() {
           data-resolve-differentials-title
           className={productSectionTitleClassName}
         >
-          Por que o Iungo Resolve vê o que Zendesk e Intercom não veem.
+          {t("title")}
         </h2>
 
         <p
           data-resolve-differentials-subtitle
           className={productSectionDescriptionClassName}
         >
-          Não é mais um chatbot treinado em FAQ. É um agente plugado nos dados
-          vivos da sua operação.
+          {t("subtitle")}
         </p>
       </div>
 
@@ -43,7 +92,7 @@ export default function ResolveDifferentials() {
         data-resolve-differentials-grid
         className="mx-auto mt-16 grid w-full max-w-[1088px] grid-cols-1 gap-6 md:grid-cols-2"
       >
-        {RESOLVE_DIFFERENTIAL_CARDS.map((card) => (
+        {differentialCards(t).map((card) => (
           <ResolveDifferentialCard key={card.id} card={card} />
         ))}
       </div>

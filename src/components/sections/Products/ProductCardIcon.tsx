@@ -10,7 +10,7 @@ export default function ProductCardIcon({
   productId,
   src,
   backgroundClassName,
-}: ProductCardIconProps) {
+}: Readonly<ProductCardIconProps>) {
   return (
     <div
       data-product-icon={productId}

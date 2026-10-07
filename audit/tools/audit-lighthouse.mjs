@@ -8,10 +8,11 @@ import { fileURLToPath } from "node:url";
 import * as chromeLauncher from "chrome-launcher";
 import lighthouse from "lighthouse";
 
+import { AUDIT_BASE_URL as BASE_URL, runSequentially } from "./audit.shared.mjs";
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
 const OUT = join(ROOT, "audit", "review");
-const BASE_URL = process.env.AUDIT_BASE_URL ?? "http://localhost:3003";
 const RUNS = 3;
 
 const PAGES = [
@@ -72,15 +73,18 @@ try {
     pages: {},
   };
 
-  for (const page of PAGES) {
-    const url = `${BASE_URL}${page.path}`;
+  async function pushLighthouseRun(url, runs) {
+    runs.push(await runOnce(url, chrome));
+  }
+
+  async function measureLighthousePage(entry) {
+    const url = `${BASE_URL}${entry.path}`;
     const runs = [];
+    const attempts = Array.from({ length: RUNS }, (_, index) => index);
 
-    for (let i = 0; i < RUNS; i += 1) {
-      runs.push(await runOnce(url, chrome));
-    }
+    await runSequentially(attempts, () => pushLighthouseRun(url, runs));
 
-    report.pages[page.id] = {
+    report.pages[entry.id] = {
       url,
       runs,
       median: {
@@ -98,6 +102,8 @@ try {
     };
   }
 
+  await runSequentially(PAGES, (entry) => measureLighthousePage(entry));
+
   writeFileSync(
     join(OUT, "lighthouse-median.json"),
     JSON.stringify(report, null, 2),
@@ -108,7 +114,11 @@ try {
   process.exitCode = 1;
 } finally {
   if (chrome) {
-    await chrome.kill().catch(() => {});
+    try {
+      await chrome.kill();
+    } catch {
+      // No Windows o Chrome às vezes ainda segura a pasta temporária.
+    }
   }
 
   if (process.exitCode === 1) {

@@ -1,65 +1,98 @@
-import CheckIcon from "@/components/icons/CheckIcon";
-import XIcon from "@/components/icons/XIcon";
+import { getTranslations } from "next-intl/server";
+
 import ProductTableScroll from "@/components/sections/shared/DataTable/ProductTableScroll";
-import type { ComparisonValue } from "./organizerComparison.constants";
-import { COMPARISON_ROWS } from "./organizerComparison.constants";
 
-function ComparisonValueContent({ value }: { value: ComparisonValue }) {
-  if (value.type === "text") {
-    return (
-      <span className="font-reddit text-[14px] font-normal leading-5 tracking-[0px] text-[#27272A]">
-        {value.value}
-      </span>
-    );
-  }
+import OrganizerComparisonValue from "./OrganizerComparisonValue";
+import {
+  COMPARISON_ROWS,
+  type ComparisonCell,
+  type ComparisonValue,
+} from "./organizerComparison.constants";
 
-  if (value.type === "check") {
-    const isBrand = value.tone === "brand";
-    return (
-      <span
-        className={[
-          "mx-auto inline-flex shrink-0 items-center justify-center",
-          isBrand
-            ? "h-7 w-[15px] text-[#1E9F67]"
-            : "h-5 w-3 text-[#27272A]",
-        ].join(" ")}
-      >
-        <CheckIcon
-          aria-hidden="true"
-          focusable="false"
-          className={isBrand ? "h-[18px] w-[15px] shrink-0" : "size-full shrink-0"}
-        />
-        <span className="sr-only">Sim</span>
-      </span>
-    );
-  }
-
-  return (
-    <span className="mx-auto inline-flex h-5 w-[10px] shrink-0 items-center justify-center text-[#27272A]">
-      <XIcon
-        aria-hidden="true"
-        focusable="false"
-        className="size-full shrink-0"
-      />
-      <span className="sr-only">Não</span>
-    </span>
-  );
-}
+type ComparisonTranslator = Awaited<
+  ReturnType<typeof getTranslations<"productPages.organizer.comparison">>
+>;
 
 const thBase =
   "h-[52px] box-border p-4 align-middle font-reddit text-[14px] font-bold leading-5 tracking-[0px]";
 
-export default function OrganizerComparisonTable() {
+function rowCopy(t: ComparisonTranslator) {
+  return {
+    onboarding: {
+      criterion: t("onboarding.criterion"),
+      iungo: t("onboarding.iungo"),
+      akeneo: t("onboarding.akeneo"),
+      salsify: t("onboarding.salsify"),
+    },
+    nativeIntegration: {
+      criterion: t("nativeIntegration.criterion"),
+      akeneo: t("nativeIntegration.akeneo"),
+    },
+    generativeAi: {
+      criterion: t("generativeAi.criterion"),
+      akeneo: t("generativeAi.akeneo"),
+      salsify: t("generativeAi.salsify"),
+    },
+    dam: {
+      criterion: t("dam.criterion"),
+      akeneo: t("dam.akeneo"),
+    },
+    pricing: {
+      criterion: t("pricing.criterion"),
+      akeneo: t("pricing.akeneo"),
+      salsify: t("pricing.salsify"),
+    },
+    lgpd: {
+      criterion: t("lgpd.criterion"),
+      akeneo: t("lgpd.akeneo"),
+      salsify: t("lgpd.salsify"),
+    },
+  };
+}
+
+function cellValue(
+  cell: ComparisonCell,
+  value: string | undefined,
+): ComparisonValue {
+  if (cell.type !== "text") {
+    return cell;
+  }
+
+  if (!value) {
+    throw new Error("Missing Organizer comparison translation");
+  }
+
+  return { type: "text", value };
+}
+
+export default async function OrganizerComparisonTable() {
+  const t = await getTranslations("productPages.organizer.comparison");
+  const tCommon = await getTranslations("common");
+  const copy = rowCopy(t);
+  const yesLabel = tCommon("yes");
+  const noLabel = tCommon("no");
+  const rows = COMPARISON_ROWS.map((row) => {
+    const texts = copy[row.id];
+    return {
+      ...row,
+      criterion: texts.criterion,
+      iungo: cellValue(row.iungo, "iungo" in texts ? texts.iungo : undefined),
+      akeneo: cellValue(row.akeneo, texts.akeneo),
+      salsify: cellValue(
+        row.salsify,
+        "salsify" in texts ? texts.salsify : undefined,
+      ),
+    };
+  });
+
   return (
     <ProductTableScroll
-      ariaLabel="Comparação de plataformas PIM"
+      ariaLabel={t("ariaLabel")}
       className="mt-12"
       frameClassName="min-w-[960px] rounded-[20px]"
     >
       <table className="w-full table-fixed border-collapse">
-          <caption className="sr-only">
-            Comparação entre Iungo Organizer AI PIM, Akeneo e Salsify
-          </caption>
+          <caption className="sr-only">{t("caption")}</caption>
 
           <colgroup>
             <col style={{ width: "34.724%" }} />
@@ -72,38 +105,38 @@ export default function OrganizerComparisonTable() {
             <tr style={{ height: "52px" }} className="border-b border-[#E4E4E7]">
               <th scope="col" className={`${thBase} text-left text-[#27272A]`}>
                 <div className="flex h-5 w-full items-center justify-start">
-                  <span className="w-fit">Critério</span>
+                  <span className="w-fit">{t("columns.criterion")}</span>
                 </div>
               </th>
               <th scope="col" className={`${thBase} text-center text-[#1E9F67]`}>
                 <div className="flex h-5 w-full items-center justify-center">
-                  <span className="w-fit">Iungo Organizer AI PIM</span>
+                  <span className="w-fit">{t("columns.iungo")}</span>
                 </div>
               </th>
               <th scope="col" className={`${thBase} text-center text-[#71717A]`}>
                 <div className="flex h-5 w-full items-center justify-center">
-                  <span className="w-fit">Akeneo</span>
+                  <span className="w-fit">{t("columns.akeneo")}</span>
                 </div>
               </th>
               <th scope="col" className={`${thBase} text-center text-[#71717A]`}>
                 <div className="flex h-5 w-full items-center justify-center">
-                  <span className="w-fit">Salsify</span>
+                  <span className="w-fit">{t("columns.salsify")}</span>
                 </div>
               </th>
             </tr>
           </thead>
 
           <tbody>
-            {COMPARISON_ROWS.map((row, rowIndex) => (
+            {rows.map((row, rowIndex) => (
               <tr
-                key={row.criterion}
+                key={row.id}
                 style={{ height: `${row.height}px` }}
                 className={`${
                   rowIndex % 2 === 1
                     ? "bg-[rgba(244,244,245,0.4)]"
                     : "bg-white"
                 }${
-                  rowIndex < COMPARISON_ROWS.length - 1
+                  rowIndex < rows.length - 1
                     ? " border-b border-[#E4E4E7]"
                     : ""
                 }`}
@@ -115,13 +148,25 @@ export default function OrganizerComparisonTable() {
                   {row.criterion}
                 </th>
                 <td className="min-w-0 px-4 text-center align-middle">
-                  <ComparisonValueContent value={row.iungo} />
+                  <OrganizerComparisonValue
+                    value={row.iungo}
+                    yesLabel={yesLabel}
+                    noLabel={noLabel}
+                  />
                 </td>
                 <td className="min-w-0 px-4 text-center align-middle">
-                  <ComparisonValueContent value={row.akeneo} />
+                  <OrganizerComparisonValue
+                    value={row.akeneo}
+                    yesLabel={yesLabel}
+                    noLabel={noLabel}
+                  />
                 </td>
                 <td className="min-w-0 px-4 text-center align-middle">
-                  <ComparisonValueContent value={row.salsify} />
+                  <OrganizerComparisonValue
+                    value={row.salsify}
+                    yesLabel={yesLabel}
+                    noLabel={noLabel}
+                  />
                 </td>
               </tr>
             ))}

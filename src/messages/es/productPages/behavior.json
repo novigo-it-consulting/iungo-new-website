@@ -1,0 +1,69 @@
+{
+  "hero": {
+    "title": "Iungo Behavior",
+    "description": "El único Behavior CDP brasileño con motor conductual + semántico propio. Visión 360º predictiva en tiempo real — no en un batch nocturno.",
+    "imageAlt": "Ilustración de Iungo Behavior con radar conductual, perfil y métricas en tiempo real"
+  },
+  "overview": {
+    "ariaLabel": "Visión general de Iungo Behavior CDP"
+  },
+  "calculator": {
+    "eyebrow": "CALCULADORA DE INGRESO PERDIDO",
+    "title": "¿Cuánto pierde al no tener una visión 360° unificada?",
+    "description": "Las empresas con GMV superior a R$ 50M pierden en promedio <strong>3,2% de ingresos</strong> por datos de cliente fragmentados. Calcule su caso.",
+    "cta": "Calcular mi caso"
+  },
+  "cdp": {
+    "title": "Behavior CDP, no un CDP tradicional.",
+    "batch": "Los CDP tradicionales consolidan datos en batches nocturnos. Cuando el equipo de marketing empieza el día, la oportunidad ya pasó.",
+    "live": "Iungo Behavior CDP procesa eventos en <strong>< 200ms</strong>, alimenta recorridos y sales agents al instante, y mantiene un perfil unificado vivo de cada cliente.",
+    "imageAlt": "Perfil unificado del cliente con eventos en tiempo real y recorrido disparado",
+    "ingestion": "Ingesta de eventos web, app, tienda física, WhatsApp y e-mail en una sola timeline.",
+    "identity": "Identity resolution: une cookies, hashed email, teléfono, CPF y device IDs en un único perfil.",
+    "predictions": "Predicciones nativas: probabilidad de compra, abandono, churn y LTV — en tiempo real.",
+    "lgpd": "LGPD-first: consentimiento granular, auditoría inmutable y opt-out propagado en todos los canales.",
+    "integrations": "Integración nativa con VTEX Data Lake, Shopify Flow, Google Cloud y AWS."
+  },
+  "systemScreens": {
+    "title": "Vea el perfil que el sitio, la tienda y WhatsApp ven — en tiempo real.",
+    "description": "Perfil 360°, segmentos activos, eventos en streaming y activaciones cross-canal.",
+    "ariaLabel": "Pantallas del sistema Iungo Behavior",
+    "badges": {
+      "profile360": "Perfil 360°",
+      "liveSegments": "Segmentos en vivo",
+      "streamEvents": "Eventos · stream",
+      "activations": "Activaciones"
+    },
+    "alts": {
+      "main": "Pantalla de Iungo Behavior con el perfil 360° de Juliana L. y el stream de eventos en tiempo real.",
+      "segmentBuilder": "Constructor de segmentos de Iungo Behavior con reglas en tiempo real, sin SQL.",
+      "identity": "Identidad unificada de Iungo Behavior con e-mail, CPF, device y cookie en el mismo perfil.",
+      "destinations": "Destinos de activación de Iungo Behavior con más de 40 conectores nativos."
+    }
+  },
+  "spotlight": {
+    "ariaLabel": "Testimonio de cliente sobre Iungo Behavior CDP",
+    "quote": "“Pasamos de un CDP de batch nocturno a Iungo Behavior CDP. La activación subió 240% en 90 días.”",
+    "attribution": "— CMO, retail premium (caso bajo NDA)"
+  },
+  "testimonials": {
+    "title": "Quien lo activó, lo sintió.",
+    "description": "Líderes de growth y CRM que reemplazaron Segment y herramientas sueltas por una stack unificada.",
+    "camila": {
+      "quote": "Antes esperábamos 24h para que un segmento estuviera listo en Meta. Hoy el trigger sale del CDP en segundos, y el flujo de WhatsApp se dispara antes de que el cliente deje el sitio. Es otro juego.",
+      "name": "Camila R.",
+      "role": "Head de Growth · D2C belleza · bajo NDA",
+      "metricLabel": "LATENCIA"
+    },
+    "bruno": {
+      "quote": "Saqué Segment, saqué herramientas de identidad y saqué dos jobs nocturnos. El costo de la stack cayó 38% en el primer semestre, y marketing por fin arma audiencias sin pedir SQL al equipo de datos.",
+      "name": "Bruno A.",
+      "role": "CRM Lead · Grupo de moda multimarca",
+      "metricLabel": "COSTO STACK"
+    }
+  },
+  "cta": {
+    "line1": "Empiece a activar datos",
+    "line2": "en segundos, no en horas."
+  }
+}

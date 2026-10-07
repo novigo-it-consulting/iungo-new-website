@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
+import { Link } from "@/i18n/navigation";
 
 import { CASES_HREF, isAvailableHref } from "@/constants/routes";
 import {
@@ -11,7 +13,7 @@ import {
 } from "@/components/ui/buttonInteraction.styles";
 import { homeCasesTitleClassName } from "@/components/ui/sectionTitle.styles";
 import CaseCard from "./CaseCard";
-import { CASES } from "./cases.constants";
+import { homeCaseCards } from "./caseViews";
 import {
   casesSectionCardsGridClassName,
   casesSectionClassName,
@@ -25,34 +27,78 @@ const allCasesButtonClassName = [
   solidButtonHoverClassName,
 ].join(" ");
 
-function AllCasesButton({ href }: { readonly href: string | null }) {
-  const label = (
+function AllCasesButton({
+  href,
+  label,
+}: {
+  readonly href: string | null;
+  readonly label: string;
+}) {
+  const content = (
     <span data-cases="all-cases-button-text" className={ctaPillLabelClassName}>
-      Ver todos os casos
+      {label}
     </span>
   );
 
   if (isAvailableHref(href)) {
     return (
-      <Link
-        href={href}
-        data-cases="all-cases-button"
-        className={allCasesButtonClassName}
-      >
-        {label}
+      <Link href={href} data-cases="all-cases-button" className={allCasesButtonClassName}>
+        {content}
       </Link>
     );
   }
 
   return (
     <span data-cases="all-cases-button" className={allCasesButtonClassName}>
-      {label}
+      {content}
     </span>
   );
 }
 
-export default function CasesSection() {
-  const casesHref = CASES_HREF;
+function CasesHeader({
+  badge,
+  title,
+  allCasesLabel,
+  casesHref,
+}: {
+  readonly badge: string;
+  readonly title: string;
+  readonly allCasesLabel: string;
+  readonly casesHref: string | null;
+}) {
+  return (
+    <div
+      data-cases="header"
+      className="flex w-full flex-col items-start gap-6 lg:min-h-[95.8px] lg:flex-row lg:items-end lg:justify-between lg:gap-10"
+    >
+      <div
+        data-cases="heading-group"
+        className="flex min-w-0 w-full flex-col items-center gap-4 lg:w-auto lg:items-start"
+      >
+        <span
+          data-cases="badge"
+          className="box-border inline-flex h-[31.8px] w-[145.8px] shrink-0 items-center justify-center self-center overflow-visible rounded-[399px] border border-[#0024AE]/25 bg-[#0024AE]/5 px-[14.4px] py-[6.4px] backdrop-blur-sm lg:self-start"
+        >
+          <span
+            data-cases="badge-text"
+            className="flex h-[17px] w-[115px] items-center justify-center whitespace-nowrap text-center font-reddit text-[11.2px] font-medium leading-[16.8px] text-[#0024AE]"
+          >
+            {badge}
+          </span>
+        </span>
+
+        <h2 id="cases-title" data-cases="title" className={homeCasesTitleClassName}>
+          {title}
+        </h2>
+      </div>
+
+      <AllCasesButton href={casesHref} label={allCasesLabel} />
+    </div>
+  );
+}
+
+export default async function CasesSection() {
+  const t = await getTranslations("home.cases");
 
   return (
     <section
@@ -60,47 +106,16 @@ export default function CasesSection() {
       aria-labelledby="cases-title"
       className={casesSectionClassName}
     >
-      <div
-        data-section="cases-container"
-        className={casesSectionContainerClassName}
-      >
-        <div
-          data-cases="header"
-          className="flex w-full flex-col items-start gap-6 lg:min-h-[95.8px] lg:flex-row lg:items-end lg:justify-between lg:gap-10"
-        >
-          <div
-            data-cases="heading-group"
-            className="flex min-w-0 w-full flex-col items-center gap-4 lg:w-auto lg:items-start"
-          >
-            <span
-              data-cases="badge"
-              className="box-border inline-flex h-[31.8px] w-[145.8px] shrink-0 items-center justify-center self-center overflow-visible rounded-[399px] border border-[#0024AE]/25 bg-[#0024AE]/5 px-[14.4px] py-[6.4px] backdrop-blur-sm lg:self-start"
-            >
-              <span
-                data-cases="badge-text"
-                className="flex h-[17px] w-[115px] items-center justify-center whitespace-nowrap text-center font-reddit text-[11.2px] font-medium leading-[16.8px] text-[#0024AE]"
-              >
-                CASOS DE SUCESSO
-              </span>
-            </span>
+      <div data-section="cases-container" className={casesSectionContainerClassName}>
+        <CasesHeader
+          badge={t("badge")}
+          title={t("title")}
+          allCasesLabel={t("allCases")}
+          casesHref={CASES_HREF}
+        />
 
-            <h2
-              id="cases-title"
-              data-cases="title"
-              className={homeCasesTitleClassName}
-            >
-              Resultados em produção. Não em pitch deck.
-            </h2>
-          </div>
-
-          <AllCasesButton href={casesHref} />
-        </div>
-
-        <div
-          data-cases="cards-grid"
-          className={casesSectionCardsGridClassName}
-        >
-          {CASES.map((successCase) => (
+        <div data-cases="cards-grid" className={casesSectionCardsGridClassName}>
+          {homeCaseCards(t).map((successCase) => (
             <CaseCard key={successCase.id} caseData={successCase} />
           ))}
         </div>

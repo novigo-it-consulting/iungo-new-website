@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": "Iungo Concierge",
+    "description": "Orquestación de recorridos multicanal en tiempo real. Studio visual no-code. Triggers en minutos, no en horas. El único stack que orquesta con su propio Behavior + Organizer AI PIM en tiempo real.",
+    "imageAlt": "Ilustración de Iungo Concierge conectando personas, procesos y objetivos"
+  },
+  "studio": {
+    "eyebrow": "IUNGO JOURNEY STUDIO",
+    "title": "Drag-and-drop. Sin código. Sin<br></br>dependencia de TI.",
+    "description": "Marketing construye, prueba y publica recorridos por su cuenta. Trigger, condicionales,<br></br>splits,<br></br>A/B testing — todo visual.",
+    "behavior": "Y a diferencia de Braze o Klaviyo, el Studio usa el <strong>Behavior Engine</strong> nativo:<br></br>usted<br></br>no exporta segmentos, no actualiza audiencias ni espera un sync.",
+    "imageAlt": "Flujo automatizado de Iungo Journey Studio"
+  },
+  "systemScreens": {
+    "title": "El canvas que marketing opera solo.",
+    "description": "Recorridos visuales, splits inteligentes, A/B test integrado y métricas en vivo por etapa.",
+    "filtersAria": "Recursos del canvas",
+    "canvasAlt": "Canvas drag-and-drop de Iungo Concierge con flujo de recuperación de carrito",
+    "badges": {
+      "canvas": "Lienzo drag-and-drop",
+      "templates": "Plantillas de flujo",
+      "abTest": "A/B test",
+      "stepMetrics": "Métricas por etapa"
+    },
+    "alts": {
+      "templates": "Plantillas listas de Iungo Concierge con 14 flujos validados en el retail brasileño",
+      "abTest": "A/B test integrado de Iungo Concierge con significancia estadística automática",
+      "funnel": "Embudo por etapa de Iungo Concierge que muestra dónde el flujo gana y dónde pierde"
+    }
+  },
+  "testimonials": {
+    "title": "Marketing publica el flujo sin TI.",
+    "description": "CMOs y CRM leads que dejaron de depender de tickets de ingeniería para probar un recorrido.",
+    "patricia": {
+      "quote": "Antes briefábamos al equipo de tech para ajustar un flujo y esperábamos 2 sprints. Hoy el practicante de CRM publica un test A/B en el canvas en 20 minutos. La velocidad de aprendizaje de la operación se duplicó.",
+      "name": "Patricia M.",
+      "role": "CMO · Grupo de moda premium · 6 marcas",
+      "metricValue": "2,5x",
+      "metricLabel": "CVR VS SITE"
+    },
+    "eduardo": {
+      "quote": "Reemplazamos una stack de Braze + Klaviyo + Segment por un solo orquestador. El ROI llegó en 60 días solo por los costos recortados — el incremento de ventas lo tomamos como bonus.",
+      "name": "Eduardo F.",
+      "role": "Head de CRM · Beauty & care · bajo NDA",
+      "metricValue": "60 días",
+      "metricLabel": "PAYBACK"
+    }
+  },
+  "triggers": {
+    "eyebrow": "FLUJOS INTELIGENTES LISTOS",
+    "title": "Triggers que convierten en producción real.",
+    "cartAbandonment": {
+      "title": "Abandono de carrito",
+      "description": "CVR media (Outlet Premium)"
+    },
+    "navigationAbandonment": {
+      "title": "Abandono de navegación",
+      "description": "CVR media (top performer)"
+    },
+    "priceReduction": {
+      "title": "Reducción de precio",
+      "description": "CVR media"
+    },
+    "repurchaseKids": {
+      "title": "Recompra (kids)",
+      "description": "CVR (categoría infantil)"
+    }
+  },
+  "cta": {
+    "line1": "Triggers que convierten",
+    "line2": "2,5x más que el sitio."
+  }
+}

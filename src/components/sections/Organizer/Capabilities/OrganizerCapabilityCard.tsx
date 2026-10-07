@@ -12,7 +12,7 @@ export default function OrganizerCapabilityCard({
   title,
   description,
   icon: Icon,
-}: OrganizerCapabilityCardProps) {
+}: Readonly<OrganizerCapabilityCardProps>) {
   return (
     <li className="flex h-full w-full min-w-0 flex-col items-start rounded-lg border border-[#E4E4E7] bg-white p-6 2xl:min-h-[178px]">
       <div className="flex w-full min-w-0 flex-col items-start">

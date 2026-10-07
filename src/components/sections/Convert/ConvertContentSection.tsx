@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 
 import ConvertHandoff from "./Handoff/ConvertHandoff";
@@ -7,11 +9,15 @@ import ProductTestimonialsSection from "@/components/sections/shared/Testimonial
 import { CONVERT_TESTIMONIALS } from "./Testimonials/convertTestimonials.constants";
 import ConvertWhySellsMore from "./WhySellsMore/ConvertWhySellsMore";
 
-export default function ConvertContentSection() {
+export default async function ConvertContentSection() {
+  const t = await getTranslations("productPages.convert");
+  const tQuotes = await getTranslations("productPages.convert.testimonials");
+  const [daniel, vivian] = CONVERT_TESTIMONIALS;
+
   return (
     <section
       data-convert-content-section
-      aria-label="Conteúdo do Iungo Convert"
+      aria-label={t("contentAria")}
       className="box-border w-full min-w-0 bg-white pt-[76px]"
     >
       <div className="mx-auto w-[calc(100%_-_48px)] min-w-0 max-w-[960px] sm:w-[calc(100%_-_64px)]">
@@ -33,9 +39,24 @@ export default function ConvertContentSection() {
       >
         <ProductTestimonialsSection
           productSlug="convert"
-          title="O comercial que vende sozinho — e abre porta pro vendedor."
-          description="Diretores comerciais que pararam de perder venda quente fora do horário e começaram a entregar pipeline aquecido ao time."
-          testimonials={CONVERT_TESTIMONIALS}
+          title={tQuotes("title")}
+          description={tQuotes("description")}
+          testimonials={[
+            {
+              ...daniel,
+              quote: tQuotes("daniel.quote"),
+              name: tQuotes("daniel.name"),
+              role: tQuotes("daniel.role"),
+              metricLabel: tQuotes("daniel.metricLabel"),
+            },
+            {
+              ...vivian,
+              quote: tQuotes("vivian.quote"),
+              name: tQuotes("vivian.name"),
+              role: tQuotes("vivian.role"),
+              metricLabel: tQuotes("vivian.metricLabel"),
+            },
+          ]}
           variant="convert"
         />
       </PageContainer>

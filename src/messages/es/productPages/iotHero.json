@@ -1,0 +1,32 @@
+{
+  "hero": {
+    "title": "Iungo IoT",
+    "presentation": "La capa física de la plataforma Iungo. Activos, personas, ambientes — todos como dato en tiempo real.",
+    "description": "RFID, BLE, LoRa, NFC y GPS unificados en una sola plataforma — Iungo Asset Cloud. La misma infraestructura que rastrea 70.000+ activos en uno de los mayores retailers de Brasil.",
+    "imageAlt": "Ilustración de Iungo IoT con una nube dorada conectando dispositivos RFID, BLE, LoRa, NFC y GPS."
+  },
+  "contentAria": "Contenido de Iungo IoT",
+  "metrics": {
+    "title": "OPERACIÓN EN PRODUCCIÓN",
+    "trackedAssets": {
+      "value": "70.000+",
+      "label": "activos rastreados"
+    },
+    "connectedStores": {
+      "value": "3.000+",
+      "label": "tiendas conectadas"
+    },
+    "inventoryAccuracy": {
+      "value": "98,7%",
+      "label": "exactitud de inventario"
+    },
+    "countingCost": {
+      "value": "-90%",
+      "label": "costo de conteo"
+    }
+  },
+  "cta": {
+    "line1": "El activo físico se vuelve dato.",
+    "line2": "El dato se vuelve inteligencia."
+  }
+}

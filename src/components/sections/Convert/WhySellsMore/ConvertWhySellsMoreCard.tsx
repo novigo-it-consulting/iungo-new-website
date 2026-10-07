@@ -6,7 +6,7 @@ type ConvertWhySellsMoreCardProps = {
 
 export default function ConvertWhySellsMoreCard({
   card,
-}: ConvertWhySellsMoreCardProps) {
+}: Readonly<ConvertWhySellsMoreCardProps>) {
   return (
     <article
       data-convert-why-sells-more-card

@@ -31,7 +31,7 @@ export default function SectionHeader({
   className = "",
   eyebrowIcon,
   titleSize = "default",
-}: SectionHeaderProps) {
+}: Readonly<SectionHeaderProps>) {
   return (
     <div
       className={`flex w-full min-w-0 flex-col items-center justify-start gap-4 ${className}`}

@@ -1,10 +1,14 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroLayout from "@/components/sections/shared/Hero/ProductHeroLayout";
 import ProductHeroVisual from "@/components/sections/shared/Hero/ProductHeroVisual";
 
 import ResolveHeroContent from "./ResolveHeroContent";
 
-export default function ResolveHeroSection() {
+export default async function ResolveHeroSection() {
+  const t = await getTranslations("productPages.resolve.hero");
+
   return (
     <ProductHeroLayout
       scope="resolve"
@@ -16,7 +20,7 @@ export default function ResolveHeroSection() {
         <ProductHeroVisual
           productSlug="resolve"
           src="/images/products/resolve/resolve-hero.png"
-          alt="Ilustração do Iungo Resolve com fluxos de atendimento e módulos conectados."
+          alt={t("imageAlt")}
           width={900}
           height={900}
         />

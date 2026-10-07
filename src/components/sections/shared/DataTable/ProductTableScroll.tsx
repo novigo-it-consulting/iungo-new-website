@@ -2,8 +2,12 @@ import type { ReactNode } from "react";
 
 import { primaryFocusVisibleClassName } from "@/components/ui/buttonInteraction.styles";
 
+import ProductTableScrollRegion from "./ProductTableScrollRegion";
+
+// contain-paint segura a largura da tabela dentro da rolagem.
+// Os ancestrais flex/grid já usam min-w-0; sem isso o Chrome soma a tabela ao scroll da página.
 const productTableScrollClassName = [
-  "w-full min-w-0 overflow-x-auto overscroll-x-contain",
+  "w-full min-w-0 contain-paint overflow-x-auto overscroll-x-contain",
   primaryFocusVisibleClassName,
 ].join(" ");
 
@@ -26,12 +30,10 @@ export default function ProductTableScroll({
   dataSlug,
 }: Readonly<ProductTableScrollProps>) {
   return (
-    <div
-      role="region"
-      aria-label={ariaLabel}
-      tabIndex={0}
-      {...(dataSlug ? { "data-product-text-table": dataSlug } : {})}
+    <ProductTableScrollRegion
+      ariaLabel={ariaLabel}
       className={`${productTableScrollClassName} ${className}`}
+      dataSlug={dataSlug}
     >
       <div
         {...(dataSlug
@@ -41,6 +43,6 @@ export default function ProductTableScroll({
       >
         {children}
       </div>
-    </div>
+    </ProductTableScrollRegion>
   );
 }

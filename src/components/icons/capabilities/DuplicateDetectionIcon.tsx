@@ -1,7 +1,7 @@
 import type { SVGProps } from "react";
 
 export default function DuplicateDetectionIcon(
-  props: SVGProps<SVGSVGElement>,
+  props: Readonly<SVGProps<SVGSVGElement>>,
 ) {
   return (
     <svg

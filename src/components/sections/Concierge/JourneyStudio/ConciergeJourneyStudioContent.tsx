@@ -1,18 +1,25 @@
+import { getTranslations } from "next-intl/server";
+
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
+import { renderInkStrong } from "@/components/ui/richText";
 import {
   homeSectionTitleMobileClassName,
   productSectionDescriptionBaseClassName,
 } from "@/components/ui/sectionTitle.styles";
 
-export default function ConciergeJourneyStudioContent() {
+function StudioBreak() {
+  return <br className="hidden xl:block" />;
+}
+
+export default async function ConciergeJourneyStudioContent() {
+  const t = await getTranslations("productPages.concierge.studio");
+
   return (
     <div
       data-concierge-studio-content
       className="flex min-w-0 w-full flex-col gap-4"
     >
-      <SectionEyebrow variant="compact">
-        IUNGO JOURNEY STUDIO
-      </SectionEyebrow>
+      <SectionEyebrow variant="compact">{t("eyebrow")}</SectionEyebrow>
 
       <h2
         id="concierge-studio-title"
@@ -23,34 +30,24 @@ export default function ConciergeJourneyStudioContent() {
           "xl:text-[32px] xl:leading-[40px] xl:tracking-[-0.64px]",
         ].join(" ")}
       >
-        Drag-and-drop. Sem código. Sem
-        <br className="hidden xl:block" />
-        dependência de TI.
+        {t.rich("title", { br: StudioBreak })}
       </h2>
 
       <p
         data-concierge-studio-description
         className={productSectionDescriptionBaseClassName}
       >
-        Marketing constrói, testa e publica jornadas sozinho. Trigger,
-        condicionais,
-        <br className="hidden xl:block" />
-        splits,
-        <br className="hidden xl:block" />
-        A/B testing — tudo visual.
+        {t.rich("description", { br: StudioBreak })}
       </p>
 
       <p
         data-concierge-studio-behavior-description
         className={productSectionDescriptionBaseClassName}
       >
-        E ao contrário de Braze ou Klaviyo, o Studio usa o{" "}
-        <strong className="font-bold text-[#27272A]">Behavior Engine</strong>{" "}
-        nativo:
-        <br className="hidden xl:block" />
-        você
-        <br className="hidden xl:block" />
-        não precisa exportar segmentos, atualizar audiências ou esperar sync.
+        {t.rich("behavior", {
+          strong: renderInkStrong,
+          br: StudioBreak,
+        })}
       </p>
     </div>
   );

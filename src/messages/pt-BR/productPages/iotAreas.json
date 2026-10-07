@@ -1,0 +1,39 @@
+{
+  "areas": {
+    "eyebrow": "ÁREAS DE APLICAÇÃO",
+    "title": "8 áreas. Uma plataforma.",
+    "description": "Do chão de fábrica ao showroom de luxo, do almoxarifado ao centro cirúrgico.",
+    "assetMonitoring": {
+      "title": "Monitoramento de ativos",
+      "description": "Notebooks, equipamentos, mobiliário, ferramentas. Localização e status em tempo real."
+    },
+    "peopleMonitoring": {
+      "title": "Monitoramento de pessoas",
+      "description": "Acesso, presença, fluxo. Crachá inteligente e zonas autorizadas."
+    },
+    "nr36": {
+      "title": "NR-36 & segurança",
+      "description": "Conformidade automatizada para frigoríficos e ambientes críticos."
+    },
+    "coldChain": {
+      "title": "Cold chain & temperatura",
+      "description": "Câmaras frias, vacinas, medicamentos. Alertas antes do desvio."
+    },
+    "milkRun": {
+      "title": "Milk run & logística",
+      "description": "Roteirização e rastreio entre CDs, lojas, fornecedores."
+    },
+    "ppe": {
+      "title": "EPI & uso obrigatório",
+      "description": "Validação automática de uso de capacete, luva, óculos antes de zona crítica."
+    },
+    "hospitality": {
+      "title": "Hotelaria & hospitalidade",
+      "description": "Enxoval, minibar, amenities. Check-in automático e pull operacional."
+    },
+    "highValue": {
+      "title": "Alto valor agregado",
+      "description": "Joias, relógios, eletrônicos premium. Anti-furto e prova de autenticidade."
+    }
+  }
+}

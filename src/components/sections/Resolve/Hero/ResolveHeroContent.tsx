@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
@@ -8,7 +10,9 @@ import {
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
-export default function ResolveHeroContent() {
+export default async function ResolveHeroContent() {
+  const t = await getTranslations("productPages.resolve.hero");
+
   return (
     <div data-resolve-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
@@ -17,7 +21,7 @@ export default function ResolveHeroContent() {
 
       <ProductHeroTitle
         id="resolve-hero-title"
-        title="Iungo Resolve"
+        title={t("title")}
         dataPrefix="resolve"
       />
 
@@ -29,16 +33,14 @@ export default function ResolveHeroContent() {
           data-resolve-hero-presentation
           className={productHeroParagraphClassName}
         >
-          Agente de suporte L1/L2 com conhecimento profundo do seu produto.
+          {t("presentation")}
         </p>
 
         <p
           data-resolve-hero-description
           className={`mt-[14px] ${productHeroParagraphClassName}`}
         >
-          Lê o catálogo do Iungo Organizer AI PIM em tempo real. Consulta o
-          perfil do Iungo Behavior CDP. Resolve dúvidas técnicas como um
-          especialista — em segundos.
+          {t("description")}
         </p>
       </div>
     </div>

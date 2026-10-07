@@ -5,7 +5,11 @@ export const primaryFocusVisibleClassName =
   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-2";
 
 export const mutedFocusVisibleClassName =
-  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#687681] focus-visible:ring-offset-2";
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-action-muted focus-visible:ring-offset-2";
+
+/** Foco em controle sobre fundo escuro. Anel interno para não invadir o vizinho. */
+export const darkSurfaceFocusVisibleClassName =
+  "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-white";
 
 export const outlineButtonHoverClassName =
   "transition-colors duration-150 hover:bg-[#0024AE]/10 motion-reduce:transition-none";

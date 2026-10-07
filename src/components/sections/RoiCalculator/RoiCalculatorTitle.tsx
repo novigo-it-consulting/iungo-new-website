@@ -1,15 +1,19 @@
+import { getTranslations } from "next-intl/server";
+
 import { homeRoiTitleClassName } from "@/components/ui/sectionTitle.styles";
 
-export default function RoiCalculatorTitle() {
+function renderRoiLineBreak() {
+  return <br />;
+}
+
+export default async function RoiCalculatorTitle() {
+  const t = await getTranslations("home.roi");
+
   return (
-    <h2
-      id="roi-title"
-      data-roi="title"
-      className={homeRoiTitleClassName}
-    >
-      Vamos calcular o ROI
-      <br />
-      da sua operação?
+    <h2 id="roi-title" data-roi="title" className={homeRoiTitleClassName}>
+      {t.rich("title", {
+        br: renderRoiLineBreak,
+      })}
     </h2>
   );
 }

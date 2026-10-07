@@ -1,8 +1,8 @@
 "use client";
 
-import ChevronDownIcon from "@/components/icons/ChevronDownIcon";
+import { useTranslations } from "next-intl";
 
-import { SOLUCOES_NAV_LABEL } from "../header.constants";
+import ChevronDownIcon from "@/components/icons/ChevronDownIcon";
 import SolucoesMegaMenuMobileCategories from "./SolucoesMegaMenuMobileCategories";
 import {
   solucoesMobileGroupButtonClassName,
@@ -16,6 +16,7 @@ type SolucoesMobileNavGroupProps = {
 export default function SolucoesMobileNavGroup({
   onNavigate,
 }: Readonly<SolucoesMobileNavGroupProps>) {
+  const t = useTranslations("header");
   const panelId = "mobile-solucoes-nav-group";
 
   return (
@@ -25,7 +26,7 @@ export default function SolucoesMobileNavGroup({
           className={`${solucoesMobileGroupButtonClassName} list-none [&::-webkit-details-marker]:hidden`}
           aria-controls={panelId}
         >
-          <span>{SOLUCOES_NAV_LABEL}</span>
+          <span>{t("nav.solutions")}</span>
           <ChevronDownIcon
             className={`${solucoesMegaMenuChevronClassName} group-open/details:rotate-180 group-open/details:text-[#0024AE]`}
           />

@@ -1,0 +1,87 @@
+{
+  "hero": {
+    "title": "Iungo Convert",
+    "presentation": "O único Sales Agent que conhece seu catálogo PIM e o perfil CDP em tempo real.",
+    "description": "Identifica intenção. Recomenda produto. Negocia condição. Fecha venda. E faz handoff perfeito ao humano quando faz sentido — com contexto completo.",
+    "imageAlt": "Ilustração do Iungo Convert com funil de vendas, perfis de clientes e indicadores de conversão."
+  },
+  "contentAria": "Conteúdo do Iungo Convert",
+  "handoff": {
+    "eyebrow": "HANDOFF HUMANO",
+    "title": "Quando entrega ao vendedor humano, entrega tudo.",
+    "description": "95% dos chatbots passam o cliente \"do zero\" para o humano. O Iungo Convert passa o briefing pronto:",
+    "summary": {
+      "title": "RESUMO",
+      "description": "Intenção, objeções levantadas, faixa de preço aceita, urgência percebida."
+    },
+    "products": {
+      "title": "PRODUTOS",
+      "description": "Top 3 sugestões já calibradas, com estoque e margem confirmados."
+    },
+    "profile": {
+      "title": "PERFIL",
+      "description": "Histórico, LTV, segmento, se é VIP, alergias/preferências de marca."
+    },
+    "nextAction": {
+      "title": "PRÓXIMA AÇÃO",
+      "description": "Recomendação concreta: \"ofereça parcelamento sem juros e fechamento por WhatsApp\"."
+    }
+  },
+  "systemScreens": {
+    "title": "Onde o time comercial vê o pipeline com IA.",
+    "description": "Pipeline gerado por IA, conversas em curso, briefings de handoff e métricas por vendedor.",
+    "ariaLabel": "Telas do sistema Iungo Convert",
+    "badges": {
+      "pipeline": "Pipeline · IA",
+      "conversation": "Conversa em curso",
+      "briefing": "Briefing de handoff",
+      "performance": "Performance · vendedor"
+    },
+    "alts": {
+      "main": "Pipeline comercial do Iungo Convert com oportunidades detectadas, conversas, handoffs e vendas fechadas.",
+      "conversation": "Conversa comercial do Iungo Convert com recomendação de produto e fechamento de venda.",
+      "briefing": "Briefing para o vendedor com contexto do cliente no Iungo Convert.",
+      "performance": "Performance do time comercial do Iungo Convert com métricas por vendedor."
+    }
+  },
+  "testimonials": {
+    "title": "O comercial que vende sozinho — e abre porta pro vendedor.",
+    "description": "Diretores comerciais que pararam de perder venda quente fora do horário e começaram a entregar pipeline aquecido ao time.",
+    "daniel": {
+      "quote": "Antes a gente perdia visita quente do site fora do horário. Hoje o Iungo Convert fecha à 1h da manhã e entrega o ticket pronto pro vendedor humano só nos casos B2B. Ticket médio dobrou na operação digital.",
+      "name": "Daniel P.",
+      "role": "Diretor Comercial · Calçados outdoor · sob NDA",
+      "metricLabel": "TICKET MÉDIO"
+    },
+    "vivian": {
+      "quote": "Drift e Intercom recomendavam de jeito genérico. O Iungo recomenda olhando o catálogo de verdade — e olhando o histórico do cliente no CDP. Recomendação melhor = conversão maior. Não tem mistério.",
+      "name": "Vivian K.",
+      "role": "Head de Vendas Digitais · Marketplace fashion",
+      "metricLabel": "CVR CONVERSA"
+    }
+  },
+  "why": {
+    "eyebrow": "POR QUE VENDE MAIS",
+    "title": "Conhece o catálogo. Conhece o cliente. Conhece o momento.",
+    "description": "Drift, Intercom, Regie.ai funcionam com scripts. O Iungo Convert funciona com dados vivos da sua operação.",
+    "catalog": {
+      "category": "CATÁLOGO",
+      "title": "Recomenda com critério técnico",
+      "description": "Conhece compatibilidade, especificações, estoque, preço atual. Sugere produto certo, não o mais caro."
+    },
+    "profile": {
+      "category": "PERFIL",
+      "title": "Adapta tom e oferta",
+      "description": "Se é VIP, oferece pré-venda. Se é price-sensitive, oferece cupom. Se é B2B, oferece condição corporativa."
+    },
+    "moment": {
+      "category": "MOMENTO",
+      "title": "Aciona no instante certo",
+      "description": "Triggers do Behavior Engine: 3ª visita à mesma categoria, abandono de carrinho premium, queda de preço de item favoritado."
+    }
+  },
+  "cta": {
+    "line1": "O Sales Agent que",
+    "line2": "entende seu negócio."
+  }
+}

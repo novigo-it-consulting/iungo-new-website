@@ -16,7 +16,7 @@ type CaseCardMediaProps = {
 export default function CaseCardMedia({
   caseId,
   image,
-}: CaseCardMediaProps) {
+}: Readonly<CaseCardMediaProps>) {
   return (
     <div
       data-case-media={caseId}

@@ -6,7 +6,7 @@ type CaseCardDescriptionProps = {
 export default function CaseCardDescription({
   caseId,
   children,
-}: CaseCardDescriptionProps) {
+}: Readonly<CaseCardDescriptionProps>) {
   return (
     <div
       data-case-description={caseId}

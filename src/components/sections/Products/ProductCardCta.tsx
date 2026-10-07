@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import {
   ctaPillBaseClassName,
@@ -12,16 +12,16 @@ import {
 interface ProductCardCtaProps {
   productId: string;
   href: string;
-  label?: string;
+  label: string;
   ariaLabel?: string;
 }
 
 export default function ProductCardCta({
   productId,
   href,
-  label = "Saiba mais",
+  label,
   ariaLabel,
-}: ProductCardCtaProps) {
+}: Readonly<ProductCardCtaProps>) {
   return (
     <Link
       data-product-cta={productId}

@@ -1,10 +1,14 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroLayout from "@/components/sections/shared/Hero/ProductHeroLayout";
 import ProductHeroVisual from "@/components/sections/shared/Hero/ProductHeroVisual";
 
 import ConciergeHeroContent from "./ConciergeHeroContent";
 
-export default function ConciergeHeroSection() {
+export default async function ConciergeHeroSection() {
+  const t = await getTranslations("productPages.concierge.hero");
+
   return (
     <ProductHeroLayout
       scope="concierge"
@@ -15,7 +19,7 @@ export default function ConciergeHeroSection() {
         <ProductHeroVisual
           productSlug="concierge"
           src="/images/products/concierge/concierge-hero.png"
-          alt="Ilustração do Iungo Concierge conectando pessoas, processos e objetivos"
+          alt={t("imageAlt")}
           width={900}
           height={900}
         />

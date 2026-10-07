@@ -1,7 +1,11 @@
+import { getTranslations } from "next-intl/server";
+
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 import { homeSectionTitleMobileClassName } from "@/components/ui/sectionTitle.styles";
 
-export default function ConciergeTriggersHeader() {
+export default async function ConciergeTriggersHeader() {
+  const t = await getTranslations("productPages.concierge.triggers");
+
   return (
     <header
       data-concierge-triggers-header
@@ -9,7 +13,7 @@ export default function ConciergeTriggersHeader() {
     >
       <div className="flex w-full flex-col items-center gap-4">
         <SectionEyebrow variant="compact">
-          RÉGUAS INTELIGENTES PRONTAS
+          {t("eyebrow")}
         </SectionEyebrow>
 
         <div
@@ -25,7 +29,7 @@ export default function ConciergeTriggersHeader() {
               "lg:text-[42px] lg:leading-[46px] lg:tracking-[-0.84px] xl:text-[48px] xl:leading-[48px] xl:tracking-[-0.96px]",
             ].join(" ")}
           >
-            Triggers que convertem em produção real.
+            {t("title")}
           </h2>
         </div>
       </div>

@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 
 import IoTApplicationAreasSection from "./ApplicationAreas/IoTApplicationAreasSection";
@@ -9,11 +11,15 @@ import ProductTestimonialsSection from "@/components/sections/shared/Testimonial
 
 import { IOT_TESTIMONIALS } from "./Testimonials/iotTestimonials.constants";
 
-export default function IoTContentSection() {
+export default async function IoTContentSection() {
+  const t = await getTranslations("productPages.iot");
+  const tQuotes = await getTranslations("productPages.iot.testimonials");
+  const [luis, claudia] = IOT_TESTIMONIALS;
+
   return (
     <section
       data-iot-content-section
-      aria-label="Conteúdo do Iungo IoT"
+      aria-label={t("contentAria")}
       className="w-full min-w-0 bg-white"
     >
       <IoTMetricsSection />
@@ -29,9 +35,24 @@ export default function IoTContentSection() {
       >
         <ProductTestimonialsSection
           productSlug="iot"
-          title="Quem rastreia ativo crítico, fala."
-          description="Diretores de TI e supply chain que reduziram prejuízo, fechamento contábil e auditoria física."
-          testimonials={IOT_TESTIMONIALS}
+          title={tQuotes("title")}
+          description={tQuotes("description")}
+          testimonials={[
+            {
+              ...luis,
+              quote: tQuotes("luis.quote"),
+              name: tQuotes("luis.name"),
+              role: tQuotes("luis.role"),
+              metricLabel: tQuotes("luis.metricLabel"),
+            },
+            {
+              ...claudia,
+              quote: tQuotes("claudia.quote"),
+              name: tQuotes("claudia.name"),
+              role: tQuotes("claudia.role"),
+              metricLabel: tQuotes("claudia.metricLabel"),
+            },
+          ]}
           variant="iot"
         />
       </PageContainer>

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { ctaMobileSizeAndTypographyClassName } from "@/components/ui/ctaButton.styles";
 
@@ -17,7 +17,7 @@ export default function CtaButton({
   href,
   label,
   variant = "default",
-}: CtaButtonProps) {
+}: Readonly<CtaButtonProps>) {
   return (
     <Link
       href={href}

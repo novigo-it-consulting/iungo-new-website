@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 
 import ResolveDifferentials from "./Differentials/ResolveDifferentials";
@@ -12,11 +14,40 @@ import ProductTestimonialsSection from "@/components/sections/shared/Testimonial
 
 import { RESOLVE_TESTIMONIALS } from "./Testimonials/resolveTestimonials.constants";
 
-export default function ResolveContentSection() {
+type MetricsTranslator = Awaited<
+  ReturnType<typeof getTranslations<"productPages.resolve.metrics">>
+>;
+
+function metricCopy(t: MetricsTranslator, id: (typeof RESOLVE_METRICS)[number]["id"]) {
+  switch (id) {
+    case "automated-resolution":
+      return {
+        description: t("automatedResolution.description"),
+        complement: t("automatedResolution.complement"),
+      };
+    case "response-time":
+      return {
+        description: t("responseTime.description"),
+        complement: t("responseTime.complement"),
+      };
+    case "ticket-cost":
+      return {
+        description: t("ticketCost.description"),
+        complement: t("ticketCost.complement"),
+      };
+  }
+}
+
+export default async function ResolveContentSection() {
+  const t = await getTranslations("productPages.resolve");
+  const tMetrics = await getTranslations("productPages.resolve.metrics");
+  const tQuotes = await getTranslations("productPages.resolve.testimonials");
+  const [renata, felipe] = RESOLVE_TESTIMONIALS;
+
   return (
     <section
       data-resolve-content-section
-      aria-label="Conteúdo do Iungo Resolve"
+      aria-label={t("contentAria")}
       className={resolveContentSectionClassName}
     >
       <PageContainer
@@ -29,7 +60,10 @@ export default function ResolveContentSection() {
           className={resolveMetricsGridClassName}
         >
           {RESOLVE_METRICS.map((metric) => (
-            <ResolveMetricItem key={metric.id} metric={metric} />
+            <ResolveMetricItem
+              key={metric.id}
+              metric={{ ...metric, ...metricCopy(tMetrics, metric.id) }}
+            />
           ))}
         </div>
 
@@ -51,9 +85,24 @@ export default function ResolveContentSection() {
       >
         <ProductTestimonialsSection
           productSlug="resolve"
-          title="CX que cresce sem inflar headcount."
-          description="Líderes de atendimento que automatizaram L1/L2 sem perder qualidade nem CSAT."
-          testimonials={RESOLVE_TESTIMONIALS}
+          title={tQuotes("title")}
+          description={tQuotes("description")}
+          testimonials={[
+            {
+              ...renata,
+              quote: tQuotes("renata.quote"),
+              name: tQuotes("renata.name"),
+              role: tQuotes("renata.role"),
+              metricLabel: tQuotes("renata.metricLabel"),
+            },
+            {
+              ...felipe,
+              quote: tQuotes("felipe.quote"),
+              name: tQuotes("felipe.name"),
+              role: tQuotes("felipe.role"),
+              metricLabel: tQuotes("felipe.metricLabel"),
+            },
+          ]}
           variant="resolve"
         />
       </PageContainer>

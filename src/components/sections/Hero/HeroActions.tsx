@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
+import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref, PLATAFORMA_HREF, SOLICITAR_DEMONSTRACAO_HREF } from "@/constants/routes";
 import PrimaryLink from "@/components/ui/PrimaryLink";
@@ -10,10 +12,11 @@ import {
   homeHeroSecondaryButtonClassName,
 } from "./homeHero.styles";
 
-export default function HeroActions() {
+export default async function HeroActions() {
+  const t = await getTranslations("common");
   const plataformaHref = PLATAFORMA_HREF;
   const secondaryLabel = (
-    <span className={homeHeroActionLabelClassName}>Conhecer a Plataforma</span>
+    <span className={homeHeroActionLabelClassName}>{t("knowPlatform")}</span>
   );
 
   return (
@@ -23,7 +26,7 @@ export default function HeroActions() {
         className={homeHeroPrimaryButtonClassName}
         labelClassName={homeHeroActionLabelClassName}
       >
-        Solicitar Demonstração
+        {t("requestDemo")}
       </PrimaryLink>
 
       {isAvailableHref(plataformaHref) ? (

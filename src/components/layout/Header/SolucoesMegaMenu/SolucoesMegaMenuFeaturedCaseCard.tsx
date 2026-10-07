@@ -1,3 +1,7 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 import { isAvailableHref } from "@/constants/routes";
 import { SOLUCOES_MEGA_MENU_FEATURED_CASE } from "./solucoesMegaMenu.featuredCase.constants";
 import SolucoesMegaMenuArrowLink from "./SolucoesMegaMenuArrowLink";
@@ -16,6 +20,7 @@ type SolucoesMegaMenuFeaturedCaseCardProps = {
 export default function SolucoesMegaMenuFeaturedCaseCard({
   onNavigate,
 }: Readonly<SolucoesMegaMenuFeaturedCaseCardProps>) {
+  const t = useTranslations("megaMenu");
   const featuredCase = SOLUCOES_MEGA_MENU_FEATURED_CASE;
   const canReadFeaturedCase = isAvailableHref(featuredCase.readCaseHref);
 
@@ -26,25 +31,25 @@ export default function SolucoesMegaMenuFeaturedCaseCard({
     >
       <SolucoesMegaMenuBadge
         variant="featured-case"
-        label={featuredCase.badgeLabel}
+        label={t("featuredCase.badge")}
       />
 
       <h3
         data-solucoes-mega-menu-featured-case-title
         className={solucoesMegaMenuFeaturedCaseTitleClassName}
       >
-        {featuredCase.title}
+        {t("featuredCase.title")}
       </h3>
 
       <p
         data-solucoes-mega-menu-featured-case-subtitle
         className={solucoesMegaMenuFeaturedCaseSubtitleClassName}
       >
-        {featuredCase.subtitle}
+        {t("featuredCase.subtitle")}
       </p>
 
       <SolucoesMegaMenuArrowLink
-        label={featuredCase.readCaseLabel}
+        label={t("featuredCase.readCase")}
         href={featuredCase.readCaseHref}
         linkKind={canReadFeaturedCase ? "featured-case" : "featured-case-pending"}
         className={solucoesMegaMenuFeaturedCaseReadLinkClassName}

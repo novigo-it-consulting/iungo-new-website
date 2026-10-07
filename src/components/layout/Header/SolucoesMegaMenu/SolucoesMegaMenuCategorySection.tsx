@@ -1,5 +1,8 @@
+"use client";
+
+import { useTranslations } from "next-intl";
+
 import type { SolucoesMegaMenuCategory } from "./solucoesMegaMenu.constants";
-import { SOLUCOES_MEGA_MENU_VIEW_SOLUTION_LABEL } from "./solucoesMegaMenu.constants";
 import { getSolucoesMegaMenuProductsForCategory } from "./solucoesMegaMenu.products";
 import SolucoesMegaMenuArrowLink from "./SolucoesMegaMenuArrowLink";
 import SolucoesMegaMenuCategoryHeader from "./SolucoesMegaMenuCategoryHeader";
@@ -19,6 +22,7 @@ export default function SolucoesMegaMenuCategorySection({
   category,
   onProductNavigate,
 }: Readonly<SolucoesMegaMenuCategorySectionProps>) {
+  const t = useTranslations("megaMenu");
   const products = getSolucoesMegaMenuProductsForCategory(category);
 
   return (
@@ -38,7 +42,7 @@ export default function SolucoesMegaMenuCategorySection({
         ))}
       </ul>
       <SolucoesMegaMenuArrowLink
-        label={SOLUCOES_MEGA_MENU_VIEW_SOLUTION_LABEL}
+        label={t("viewSolution")}
         href={category.viewSolutionHref}
         linkKind="view-solution"
         className={solucoesMegaMenuCategoryViewLinkClassName}

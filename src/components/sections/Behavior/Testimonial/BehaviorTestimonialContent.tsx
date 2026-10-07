@@ -1,9 +1,13 @@
+import { getTranslations } from "next-intl/server";
+
 import {
   productSectionDescriptionClassName,
   productSectionTitleClassName,
 } from "@/components/ui/sectionTitle.styles";
 
-export default function BehaviorTestimonialContent() {
+export default async function BehaviorTestimonialContent() {
+  const t = await getTranslations("productPages.behavior.spotlight");
+
   return (
     <div
       data-behavior-testimonial-content
@@ -17,8 +21,7 @@ export default function BehaviorTestimonialContent() {
           data-behavior-testimonial-quote
           className={productSectionTitleClassName}
         >
-          &ldquo;Saímos de um CDP batch noturno para o Iungo Behavior CDP. A
-          ativação subiu 240% em 90 dias.&rdquo;
+          {t("quote")}
         </blockquote>
       </div>
 
@@ -30,7 +33,7 @@ export default function BehaviorTestimonialContent() {
           data-behavior-testimonial-attribution
           className={productSectionDescriptionClassName}
         >
-          — CMO, varejo premium (case sob NDA)
+          {t("attribution")}
         </p>
       </div>
     </div>

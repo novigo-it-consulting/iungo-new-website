@@ -10,7 +10,7 @@ interface ResolveMetricItemProps {
   metric: ResolveMetric;
 }
 
-export default function ResolveMetricItem({ metric }: ResolveMetricItemProps) {
+export default function ResolveMetricItem({ metric }: Readonly<ResolveMetricItemProps>) {
   return (
     <div
       data-resolve-metric-item={metric.id}

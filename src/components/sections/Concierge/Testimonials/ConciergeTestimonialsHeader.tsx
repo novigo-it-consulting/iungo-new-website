@@ -1,16 +1,21 @@
+import { getTranslations } from "next-intl/server";
+
 import SectionEyebrow from "@/components/ui/SectionEyebrow";
 import {
   productSectionDescriptionClassName,
   productSectionTitleClassName,
 } from "@/components/ui/sectionTitle.styles";
 
-export default function ConciergeTestimonialsHeader() {
+export default async function ConciergeTestimonialsHeader() {
+  const tCommon = await getTranslations("common");
+  const t = await getTranslations("productPages.concierge.testimonials");
+
   return (
     <header
       data-concierge-testimonials-header
       className="flex w-full max-w-[672px] flex-col items-center gap-3"
     >
-      <SectionEyebrow variant="compact">DEPOIMENTOS</SectionEyebrow>
+      <SectionEyebrow variant="compact">{tCommon("testimonials")}</SectionEyebrow>
 
       <div
         data-concierge-testimonials-title-frame
@@ -21,7 +26,7 @@ export default function ConciergeTestimonialsHeader() {
           data-concierge-testimonials-title
             className={`${productSectionTitleClassName} w-full max-w-[496px]`}
         >
-          Marketing solta a régua sem TI.
+          {t("title")}
         </h2>
       </div>
 
@@ -29,8 +34,7 @@ export default function ConciergeTestimonialsHeader() {
         data-concierge-testimonials-description
         className={`${productSectionDescriptionClassName} max-w-[619px]`}
       >
-        CMOs e CRM leads que pararam de depender de tickets de engenharia para
-        testar uma jornada.
+        {t("description")}
       </p>
     </header>
   );

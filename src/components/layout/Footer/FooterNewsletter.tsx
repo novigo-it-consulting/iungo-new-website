@@ -1,6 +1,10 @@
+import { getTranslations } from "next-intl/server";
+
 import FooterNewsletterForm from "./FooterNewsletterForm";
 
-export default function FooterNewsletter() {
+export default async function FooterNewsletter() {
+  const t = await getTranslations("footerNewsletter");
+
   return (
     <div
       data-footer-newsletter
@@ -10,7 +14,7 @@ export default function FooterNewsletter() {
         data-newsletter-title
         className="m-0 w-full font-reddit text-[16px] font-normal leading-6 text-white"
       >
-        Newsletter técnica
+        {t("title")}
       </h2>
 
       <div
@@ -21,13 +25,11 @@ export default function FooterNewsletter() {
           data-newsletter-description
           className="m-0 w-full font-reddit text-sm font-normal leading-5 text-white/60"
         >
-          Cases reais, benchmarks BR e novidades de produto. Mensal. Sem spam.
+          {t("description")}
         </p>
       </div>
 
       <FooterNewsletterForm />
-
-      {/* Texto de confirmação dupla/LGPD será adicionado na próxima etapa */}
     </div>
   );
 }

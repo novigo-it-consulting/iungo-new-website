@@ -1,11 +1,23 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
-import Link from "next/link";
+import {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useCallback,
+  type ReactNode,
+} from "react";
+import { useTranslations } from "next-intl";
+
+import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref } from "@/constants/routes";
 
-import { NAV_LINK_ITEMS, HEADER_BUTTONS } from "./header.constants";
+import {
+  HEADER_BUTTONS,
+  NAV_LINK_ITEMS,
+} from "./header.constants";
 import {
   mobileNavActionsClassName,
   mobileNavClientButtonClassName,
@@ -13,14 +25,13 @@ import {
   mobileNavItemClassName,
   mobileNavPanelClassName,
   mobileNavPanelInnerClassName,
+  mobileNavRootClassName,
   mobileNavToggleBarClassName,
   mobileNavToggleBarMiddleClassName,
   mobileNavToggleClassName,
 } from "./header.styles";
 import SolucoesMobileNavGroup from "./SolucoesMegaMenu/SolucoesMobileNavGroup";
-
-/** Mesmo ponto do `xl:hidden` deste menu (breakpoint `xl` padrão do Tailwind). */
-const HEADER_DESKTOP_MEDIA_QUERY = "(min-width: 80rem)";
+import { useCloseOnHeaderDesktopMediaQuery } from "./useCloseOnHeaderDesktopMediaQuery";
 
 const TABBABLE_SELECTOR = [
   "a[href]",
@@ -33,6 +44,10 @@ const TABBABLE_SELECTOR = [
 ].join(",");
 
 type MobileNavCloseReason = "toggle" | "escape" | "navigate" | "desktop";
+
+type MobileNavigationProps = {
+  children?: ReactNode;
+};
 
 function getTabbableElements(root: HTMLElement) {
   return [...root.querySelectorAll<HTMLElement>(TABBABLE_SELECTOR)].filter(
@@ -91,7 +106,9 @@ function isolateFromBackground(keep: HTMLElement) {
   };
 }
 
-export default function MobileNavigation() {
+export default function MobileNavigation({
+  children,
+}: Readonly<MobileNavigationProps>) {
   const [isOpen, setIsOpen] = useState(false);
   const menuId = "mobile-navigation-menu";
   const rootRef = useRef<HTMLDivElement>(null);
@@ -131,22 +148,11 @@ export default function MobileNavigation() {
     closeMenu("navigate");
   }, [closeMenu]);
 
-  useEffect(() => {
-    const desktopQuery = window.matchMedia(HEADER_DESKTOP_MEDIA_QUERY);
-
-    const closeOnDesktop = () => {
-      if (desktopQuery.matches) {
-        closeMenu("desktop");
-      }
-    };
-
-    closeOnDesktop();
-    desktopQuery.addEventListener("change", closeOnDesktop);
-
-    return () => {
-      desktopQuery.removeEventListener("change", closeOnDesktop);
-    };
+  const closeOnDesktop = useCallback(() => {
+    closeMenu("desktop");
   }, [closeMenu]);
+
+  useCloseOnHeaderDesktopMediaQuery("enter-desktop", closeOnDesktop);
 
   useLayoutEffect(() => {
     if (!isOpen) {
@@ -207,6 +213,10 @@ export default function MobileNavigation() {
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
+        if (event.defaultPrevented) {
+          return;
+        }
+
         closeMenu("escape");
         return;
       }
@@ -258,14 +268,19 @@ export default function MobileNavigation() {
     };
   }, [closeMenu, isOpen]);
 
+  const t = useTranslations("header");
+  const tCommon = useTranslations("common");
+  const tMobile = useTranslations("mobileNav");
   const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
 
   return (
-    <div ref={rootRef} data-mobile-navigation className="xl:hidden">
+    <div ref={rootRef} data-mobile-navigation className={mobileNavRootClassName}>
+      {isOpen ? children : null}
       <button
         ref={toggleRef}
         type="button"
-        aria-label={isOpen ? "Fechar menu" : "Abrir menu"}
+        data-mobile-navigation-toggle
+        aria-label={isOpen ? tMobile("closeMenu") : tMobile("openMenu")}
         aria-expanded={isOpen}
         aria-controls={menuId}
         onClick={() => {
@@ -305,7 +320,7 @@ export default function MobileNavigation() {
         ref={panelRef}
         id={menuId}
         role="dialog"
-        aria-label="Menu de navegação"
+        aria-label={tMobile("dialog")}
         aria-modal={isOpen}
         inert={!isOpen}
         className={[
@@ -314,7 +329,7 @@ export default function MobileNavigation() {
         ].join(" ")}
       >
         <div className={mobileNavPanelInnerClassName}>
-          <nav aria-label="Navegação mobile">
+          <nav aria-label={tMobile("nav")}>
             <ul className="mb-6 flex flex-col">
               <SolucoesMobileNavGroup onNavigate={closeByNavigate} />
               {NAV_LINK_ITEMS.map((item) => (
@@ -325,10 +340,10 @@ export default function MobileNavigation() {
                       onClick={closeByNavigate}
                       className={mobileNavItemClassName}
                     >
-                      {item.label}
+                      {t(item.labelKey)}
                     </Link>
                   ) : (
-                    <span className={mobileNavItemClassName}>{item.label}</span>
+                    <span className={mobileNavItemClassName}>{t(item.labelKey)}</span>
                   )}
                 </li>
               ))}
@@ -342,11 +357,11 @@ export default function MobileNavigation() {
                 onClick={closeByNavigate}
                 className={mobileNavClientButtonClassName}
               >
-                {HEADER_BUTTONS.areaCliente.label}
+                {t(HEADER_BUTTONS.areaCliente.labelKey)}
               </Link>
             ) : (
               <span className={mobileNavClientButtonClassName}>
-                {HEADER_BUTTONS.areaCliente.label}
+                {t(HEADER_BUTTONS.areaCliente.labelKey)}
               </span>
             )}
             <Link
@@ -354,7 +369,7 @@ export default function MobileNavigation() {
               onClick={closeByNavigate}
               className={mobileNavDemoButtonClassName}
             >
-              {HEADER_BUTTONS.solicitarDemo.label}
+              {tCommon("requestDemo")}
             </Link>
           </div>
         </div>

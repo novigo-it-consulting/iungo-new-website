@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import {
   productHeroTitleClassName,
   productHeroParagraphClassName,
@@ -12,7 +14,9 @@ const organizerHeroContentClassName = [
   productHeroContentPlacementClassName,
 ].join(" ");
 
-export default function OrganizerHeroContent() {
+export default async function OrganizerHeroContent() {
+  const t = await getTranslations("productPages.organizer.hero");
+
   return (
     <div
       data-organizer-hero-content
@@ -29,16 +33,14 @@ export default function OrganizerHeroContent() {
           data-organizer-hero-title
           className={productHeroTitleClassName}
         >
-          Iungo Organizer
+          {t("title")}
         </h1>
 
         <p
           data-organizer-hero-description
           className={`max-w-[579px] ${productHeroParagraphClassName}`}
         >
-          O melhor AI PIM para enriquecer catálogos com IA generativa, com
-          onboarding em 14 dias e integração nativa com Mercado Livre e Amazon
-          BR.
+          {t("description")}
         </p>
       </div>
     </div>

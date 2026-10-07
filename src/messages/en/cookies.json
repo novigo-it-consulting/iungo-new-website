@@ -1,0 +1,34 @@
+{
+  "banner": {
+    "title": "Cookies and privacy",
+    "description": "We use only essential cookies so the site can work and remember your preferences. To learn more or change your choice, click “Customize cookies”."
+  },
+  "actions": {
+    "acceptAll": "Accept all cookies",
+    "rejectNonEssential": "Reject non-essential cookies",
+    "personalize": "Customize cookies",
+    "savePreferences": "Save preferences",
+    "closePreferences": "Close cookie preferences",
+    "settings": "Cookie settings"
+  },
+  "choice": {
+    "legend": "How should optional cookies be handled",
+    "requiredHint": "Select an option to save your preferences."
+  },
+  "dialog": {
+    "title": "Cookie preference center",
+    "description": "Only strictly necessary cookies are in use. We do not use optional cookies at this time. Accepting all cookies and rejecting non-essential cookies record the same decision for now."
+  },
+  "necessary": {
+    "title": "Strictly necessary",
+    "alwaysOn": "Always on",
+    "description": "Required for the site to work and to remember your privacy choice. They stay on at all times.",
+    "purpose": "Purpose: site operation and local storage of your cookie decision.",
+    "vendor": "Vendor: Iungo Intelligence (this website).",
+    "duration": "Duration: up to 365 days in the browser. This period is a configurable technical choice, pending validation by the owner — it is not a legal period from the institutional policy.",
+    "technology": "Technology: localStorage on this device. It is not an HTTP cookie and does not identify you on an Iungo server."
+  },
+  "browserManagement": "You can also block or delete cookies and site data in your browser settings. That may affect how some pages work. This site cannot delete HttpOnly cookies or cookies from other domains through JavaScript.",
+  "contactPrefix": "Privacy questions: ",
+  "sessionOnlyNotice": "This choice applies only to this session, because the browser blocked permanent storage."
+}

@@ -4,7 +4,7 @@ interface IoTMetricItemProps {
   metric: IoTMetric;
 }
 
-export default function IoTMetricItem({ metric }: IoTMetricItemProps) {
+export default function IoTMetricItem({ metric }: Readonly<IoTMetricItemProps>) {
   return (
     <li className="min-w-0">
       <div

@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroCta from "@/components/sections/shared/Hero/ProductHeroCta";
 import ProductHeroLayout from "@/components/sections/shared/Hero/ProductHeroLayout";
 import ProductHeroVisual from "@/components/sections/shared/Hero/ProductHeroVisual";
@@ -9,7 +11,9 @@ import {
 
 import OrganizerHeroContent from "./OrganizerHeroContent";
 
-export default function OrganizerHero() {
+export default async function OrganizerHero() {
+  const t = await getTranslations("productPages.organizer.hero");
+
   return (
     <ProductHeroLayout
       scope="organizer"
@@ -21,7 +25,7 @@ export default function OrganizerHero() {
         <ProductHeroVisual
           productSlug="organizer"
           src="/images/products/organizer/organizer-hero.png"
-          alt="Interface visual do Iungo Organizer"
+          alt={t("imageAlt")}
           width={450}
           height={450}
           className={productHeroVisualOrganizerClassName}

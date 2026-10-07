@@ -17,7 +17,7 @@ export default function ProductTestimonialsCards({
   testimonials,
   variant,
   listClassName = "mt-10 grid w-full max-w-[1088px] grid-cols-1 gap-6 lg:grid-cols-2",
-}: ProductTestimonialsCardsProps) {
+}: Readonly<ProductTestimonialsCardsProps>) {
   return (
     <ul
       {...{

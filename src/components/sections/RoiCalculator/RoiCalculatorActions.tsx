@@ -1,4 +1,6 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
+import { Link } from "@/i18n/navigation";
 
 import {
   isAvailableHref,
@@ -12,8 +14,10 @@ import {
   roiSecondaryButtonClassName,
 } from "./roiCalculator.styles";
 
-export default function RoiCalculatorActions() {
+export default async function RoiCalculatorActions() {
+  const t = await getTranslations("common");
   const plataformaHref = PLATAFORMA_HREF;
+  const platformLabel = t("knowThePlatform");
 
   return (
     <div
@@ -25,7 +29,7 @@ export default function RoiCalculatorActions() {
         data-roi="cta-primary"
         className={roiPrimaryButtonClassName}
       >
-        Agendar diagnóstico
+        {t("scheduleDiagnosis")}
       </Link>
 
       {isAvailableHref(plataformaHref) ? (
@@ -34,11 +38,11 @@ export default function RoiCalculatorActions() {
           data-roi="cta-secondary"
           className={roiSecondaryButtonClassName}
         >
-          Conhecer a plataforma
+          {platformLabel}
         </Link>
       ) : (
         <span data-roi="cta-secondary" className={roiSecondaryButtonClassName}>
-          Conhecer a plataforma
+          {platformLabel}
         </span>
       )}
     </div>

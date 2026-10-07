@@ -1,3 +1,5 @@
+import { getTranslations } from "next-intl/server";
+
 import ProductHeroTitle from "@/components/sections/shared/Hero/ProductHeroTitle";
 import {
   productHeroContentClassName,
@@ -8,7 +10,9 @@ import {
 import ProductHeroIcon from "@/components/sections/shared/Hero/ProductHeroIcon";
 import { PRODUCT_HERO_ICONS } from "@/components/sections/shared/Hero/productHeroIcon.config";
 
-export default function BehaviorHeroContent() {
+export default async function BehaviorHeroContent() {
+  const t = await getTranslations("productPages.behavior.hero");
+
   return (
     <div data-behavior-hero-content className={productHeroContentClassName}>
       <div className={productHeroIconSpacingClassName}>
@@ -17,7 +21,7 @@ export default function BehaviorHeroContent() {
 
       <ProductHeroTitle
         id="behavior-hero-title"
-        title="Iungo Behavior"
+        title={t("title")}
         dataPrefix="behavior"
       />
 
@@ -29,9 +33,7 @@ export default function BehaviorHeroContent() {
           data-behavior-hero-subtitle
           className={productHeroParagraphClassName}
         >
-          O único Behavior CDP brasileiro com engine comportamental + semântico
-          proprietário. Visão 360º preditiva em tempo real — não em batch
-          noturno.
+          {t("description")}
         </p>
       </div>
     </div>

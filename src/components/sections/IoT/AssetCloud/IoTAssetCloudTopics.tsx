@@ -1,22 +1,53 @@
-import CheckIcon from "@/components/icons/CheckIcon";
+import { getTranslations } from "next-intl/server";
 
-import { IOT_ASSET_CLOUD_TOPICS } from "./iotAssetCloud.constants";
+import CheckIcon from "@/components/icons/CheckIcon";
 
 const topicTextClassName =
   "font-reddit text-[14px] font-normal leading-5 tracking-[0px] text-white/80";
 
-export default function IoTAssetCloudTopics() {
-  const lastTopicIndex = IOT_ASSET_CLOUD_TOPICS.length - 1;
+const TOPIC_IDS = [
+  "blind-inventory",
+  "geofence",
+  "audit-trail",
+  "multi-tenant",
+  "pim-connector",
+] as const;
+
+type TopicsTranslator = Awaited<
+  ReturnType<typeof getTranslations<"productPages.iot.assetCloud">>
+>;
+
+function topicLabel(
+  t: TopicsTranslator,
+  id: (typeof TOPIC_IDS)[number],
+) {
+  switch (id) {
+    case "blind-inventory":
+      return t("blindInventory");
+    case "geofence":
+      return t("geofence");
+    case "audit-trail":
+      return t("auditTrail");
+    case "multi-tenant":
+      return t("multiTenant");
+    case "pim-connector":
+      return t("pimConnector");
+  }
+}
+
+export default async function IoTAssetCloudTopics() {
+  const t = await getTranslations("productPages.iot.assetCloud");
+  const lastTopicIndex = TOPIC_IDS.length - 1;
 
   return (
     <div data-iot-asset-cloud-topics className="w-full min-w-0 pt-2">
       <ul className="m-0 flex list-none flex-col gap-3 p-0">
-        {IOT_ASSET_CLOUD_TOPICS.map((topic, index) => {
+        {TOPIC_IDS.map((id, index) => {
           const isLastTopic = index === lastTopicIndex;
 
           return (
             <li
-              key={topic}
+              key={id}
               data-iot-asset-cloud-topic-item
               className={[
                 "flex min-h-[22px] w-full min-w-0 gap-3",
@@ -40,7 +71,7 @@ export default function IoTAssetCloudTopics() {
                     : "min-w-0 flex-1",
                 ].join(" ")}
               >
-                {topic}
+                {topicLabel(t, id)}
               </span>
             </li>
           );

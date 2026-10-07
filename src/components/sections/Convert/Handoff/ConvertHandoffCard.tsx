@@ -4,7 +4,7 @@ type ConvertHandoffCardProps = {
   item: ConvertHandoffCardItem;
 };
 
-export default function ConvertHandoffCard({ item }: ConvertHandoffCardProps) {
+export default function ConvertHandoffCard({ item }: Readonly<ConvertHandoffCardProps>) {
   return (
     <article
       data-convert-handoff-card

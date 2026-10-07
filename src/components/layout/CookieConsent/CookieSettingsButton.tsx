@@ -1,14 +1,14 @@
 "use client";
 
-import {
-  COOKIE_SETTINGS_LABEL,
-  COOKIE_SETTINGS_TRIGGER_ID,
-} from "./cookieConsent.constants";
+import { useTranslations } from "next-intl";
+
+import { COOKIE_SETTINGS_TRIGGER_ID } from "./cookieConsent.constants";
 import { cookieSettingsButtonClassName } from "./cookieConsent.styles";
 import { useCookieConsent } from "./CookieConsentContext";
 
 export default function CookieSettingsButton() {
   const { openPreferences } = useCookieConsent();
+  const t = useTranslations("cookies");
 
   return (
     <button
@@ -21,7 +21,7 @@ export default function CookieSettingsButton() {
         openPreferences(event.currentTarget);
       }}
     >
-      {COOKIE_SETTINGS_LABEL}
+      {t("actions.settings")}
     </button>
   );
 }

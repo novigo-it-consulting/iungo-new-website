@@ -19,7 +19,7 @@ export default function ProductSystemScreensBadges({
   badges,
   inactiveBorderClassName,
   wrapperClassName = productSystemScreensBadgeWrapperClassName,
-}: ProductSystemScreensBadgesProps) {
+}: Readonly<ProductSystemScreensBadgesProps>) {
   return (
     <div
       {...{

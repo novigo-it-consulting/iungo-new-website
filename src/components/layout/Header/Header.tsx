@@ -1,9 +1,12 @@
-import Link from "next/link";
+import { getTranslations } from "next-intl/server";
+
+import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref } from "@/constants/routes";
 
 import { HEADER_BUTTONS } from "./header.constants";
 import HeaderShell from "./HeaderShell";
+import LanguageSelector from "./LanguageSelector";
 import {
   headerActionsClassName,
   headerButtonLabelClassName,
@@ -11,8 +14,12 @@ import {
   headerDemoButtonClassName,
 } from "./header.styles";
 
-export default function Header() {
+export default async function Header() {
+  const t = await getTranslations("header");
+  const tCommon = await getTranslations("common");
   const areaClienteHref = HEADER_BUTTONS.areaCliente.href;
+  const clientAreaLabel = t(HEADER_BUTTONS.areaCliente.labelKey);
+  const requestDemoLabel = tCommon("requestDemo");
 
   return (
     <header
@@ -33,7 +40,7 @@ export default function Header() {
                   data-header-action-label="client-area"
                   className={headerButtonLabelClassName}
                 >
-                  {HEADER_BUTTONS.areaCliente.label}
+                  {clientAreaLabel}
                 </span>
               </Link>
             ) : (
@@ -45,7 +52,7 @@ export default function Header() {
                   data-header-action-label="client-area"
                   className={headerButtonLabelClassName}
                 >
-                  {HEADER_BUTTONS.areaCliente.label}
+                  {clientAreaLabel}
                 </span>
               </span>
             )}
@@ -58,9 +65,10 @@ export default function Header() {
                 data-header-action-label="demonstration"
                 className={headerButtonLabelClassName}
               >
-                {HEADER_BUTTONS.solicitarDemo.label}
+                {requestDemoLabel}
               </span>
             </Link>
+            <LanguageSelector instance="desktop" />
           </div>
         }
       />

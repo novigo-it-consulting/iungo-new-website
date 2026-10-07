@@ -1,15 +1,39 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 import { homeSectionTitleClassName } from "@/components/ui/sectionTitle.styles";
 
 import MetricItem from "./MetricItem";
 import { METRICS } from "./metrics.constants";
 
-export default function MetricsSection() {
+type MetricsTranslator = Awaited<ReturnType<typeof getTranslations<"home.metrics">>>;
+type MetricDescriptionKey = (typeof METRICS)[number]["descriptionKey"];
+
+function metricDescription(
+  descriptionKey: MetricDescriptionKey,
+  t: MetricsTranslator,
+): string {
+  switch (descriptionKey) {
+    case "revenue":
+      return t("revenue");
+    case "conversion":
+      return t("conversion");
+    case "automation":
+      return t("automation");
+    case "trackedAssets":
+      return t("trackedAssets");
+    default: {
+      const exhaustive: never = descriptionKey;
+      return exhaustive;
+    }
+  }
+}
+
+export default async function MetricsSection() {
+  const t = await getTranslations("home.metrics");
+
   return (
-    <section
-      data-metrics-section
-      className="w-full bg-white"
-    >
+    <section data-metrics-section className="w-full bg-white">
       <PageContainer
         size="content1264"
         data-page-main-content="metrics"
@@ -19,7 +43,7 @@ export default function MetricsSection() {
           data-metrics-heading
           className={`${homeSectionTitleClassName} max-w-[900px] 2xl:mt-[50px]`}
         >
-          Métricas que decisores enterprise levam a sério.
+          {t("title")}
         </h2>
 
         <div
@@ -36,7 +60,7 @@ export default function MetricsSection() {
                 key={metric.id}
                 metricId={metric.id}
                 value={metric.value}
-                description={metric.description}
+                description={metricDescription(metric.descriptionKey, t)}
               />
             ))}
           </dl>

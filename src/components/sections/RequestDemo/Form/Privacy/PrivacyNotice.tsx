@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref } from "@/constants/routes";
 
@@ -15,7 +15,19 @@ import {
   privacyNoticeTextClassName,
 } from "./privacyNotice.styles";
 
-export default function PrivacyNotice() {
+type PrivacyNoticeProps = {
+  beforePolicy: string;
+  policy: string;
+  between: string;
+  afterEmail: string;
+};
+
+export default function PrivacyNotice({
+  beforePolicy,
+  policy,
+  between,
+  afterEmail,
+}: Readonly<PrivacyNoticeProps>) {
   return (
     <div data-request-demo-privacy-notice className={privacyNoticeRowClassName}>
       <div className={privacyNoticeBlockClassName}>
@@ -27,25 +39,25 @@ export default function PrivacyNotice() {
         </span>
 
         <p className={privacyNoticeTextClassName}>
-          Li e concordo com a{" "}
+          {beforePolicy}
           {isAvailableHref(PRIVACY_POLICY_HREF) ? (
             <Link
               href={PRIVACY_POLICY_HREF}
               className={privacyNoticeLinkClassName}
             >
-              Política de Privacidade
+              {policy}
             </Link>
           ) : (
-            <span className={privacyNoticeLinkClassName}>
-              Política de Privacidade
-            </span>
-          )}{". Autorizo a Iungo Intelligence a tratar meus dados pessoais para fins de retorno comercial, conforme art. 7º, I e V da LGPD. Posso revogar este consentimento a qualquer momento via "}
+            <span className={privacyNoticeLinkClassName}>{policy}</span>
+          )}
+          {between}
           <a
             href={`mailto:${PRIVACY_NOTICE_CONTACT_EMAIL}`}
             className={privacyNoticeEmailClassName}
           >
             {PRIVACY_NOTICE_CONTACT_EMAIL}
-          </a>{"."}
+          </a>
+          {afterEmail}
         </p>
       </div>
     </div>

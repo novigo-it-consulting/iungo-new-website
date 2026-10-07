@@ -19,7 +19,7 @@ export default function CtaProductTitle({
   line2,
   dataPrefix,
   frameClassName = defaultTitleFrameClassName,
-}: CtaProductTitleProps) {
+}: Readonly<CtaProductTitleProps>) {
   return (
     <div
       {...{ [`data-${dataPrefix}-title-frame`]: true }}

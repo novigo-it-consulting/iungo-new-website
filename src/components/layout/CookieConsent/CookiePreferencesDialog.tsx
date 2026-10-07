@@ -1,33 +1,14 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { useTranslations } from "next-intl";
 
 import {
   getRecordedConsentChoice,
   type CookieConsentChoice,
 } from "@/lib/cookieConsent";
 
-import {
-  COOKIE_ACCEPT_ALL_LABEL,
-  COOKIE_BROWSER_MANAGEMENT,
-  COOKIE_CHOICE_LEGEND,
-  COOKIE_CHOICE_REQUIRED_HINT,
-  COOKIE_CLOSE_PREFERENCES_LABEL,
-  COOKIE_CONSENT_CONTACT_EMAIL,
-  COOKIE_CONTACT_PREFIX,
-  COOKIE_DIALOG_DESCRIPTION,
-  COOKIE_DIALOG_TITLE,
-  COOKIE_NECESSARY_ALWAYS_ON,
-  COOKIE_NECESSARY_DESCRIPTION,
-  COOKIE_NECESSARY_DURATION,
-  COOKIE_NECESSARY_PURPOSE,
-  COOKIE_NECESSARY_TECHNOLOGY,
-  COOKIE_NECESSARY_TITLE,
-  COOKIE_NECESSARY_VENDOR,
-  COOKIE_REJECT_NON_ESSENTIAL_LABEL,
-  COOKIE_SAVE_PREFERENCES_LABEL,
-  COOKIE_SESSION_ONLY_NOTICE,
-} from "./cookieConsent.constants";
+import { COOKIE_CONSENT_CONTACT_EMAIL } from "./cookieConsent.constants";
 import {
   cookieCategoryCardClassName,
   cookieCategoryTextClassName,
@@ -109,6 +90,7 @@ export default function CookiePreferencesDialog() {
     persisted,
     decision,
   } = useCookieConsent();
+  const t = useTranslations("cookies");
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const wasOpenRef = useRef(false);
@@ -174,7 +156,7 @@ export default function CookiePreferencesDialog() {
       <button
         type="button"
         className={cookieDialogCloseClassName}
-        aria-label={COOKIE_CLOSE_PREFERENCES_LABEL}
+        aria-label={t("actions.closePreferences")}
         onClick={() => {
           dialogRef.current?.close();
         }}
@@ -204,10 +186,10 @@ export default function CookiePreferencesDialog() {
           tabIndex={-1}
           className={cookieDialogTitleClassName}
         >
-          {COOKIE_DIALOG_TITLE}
+          {t("dialog.title")}
         </h2>
         <p id={descriptionId} className={cookieDialogDescriptionClassName}>
-          {COOKIE_DIALOG_DESCRIPTION}
+          {t("dialog.description")}
         </p>
       </div>
 
@@ -215,51 +197,51 @@ export default function CookiePreferencesDialog() {
         <section className={cookieCategoryCardClassName}>
           <div className="flex items-start justify-between gap-3">
             <h3 className={cookieCategoryTitleClassName}>
-              {COOKIE_NECESSARY_TITLE}
+              {t("necessary.title")}
             </h3>
             <p className={`${cookieCategoryTextClassName} shrink-0 font-semibold`}>
-              {COOKIE_NECESSARY_ALWAYS_ON}
+              {t("necessary.alwaysOn")}
             </p>
           </div>
           <p className={cookieCategoryTextClassName}>
-            {COOKIE_NECESSARY_DESCRIPTION}
+            {t("necessary.description")}
           </p>
-          <p className={cookieCategoryTextClassName}>{COOKIE_NECESSARY_PURPOSE}</p>
-          <p className={cookieCategoryTextClassName}>{COOKIE_NECESSARY_VENDOR}</p>
+          <p className={cookieCategoryTextClassName}>{t("necessary.purpose")}</p>
+          <p className={cookieCategoryTextClassName}>{t("necessary.vendor")}</p>
           <p className={cookieCategoryTextClassName}>
-            {COOKIE_NECESSARY_TECHNOLOGY}
+            {t("necessary.technology")}
           </p>
           <p className={cookieCategoryTextClassName}>
-            {COOKIE_NECESSARY_DURATION}
+            {t("necessary.duration")}
           </p>
         </section>
 
         <fieldset className={cookieChoiceFieldsetClassName}>
           <legend className={cookieChoiceLegendClassName}>
-            {COOKIE_CHOICE_LEGEND}
+            {t("choice.legend")}
           </legend>
           <CookieChoiceOption
             name={choiceGroupName}
             value="accept-all"
-            label={COOKIE_ACCEPT_ALL_LABEL}
+            label={t("actions.acceptAll")}
             checked={draftChoice === "accept-all"}
             onChange={setDraftChoice}
           />
           <CookieChoiceOption
             name={choiceGroupName}
             value="reject-non-essential"
-            label={COOKIE_REJECT_NON_ESSENTIAL_LABEL}
+            label={t("actions.rejectNonEssential")}
             checked={draftChoice === "reject-non-essential"}
             onChange={setDraftChoice}
           />
           {!canSave ? (
-            <CookieLiveNotice>{COOKIE_CHOICE_REQUIRED_HINT}</CookieLiveNotice>
+            <CookieLiveNotice>{t("choice.requiredHint")}</CookieLiveNotice>
           ) : null}
         </fieldset>
 
-        <p className={cookieCategoryTextClassName}>{COOKIE_BROWSER_MANAGEMENT}</p>
+        <p className={cookieCategoryTextClassName}>{t("browserManagement")}</p>
         <p className={cookieCategoryTextClassName}>
-          {COOKIE_CONTACT_PREFIX}
+          {t("contactPrefix")}
           <a
             href={`mailto:${COOKIE_CONSENT_CONTACT_EMAIL}`}
             className={cookieEmailClassName}
@@ -269,7 +251,7 @@ export default function CookiePreferencesDialog() {
           {"."}
         </p>
         {!persisted && decision !== null ? (
-          <CookieLiveNotice>{COOKIE_SESSION_ONLY_NOTICE}</CookieLiveNotice>
+          <CookieLiveNotice>{t("sessionOnlyNotice")}</CookieLiveNotice>
         ) : null}
       </div>
 
@@ -286,7 +268,7 @@ export default function CookiePreferencesDialog() {
             savePreferences(draftChoice);
           }}
         >
-          {COOKIE_SAVE_PREFERENCES_LABEL}
+          {t("actions.savePreferences")}
         </button>
       </div>
     </dialog>

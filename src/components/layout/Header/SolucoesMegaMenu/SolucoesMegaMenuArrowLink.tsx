@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 
 import ArrowRightIcon from "@/components/icons/ArrowRightIcon";
 import { isAvailableHref } from "@/constants/routes";

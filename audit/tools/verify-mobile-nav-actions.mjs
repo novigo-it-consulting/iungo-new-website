@@ -5,9 +5,10 @@
 import {
   AUDIT_BASE_URL as BASE_URL,
   createResultRecorder,
-  openAuditMobileMenu,
+  runSequentially,
   withAuditBrowser,
-} from "./mobile-nav-audit.shared.mjs";
+} from "./audit.shared.mjs";
+import { openAuditMobileMenu } from "./mobile-nav-audit.shared.mjs";
 
 const { record, printAndExit } = createResultRecorder();
 
@@ -148,9 +149,7 @@ async function inspectViewport(page, viewport) {
 
 try {
   await withAuditBrowser(async (page) => {
-    for (const viewport of VIEWPORTS) {
-      await inspectViewport(page, viewport);
-    }
+    await runSequentially(VIEWPORTS, (viewport) => inspectViewport(page, viewport));
 
     await page.setViewport({ width: 1280, height: 800 });
     await page.goto(BASE_URL, { waitUntil: "domcontentloaded", timeout: 30000 });

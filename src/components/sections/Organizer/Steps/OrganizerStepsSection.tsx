@@ -1,8 +1,12 @@
+import { getTranslations } from "next-intl/server";
+
 import SectionHeader from "@/components/ui/SectionHeader";
 import PageContainer from "@/components/layout/PageContainer";
 import OrganizerStepsList from "./OrganizerStepsList";
 
-export default function OrganizerStepsSection() {
+export default async function OrganizerStepsSection() {
+  const t = await getTranslations("productPages.organizer.steps");
+
   return (
     <section
       aria-labelledby="organizer-steps-title"
@@ -14,8 +18,8 @@ export default function OrganizerStepsSection() {
         className="flex min-w-0 flex-col items-center justify-start gap-16"
       >
         <SectionHeader
-          eyebrow="COMO FUNCIONA"
-          title="Da planilha ao canal, em 3 passos."
+          eyebrow={t("eyebrow")}
+          title={t("title")}
           titleId="organizer-steps-title"
           className="max-w-[768px]"
         />

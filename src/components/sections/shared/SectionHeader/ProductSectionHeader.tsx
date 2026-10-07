@@ -26,7 +26,7 @@ export default function ProductSectionHeader({
   description,
   titleClassName = DEFAULT_TITLE_CLASS,
   descriptionClassName = DEFAULT_DESCRIPTION_CLASS,
-}: ProductSectionHeaderProps) {
+}: Readonly<ProductSectionHeaderProps>) {
   return (
     <div
       {...{

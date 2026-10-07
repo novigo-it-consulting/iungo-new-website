@@ -1,3 +1,6 @@
+import { getTranslations } from "next-intl/server";
+import type { ReactNode } from "react";
+
 import {
   homeHeroContentClassName,
   homeHeroCopyClassName,
@@ -7,7 +10,21 @@ import {
   homeHeroTitleLineClassName,
 } from "./homeHero.styles";
 
-export default function HeroContent() {
+function renderHeroLine(chunks: ReactNode) {
+  return <span className={homeHeroTitleLineClassName}>{chunks}</span>;
+}
+
+function renderHeroHighlight(chunks: ReactNode) {
+  return (
+    <span data-hero-highlight className={homeHeroTitleHighlightClassName}>
+      {chunks}
+    </span>
+  );
+}
+
+export default async function HeroContent() {
+  const t = await getTranslations("home.hero");
+
   return (
     <div data-hero-content className={homeHeroContentClassName}>
       <div data-hero-copy className={homeHeroCopyClassName}>
@@ -18,19 +35,13 @@ export default function HeroContent() {
           data-page-content-anchor="hero"
           className={homeHeroTitleClassName}
         >
-          <span className={homeHeroTitleLineClassName}>Catálogo. Cliente.</span>
-          <span className={homeHeroTitleLineClassName}>Atendimento. Vendas.</span>
-          <span
-            data-hero-highlight
-            className={homeHeroTitleHighlightClassName}
-          >
-            Em uma IA unificada.
-          </span>
+          {t.rich("title", {
+            line: renderHeroLine,
+            highlight: renderHeroHighlight,
+          })}
         </h1>
         <p data-hero-description className={homeHeroDescriptionClassName}>
-          A única plataforma do Brasil que integra PIM, CDP, Concierge, AI
-          Agents e IoT sobre uma infraestrutura proprietária de IA pronta para
-          varejo digital de alta complexidade.
+          {t("description")}
         </p>
       </div>
     </div>

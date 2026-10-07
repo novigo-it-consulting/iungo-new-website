@@ -1,3 +1,8 @@
+import {
+  disclosureChevronClassName,
+  disclosureChevronOpenClassName,
+} from "@/components/ui/disclosureChevron.styles";
+
 /** Valores aproximados — alinhados ao Header e referência do mega menu. */
 
 export const solucoesMegaMenuPanelClassName =
@@ -110,10 +115,15 @@ export const solucoesMegaMenuTriggerClassName =
 
 export const solucoesMegaMenuTriggerOpenClassName = "text-[#0024AE]";
 
-export const solucoesMegaMenuChevronClassName =
-  "size-3 shrink-0 transition-transform duration-200 motion-reduce:transition-none";
+export const solucoesMegaMenuChevronClassName = [
+  "size-3 shrink-0",
+  disclosureChevronClassName,
+].join(" ");
 
-export const solucoesMegaMenuChevronOpenClassName = "rotate-180 text-[#0024AE]";
+export const solucoesMegaMenuChevronOpenClassName = [
+  disclosureChevronOpenClassName,
+  "text-[#0024AE]",
+].join(" ");
 
 export const solucoesMobileGroupButtonClassName =
   "flex min-h-[44px] w-full items-center justify-between gap-3 rounded py-3 font-reddit text-lg font-normal leading-8 text-[#383838] transition-colors duration-150 hover:text-[#111111] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0024AE] focus-visible:ring-offset-1";

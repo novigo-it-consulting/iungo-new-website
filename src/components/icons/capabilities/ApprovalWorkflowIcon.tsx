@@ -1,6 +1,6 @@
 import type { SVGProps } from "react";
 
-export default function ApprovalWorkflowIcon(props: SVGProps<SVGSVGElement>) {
+export default function ApprovalWorkflowIcon(props: Readonly<SVGProps<SVGSVGElement>>) {
   return (
     <svg
       viewBox="0 0 14 17"

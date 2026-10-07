@@ -1,14 +1,17 @@
+import { getTranslations } from "next-intl/server";
+
 import PageContainer from "@/components/layout/PageContainer";
 import ProductSectionHeader from "@/components/sections/shared/SectionHeader/ProductSectionHeader";
 
 import {
   IOT_TECHNOLOGIES_DESCRIPTION_CLASS,
-  IOT_TECHNOLOGIES_HEADER,
   IOT_TECHNOLOGIES_TITLE_CLASS,
 } from "./iotTechnologies.constants";
 import IoTTechnologiesTable from "./IoTTechnologiesTable";
 
-export default function IoTTechnologiesSection() {
+export default async function IoTTechnologiesSection() {
+  const t = await getTranslations("productPages.iot.technologies");
+
   return (
     <section
       data-iot-technologies-section
@@ -26,10 +29,10 @@ export default function IoTTechnologiesSection() {
         >
           <ProductSectionHeader
             blockSlug="iot-technologies"
-            eyebrow={IOT_TECHNOLOGIES_HEADER.eyebrow}
-            title={IOT_TECHNOLOGIES_HEADER.title}
+            eyebrow={t("eyebrow")}
+            title={t("title")}
             titleId="iot-technologies-title"
-            description={IOT_TECHNOLOGIES_HEADER.description}
+            description={t("description")}
             titleClassName={IOT_TECHNOLOGIES_TITLE_CLASS}
             descriptionClassName={IOT_TECHNOLOGIES_DESCRIPTION_CLASS}
           />
