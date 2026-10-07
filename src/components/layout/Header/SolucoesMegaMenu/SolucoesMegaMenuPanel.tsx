@@ -1,5 +1,7 @@
 "use client";
 
+import { focusMovedOutside } from "@/components/ui/focusMovedOutside";
+
 import {
   SOLUCOES_MEGA_MENU_PANEL_ID,
   SOLUCOES_MEGA_MENU_PANEL_MIN_HEIGHT_PX,
@@ -36,17 +38,15 @@ export default function SolucoesMegaMenuPanel() {
       onMouseLeave={scheduleClose}
       onFocusCapture={cancelScheduledClose}
       onBlurCapture={(event) => {
-        const nextTarget = event.relatedTarget as Node | null;
-
-        if (nextTarget && panelRef.current?.contains(nextTarget)) {
-          return;
+        if (
+          focusMovedOutside(
+            event.relatedTarget,
+            panelRef.current,
+            triggerRef.current,
+          )
+        ) {
+          scheduleClose();
         }
-
-        if (nextTarget && triggerRef.current?.contains(nextTarget)) {
-          return;
-        }
-
-        scheduleClose();
       }}
     >
       <div

@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { useCallback, useId, useRef, useState } from "react";
 
 import LanguageSelectorChevronIcon from "@/components/icons/LanguageSelectorChevronIcon";
+import { focusMovedOutside } from "@/components/ui/focusMovedOutside";
 import { Link, usePathname } from "@/i18n/navigation";
 import {
   LANGUAGE_SELECTOR_FLAG_SIZE,
@@ -123,16 +124,9 @@ export default function LanguageSelector({
           return;
         }
 
-        const nextTarget = event.relatedTarget;
-
-        if (
-          nextTarget instanceof Node &&
-          rootRef.current?.contains(nextTarget)
-        ) {
-          return;
+        if (focusMovedOutside(event.relatedTarget, rootRef.current)) {
+          close();
         }
-
-        close();
       }}
     >
       {isOpen ? (
@@ -185,13 +179,11 @@ export default function LanguageSelector({
                 hrefLang={language.code}
                 data-header-language-option={language.code}
                 className={languageSelectorOptionClassName}
-                onPointerDown={(event) => {
-                  if (
-                    event.pointerType === "mouse" ||
-                    event.pointerType === "touch"
-                  ) {
-                    focusTrigger(event.currentTarget, "pointer");
-                  }
+                onMouseDown={(event) => {
+                  // O clique não pode tirar o foco do gatilho: no Safari isso
+                  // dispara blur com relatedTarget nulo e desmonta o link
+                  // antes do click. preventDefault no mousedown não cancela o click.
+                  event.preventDefault();
                 }}
               >
                 <LanguageFlag language={language} />
