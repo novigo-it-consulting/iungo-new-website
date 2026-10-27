@@ -8,6 +8,7 @@ import { Link } from "@/i18n/navigation";
 
 import HeaderDesktopNav from "./HeaderDesktopNav";
 import {
+  headerBrandNavClassName,
   headerFrameClassName,
 } from "./header.styles";
 import PageContainer from "@/components/layout/PageContainer";
@@ -32,24 +33,26 @@ export default function HeaderShell({ actions }: Readonly<HeaderShellProps>) {
               data-page-main-content="header"
               className="flex h-full w-full min-w-0 items-center justify-between gap-4 xl:gap-6 2xl:gap-8"
             >
-              <Link
-                data-header-logo
-                data-page-content-anchor="header"
-                href="/"
-                aria-label={t("logo.homeAria")}
-                className="block shrink-0 2xl:h-[42.4px] 2xl:w-[118.87px]"
-              >
-                <Image
-                  src="/images/logo.png"
-                  alt={t("logo.alt")}
-                  width={157}
-                  height={56}
-                  className="h-auto w-[107px] object-contain min-[375px]:w-[130px] sm:w-[145px] xl:w-[150px] 2xl:h-full 2xl:w-full 2xl:max-w-[157px]"
-                  priority
-                />
-              </Link>
+              <div data-header-brand-nav className={headerBrandNavClassName}>
+                <Link
+                  data-header-logo
+                  data-page-content-anchor="header"
+                  href="/"
+                  aria-label={t("logo.homeAria")}
+                  className="block shrink-0 2xl:h-[42.4px] 2xl:w-[118.87px]"
+                >
+                  <Image
+                    src="/images/logo.png"
+                    alt={t("logo.alt")}
+                    width={157}
+                    height={56}
+                    className="h-auto w-[107px] object-contain min-[375px]:w-[130px] sm:w-[145px] xl:w-[150px] 2xl:h-full 2xl:w-full 2xl:max-w-[157px]"
+                    priority
+                  />
+                </Link>
 
-              <HeaderDesktopNav />
+                <HeaderDesktopNav />
+              </div>
 
               {actions}
 

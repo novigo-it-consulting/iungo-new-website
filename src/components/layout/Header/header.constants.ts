@@ -12,6 +12,16 @@ export const NAV_LINK_ITEMS = [
   { id: "recursos", labelKey: "nav.resources", href: RECURSOS_HREF },
 ] as const;
 
+const HIDDEN_NAV_LINK_IDS = new Set<(typeof NAV_LINK_ITEMS)[number]["id"]>([
+  "plataforma",
+  "cases",
+  "recursos",
+]);
+
+export const VISIBLE_NAV_LINK_ITEMS = NAV_LINK_ITEMS.filter(
+  (item) => !HIDDEN_NAV_LINK_IDS.has(item.id),
+);
+
 /** Mesmo ponto do `xl:` do Tailwind (80rem). Usado pelo menu mobile e pelo seletor de idioma. */
 export const HEADER_DESKTOP_MEDIA_QUERY = "(min-width: 80rem)";
 
