@@ -11,6 +11,9 @@ import {
 export const headerFrameClassName =
   "box-border w-full py-4 2xl:h-[96px] 2xl:py-0";
 
+export const headerBrandNavClassName =
+  "flex min-w-0 items-center gap-6 xl:gap-8 2xl:gap-10";
+
 export const headerNavClassName =
   "hidden shrink-0 items-center xl:flex 2xl:h-[25px] 2xl:w-[339.2px]";
 

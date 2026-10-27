@@ -16,7 +16,7 @@ import { isAvailableHref } from "@/constants/routes";
 
 import {
   HEADER_BUTTONS,
-  NAV_LINK_ITEMS,
+  VISIBLE_NAV_LINK_ITEMS,
 } from "./header.constants";
 import {
   mobileNavActionsClassName,
@@ -332,7 +332,7 @@ export default function MobileNavigation({
           <nav aria-label={tMobile("nav")}>
             <ul className="mb-6 flex flex-col">
               <SolucoesMobileNavGroup onNavigate={closeByNavigate} />
-              {NAV_LINK_ITEMS.map((item) => (
+              {VISIBLE_NAV_LINK_ITEMS.map((item) => (
                 <li key={item.id}>
                   {isAvailableHref(item.href) ? (
                     <Link

@@ -6,7 +6,7 @@ import { Link } from "@/i18n/navigation";
 
 import { isAvailableHref } from "@/constants/routes";
 
-import { NAV_LINK_ITEMS } from "./header.constants";
+import { NAV_LINK_ITEMS, VISIBLE_NAV_LINK_ITEMS } from "./header.constants";
 import {
   headerNavClassName,
   headerNavLinkClassName,
@@ -36,7 +36,7 @@ export default function HeaderDesktopNav() {
         <li>
           <SolucoesMegaMenuTrigger />
         </li>
-        {NAV_LINK_ITEMS.map((item) => {
+        {VISIBLE_NAV_LINK_ITEMS.map((item) => {
           const meta = NAV_ITEM_META[item.id];
           const className = `${headerNavLinkClassName} ${meta.desktopWidth}`;
 

@@ -12,6 +12,8 @@ import {
   homeHeroSecondaryButtonClassName,
 } from "./homeHero.styles";
 
+const SHOW_KNOW_PLATFORM_BUTTON = false;
+
 export default async function HeroActions() {
   const t = await getTranslations("common");
   const plataformaHref = PLATAFORMA_HREF;
@@ -29,23 +31,25 @@ export default async function HeroActions() {
         {t("requestDemo")}
       </PrimaryLink>
 
-      {isAvailableHref(plataformaHref) ? (
-        <Link
-          data-hero-secondary-cta
-          href={plataformaHref}
-          className={homeHeroSecondaryButtonClassName}
-        >
-          {secondaryLabel}
-        </Link>
-      ) : (
-        <span
-          data-hero-secondary-cta
-          className={homeHeroSecondaryButtonClassName}
-          aria-disabled="true"
-        >
-          {secondaryLabel}
-        </span>
-      )}
+      {SHOW_KNOW_PLATFORM_BUTTON ? (
+        isAvailableHref(plataformaHref) ? (
+          <Link
+            data-hero-secondary-cta
+            href={plataformaHref}
+            className={homeHeroSecondaryButtonClassName}
+          >
+            {secondaryLabel}
+          </Link>
+        ) : (
+          <span
+            data-hero-secondary-cta
+            className={homeHeroSecondaryButtonClassName}
+            aria-disabled="true"
+          >
+            {secondaryLabel}
+          </span>
+        )
+      ) : null}
     </div>
   );
 }
